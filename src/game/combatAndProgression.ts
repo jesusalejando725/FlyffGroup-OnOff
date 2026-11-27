@@ -1,3 +1,4 @@
+import { equippedGearBonuses } from '../data/flyffEconomy';
 import { MU_CLASSES, MU_SKILLS } from '../data/muSkillsAndClasses';
 import type {
   ActiveEffect,
@@ -343,6 +344,7 @@ export function computeHeroDamageStats(
   const profile = TEN_CHARACTER_TABLES.find((t) => t.variantKey === variant) || TEN_CHARACTER_TABLES[0];
   const equipped = items.filter((i) => i.isEquipped && (i.durability ?? 100) > 0);
 
+  const gear = equippedGearBonuses(equipped);
   let eqMin = 0;
   let eqMax = 0;
   let eqMagic = 0;
@@ -351,7 +353,7 @@ export function computeHeroDamageStats(
 
   for (const it of equipped) {
     const enhScale = 1 + it.enhanceLevel * 0.06;
-    const rarityScale = it.rarity === 'ancient' ? 1.25 : it.rarity === 'excellent' ? 1.15 : 1.0;
+    const rarityScale = it.sourceLevel !== undefined ? 1 : it.rarity === 'ancient' ? 1.25 : it.rarity === 'excellent' ? 1.15 : 1.0;
     eqMin += Math.round(it.minDmg * enhScale * rarityScale);
     eqMax += Math.round(it.maxDmg * enhScale * rarityScale);
     eqMagic += Math.round(it.magicPower * enhScale * rarityScale);
@@ -360,7 +362,7 @@ export function computeHeroDamageStats(
   }
 
   const statPhysical = Math.round(
-    character.str * profile.atkWeight.str +
+    (character.str + (gear.str ?? 0)) * profile.atkWeight.str +
       character.agi * profile.atkWeight.agi +
       character.cmd * profile.atkWeight.cmd +
       character.level * 2.2 +
@@ -382,7 +384,7 @@ export function computeHeroDamageStats(
 
   const physicalPower = Math.max(12, statPhysical + Math.round((eqMin + eqMax) * 0.5));
   const magicPower = Math.max(10, statMagic + eqMagic);
-  const defense = Math.max(10, statDefense + eqDef);
+  const defense = Math.max(10, Math.round((statDefense + eqDef) * (1 + (gear.defensePct ?? 0) / 100)));
 
   const primaryAtk =
     character.classType === 'DW'
@@ -393,7 +395,7 @@ export function computeHeroDamageStats(
 
   const critPct = Math.min(
     65,
-    Math.round(profile.critBasePct + character.agi * 0.04 + character.cmd * 0.03 + luckCount * 3),
+    Math.round(profile.critBasePct + character.agi * 0.04 + character.cmd * 0.03 + luckCount * 3 + (gear.critPct ?? 0)),
   );
   const avgAttack = Math.max(14, primaryAtk);
   const powerScore = Math.round(avgAttack * 2.4 + defense * 1.8 + character.maxHp * 0.25 + character.resets * 220);

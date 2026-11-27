@@ -11,6 +11,7 @@ interface MuInventoryModalProps {
   onClose: () => void;
   onRepair: () => void;
   onEquip: (itemId: string) => void;
+  onUse: (itemId: string) => void;
   onUpgrade: (itemId: string, jewel: 'bless' | 'soul' | 'life' | 'harmony') => void;
   forgeMessage: string | null;
 }
@@ -36,6 +37,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
   items,
   onClose,
   onEquip,
+  onUse,
   onRepair,
   onUpgrade,
   forgeMessage,
@@ -221,6 +223,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   <span>Set: {selectedItem.setName} · Estado: {selectedItem.durability ?? 100}%</span>
                 </div>
 
+                {selectedItem.requiredLevel && <div className="text-xs">Nivel requerido: {selectedItem.requiredLevel}</div>}
                 <div className="text-xs text-emerald-300">
                   {selectedItem.luck ? 'Suerte (Crítico +5% / Joya +25%)' : 'Sin Suerte'}
                   {selectedItem.excellentOpt ? ` · ${selectedItem.excellentOpt}` : ''}
@@ -233,8 +236,11 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
 
                 <button onClick={onRepair} className="min-h-[40px] rounded bg-emerald-900 px-3 text-sm">Reparar equipo · 1 Zen por punto</button>
                 <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-                  {(
+                  {selectedItem.recovery && <button onClick={() => onUse(selectedItem.id)}
+                    className="min-h-[40px] rounded bg-emerald-800 px-3 text-sm">Usar poción</button>}
+                  {selectedItem.slot !== 'consumable' && (
                     <button
+                      disabled={!selectedItem.isEquipped && (selectedItem.requiredLevel ?? 1) > character.level}
                       onClick={() => onEquip(selectedItem.id)}
                       className="min-h-[40px] px-3.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs cursor-pointer"
                     >
@@ -243,7 +249,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   )}
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'bless')}
-                    disabled={character.bless <= 0 || selectedItem.enhanceLevel >= 6}
+                    disabled={selectedItem.slot === 'consumable' || character.bless <= 0 || selectedItem.enhanceLevel >= 6}
                     className="min-h-[40px] px-3 rounded-lg bg-rose-700 hover:bg-rose-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Hammer className="w-3.5 h-3.5" />
@@ -251,7 +257,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   </button>
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'soul')}
-                    disabled={character.soul <= 0 || selectedItem.enhanceLevel >= 13}
+                    disabled={selectedItem.slot === 'consumable' || character.soul <= 0 || selectedItem.enhanceLevel >= 13}
                     className="min-h-[40px] px-3 rounded-lg bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Hammer className="w-3.5 h-3.5" />
@@ -259,7 +265,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   </button>
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'life')}
-                    disabled={character.life <= 0}
+                    disabled={selectedItem.slot === 'consumable' || character.life <= 0}
                     className="min-h-[40px] px-3 rounded-lg bg-purple-700 hover:bg-purple-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Gem className="w-3.5 h-3.5" />
@@ -267,7 +273,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   </button>
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'harmony')}
-                    disabled={character.harmony <= 0 || selectedItem.enhanceLevel < 13 || selectedItem.enhanceLevel >= 15}
+                    disabled={selectedItem.slot === 'consumable' || character.harmony <= 0 || selectedItem.enhanceLevel < 13 || selectedItem.enhanceLevel >= 15}
                     className="min-h-[40px] px-3 rounded-lg bg-emerald-700 hover:bg-emerald-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Sparkles className="w-3.5 h-3.5" />

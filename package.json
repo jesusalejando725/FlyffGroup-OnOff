@@ -13,7 +13,7 @@
     "verify:flyff": "node scripts/check-world-assets.mjs",
     "test:flyff": "node --test scripts/world-collision.test.mjs",
     "typecheck:app": "tsc -p tsconfig.app.json",
-    "test:release": "node --test scripts/item-pricing.test.ts scripts/release-connection.test.mjs scripts/world-collision.test.mjs scripts/world-terrain.test.mjs scripts/world-encounters.test.ts scripts/world-invasions.test.ts scripts/private-backup.test.ts scripts/world-admin.test.ts"
+    "test:release": "node --test scripts/item-pricing.test.ts scripts/flyff-economy.test.ts scripts/release-connection.test.mjs scripts/world-collision.test.mjs scripts/world-terrain.test.mjs scripts/world-encounters.test.ts scripts/world-invasions.test.ts scripts/private-backup.test.ts scripts/world-admin.test.ts"
   },
   "dependencies": {
     "@babylonjs/core": "^9.37.1",

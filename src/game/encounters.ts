@@ -127,3 +127,65 @@ export class SpawnGrid<T> {
 
   clear(): void { this.cells.clear(); }
 }
+
+export const CAMP_MIN_SPACING = 40;
+export const MONSTER_WANDER_RADIUS = 6;
+
+export interface HuntingRegion {
+  id: string;
+  count: number;
+  contains(x: number, z: number): boolean;
+  allows(x: number, z: number): boolean;
+}
+
+// Preserve imported sites and fill each region independently on a staggered grid.
+// Rejected sites (shore, city, or regional borders) never yield a partial camp.
+export function populateRegionalCamps(size: number, regions: readonly HuntingRegion[], sites: SpawnSite[]): Map<string, CampMember[]> {
+  const result = new Map(regions.map(region => [region.id, [] as CampMember[]]));
+  const centers = new SpawnGrid<{ x: number; z: number }>();
+  const add = (region: HuntingRegion, x: number, z: number, heading: number, site?: SpawnSite) => {
+    const members = result.get(region.id)!;
+    if (members.length >= region.count * CAMP_SIZE) return;
+    for (const other of centers.near(x, z, CAMP_MIN_SPACING)) {
+      if (Math.hypot(other.x - x, other.z - z) < CAMP_MIN_SPACING) return;
+    }
+    const camp = members.length / CAMP_SIZE;
+    const group: CampMember[] = [];
+    for (let i = 0; i < CAMP_SIZE; i++) {
+      const angle = heading + i * 2.399963;
+      const radius = Math.sqrt(i) * 2.7;
+      const mx = x + Math.cos(angle) * radius;
+      const mz = z + Math.sin(angle) * radius;
+      if (mx < MARGIN || mz < MARGIN || mx > size - MARGIN || mz > size - MARGIN ||
+          !region.contains(mx, mz) || !region.allows(mx, mz)) return;
+      group.push({ camp, x: mx, z: mz, heading: angle, site });
+    }
+    centers.add(x, z, { x, z });
+    members.push(...group);
+  };
+
+  for (const site of sites) {
+    const region = regions.find(candidate => candidate.contains(site.x, site.z));
+    if (region) add(region, site.x, site.z, site.x + site.z, site);
+  }
+
+  const pitch = 40.5;
+  const rowSpacing = pitch * Math.sqrt(3) / 2;
+  const candidates: { x: number; z: number; heading: number }[] = [];
+  for (let row = 0, z = MARGIN + 9; z <= size - MARGIN - 9; row++, z += rowSpacing) {
+    for (let x = MARGIN + 9 + (row % 2) * pitch / 2; x <= size - MARGIN - 9; x += pitch) {
+      candidates.push({ x, z, heading: x + z });
+    }
+  }
+  let seed = 12582917;
+  for (let i = candidates.length - 1; i > 0; i--) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const j = seed % (i + 1);
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+  for (const { x, z, heading } of candidates) {
+    const region = regions.find(candidate => candidate.contains(x, z));
+    if (region) add(region, x, z, heading);
+  }
+  return result;
+}

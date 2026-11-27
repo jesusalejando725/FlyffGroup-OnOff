@@ -212,6 +212,14 @@ for (const files of Object.values(arms)) {
 }
 for (const key of await loadData('creatureVoices')) await asset('audio/voces/'+key+'.ogg');
 for (const id of ['red','gold','medusa','selupan','kundum']) await asset('ui/event-'+id+'.webp');
+
+const khan = await glb('monstruos/besibigfoot.glb');
+assert.ok(khan.skins[0].joints.length > 1 && khan.images.length > 0);
+for (const clip of ['stand', 'walk', 'atk1', 'atk2', 'atk3', 'dmg1', 'die1']) {
+  assert.ok(khan.animations.some(ani => ani.name === clip), `Beast Overlord Khan: ${clip}`);
+}
+for (const clip of ['atk1', 'dmg1', 'die1']) await asset(`audio/npc_besibigfoot_${clip}.wav`);
+
 console.log(
   JSON.stringify(
     {

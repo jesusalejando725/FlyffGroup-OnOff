@@ -1,3 +1,4 @@
+import { equippedGearBonuses } from './data/flyffEconomy';
 import { watchWebUpdates } from './services/githubOtaService';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Bluetooth, RotateCw, ShieldAlert, Wifi } from 'lucide-react';
@@ -16,6 +17,8 @@ import {
   buyJewelFromNpc,
   buyShopItem,
   addCatalogItem,
+  applyGearHealth,
+  consumeInventoryPotion,
   changeAccountPassword,
   createCharacterForAccount,
   equipItem,
@@ -245,7 +248,7 @@ export default function App() {
   const lootFiltersRef = useRef<LootFilterSettings>(DEFAULT_LOOT_FILTERS);
   const potionConfigRef = useRef<PotionConfig>(DEFAULT_POTION_CONFIG);
   const autoHealAtRef = useRef<number>(0);
-  const pressAttackRef = useRef<() => void>(() => {});
+  const pressAttackRef = useRef<(useCombo?: boolean, helper?: boolean) => void>(() => {});
   charRef.current = character;
   itemsRef.current = items;
   roomRef.current = roomState;
@@ -595,9 +598,11 @@ export default function App() {
     const timer = window.setInterval(() => {
       setCharacter((prev) => {
         if (!prev) return prev;
-        if (prev.mp >= prev.maxMp && prev.ag >= prev.maxAg && prev.sd >= prev.maxSd) return prev;
+        const recovery = prev.hp < prev.maxHp ? equippedGearBonuses(itemsRef.current).hpRecoveryPct ?? 0 : 0;
+        if (!recovery && prev.mp >= prev.maxMp && prev.ag >= prev.maxAg && prev.sd >= prev.maxSd) return prev;
         return {
           ...prev,
+          hp: Math.min(prev.maxHp, prev.hp + Math.round(prev.maxHp * recovery / 100)),
           mp: Math.min(prev.maxMp, prev.mp + 6),
           ag: Math.min(prev.maxAg, prev.ag + 8),
           sd: Math.min(prev.maxSd, prev.sd + 5),
@@ -818,7 +823,7 @@ export default function App() {
         const char = charRef.current; if (!char) return;
         const next = itemsRef.current.map(i => i.isEquipped && i.slot === slot ? { ...i, durability } : i);
         itemsRef.current = next; setItems(next);
-        setCharacter(prev => prev?.id === char.id ? { ...prev, equipment: next.filter(i=>i.isEquipped), inventory: next.filter(i=>!i.isEquipped) } : prev);
+        setCharacter(prev => prev?.id === char.id ? { ...applyGearHealth(prev, next), equipment: next.filter(i=>i.isEquipped), inventory: next.filter(i=>!i.isEquipped) } : prev);
         void wearEquipment(char.id, slot, durability, next.find(i => i.isEquipped && i.slot === slot)?.id).catch(error => pushBanner(String(error), '#f87171'));
       },
       onKillMonster: async (xp, zen, invasion) => {
@@ -862,7 +867,7 @@ export default function App() {
           soundSynth.playLevelUp();
         }
 
-        const updated: MuCharacter = {
+        const updated = applyGearHealth({
           ...c,
           level: nextLevel,
           xp: nextXp,
@@ -879,7 +884,7 @@ export default function App() {
           ag: leveledUp ? nextMaxAg : c.ag,
           zen: c.zen + zen,
           kills: c.kills + 1,
-        };
+        }, itemsRef.current);
         if (invasion) pushBanner(`${invasion.name}: +${zen.toLocaleString()} Zen · +${nextLevel-c.level} niveles · +${invasion.points} puntos`, '#fbcf69');
         charRef.current = updated;
         setCharacter(updated);
@@ -909,8 +914,10 @@ export default function App() {
           creation: (c.creation ?? 0) + (drop.kind === 'creation' ? drop.amount : 0),
           talisman: (c.talisman ?? 0) + (drop.kind === 'talisman' ? drop.amount : 0),
         };
+        charRef.current = updated;
+        setCharacter(updated);
         const saved = await updateCharacter(updated);
-        setCharacter(saved);
+        if (charRef.current === updated) setCharacter(saved);
         pushBanner(
           `+${drop.label}`,
           drop.kind === 'bless'
@@ -1006,7 +1013,7 @@ export default function App() {
         setMinimapData(snap);
       },
       onAutoHuntAttack: () => {
-        pressAttackRef.current();
+        pressAttackRef.current(true, true);
       },
       onWorldTelemetry: (info) => {
         setWorldTelemetry(info);
@@ -1097,7 +1104,7 @@ export default function App() {
     [pushBanner],
   );
 
-  const handlePressAttack = useCallback((useCombo = comboArmed) => {
+  const handlePressAttack = useCallback((useCombo = comboArmed, helper = false) => {
     const c = charRef.current;
     if (!c || screenStageRef.current !== 'playing') return;
     const classSkills = MU_SKILLS[c.classType] || MU_SKILLS.DK;
@@ -1113,11 +1120,11 @@ export default function App() {
       const selectedIds = comboConfig.comboSkillIds.slice(0, 5);
       const comboSkills: SkillDef[] = [];
       for (const id of selectedIds) {
-        const found = classSkills.find((s) => s.id === id);
+        const found = classSkills.find((s) => s.id === id && (!helper || !s.isBuff));
         if (found) comboSkills.push(found);
       }
       for (let idx = 1; comboSkills.length < 5 && idx < classSkills.length; idx++) {
-        if (!comboSkills.some((s) => s.id === classSkills[idx].id)) {
+        if ((!helper || !classSkills[idx].isBuff) && !comboSkills.some((s) => s.id === classSkills[idx].id)) {
           comboSkills.push(classSkills[idx]);
         }
       }
@@ -1126,7 +1133,7 @@ export default function App() {
 
       if (c.mp < totalMp || c.ag < totalAg) {
         pushBanner('MP/AG insuficiente para Combo x5 · Ataque base', '#fbbf24');
-        const def = classSkills.find((s) => s.id === comboConfig.defaultSkillId) || classSkills[0];
+        const def = helper ? classSkills[0] : classSkills.find((s) => s.id === comboConfig.defaultSkillId) || classSkills[0];
         handleCastSkill(def);
         return;
       }
@@ -1150,8 +1157,13 @@ export default function App() {
   pressAttackRef.current = handlePressAttack;
 
   useEffect(() => {
-    engineRef.current?.setAutoHuntEnabled(helperEnabled && !adminPanelOpen);
-  }, [helperEnabled, screenStage, adminPanelOpen]);
+    const basic = MU_SKILLS[character?.classType ?? 'DK'][0];
+    engineRef.current?.setAutoHuntEnabled(
+      helperEnabled && screenStage === 'playing' && !adminPanelOpen && activeDrawer === 'none' && !editMode,
+      Math.min(...MU_SKILLS[character?.classType ?? 'DK'].filter(skill => !skill.isBuff).map(skill => skill.range), basic.range) + 1.4,
+      lootFilters,
+    );
+  }, [helperEnabled, screenStage, adminPanelOpen, activeDrawer, editMode, character?.classType, lootFilters]);
 
   // Global keyboard shortcuts while playing/paused
   useEffect(() => {
@@ -1475,10 +1487,10 @@ export default function App() {
   useEffect(() => {
     if (screenStage !== 'playing') return;
     const timer = window.setInterval(() => {
-      if (lootFiltersRef.current.autoLootEnabled) {
+      if (!helperEnabled && lootFiltersRef.current.autoLootEnabled) {
         engineRef.current?.collectAutoLoot(lootFiltersRef.current);
       }
-      if (document.hidden) return;
+      if (document.hidden || activeDrawer !== 'none' || adminPanelOpen || editMode) return;
       if (helperEnabled || comboArmed) {
         const c = charRef.current;
         if (c && (c.hp < c.maxHp || c.mp < c.maxMp)) {
@@ -1496,12 +1508,13 @@ export default function App() {
       }
     }, 350);
     return () => window.clearInterval(timer);
-  }, [screenStage, comboArmed, helperEnabled, handleHealPotion]);
+  }, [screenStage, comboArmed, helperEnabled, handleHealPotion, activeDrawer, adminPanelOpen, editMode]);
 
   const handleEquip = async (itemId: string) => {
     if (!character) return;
     const nextItems = await equipItem(character.id, itemId);
     setItems(nextItems);
+    setCharacter(current => current?.id === character.id ? applyGearHealth(current, nextItems) : current);
     engineRef.current?.syncHeroAppearance(
       character.classType,
       nextItems.filter((i) => i.isEquipped),
@@ -1511,6 +1524,17 @@ export default function App() {
     const toggled = nextItems.find((i) => i.id === itemId);
     soundSynth.playEquip(toggled?.slot === 'wings');
     setForgeMessage('Equipo actualizado y guardado en IndexedDB (Dexie).');
+  };
+
+  const handleUsePotion = async (itemId: string) => {
+    const c = charRef.current;
+    if (!c) return;
+    const updated = await consumeInventoryPotion(c.id, itemId);
+    if (!updated) { setForgeMessage('No necesitas recuperar PV o PM con esta poción.'); return; }
+    if (charRef.current?.id !== c.id) return;
+    setCharacter(updated);
+    setItems(await getItemsForCharacter(c.id));
+    soundSynth.playPotion();
   };
 
   const handleUpgrade = async (itemId: string, jewel: 'bless' | 'soul' | 'life' | 'harmony') => {
@@ -1915,6 +1939,7 @@ export default function App() {
               setForgeMessage(null);
             }}
             onEquip={handleEquip}
+            onUse={handleUsePotion}
             onRepair={async () => { if (!character) return; try { const saved=await repairEquipment(character.id); await selectAndHydrateCharacter(saved); } catch(error) { setForgeMessage(String(error)); } }}
             onUpgrade={handleUpgrade}
             forgeMessage={forgeMessage}

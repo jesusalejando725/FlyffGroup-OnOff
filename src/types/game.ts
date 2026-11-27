@@ -1,3 +1,5 @@
+import type { GearBonuses } from '../data/flyffEconomy';
+
 export type HeroClass = 'DK' | 'DW' | 'ELF' | 'DL' | 'MG';
 
 export type CharacterVariantKey =
@@ -36,9 +38,10 @@ export type ItemSlot =
   | 'pendant'
   | 'ring1'
   | 'ring2'
-  | 'pet';
+  | 'pet'
+  | 'consumable';
 
-export type ItemCategory = 'weapon' | 'armor' | 'wings' | 'jewelry' | 'pet';
+export type ItemCategory = 'weapon' | 'armor' | 'wings' | 'jewelry' | 'pet' | 'consumable';
 
 export type ItemRarity = 'normal' | 'excellent' | 'ancient';
 
@@ -81,7 +84,17 @@ export interface MuAccount {
   isSynced: boolean;
 }
 
-export interface MuItem {
+interface FlyffItemRules {
+  sourceLevel?: number;
+  requiredLevel?: number;
+  gearBonus?: GearBonuses;
+  setBonus?: GearBonuses;
+  sexFilter?: 'male' | 'female';
+  classFilter?: HeroClass[];
+  recovery?: { hp?: number; mp?: number };
+}
+
+export interface MuItem extends FlyffItemRules {
   id: string;
   charId: string;
   name: string;
@@ -116,6 +129,7 @@ export interface MuCharacter {
   xpToNext: number;
   hp: number;
   maxHp: number;
+  gearHpBonus?: number;
   mp: number;
   maxMp: number;
   sd: number;
@@ -196,6 +210,7 @@ export interface MonsterSpawnDef {
   isBoss?: boolean;
   powers?: MonsterPower[];
   roamRadius?: number;
+  evasionPct?: number;
   moveSpeed?: number;
   respawnSeconds?: number;
   drops?: string[];
@@ -231,7 +246,7 @@ export interface MapDef {
   monsters: MonsterSpawnDef[];
 }
 
-export interface ShopItemDef {
+export interface ShopItemDef extends FlyffItemRules {
   id: string;
   name: string;
   slot: ItemSlot;
@@ -247,7 +262,8 @@ export interface ShopItemDef {
   excellentOpt: string;
   zenCost: number;
   vendorRoles: Array<NpcDef['role']>;
-  classFilter?: HeroClass[];
+  fixedPrice?: boolean;
+  dropExclusive?: boolean;
 }
 
 export interface ButtonLayoutItem {

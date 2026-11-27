@@ -99,3 +99,23 @@ test('Madrigal has one regional coordinate space and four distinct routes at eve
   for (let i=0;i<=100;i++) visits.add(nearestRegion(maps,1336+1204*i/100,1281-791*i/100).id);
   assert.deepEqual([...visits],['flaris','crater_ceniza']);
 });
+
+test('the shared map fills each region up to its own quota using only complete camps', async () => {
+  const { populateRegionalCamps } = await import('../src/game/encounters.ts');
+  const camps = populateRegionalCamps(600, [
+    { id: 'west', count: 16, contains: x => x < 300, allows: (_x, z) => z > 100 },
+    { id: 'east', count: 13, contains: x => x >= 300, allows: (_x, z) => z > 100 },
+  ], [{ x: 80, z: 120, level: 1, model: 'aibatt', name: 'Aibatt' }]);
+  assert.equal(camps.get('west')?.length, 160);
+  assert.equal(camps.get('east')?.length, 130);
+  assert.equal(camps.get('west')?.[0].site?.model, 'aibatt');
+  const centers = [...camps].flatMap(([id, members]) => {
+    members.forEach((member, i) => {
+      assert.equal(member.camp, Math.floor(i / CAMP_SIZE));
+      assert.ok(member.z > 100);
+      assert.equal(member.x < 300 ? 'west' : 'east', id);
+    });
+    return members.filter((_, i) => i % CAMP_SIZE === 0);
+  });
+  centers.forEach((a, i) => centers.slice(i + 1).forEach(b => assert.ok(Math.hypot(a.x-b.x, a.z-b.z) >= 40)));
+});

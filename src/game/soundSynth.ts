@@ -319,6 +319,10 @@ class MuSoundSynth {
     const last = this.monsterSfxThrottle.get(throttleKey) ?? -Infinity;
     if (now - last < 750) return;
     this.monsterSfxThrottle.set(throttleKey, now);
+    if (base === 'besibigfoot' && event !== 'idle1') {
+      this.playUrl(`./mugroup/audio/npc_besibigfoot_${event}.wav`, .65);
+      return;
+    }
     const voice = base+'-'+event;
     if (monsterVoices.has(voice)) { this.playUrl('./mugroup/audio/voces/'+voice+'.ogg',.65); return; }
     const heavy = ['bang', 'grrr', 'rockmuscle', 'clockwork', 'jackhammer'].includes(cleanName);

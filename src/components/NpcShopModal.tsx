@@ -45,12 +45,16 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   const customStock = npc.stock;
   const catalogForNpc = ITEM_CATALOG
     .filter(item => {
+      if (item.dropExclusive || (item.sourceLevel !== undefined && !item.vendorRoles.length)) return false;
+      if (item.sexFilter && item.sexFilter !== character.sex) return false;
       if (item.classFilter && !item.classFilter.includes(character.classType)) return false;
+      if (item.fixedPrice) return item.vendorRoles.includes(npc.role) &&
+        (!customStock || Object.hasOwn(customStock, item.id));
       if (customStock) return Object.hasOwn(customStock, item.id) &&
         Number.isSafeInteger(customStock[item.id]) && customStock[item.id] >= 0;
       return item.vendorRoles.includes(npc.role) || npc.role === 'guard';
     })
-    .map(item => ({ ...item, zenCost: customStock?.[item.id] ??
+    .map(item => ({ ...item, zenCost: item.fixedPrice ? item.zenCost : customStock?.[item.id] ??
       Math.round(item.zenCost * (Number.isFinite(priceMultiplier) && priceMultiplier >= 0 ? priceMultiplier : 1)) }));
   const sellableItems = items.filter((i) => !i.isEquipped);
 
@@ -166,6 +170,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                       {s.magicPower > 0 && `Magia +${s.magicPower} · `}
                       {s.defense > 0 && `Def +${s.defense}`}
                     </div>
+                    {s.requiredLevel && <div className="text-[11px] text-slate-300">Nivel requerido: {s.requiredLevel}</div>}
                     {s.setName && <div className="mt-1 text-[11px] text-slate-300">Conjunto: {s.setName}</div>}
                     {s.classFilter?.length ? <div className="mt-1 text-[11px] text-slate-300">Clases: {s.classFilter.join(', ')}</div> : null}
                     {s.luck && <div className="text-[11px] text-amber-300">Suerte</div>}

@@ -1,3 +1,4 @@
+import { equippedGearBonuses, rollFlyffDrops } from '../data/flyffEconomy';
 import madrigalSites from '../data/madrigalSpawns.json';
 import { capitalPortals, nearestRegion } from './worldRegions';
 import creatureModels from '../data/creatureModels.json' with {type:'json'};
@@ -5,7 +6,7 @@ import { flightHeight } from './content/WingRig';
 import { invasionSites, invasionWindow, type Invasion } from '../data/worldInvasions';
 import { applyMonsterRule, canonicalMap, modelMonsters, positionsAt } from '../data/liveWorld';
 import { getLiveWorld, refreshLiveWorld, worldInvasions } from '../services/liveWorldService';
-import { CAMP_SIZE, populateCamps, regionalTemplate, SpawnGrid } from './encounters';
+import { CAMP_SIZE, MONSTER_WANDER_RADIUS, populateRegionalCamps, regionalTemplate, SpawnGrid, type CampMember } from './encounters';
 import {
   AnimationGroup,
   ArcRotateCamera,
@@ -258,6 +259,8 @@ export class MuWorldEngine {
   private autoAimAssist = true;
   private targetFps: 30 | 45 | 60 = 60;
   private autoHuntEnabled = false;
+  private helperLootFilters?: LootFilterSettings;
+  private helperRange = 3;
   private activeBonuses = { atkBonusPct: 0, speedBonusPct: 0, critBonusPct: 0 };
 
   private monsters: ActiveMonster[] = [];
@@ -435,7 +438,9 @@ export class MuWorldEngine {
     this.targetFps = fps;
   }
 
-  public setAutoHuntEnabled(enabled: boolean): void {
+  public setAutoHuntEnabled(enabled: boolean, range = 3, filters?: LootFilterSettings): void {
+    this.helperRange = range;
+    this.helperLootFilters = filters;
     this.autoHuntEnabled = enabled;
     if (enabled) this.autoHuntAccum = 1.1;
   }
@@ -748,14 +753,20 @@ export class MuWorldEngine {
     );
     const affected = skill.damageMultiplier >= 2.0 ? hits.slice(0, 4) : hits.slice(0, 1);
 
+    const gear = equippedGearBonuses(this.flyff.getLastEquippedItems());
     for (const mob of affected) {
+      if (mob.def.evasionPct && Math.random() * 100 < Math.max(0, mob.def.evasionPct - (gear.accuracyPct ?? 0))) {
+        this.emitDamageNumber(48, 34, 'Esquiva', '#94a3b8', false);
+        continue;
+      }
       const mult = this.heroStats
         ? getEffectiveSkillMultiplier(skill, this.heroStats)
         : skill.damageMultiplier;
       const atkBonus = 1 + this.activeBonuses.atkBonusPct / 100;
-      const isCrit = Math.random() * 100 < 14 + this.activeBonuses.critBonusPct;
-      const rawDmg = baseStatPower * mult * atkBonus * (isCrit ? 1.55 : 0.92 + Math.random() * 0.16);
-      const finalDmg = Math.max(4, Math.round(rawDmg - mob.defense * 0.35));
+      const isCrit = Math.random() * 100 < 14 + this.activeBonuses.critBonusPct + (gear.critPct ?? 0);
+      const rawDmg = baseStatPower * mult * atkBonus * (isCrit ? 1.55 + (gear.critDamagePct ?? 0) / 100 : 0.92 + Math.random() * 0.16);
+      const effectiveDefense = mob.defense * (1 - (gear.ignoreDefensePct ?? 0) / 100);
+      const finalDmg = Math.max(4, Math.round(rawDmg - effectiveDefense * 0.35));
 
       mob.hp = Math.max(0, mob.hp - finalDmg);
       this.playMonsterAnim(mob, 'hit', false);
@@ -856,7 +867,7 @@ export class MuWorldEngine {
       localStorage.setItem(mob.id,String(mob.respawnAt));
       mob.respawnAt = Infinity; mob.strike = undefined;
       void this.callbacks.onKillMonster?.(0,e.zen,e);
-      const pool = [...ITEM_BY_ID.values()].filter(i =>
+      const pool = [...ITEM_BY_ID.values()].filter(i => !i.id.startsWith('flyff_')).filter(i =>
         ['helm','armor','pants','boots','gloves'].includes(i.slot) || (e.id !== 'red' && i.slot === 'weapon') ||
         (e.id !== 'red' && e.id !== 'selupan' && i.slot === 'shield')).map(i=>i.id);
       for (let i=0; i<e.pieces; i++) this.spawnLootDrop(mob.x+1.5*Math.cos(i*2.4),mob.z+1.5*Math.sin(i*2.4),0,true,pool);
@@ -868,9 +879,12 @@ export class MuWorldEngine {
 
     const zen =
       mob.def.zenMin + Math.floor(Math.random() * Math.max(1, mob.def.zenMax - mob.def.zenMin));
-    void this.callbacks.onKillMonster?.(mob.def.xpReward, zen);
-
-    if (mob.def.drops?.length !== 0) this.spawnLootDrop(mob.x, mob.z, zen, mob.def.isBoss, mob.def.drops);
+    void this.callbacks.onKillMonster?.(mob.def.xpReward, 0);
+    if (zen > 0 && mob.def.drops?.length !== 0) this.spawnLootDrop(mob.x, mob.z, zen, false, ['zen']);
+    rollFlyffDrops(mob.def).forEach((id, i) => {
+      const angle = i * 2.399963;
+      this.spawnLootDrop(mob.x + Math.cos(angle), mob.z + Math.sin(angle), 0, false, [id]);
+    });
   }
 
   private spawnLootDrop(x: number, z: number, zenAmount: number, isBoss?: boolean, allowed?: string[]): void {
@@ -1019,7 +1033,9 @@ export class MuWorldEngine {
       mob.actionTime = name === 'atk1' ? 0.6 : 0.25;
       if (name === 'hit') mob.strike = undefined;
     }
-    const lower = name.toLowerCase();
+    const clip = mob.glbFile === 'monstruos/besibigfoot.glb' && name === 'hit' ? 'dmg1' :
+      mob.glbFile === 'monstruos/besibigfoot.glb' && name === 'death' ? 'die1' : name;
+    const lower = clip.toLowerCase();
     const ag =
       mob.animations.find((a) => a.name.toLowerCase() === lower) ||
       mob.animations.find((a) => a.name.toLowerCase().includes(lower)) ||
@@ -1157,16 +1173,23 @@ export class MuWorldEngine {
     this.monsterRoamLimit = 40;
     this.monsterScan = 0;
     const size = MU_MAPS[0].worldSize;
-    const camps = populateCamps('madrigal',size,5000,(x,z)=>this.flyff.world.isHuntingLand(x,z) && !this.isSafePoint(x,z,12),madrigalSites);
-    const sites = new Map(camps.filter((_,i)=>i%CAMP_SIZE === 0).map(m=>[m.camp,nearestRegion(MU_MAPS,m.x,m.z).id]));
-    for (const map of MU_MAPS) this.addRegionMonsters(map,camps.filter(m=>sites.get(m.camp) === map.id),live,adminCfg);
+    const camps = populateRegionalCamps(size, MU_MAPS.map(map => {
+      const key = map.id === 'puerto_bruma' ? 'puerto' : map.id === 'crater_ceniza' ? 'ceniza' : map.id;
+      return {
+        id: map.id,
+        count: Math.max(1, Math.min(5000, Math.ceil(adminCfg['world-rules'].maps[key].targetMonsterCount / CAMP_SIZE))),
+        contains: (x, z) => nearestRegion(MU_MAPS, x, z).id === map.id,
+        allows: (x, z) => this.flyff.world.isHuntingLand(x, z) && !this.isSafePoint(x, z, 12),
+      };
+    }), madrigalSites);
+    for (const map of MU_MAPS) this.addRegionMonsters(map, camps.get(map.id) ?? [], live, adminCfg);
     this.entityRevision = live.revision;
     this.entityHeroId = this.heroStats?.id;
   }
 
   private portalMaterial?: StandardMaterial;
 
-  private addRegionMonsters(map: MapDef, camps: ReturnType<typeof populateCamps>, live: ReturnType<typeof getLiveWorld>, adminCfg: ReturnType<typeof getAdminConfigSync>) {
+  private addRegionMonsters(map: MapDef, camps: CampMember[], live: ReturnType<typeof getLiveWorld>, adminCfg: ReturnType<typeof getAdminConfigSync>) {
     const mapKey = map.id === 'puerto_bruma' ? 'puerto' : map.id === 'crater_ceniza' ? 'ceniza' : map.id;
     const extraCatalog = Array.isArray(adminCfg.monsters?.extraCatalog) ? adminCfg.monsters.extraCatalog : [];
     const glbOverrides: Record<string, string> = adminCfg.monsters?.glbOverrides || {};
@@ -1186,7 +1209,10 @@ export class MuWorldEngine {
     for (let i = 0; i < map.monsters.length; i++) {
       const t = map.monsters[i];
       const key = t.name.toLowerCase().split(' ')[0];
-      const glb = resolveMonsterGlb(glbOverrides[t.id] || glbOverrides[key] || 'monstruos/' + key + '.glb', i);
+      const original = t.id === 'beast_overlord_khan' ? 'monstruos/besibigfoot.glb' :
+        t.id === 'boss_flaris_giant' ? 'monstruos/bang.glb' :
+        t.id === 'boss_rob_clock' ? 'monstruos/clockwork.glb' : undefined;
+      const glb = resolveMonsterGlb(glbOverrides[t.id] || glbOverrides[key] || original || 'monstruos/' + key + '.glb', i);
       templates.push({ def: t, glb });
     }
 
@@ -1222,10 +1248,10 @@ export class MuWorldEngine {
     const presentGlbs = new Set(templates.map((t) => t.glb));
     for (let i = 0; i < creatureModels.length; i++) {
       const glb = creatureModels[i];
-      if (presentGlbs.has(glb)) continue;
+      if (presentGlbs.has(glb) || glb === 'monstruos/besibigfoot.glb') continue;
       presentGlbs.add(glb);
       const base = glb.replace('monstruos/', '').replace('.glb', '');
-      const lvl = map.minLevel + (i % Math.max(1, map.maxLevel - map.minLevel));
+      const lvl = map.minLevel + (i % (map.maxLevel - map.minLevel + 1));
       templates.push({
         def: {
           id: `glb_${base}`,
@@ -1245,23 +1271,31 @@ export class MuWorldEngine {
       });
     }
 
-    const total = Number(adminCfg['world-rules'].maps?.[mapKey]?.targetMonsterCount) || 40000;
-    const campCount = Math.min(5000, Math.max(1, Math.ceil(total / CAMP_SIZE)));
     const regional = templates.filter(t => !t.def.isBoss && t.def.level >= map.minLevel && t.def.level <= map.maxLevel);
-    const choices = (regional.length ? regional : templates.filter(t => !t.def.isBoss)).map(t => ({ level: t.def.level, template: t }));
+    const choices = regional.map(t => ({ level: t.def.level, template: t }));
     const campTemplates = new Map<number, Template>();
-    const placements: { entry: Template; mx: number; mz: number; angle: number; camp?: number }[] = camps.slice(0,campCount*CAMP_SIZE).map(
+    const placements: { entry: Template; mx: number; mz: number; angle: number; camp?: number }[] = camps.map(
       ({ camp, x, z, heading, site }) => {
         let entry = campTemplates.get(camp);
-        if (!entry) entry = regionalTemplate(choices, camp, Math.hypot(x-map.spawn.x,z-map.spawn.z), this.cityRadius(map, adminCfg['world-rules']), map.minLevel, map.maxLevel).template;
-        if (site && !campTemplates.has(camp)) {
-          const matched = templates.find(t=>t.glb === 'monstruos/'+site.model+'.glb');
-          if (matched) entry = { ...matched, def:{...matched.def, name:site.name, level:site.level} };
+        if (!entry) {
+          const distance = Math.hypot(x - map.spawn.x, z - map.spawn.z);
+          entry = regionalTemplate(choices, camp, distance, this.cityRadius(map, adminCfg['world-rules']), map.minLevel, map.maxLevel).template;
+          if (site) {
+            const matched = templates.find(t => t.glb === 'monstruos/' + site.model + '.glb');
+            if (matched) entry = { ...matched, def: { ...matched.def, name: site.name, level: site.level } };
+          }
+          campTemplates.set(camp, entry);
         }
-        campTemplates.set(camp, entry);
-        return {entry, mx:x, mz:z, angle:heading, camp};
+        return { entry, mx: x, mz: z, angle: heading, camp };
       },
     );
+    // Give each regional giant one existing camp slot, without adding extra camps.
+    const farCamps = placements.filter((p, i) => i % CAMP_SIZE === 0 && !camps[i].site)
+      .sort((a, b) => Math.hypot(b.mx - map.spawn.x, b.mz - map.spawn.z) -
+        Math.hypot(a.mx - map.spawn.x, a.mz - map.spawn.z));
+    templates.filter(entry => entry.def.isBoss).forEach((entry, i) => {
+      if (farCamps[i]) farCamps[i].entry = entry;
+    });
 
     const extraGroups = live.groups.filter(group => group.map === map.id);
     const groups = [...(Array.isArray(adminCfg.monsters?.groups) ? adminCfg.monsters.groups.slice(0, 40) : []), ...extraGroups];
@@ -1296,7 +1330,7 @@ export class MuWorldEngine {
         xpReward: number(group.xp, template.def.xpReward, 0, 1e8),
         zenMin: number(group.zen, template.def.zenMin, 0, 1e8),
         zenMax: number(group.zen, template.def.zenMax, 0, 1e8),
-        roamRadius: number(group.roamRadius, 40, 0, 200),
+        roamRadius: number(group.roamRadius, MONSTER_WANDER_RADIUS, 0, 200),
         respawnSeconds: number(group.respawnSeconds, 7, 1, 3600),
         drops: Array.isArray(group.drops) ? group.drops.filter((key: string) =>
           ['zen', 'bless', 'soul', 'life', 'chaos', 'creation', 'talisman'].includes(key) || ITEM_BY_ID.has(key)) : undefined,
@@ -1312,7 +1346,13 @@ export class MuWorldEngine {
     }
 
     for (const [i, { entry, mx, mz, angle, camp }] of placements.entries()) {
-      const def = applyMonsterRule(entry.def, live.monsters[entry.def.id]);
+      const rule = applyMonsterRule(entry.def, live.monsters[entry.def.id]);
+      const level = Math.max(map.minLevel, Math.min(map.maxLevel, rule.level));
+      const scale = level / Math.max(1, rule.level);
+      const def = { ...rule, level, maxHp: Math.max(1, Math.round(rule.maxHp * scale)),
+        attack: Math.round(rule.attack * scale), defense: Math.round(rule.defense * scale),
+        xpReward: Math.round(rule.xpReward * scale), zenMin: Math.round(rule.zenMin * scale),
+        zenMax: Math.round(rule.zenMax * scale) };
       const mob: ActiveMonster = {
         id: `mob-${map.id}-${i}`,
         def, glbFile: entry.glb, camp,
@@ -1447,6 +1487,26 @@ export class MuWorldEngine {
     if (this.keys.has('KeyW') || this.keys.has('ArrowUp')) moveZ += 1;
     if (this.keys.has('KeyS') || this.keys.has('ArrowDown')) moveZ -= 1;
 
+    const manualInput = Math.hypot(moveX, moveZ) > 0.08;
+    let helperCanAttack = false;
+    if (this.autoHuntEnabled && !manualInput && !document.hidden) {
+      const loot = this.helperLootFilters && this.loots.find(({ info }) =>
+        this.helperLootFilters?.[info.kind] && Math.hypot(info.x - this.heroX, info.z - this.heroZ) <= 5);
+      const mob = !loot && !this.isInSafeCity() ? this.findNearestTarget(25) : null;
+      const goal = loot ? loot.info : mob;
+      if (goal) {
+        const dx = goal.x - this.heroX, dz = goal.z - this.heroZ;
+        const distance = Math.hypot(dx, dz);
+        if (loot && distance <= 1.6) this.pickupLootIndex(this.loots.indexOf(loot));
+        else if (mob && distance <= this.helperRange) helperCanAttack = true;
+        else if (distance > 0 && this.attackSwingTimer <= 0) {
+          const a = this.camera.alpha;
+          moveX = (-Math.sin(a) * dx + Math.cos(a) * dz) / distance;
+          moveZ = (-Math.cos(a) * dx - Math.sin(a) * dz) / distance;
+        }
+      }
+    }
+
     const len = Math.hypot(moveX, moveZ);
     const moving = len > 0.08;
 
@@ -1556,7 +1616,7 @@ export class MuWorldEngine {
     this.stepMonsters(dt);
     this.stepLoots(dt);
 
-    if (this.autoHuntEnabled && !inCity && this.findNearestTarget(14)) {
+    if (helperCanAttack && !inCity) {
       this.autoHuntAccum += dt;
       if (this.autoHuntAccum >= 1.1) {
         this.autoHuntAccum = 0;
@@ -1584,7 +1644,7 @@ export class MuWorldEngine {
 
   private stepMonsters(dt: number): void {
     const safeCity = this.isInSafeCity();
-    const aggroRadius = Number(getAdminConfigSync().monsters?.aggroRadiusMeters || 22);
+    const normalAggro = Number(getAdminConfigSync().monsters?.aggroRadiusMeters ?? 10);
 
     const radius = Math.min(100, this.flyff.world.detailRadius);
     this.monsterScan -= dt;
@@ -1635,35 +1695,37 @@ export class MuWorldEngine {
       }
       if (root.isEnabled() !== (d <= radius)) root.setEnabled(d <= radius);
       if (!mob.model || d > radius) { mob.strike = undefined; continue; }
-      const homeDist = Math.hypot(mob.homeX - mob.x, mob.homeZ - mob.z);
-      if (mob.strike) {
-        // Let the windup finish before moving again.
-      } else if (!safeCity && d < aggroRadius && d > 2.4 && homeDist < (mob.def.roamRadius ?? 40)) {
-        const dirX = (this.heroX - mob.x) / d;
-        const dirZ = (this.heroZ - mob.z) / d;
-        const nx = mob.x + dirX * (mob.def.moveSpeed ?? 3.4) * dt;
-        const nz = mob.z + dirZ * (mob.def.moveSpeed ?? 3.4) * dt;
-        if (this.flyff.world.isHuntingLand(nx,nz) && !this.isSafePoint(nx, nz, 2) && Math.hypot(nx - mob.homeX, nz - mob.homeZ) <= (mob.def.roamRadius ?? 40)) {
+      const aggroRadius = mob.invasion ? 22 : mob.def.isBoss ? 15 : normalAggro;
+      const engaged = !safeCity && d <= aggroRadius;
+      const leash = mob.def.roamRadius ?? (aggroRadius + MONSTER_WANDER_RADIUS);
+      if (!mob.strike) {
+        const patrol = this.flyff.worldClock * 0.36 + mob.homeX + mob.homeZ;
+        const radius = Math.min(leash, MONSTER_WANDER_RADIUS) * (0.65 + 0.3 * Math.sin(patrol * 0.6));
+        const chasing = engaged && d > 2.4;
+        const tx = chasing ? this.heroX : mob.homeX + Math.cos(patrol) * radius;
+        const tz = chasing ? this.heroZ : mob.homeZ + Math.sin(patrol) * radius;
+        let dx = tx - mob.x, dz = tz - mob.z;
+        let distance = Math.hypot(dx, dz);
+        const speed = chasing ? mob.def.moveSpeed ?? 3.4 : 2.1;
+        const advance = () => {
+          if (distance < 0.12) return false;
+          const step = Math.min(distance, speed * dt) / distance;
+          const nx = mob.x + dx * step, nz = mob.z + dz * step;
+          if (!this.flyff.world.isHuntingLand(nx, nz) || this.isSafePoint(nx, nz, 2) ||
+              Math.hypot(nx - mob.homeX, nz - mob.homeZ) > leash) return false;
           mob.x = nx;
           mob.z = nz;
+          mob.rotY = Math.atan2(dx, dz);
+          root.rotation.y = mob.rotY;
+          return true;
+        };
+        let moving = (!engaged || chasing) && advance();
+        if (!moving && !engaged) {
+          dx = mob.homeX - mob.x; dz = mob.homeZ - mob.z;
+          distance = Math.hypot(dx, dz);
+          moving = distance > Math.min(leash, MONSTER_WANDER_RADIUS) && advance();
         }
-        mob.rotY = Math.atan2(dirX, dirZ);
-        root.rotation.y = mob.rotY;
-        this.playMonsterAnim(mob, 'walk', true);
-      } else if (safeCity || d >= aggroRadius || homeDist >= (mob.def.roamRadius ?? 40)) {
-        if (homeDist > 1.5) {
-          const nextX = mob.x + (mob.homeX - mob.x) * 0.7 * dt;
-          const nextZ = mob.z + (mob.homeZ - mob.z) * 0.7 * dt;
-          if (this.flyff.world.isHuntingLand(nextX,nextZ) && !this.isSafePoint(nextX, nextZ)) {
-            mob.x = nextX;
-            mob.z = nextZ;
-          }
-          this.playMonsterAnim(mob, 'walk', true);
-        } else {
-          this.playMonsterAnim(mob, 'stand', true);
-        }
-      } else {
-        this.playMonsterAnim(mob, 'stand', true);
+        this.playMonsterAnim(mob, moving ? 'walk' : 'stand', true);
       }
 
       const my = this.flyff.world.getGroundHeight(mob.x, mob.z);
@@ -1694,13 +1756,23 @@ export class MuWorldEngine {
         this.playMonsterSound(mob, 'atk1');
         if (safeCity || this.isSafePoint(mob.x, mob.z) || d > strike.range) continue;
         if (strike.power) void this.flyff.fx.play(mob.attackFx, target, 1.1, { colorHex: strike.power.colorHex });
-        const damage = Math.round(mob.attack * (strike.power?.damageMult ?? 1));
-        this.callbacks.onPlayerDamaged?.(damage, Math.random() < 0.12);
+        const gear = equippedGearBonuses(this.flyff.getLastEquippedItems());
+        if (gear.evasionPct && Math.random() * 100 < gear.evasionPct) {
+          this.callbacks.onFloatingText?.('Esquiva', '#93c5fd');
+          continue;
+        }
+        const blocked = gear.blockPct && Math.random() * 100 < gear.blockPct;
+        const damage = Math.round(mob.attack * (strike.power?.damageMult ?? 1) * (blocked ? .5 : 1));
+        this.callbacks.onPlayerDamaged?.(damage, !blocked && Math.random() < 0.12);
+        if (gear.reflectPct) {
+          mob.hp = Math.max(0, mob.hp - Math.round(damage * gear.reflectPct / 100));
+          if (!mob.hp) this.handleMonsterDefeated(mob);
+        }
         soundSynth.playHit(this.heroStats?.sex);
         if (strike.power) this.callbacks.onMonsterPowerHit?.(strike.power, damage);
         continue;
       }
-      if (safeCity || this.isSafePoint(mob.x, mob.z) || mob.actionTime > 0) continue;
+      if (!engaged || this.isSafePoint(mob.x, mob.z) || mob.actionTime > 0) continue;
       const profile = monsterAttackProfile(mob.glbFile);
       const species = mob.originalSpecies ? SPECIES_BY_ID.get(mob.originalSpecies) : undefined;
       const special = mob.powerCooldown <= 0;

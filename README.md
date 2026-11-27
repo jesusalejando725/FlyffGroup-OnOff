@@ -182,9 +182,38 @@ Madrigal es un terreno común de 9,44 km² con cuatro regiones y cuatro portales
 
 <!-- coderabbit-ai-generated-section:v1:bc0363c2607bdfa3ce1db4607b7ef9558433539a45a4ed166d4b35a2de18bde0 -->
 
-La instalación nueva se publica en [MuGro-Up](https://mugro-up.github.io/MuGro-Up/). Si tu partida está en [Mu-GruoUp-V1](https://faneittealejandro501.github.io/Mu-GruoUp-V1/), abre **Web / APK-WEB → Exportar Respaldo (.json)** en el sitio anterior. En el nuevo, usa **Importar Respaldo (.json)** y comprueba tus personajes e inventario antes de quitar la instalación anterior.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:e6198a5be214da8d46625022fb23b7bc1fa661702e7be220ff49f07ea91caf9c -->
+
+La publicación de esta rama usa [FlyffGroup-OnOff](https://jesusalejando725.github.io/FlyffGroup-OnOff/). Para trasladar una partida guardada en [MuGro-Up](https://mugro-up.github.io/MuGro-Up/) o en [Mu-GruoUp-V1](https://faneittealejandro501.github.io/Mu-GruoUp-V1/), abre **Web / APK-WEB → Exportar Respaldo (.json)** en el sitio anterior. En el nuevo, usa **Importar Respaldo (.json)** para restaurar los personajes y su inventario.
+
+<!-- /coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:4e03097d6e41a69e37020e3f1a4e98d2bf3cbb9da1b736ef5fe0e92d82905871 -->
 
 Referencias para el desarrollo: [FlyffWeb](https://github.com/marciobremer/FlyffWeb) y [flyff-web-mmo](https://github.com/ed3ath/flyff-web-mmo).
+
+## Progresión de Madrigal y economía
+
+| Región | Nivel de monstruos | Monstruos en campamentos |
+| --- | ---: | ---: |
+| Flaris | 1–27 | 6.620 |
+| Villa del Robledal | 28–48 | 2.460 |
+| Puerto de Bruma | 49–76 | 3.550 |
+| Cráter de Ceniza | 77–99 | 1.770 |
+
+El terreno original se comparte entre las cuatro regiones. Cada campamento contiene diez monstruos. La cuota es de hasta 7.000 por región, limitada por el suelo válido, las capitales y la separación de 40 m entre centros. Los monstruos patrullan hasta 6 m desde su punto de aparición y detectan al héroe a 10 m; los jefes, a 15 m. Las invasiones y los grupos publicados por administración se añaden aparte.
+
+**Hellpe** busca enemigos a 25 m, se acerca, usa combos cuando tiene MP y AG, se cura según los ajustes y se acerca al botín situado a 5 m según los filtros de recogida. Puedes tomar el control con el teclado o el joystick.
+
+[La tabla de economía](src/data/flyffEconomy.ts) define el botín y los precios en Penya (Zen en el HUD). Los monstruos normales sueltan consumibles, materiales y equipo común; los grupos normales configurados por administración no pueden soltar equipo competitivo. Los jefes dan una pieza común garantizada y tienen tiradas independientes de joyería, equipo raro y objetos exclusivos. Las piezas que en la tabla original exigen más de nivel 99 se equipan a nivel 99. Los precios de armadura publicados son por pieza.
+
+El modelo, las animaciones y los sonidos de Beast Overlord Khan se convirtieron de la [referencia fijada de Flyff](https://github.com/ed3ath/flyff-web-mmo/tree/7986e75c884174892edc98cc2151df7fcda331fd/reference/resource). Guan Yu Spike Shield queda reservado a Guan Yu Heavyblade; no está disponible mientras ese jefe no esté en el mundo.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 <!-- /coderabbit-ai-generated:v1 -->
 

@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "minDistinctClasses": 40,
-  "aggroRadiusMeters": 22,
+  "aggroRadiusMeters": 10,
   "respawnSeconds": 7,
   "glbOverrides": {
     "pompom": "monstruos/mushpang.glb",
@@ -610,24 +610,5 @@
       "isBoss": true
     }
   ],
-  "groups": [
-    {
-      "map": "flaris",
-      "monsterId": "pompom",
-      "x": 1866,
-      "z": 1281,
-      "count": 5,
-      "roamRadius": 22,
-      "hp": 135,
-      "damage": 13,
-      "xp": 42,
-      "zen": 21,
-      "respawnSeconds": 12,
-      "drops": [
-        "zen",
-        "bless",
-        "life"
-      ]
-    }
-  ]
+  "groups": []
 }

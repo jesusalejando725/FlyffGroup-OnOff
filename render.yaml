@@ -19,9 +19,9 @@ services:
       - key: MU_BACKUP_DIR
         value: /var/data/mugroup/accounts
       - key: MU_WORLD_ORIGINS
-        value: https://mugro-up.github.io
+        value: https://jesusalejando725.github.io
       - key: MU_BACKUP_ORIGINS
-        value: https://mugro-up.github.io
+        value: https://jesusalejando725.github.io
       - key: MU_RECOVERY_KEY
         sync: false
       - key: MU_ADMIN_PASSWORD

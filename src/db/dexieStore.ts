@@ -1,3 +1,4 @@
+import { equippedGearBonuses } from '../data/flyffEconomy';
 import { findHeroAppearance } from '../data/heroAppearances';
 import { inventorySellValue } from '../data/itemPricing';
 import Dexie, { type Table } from 'dexie';
@@ -161,6 +162,15 @@ export async function hashSecret(raw: string): Promise<string> {
 
 function normalizeAnswer(answer: string): string {
   return answer.trim().toLowerCase();
+}
+
+export function applyGearHealth(c: MuCharacter, items: readonly MuItem[]): MuCharacter {
+  const gear = equippedGearBonuses(items);
+  const baseHp = Math.max(120, c.maxHp - (c.gearHpBonus ?? 0));
+  const bonus = Math.round(baseHp * (gear.hpPct ?? 0) / 100) + (gear.hp ?? 0);
+  const maxHp = baseHp + bonus;
+  return c.maxHp === maxHp && (c.gearHpBonus ?? 0) === bonus ? c :
+    { ...c, gearHpBonus: bonus, maxHp, hp: Math.min(c.hp, maxHp) };
 }
 
 export function normalizeCharacterRecord(c: MuCharacter): MuCharacter {
@@ -452,7 +462,7 @@ async function touchCharacterWithItems(charId: string): Promise<MuCharacter | nu
   if (!cur) return null;
   const items = await db.items.where('charId').equals(charId).toArray();
   const updated = normalizeCharacterRecord({
-    ...cur,
+    ...applyGearHealth(cur, items),
     equipment: items.filter((i) => i.isEquipped),
     inventory: items.filter((i) => !i.isEquipped),
     updatedAt: Math.max(Date.now(),cur.updatedAt+1),
@@ -483,14 +493,17 @@ export async function removeItemFromCharacter(charId: string, itemId: string): P
 
 export async function equipItem(charId: string, itemId: string): Promise<MuItem[]> {
   await initDexie();
-  const target = await db.items.get(itemId);
-  if (!target || target.charId !== charId) return getItemsForCharacter(charId);
-
-  const all = await db.items.where('charId').equals(charId).toArray();
-  const equipping = !target.isEquipped;
-
-  await db.transaction('rw', db.items, async () => {
+  await db.transaction('rw', db.items, db.characters, async () => {
+    const target = await db.items.get(itemId);
+    if (!target || target.charId !== charId) return;
+    const equipping = !target.isEquipped;
     if (equipping) {
+      if (target.slot === 'consumable') return;
+      const character = await db.characters.get(charId);
+      if (!character || (target.requiredLevel ?? 1) > character.level ||
+          (target.sexFilter && target.sexFilter !== character.sex) ||
+          (target.classFilter && !target.classFilter.includes(character.classType))) return;
+      const all = await db.items.where('charId').equals(charId).toArray();
       for (const other of all) {
         if (other.id !== target.id && other.slot === target.slot && other.isEquipped) {
           await db.items.update(other.id, { isEquipped: false });
@@ -498,9 +511,8 @@ export async function equipItem(charId: string, itemId: string): Promise<MuItem[
       }
     }
     await db.items.update(target.id, { isEquipped: equipping });
+    await touchCharacterWithItems(charId);
   });
-
-  await touchCharacterWithItems(charId);
   return getItemsForCharacter(charId);
 }
 
@@ -661,9 +673,8 @@ export async function upgradeItemWithJewel(
   return { success, character: updatedChar, items: nextItems, message };
 }
 
-export async function addCatalogItem(character: MuCharacter, shopItem: ShopItemDef): Promise<void> {
-  await initDexie();
-  const newItem: MuItem = {
+function buildCatalogItem(character: MuCharacter, shopItem: ShopItemDef): MuItem {
+  return {
     id: `item-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
     charId: character.id,
     name: shopItem.name,
@@ -678,15 +689,40 @@ export async function addCatalogItem(character: MuCharacter, shopItem: ShopItemD
     magicPower: shopItem.magicPower,
     luck: shopItem.luck,
     excellentOpt: shopItem.excellentOpt,
+    requiredLevel: shopItem.requiredLevel,
+    sourceLevel: shopItem.sourceLevel,
+    sexFilter: shopItem.sexFilter,
+    classFilter: shopItem.classFilter,
+    gearBonus: shopItem.gearBonus,
+    setBonus: shopItem.setBonus,
+    recovery: shopItem.recovery,
     durability: 100,
     isEquipped: false,
     originalOwner: character.name,
     acquiredAt: new Date().toISOString(),
   };
 
-  await db.transaction('rw',db.items,db.characters,async()=>{
-    await db.items.put(newItem);
+}
+
+export async function addCatalogItem(character: MuCharacter, shopItem: ShopItemDef): Promise<void> {
+  await initDexie();
+  await db.transaction('rw', db.items, db.characters, async () => {
+    await db.items.put(buildCatalogItem(character, shopItem));
     await touchCharacterWithItems(character.id);
+  });
+}
+
+export async function consumeInventoryPotion(charId: string, itemId: string): Promise<MuCharacter | null> {
+  await initDexie();
+  return db.transaction('rw', db.items, db.characters, async () => {
+    const [item, character] = await Promise.all([db.items.get(itemId), db.characters.get(charId)]);
+    if (!character || item?.charId !== charId || !item.recovery) return null;
+    const hp = Math.min(character.maxHp, character.hp + Math.round((item.recovery.hp ?? 0) * character.maxHp));
+    const mp = Math.min(character.maxMp, character.mp + Math.round((item.recovery.mp ?? 0) * character.maxMp));
+    if (hp === character.hp && mp === character.mp) return null;
+    await db.items.delete(itemId);
+    await db.characters.update(charId, { hp, mp });
+    return touchCharacterWithItems(charId);
   });
 }
 
@@ -695,20 +731,21 @@ export async function buyShopItem(
   shopItem: ShopItemDef,
 ): Promise<{ ok: boolean; character: MuCharacter; items: MuItem[]; message: string }> {
   await initDexie();
-  if (character.zen < shopItem.zenCost) {
-    return {
-      ok: false,
-      character,
-      items: await getItemsForCharacter(character.id),
-      message: `Necesitas ${shopItem.zenCost.toLocaleString()} Zen para comprar ${shopItem.name}.`,
-    };
-  }
-
-  await addCatalogItem(character, shopItem);
-  const updatedChar = await updateCharacter({
-    ...character,
-    zen: character.zen - shopItem.zenCost,
+  const updatedChar = await db.transaction('rw', db.items, db.characters, async () => {
+    const current = await db.characters.get(character.id);
+    if (!current || shopItem.dropExclusive || !Number.isSafeInteger(shopItem.zenCost) ||
+        shopItem.zenCost < 0 || current.zen < shopItem.zenCost) return null;
+    await db.items.put(buildCatalogItem(current, shopItem));
+    await db.characters.update(current.id, { zen: current.zen - shopItem.zenCost });
+    return touchCharacterWithItems(current.id);
   });
+  if (!updatedChar) return {
+    ok: false,
+    character: await db.characters.get(character.id) ?? character,
+    items: await getItemsForCharacter(character.id),
+    message: `No puedes comprar ${shopItem.name} por ${shopItem.zenCost.toLocaleString()} Zen.`,
+  };
+
   const nextItems = await getItemsForCharacter(character.id);
   return {
     ok: true,
