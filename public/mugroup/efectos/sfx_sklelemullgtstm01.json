@@ -1,0 +1,1881 @@
+{
+  "name": "sfx_sklelemullgtstm01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 4,
+      "name": "sfx_SklMagEleLgtbal01",
+      "texture": "sfx_sklmagelelgtbal01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 36,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 41,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.2000000476837158,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 44,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.399999976158142,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            3.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 54,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            3.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_SklMagEleLgtbal02",
+      "texture": "sfx_sklmagelelgtbal01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 36,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 41,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 44,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            2.299999952316284,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.200000047683716,
+            3.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 54,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            3.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_SklMagEleLgtbal03",
+      "texture": "sfx_sklmagelelgtbal01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 36,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 41,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 44,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            2.299999952316284,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.200000047683716,
+            3.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 54,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            3.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal01.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "sfx_SklMagEleLgtbal04",
+      "texture": "sfx_sklmagelelgtbal03-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 30,
+        "appear": 1,
+        "keep": 10,
+        "disappear": 25,
+        "startVariance": 0.30000001192092896,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.30000001192092896,
+        "xzLow": 0.0,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.20000000298023224,
+          0.20000000298023224,
+          2.0
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 31,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 64,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal03-5.png",
+        "efectos/texturas/sfx_sklmagelelgtbal03-4.png",
+        "efectos/texturas/sfx_sklmagelelgtbal03-3.png",
+        "efectos/texturas/sfx_sklmagelelgtbal03-2.png",
+        "efectos/texturas/sfx_sklmagelelgtbal03-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_SklMagEleLgtbal05",
+      "texture": "sfx_sklmagelelgtbal02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 41,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 46,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 48,
+          "position": [
+            0.001225590007379651,
+            1.0,
+            0.009704399853944778
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.5,
+            4.5,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 49,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 53,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.5,
+            4.5,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal02.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_SklMagEleLgtbal06",
+      "texture": "sfx_sklmagelelgtbal01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 36,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 41,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.2000000476837158,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 44,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.399999976158142,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            3.0,
+            0.0
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 54,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            3.5,
+            0.5
+          ],
+          "rotation": [
+            180.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal01.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_SklMagEleLgtbal06",
+      "texture": "sfx_sklmagelelgtbal04.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            6.0,
+            6.0,
+            1.899999976158142
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal04.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_SklMagEleLgtbal07",
+      "texture": "sfx_sklmagelelgtbal05.dds",
+      "textureFrames": 1,
+      "textureLoop": 5,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            0.8399999737739563
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 204
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.6800000071525574
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 153
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.20000000298023224,
+            0.20000000298023224,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.5,
+            3.5,
+            3.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 30
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            5.300000190734863,
+            5.300000190734863,
+            5.300000190734863
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 62,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.700000047683716,
+            3.700000047683716,
+            3.700000047683716
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal05.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_SklMagEleLgtbal08",
+      "texture": "sfx_sklmagelelgtbal06-3.dds",
+      "textureFrames": 3,
+      "textureLoop": 5,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            20.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.5,
+            0.0,
+            2.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            -0.5
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.5,
+            0.0,
+            0.75
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            6.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.86667001247406,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 15,
+      "textures": [
+        "efectos/texturas/sfx_sklmagelelgtbal06-3.png",
+        "efectos/texturas/sfx_sklmagelelgtbal06-2.png",
+        "efectos/texturas/sfx_sklmagelelgtbal06-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "l",
+      "texture": "sfx_skleleelethunst01-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            110.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            10.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            10.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.5,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_skleleelethunst01-5.png",
+        "efectos/texturas/sfx_skleleelethunst01-4.png",
+        "efectos/texturas/sfx_skleleelethunst01-3.png",
+        "efectos/texturas/sfx_skleleelethunst01-2.png",
+        "efectos/texturas/sfx_skleleelethunst01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_skleleelethunst01-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.009999450296163559,
+            10.0,
+            -0.00010471200221218169
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            10.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            10.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_skleleelethunst01-5.png",
+        "efectos/texturas/sfx_skleleelethunst01-4.png",
+        "efectos/texturas/sfx_skleleelethunst01-3.png",
+        "efectos/texturas/sfx_skleleelethunst01-2.png",
+        "efectos/texturas/sfx_skleleelethunst01-1.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "1",
+      "texture": "sfx_skleleelethunst01-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 3,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 20,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          4.0,
+          20.0,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          3600.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 35,
+          "position": [
+            -0.00041958800284191966,
+            10.0,
+            0.00857933983206749
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 150,
+          "position": [
+            0.01570270024240017,
+            10.0,
+            0.021160699427127838
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            20.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_skleleelethunst01-5.png",
+        "efectos/texturas/sfx_skleleelethunst01-4.png",
+        "efectos/texturas/sfx_skleleelethunst01-3.png",
+        "efectos/texturas/sfx_skleleelethunst01-2.png",
+        "efectos/texturas/sfx_skleleelethunst01-1.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklmagspekestone02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 2,
+        "createCount": 6,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 1.0,
+        "startVarianceY": 0.0,
+        "yLow": -0.10000000149011612,
+        "yHigh": 0.20000000298023224,
+        "xzLow": -0.10000000149011612,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.30000001192092896,
+          0.30000001192092896,
+          0.30000001192092896
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 55,
+          "position": [
+            -0.009200840257108212,
+            1.0,
+            0.010334200225770473
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 80
+        },
+        {
+          "frame": 150,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagspekestone02.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklelemullgtstm01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

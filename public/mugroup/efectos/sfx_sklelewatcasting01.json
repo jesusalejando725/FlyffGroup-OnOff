@@ -1,0 +1,1129 @@
+{
+  "name": "sfx_sklelewatcasting01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "sfx_sklmagwincasting01-1.dds",
+      "texture": "sfx_sklmagwincasting01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.7,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            30.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            180.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            250.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            500.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            700.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwincasting01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklmagwincasting01-1.dds",
+      "texture": "sfx_sklmagwincasting01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.7,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            30.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 70,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            180.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwincasting01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklmagwincasting01-1.dds",
+      "texture": "sfx_sklmagwincasting01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.7,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            30.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            180.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwincasting01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklmagwincasting01-2.dds",
+      "texture": "sfx_sklmagwincasting01-2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 70,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -200.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -2000.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 140,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -2500.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwincasting01-2.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklassheahealing01-4.dds",
+      "texture": "sfx_sklassheahealing01-4.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            1.0,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            1.0,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            150.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            1.0,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            1000.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 125,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            -0.5,
+            1.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            1300.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 130,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            1.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            1400.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklassheahealing01-4.png"
+      ],
+      "points": 20
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklassheahealing01-4.dds",
+      "texture": "sfx_sklassheahealing01-4.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "positionRotation": [
+            -3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            1.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "positionRotation": [
+            -3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            1.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            -150.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "positionRotation": [
+            -3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            1.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            -1000.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 125,
+          "position": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "positionRotation": [
+            -3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            1.0,
+            -0.5
+          ],
+          "rotation": [
+            0.0,
+            -1300.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 130,
+          "position": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "positionRotation": [
+            -3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            1.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            -1400.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklassheahealing01-4.png"
+      ],
+      "points": 20
+    },
+    {
+      "type": 2,
+      "name": "sfx_sklmagwincasting01-3.dds",
+      "texture": "sfx_sklmagwatwaball01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 125,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwatwaball01.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 5,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 45,
+        "startVariance": 1.7999999523162842,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.10000000149011612,
+        "xzLow": 0.0,
+        "xzHigh": -0.05000000074505806,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "scaleSpeed": [
+          0.02,
+          0.02,
+          0.02
+        ]
+      }
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklmagwincasting01-4.dds",
+      "texture": "sfx_sklmagwincasting01-4.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            30.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            5.0,
+            5.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            500.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwincasting01-4.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklasschecannonball01-3.dds",
+      "texture": "sfx_sklasschecannonball01-3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 120,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 125,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 135,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklasschecannonball01-3.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklmagwaticemis04-3.dds",
+      "textureFrames": 3,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 50
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagwaticemis04-3.png",
+        "efectos/texturas/sfx_sklmagwaticemis04-3.png",
+        "efectos/texturas/sfx_sklmagwaticemis04-3.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 5,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.800000011920929,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.10000000149011612,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ]
+}

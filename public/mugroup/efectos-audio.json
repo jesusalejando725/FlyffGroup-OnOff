@@ -1,0 +1,1116 @@
+{
+  "effects": [
+    "efectos/magician_fire_casting.json",
+    "efectos/magician_firebomb.json",
+    "efectos/mercenary_keenwheel.json",
+    "efectos/mercenary_protection.json",
+    "efectos/mercenary_splmash.json",
+    "efectos/sfx_hitbow01.json",
+    "efectos/sfx_hitsword01.json",
+    "efectos/sfx_hitwand01.json",
+    "efectos/sfx_sklacrbowaimed01.json",
+    "efectos/sfx_sklacrbowarrowrain01.json",
+    "efectos/sfx_sklacrbowautoshot01.json",
+    "efectos/sfx_sklacrdefsupport01.json",
+    "efectos/sfx_sklassheahealing01.json",
+    "efectos/sfx_skleleelecasting01.json",
+    "efectos/sfx_sklelefirfirbrd01.json",
+    "efectos/sfx_sklelemullgtstm01.json",
+    "efectos/sfx_sklelewatcasting01.json",
+    "efectos/sfx_sklelewaticeshk01.json",
+    "efectos/sfx_sklelewaticeshk02.json",
+    "efectos/sfx_sklknttwopwswng02.json",
+    "efectos/sfx_sklmagfireboomerang01.json",
+    "efectos/sfx_sklmagmaglgtref01.json",
+    "efectos/sfx_sklmagswordwind01.json",
+    "efectos/sfx_sklmagwaticemis01.json",
+    "efectos/sfx_sklmerbloody01.json",
+    "efectos/sfx_sklmerfury01.json",
+    "efectos/sfx_sklmerimpowe01.json",
+    "efectos/sfx_sklmeroneguillo01.json",
+    "efectos/sfx_sklpsydemonolgy01.json",
+    "efectos/sfx_sklpsymaximumcrisis01.json",
+    "efectos/sfx_sklpsypsychicbomb01.json",
+    "efectos/sfx_sklpsysatanolgy01.json",
+    "efectos/sfx_sklragbowicearrow01.json",
+    "efectos/sfx_sklrinhealraincasting01.json",
+    "efectos/guardian-rain.json",
+    "efectos/harlequin-rebound.json",
+    "efectos/harlequin-fire.json",
+    "efectos/harlequin-shadow.json"
+  ],
+  "sounds": {
+    "step_grass": "audio/step_grass.wav",
+    "step_land": "audio/step_land.wav",
+    "step_water": "audio/step_water.wav",
+    "land": "audio/land.wav",
+    "jump_male": "audio/jump_male.wav",
+    "jump_female": "audio/jump_female.wav",
+    "hurt_male": "audio/hurt_male.wav",
+    "hurt_female": "audio/hurt_female.wav",
+    "attack_male": "audio/attack_male.wav",
+    "attack_female": "audio/attack_female.wav",
+    "death_male": "audio/death_male.wav",
+    "death_female": "audio/death_female.wav",
+    "swing": "audio/swing.wav",
+    "hit_sword": "audio/hit_sword.wav",
+    "hit_bow": "audio/hit_bow.wav",
+    "hit_magic": "audio/hit_magic.wav",
+    "cast_fire": "audio/cast_fire.wav",
+    "fire": "audio/fire.wav",
+    "ice": "audio/ice.wav",
+    "lightning": "audio/lightning.wav",
+    "slash": "audio/slash.wav",
+    "spin": "audio/spin.wav",
+    "stomp": "audio/stomp.wav",
+    "buff": "audio/buff.wav",
+    "arrow": "audio/arrow.wav",
+    "arrowrain": "audio/arrowrain.wav",
+    "heal": "audio/heal.wav",
+    "dark": "audio/dark.wav",
+    "soul": "audio/soul.wav",
+    "rage": "audio/rage.wav",
+    "wind": "audio/wind.wav",
+    "firebird": "audio/firebird.wav",
+    "pickup": "audio/pickup.wav",
+    "drop": "audio/drop.wav",
+    "drop_ding": "audio/drop_ding.wav",
+    "potion": "audio/potion.wav",
+    "levelup": "audio/levelup.wav",
+    "equip_wing": "audio/equip_wing.wav",
+    "equip_armor": "audio/equip_armor.wav",
+    "mu_sword_swing": "audio/mu/eSwingLightSword.wav",
+    "mu_blow": "audio/mu/eBlow.wav",
+    "mu_meteorite": "audio/mu/eMeteorite.wav",
+    "mu_piercing": "audio/mu/ePiercing.wav",
+    "mu_swell_life": "audio/mu/eSwellLife.wav",
+    "mu_thunder": "audio/mu/eThunder.wav",
+    "mu_knight_skill2": "audio/mu/sKnightSkill2.wav",
+    "mu_knight_skill3": "audio/mu/sKnightSkill3.wav",
+    "dk_slash": "audio/cls/dk_slash.wav",
+    "dk_twisting": "audio/cls/dk_twisting.wav",
+    "dk_rage": "audio/cls/dk_rage.wav",
+    "dk_stab": "audio/cls/dk_stab.wav",
+    "dk_swell": "audio/cls/dk_swell.wav",
+    "dw_orb": "audio/cls/dw_orb.wav",
+    "dw_spirit": "audio/cls/dw_spirit.wav",
+    "dw_meteor": "audio/cls/dw_meteor.wav",
+    "dw_lightning": "audio/cls/dw_lightning.wav",
+    "dw_ice": "audio/cls/dw_ice.wav",
+    "elf_shot": "audio/cls/elf_shot.wav",
+    "elf_multi": "audio/cls/elf_multi.wav",
+    "elf_icearrow": "audio/cls/elf_icearrow.wav",
+    "elf_penetrate": "audio/cls/elf_penetrate.wav",
+    "elf_heal": "audio/cls/elf_heal.wav",
+    "dl_firebird": "audio/cls/dl_firebird.wav",
+    "dl_quake": "audio/cls/dl_quake.wav",
+    "dl_fireburst": "audio/cls/dl_fireburst.wav",
+    "dl_chaotic": "audio/cls/dl_chaotic.wav",
+    "mg_swordwind": "audio/cls/mg_swordwind.wav",
+    "mg_powerslash": "audio/cls/mg_powerslash.wav",
+    "mg_eleshock": "audio/cls/mg_eleshock.wav",
+    "mg_flame": "audio/cls/mg_flame.wav",
+    "wing_flap": "audio/cls/wing_flap.wav",
+    "pcskilld-springatk": "audio/ref/pcskilld-springatk.wav",
+    "pcskilld-spritbomb": "audio/ref/pcskilld-spritbomb.wav",
+    "pcskilld-stonespr": "audio/ref/pcskilld-stonespr.wav",
+    "pcskilld-sonichand": "audio/ref/pcskilld-sonichand.wav",
+    "bgm_flaris": "audio/music/bgm_flaris.ogg",
+    "bgm_robledal": "audio/music/bgm_robledal.ogg",
+    "bgm_puerto": "audio/music/bgm_puerto.ogg",
+    "bgm_ceniza": "audio/music/bgm_ceniza.ogg",
+    "bgm_dungeon": "audio/music/bgm_dungeon.ogg"
+  },
+  "classSkillCatalog": {
+    "DK": [
+      {
+        "si": "SI_BLD_DOUBLEAX_HAWKATTACK",
+        "sfx": [
+          "efectos/sfx_sklblddaxhawatt02.json"
+        ],
+        "ani": "SklBldDaxHawatt",
+        "wav": [
+          "pcskilld-hawkatk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLEAX_SPRINGATTACK",
+        "sfx": [
+          "efectos/sfx_sklblddaxspring01.json",
+          "efectos/sfx_sklblddaxspring03.json"
+        ],
+        "ani": "SklBldDaxSpring",
+        "wav": [
+          "pcskilld-springatk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLESW_BLADEDANCE",
+        "sfx": [
+          "efectos/sfx_sklblddswblddan02.json",
+          "efectos/sfx_sklblddswblddan03.json"
+        ],
+        "ani": "SklBldDswBlddan",
+        "wav": []
+      },
+      {
+        "si": "SI_BLD_DOUBLESW_SILENTSTRIKE",
+        "sfx": [
+          "efectos/sfx_sklblddswsilent01.json",
+          "efectos/sfx_sklblddswsilent03.json"
+        ],
+        "ani": "SklBldDswSilent",
+        "wav": [
+          "pcskilld-silentstk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_ARMORPENETRATE",
+        "sfx": [
+          "efectos/sfx_sklblddblarmpen01.json",
+          "efectos/sfx_sklblddblarmpen02.json"
+        ],
+        "ani": "SklBldDblArmpen",
+        "wav": [
+          "pcskilld-armorpen"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_CROSSSTRIKE",
+        "sfx": [
+          "efectos/sfx_sklblddblcross01.json",
+          "efectos/sfx_sklblddblcross02.json"
+        ],
+        "ani": "SklBldDblCross",
+        "wav": [
+          "pcskilld-crossstk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_SONICBLADE",
+        "sfx": [
+          "efectos/sfx_sklblddblsonbld03.json"
+        ],
+        "ani": "SklBldDblSonbld",
+        "wav": []
+      },
+      {
+        "si": "SI_BLD_HERO_DEFFENCE",
+        "sfx": [
+          "efectos/sfx_sklblddeffence01.json",
+          "efectos/sfx_sklblddeffence02.json"
+        ],
+        "ani": "SklRagNature",
+        "wav": [
+          "pcskilld-pan barrier-a"
+        ]
+      },
+      {
+        "si": "SI_BLD_MASTER_ONEHANDMASTER",
+        "sfx": [
+          "efectos/sfx_sklbldonehandmaster01.json",
+          "efectos/sfx_sklbldonehandmaster02.json"
+        ],
+        "ani": "SklVagCleanHit",
+        "wav": [
+          "pcskillm-weamastery"
+        ]
+      },
+      {
+        "si": "SI_BLD_SUP_BERSERK",
+        "sfx": [
+          "efectos/sfx_sklbldsuppor01.json",
+          "efectos/sfx_sklbldsupberzer01.json"
+        ],
+        "ani": "SklBldSuppor",
+        "wav": [
+          "pcskilld-berzerke"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_FLAMEARROW",
+        "sfx": [
+          "efectos/sfx_sklragbowflamearrow01.json",
+          "efectos/sfx_sklragbowflamearrow02.json"
+        ],
+        "ani": "SklRagFlamea",
+        "wav": [
+          "pcskillm-flamearrow03"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_ICEARROW",
+        "sfx": [
+          "efectos/sfx_sklragbowicearrow01.json",
+          "efectos/sfx_sklragbowicearrow02.json"
+        ],
+        "ani": "SklRagIceArr",
+        "wav": [
+          "pcskillm-icearrow02"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_PIRCINGARROW",
+        "sfx": [
+          "efectos/sfx_sklragbowpiercingarrow01.json",
+          "efectos/sfx_sklragbowpiercingarrow02.json"
+        ],
+        "ani": "SklRagPierci",
+        "wav": [
+          "pcskillm-piercingarrow02"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_POISONARROW",
+        "sfx": [
+          "efectos/sfx_sklragbowpoisonarrow01.json",
+          "efectos/sfx_sklragbowpoisonarrow02.json"
+        ],
+        "ani": "SklRagPoison",
+        "wav": [
+          "pcskillm-poisonarrow02"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_SILENTARROW",
+        "sfx": [
+          "efectos/sfx_sklragbowsilentarrow01.json",
+          "efectos/sfx_sklragbowsilentarrow02.json"
+        ],
+        "ani": "SklRagSltaro",
+        "wav": [
+          "pcskillm-silentarrow02"
+        ]
+      },
+      {
+        "si": "SI_RAG_BOW_TRIPLESHOT",
+        "sfx": [
+          "efectos/sfx_sklragbowtripleshot01.json",
+          "efectos/sfx_sklragbowtripleshot02.json"
+        ],
+        "ani": "SklRagTriple",
+        "wav": [
+          "pcskillm-tripleshot02"
+        ]
+      },
+      {
+        "si": "SI_RAG_HERO_HAWKEYE",
+        "sfx": [
+          "efectos/sfx_sklraghawkeye01.json",
+          "efectos/sfx_sklraghawkeye02.json"
+        ],
+        "ani": "SklRagNature",
+        "wav": [
+          "pcskillm-silentarrow01"
+        ]
+      },
+      {
+        "si": "SI_RAG_MASTER_BOWMASTER",
+        "sfx": [
+          "efectos/sfx_sklragbowmaster01.json",
+          "efectos/sfx_sklragbowmaster02.json"
+        ],
+        "ani": "SklRagNature",
+        "wav": [
+          "pcskillm-weamastery"
+        ]
+      },
+      {
+        "si": "SI_RAG_SUP_FASTATTACK",
+        "sfx": [
+          "efectos/sfx_sklragbowfastattack01.json"
+        ],
+        "ani": "SklRagSuppor",
+        "wav": [
+          "pcskillm-fastattack"
+        ]
+      },
+      {
+        "si": "SI_RAG_SUP_NATURE",
+        "sfx": [
+          "efectos/sfx_sklragbownature01.json",
+          "efectos/sfx_sklragbownature01.json"
+        ],
+        "ani": "SklRagNature",
+        "wav": [
+          "pcskillm-nature01"
+        ]
+      }
+    ],
+    "DW": [
+      {
+        "si": "SI_PSY_HERO_STONE",
+        "sfx": [
+          "efectos/sfx_sklmagstone01.json",
+          "efectos/sfx_sklmagstone02.json"
+        ],
+        "ani": "SklEleMulCasting01",
+        "wav": [
+          "pcskillm-earthmaster"
+        ]
+      },
+      {
+        "si": "SI_PSY_MASTER_INTMASTER",
+        "sfx": [
+          "efectos/sfx_sklmagintmaster01.json",
+          "efectos/sfx_sklmagintmaster02.json"
+        ],
+        "ani": "SklAssHeaCasting01",
+        "wav": []
+      },
+      {
+        "si": "SI_PSY_NLG_CRUCIOSPELL",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsycruciospell02.json"
+        ],
+        "ani": "SklPsyNolgy01",
+        "wav": [
+          "pcskilld-cruciosp"
+        ]
+      },
+      {
+        "si": "SI_PSY_NLG_DEMONOLGY",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsydemonolgy01.json",
+          "efectos/sfx_sklpsydemonolgy02.json"
+        ],
+        "ani": "SklPsyNolgy01",
+        "wav": [
+          "pcskilld-demonolgy"
+        ]
+      },
+      {
+        "si": "SI_PSY_NLG_SATANOLGY",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsysatanolgy01.json",
+          "efectos/sfx_sklpsysatanolgy02.json"
+        ],
+        "ani": "SklPsyNolgy01",
+        "wav": [
+          "pcskilld-satanolgy"
+        ]
+      },
+      {
+        "si": "SI_PSY_PSY_MAXIMUMCRISIS",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsymaximumcrisis03.json",
+          "efectos/sfx_sklpsymaximumcrisis05.json"
+        ],
+        "ani": "SklPsySquare01",
+        "wav": [
+          "pcskilld-maxcrisis"
+        ]
+      },
+      {
+        "si": "SI_PSY_PSY_PSYCHICBOMB",
+        "sfx": [
+          "efectos/sfx_sklpsypsychiccasting01.json",
+          "efectos/sfx_sklpsypsychicbomb01.json",
+          "efectos/sfx_sklpsypsychicbomb02.json"
+        ],
+        "ani": "SklPsyPsychi01",
+        "wav": [
+          "pcskilld-psybomb"
+        ]
+      },
+      {
+        "si": "SI_PSY_PSY_PSYCHICSQUARE",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsypsychicsquare02.json"
+        ],
+        "ani": "SklPsySquare01",
+        "wav": [
+          "pcskillm-psysquare"
+        ]
+      },
+      {
+        "si": "SI_PSY_PSY_PSYCHICWALL",
+        "sfx": [
+          "efectos/sfx_sklpsypsychiccasting01.json"
+        ],
+        "ani": "SklPsyPsychi01",
+        "wav": []
+      },
+      {
+        "si": "SI_PSY_PSY_SPRITBOMB",
+        "sfx": [
+          "efectos/sfx_sklpsynolgycasting01.json",
+          "efectos/sfx_sklpsypsychicbomb01.json",
+          "efectos/sfx_sklpsypsychicbomb02.json"
+        ],
+        "ani": "SklPsyPsychi01",
+        "wav": [
+          "pcskilld-spritbomb"
+        ]
+      }
+    ],
+    "MG": [
+      {
+        "si": "SI_BLD_DOUBLEAX_HAWKATTACK",
+        "sfx": [
+          "efectos/sfx_sklblddaxhawatt02.json"
+        ],
+        "ani": "SklBldDaxHawatt",
+        "wav": [
+          "pcskilld-hawkatk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLEAX_SPRINGATTACK",
+        "sfx": [
+          "efectos/sfx_sklblddaxspring01.json",
+          "efectos/sfx_sklblddaxspring03.json"
+        ],
+        "ani": "SklBldDaxSpring",
+        "wav": [
+          "pcskilld-springatk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLESW_BLADEDANCE",
+        "sfx": [
+          "efectos/sfx_sklblddswblddan02.json",
+          "efectos/sfx_sklblddswblddan03.json"
+        ],
+        "ani": "SklBldDswBlddan",
+        "wav": []
+      },
+      {
+        "si": "SI_BLD_DOUBLESW_SILENTSTRIKE",
+        "sfx": [
+          "efectos/sfx_sklblddswsilent01.json",
+          "efectos/sfx_sklblddswsilent03.json"
+        ],
+        "ani": "SklBldDswSilent",
+        "wav": [
+          "pcskilld-silentstk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_ARMORPENETRATE",
+        "sfx": [
+          "efectos/sfx_sklblddblarmpen01.json",
+          "efectos/sfx_sklblddblarmpen02.json"
+        ],
+        "ani": "SklBldDblArmpen",
+        "wav": [
+          "pcskilld-armorpen"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_CROSSSTRIKE",
+        "sfx": [
+          "efectos/sfx_sklblddblcross01.json",
+          "efectos/sfx_sklblddblcross02.json"
+        ],
+        "ani": "SklBldDblCross",
+        "wav": [
+          "pcskilld-crossstk"
+        ]
+      },
+      {
+        "si": "SI_BLD_DOUBLE_SONICBLADE",
+        "sfx": [
+          "efectos/sfx_sklblddblsonbld03.json"
+        ],
+        "ani": "SklBldDblSonbld",
+        "wav": []
+      },
+      {
+        "si": "SI_BLD_HERO_DEFFENCE",
+        "sfx": [
+          "efectos/sfx_sklblddeffence01.json",
+          "efectos/sfx_sklblddeffence02.json"
+        ],
+        "ani": "SklRagNature",
+        "wav": [
+          "pcskilld-pan barrier-a"
+        ]
+      },
+      {
+        "si": "SI_BLD_MASTER_ONEHANDMASTER",
+        "sfx": [
+          "efectos/sfx_sklbldonehandmaster01.json",
+          "efectos/sfx_sklbldonehandmaster02.json"
+        ],
+        "ani": "SklVagCleanHit",
+        "wav": [
+          "pcskillm-weamastery"
+        ]
+      },
+      {
+        "si": "SI_BLD_SUP_BERSERK",
+        "sfx": [
+          "efectos/sfx_sklbldsuppor01.json",
+          "efectos/sfx_sklbldsupberzer01.json"
+        ],
+        "ani": "SklBldSuppor",
+        "wav": [
+          "pcskilld-berzerke"
+        ]
+      },
+      {
+        "si": "SI_ELE_EARTH_EARTHMASTER",
+        "sfx": [
+          "efectos/sfx_skleleearcasting01.json",
+          "efectos/sfx_skleleearearenc01.json"
+        ],
+        "ani": "SklEleEarCasting01",
+        "wav": [
+          "pcskillm-earthcasting",
+          "pcskillm-earthmaster"
+        ]
+      },
+      {
+        "si": "SI_ELE_EARTH_EARTHQUAKE",
+        "sfx": [
+          "efectos/sfx_skleleearcasting01.json",
+          "efectos/sfx_skleleearearsqk02.json"
+        ],
+        "ani": "SklEleEarCasting01",
+        "wav": [
+          "pcskillm-earthcasting",
+          "pcskilld-earthquake"
+        ]
+      },
+      {
+        "si": "SI_ELE_EARTH_STONESPEAR",
+        "sfx": [
+          "efectos/sfx_skleleearcasting01.json",
+          "efectos/sfx_skleleearstnspr01.json",
+          "efectos/sfx_skleleearstnspr02.json"
+        ],
+        "ani": "SklEleEarCasting01",
+        "wav": [
+          "pcskillm-earthcasting",
+          "pcskilld-stonespr"
+        ]
+      },
+      {
+        "si": "SI_ELE_ELECTRICITY_ELETRICSHOCK",
+        "sfx": [
+          "efectos/sfx_skleleelecasting01.json",
+          "efectos/sfx_skleleeleeleshk02.json"
+        ],
+        "ani": "SklEleEleCasting01",
+        "wav": [
+          "pcskillm-elecasting",
+          "pcskilld-eleshock"
+        ]
+      },
+      {
+        "si": "SI_ELE_ELECTRICITY_LIGHTINGMASTER",
+        "sfx": [
+          "efectos/sfx_skleleelecasting01.json",
+          "efectos/sfx_skleleeleeleenc01.json"
+        ],
+        "ani": "SklEleEleCasting01",
+        "wav": [
+          "pcskillm-elecasting",
+          "pcskillm-elemaster"
+        ]
+      },
+      {
+        "si": "SI_ELE_ELECTRICITY_THUNDERSTRIKE",
+        "sfx": [
+          "efectos/sfx_skleleelecasting01.json",
+          "efectos/sfx_skleleelethunst01.json"
+        ],
+        "ani": "SklEleEleCasting01",
+        "wav": [
+          "pcskillm-elecasting",
+          "pcskilld-thunderstk"
+        ]
+      },
+      {
+        "si": "SI_ELE_FIRE_BURINGFIELD",
+        "sfx": [
+          "efectos/sfx_sklelefircasting01.json",
+          "efectos/sfx_sklelefirbunfil02.json"
+        ],
+        "ani": "SklEleFirCasting01",
+        "wav": [
+          "pcskillm-firecasting",
+          "pcskilld-buringfld1"
+        ]
+      },
+      {
+        "si": "SI_ELE_FIRE_FIREBIRD",
+        "sfx": [
+          "efectos/sfx_sklelefircasting01.json",
+          "efectos/sfx_sklelefirfirbrd01.json",
+          "efectos/sfx_sklelefirfirbrd02.json"
+        ],
+        "ani": "SklEleFirCasting01",
+        "wav": [
+          "pcskillm-firecasting",
+          "pcskilld-firebird"
+        ]
+      },
+      {
+        "si": "SI_ELE_FIRE_FIREMASTER",
+        "sfx": [
+          "efectos/sfx_sklelefircasting01.json",
+          "efectos/sfx_sklelefirfirenc01.json"
+        ],
+        "ani": "SklEleFirCasting01",
+        "wav": [
+          "pcskillm-firecasting",
+          "pcskillm-firemaster"
+        ]
+      },
+      {
+        "si": "SI_ELE_HERO_CURSEMIND",
+        "sfx": [
+          "efectos/sfx_sklmagcursemind01.json",
+          "efectos/sfx_sklmagcursemind02.json"
+        ],
+        "ani": "SklPsySquare01",
+        "wav": [
+          "pcskilll-smiteaxe"
+        ]
+      },
+      {
+        "si": "SI_ELE_MASTER_INTMASTER",
+        "sfx": [
+          "efectos/sfx_sklmagintmaster01.json",
+          "efectos/sfx_sklmagintmaster02.json"
+        ],
+        "ani": "SklAssHeaCasting01",
+        "wav": [
+          "pcskilll-quickstep"
+        ]
+      },
+      {
+        "si": "SI_ELE_MULTY_AVALANCHE",
+        "sfx": [
+          "efectos/sfx_sklelemulcasting01.json",
+          "efectos/sfx_sklelemulavalan02.json"
+        ],
+        "ani": "SklEleMulCasting01",
+        "wav": [
+          "pcskillm-multicasting",
+          "pcskillm-avalanch"
+        ]
+      },
+      {
+        "si": "SI_ELE_MULTY_LIGHTINGSTORM",
+        "sfx": [
+          "efectos/sfx_sklelemulcasting01.json",
+          "efectos/sfx_sklelemullgtstm01.json",
+          "efectos/sfx_sklelemullgtstm02.json"
+        ],
+        "ani": "SklEleMulCasting01",
+        "wav": [
+          "pcskillm-multicasting",
+          "pcskillm-lgtstorm"
+        ]
+      },
+      {
+        "si": "SI_ELE_MULTY_METEOSHOWER",
+        "sfx": [
+          "efectos/sfx_sklelemulcasting01.json",
+          "efectos/sfx_sklelemulmeteos02.json"
+        ],
+        "ani": "SklEleMulCasting01",
+        "wav": [
+          "pcskillm-multicasting",
+          "pcskillm-meteo"
+        ]
+      },
+      {
+        "si": "SI_ELE_MULTY_SANDSTORM",
+        "sfx": [
+          "efectos/sfx_sklelemulcasting01.json",
+          "efectos/sfx_sklelemulsanstm02.json",
+          "efectos/sfx_sklelemulsanstm01.json"
+        ],
+        "ani": "SklEleMulCasting01",
+        "wav": [
+          "pcskillm-multicasting",
+          "pcskillm-sandstorm"
+        ]
+      },
+      {
+        "si": "SI_ELE_WATER_ICESHARK",
+        "sfx": [
+          "efectos/sfx_sklelewatcasting01.json",
+          "efectos/sfx_sklelewaticeshk01.json",
+          "efectos/sfx_sklelewaticeshk02.json"
+        ],
+        "ani": "SklEleWatCasting01",
+        "wav": [
+          "pcskillm-watercasting",
+          "pcskilld-iceshark"
+        ]
+      },
+      {
+        "si": "SI_ELE_WATER_POISONCLOUD",
+        "sfx": [
+          "efectos/sfx_sklelewatcasting01.json",
+          "efectos/sfx_sklelewatpoicld01.json"
+        ],
+        "ani": "SklEleWatCasting01",
+        "wav": [
+          "pcskillm-watercasting",
+          "pcskilld-poisoncld1"
+        ]
+      },
+      {
+        "si": "SI_ELE_WATER_WATERMASTER",
+        "sfx": [
+          "efectos/sfx_sklelewatcasting01.json",
+          "efectos/sfx_sklelewatwatenc01.json"
+        ],
+        "ani": "SklEleWatCasting01",
+        "wav": [
+          "pcskillm-watercasting",
+          "pcskillm-watmaster"
+        ]
+      },
+      {
+        "si": "SI_ELE_WIND_VOID",
+        "sfx": [
+          "efectos/sfx_sklelewincasting01.json",
+          "efectos/sfx_sklelewinvoid01.json"
+        ],
+        "ani": "SklEleWinCasting01",
+        "wav": [
+          "pcskillm-windcasting",
+          "pcskilld-void"
+        ]
+      },
+      {
+        "si": "SI_ELE_WIND_WINDFIELD",
+        "sfx": [
+          "efectos/sfx_sklelewincasting01.json",
+          "efectos/sfx_sklelewinwinfil02.json"
+        ],
+        "ani": "SklEleWinCasting01",
+        "wav": [
+          "pcskillm-windcasting",
+          "pcskilld-windfld1"
+        ]
+      },
+      {
+        "si": "SI_ELE_WIND_WINDMASTER",
+        "sfx": [
+          "efectos/sfx_sklelewincasting01.json",
+          "efectos/sfx_sklelewinwinenc01.json"
+        ],
+        "ani": "SklEleWinCasting01",
+        "wav": [
+          "pcskillm-windcasting",
+          "pcskillm-windmaster"
+        ]
+      }
+    ],
+    "DL": [
+      {
+        "si": "SI_JST_HERO_SILENCE",
+        "sfx": [
+          "efectos/sfx_skljstsilence01.json",
+          "efectos/sfx_skljstsilence02.json"
+        ],
+        "ani": "SklBldDblCross",
+        "wav": [
+          "pcskilld-demonolgy"
+        ]
+      },
+      {
+        "si": "SI_JST_MASTER_YOYOMASTER",
+        "sfx": [
+          "efectos/sfx_skljstyoyomaster01.json",
+          "efectos/sfx_skljstyoyomaster02.json"
+        ],
+        "ani": "SklJstSuppor",
+        "wav": [
+          "pcskillm-weamastery"
+        ]
+      },
+      {
+        "si": "SI_JST_SUP_ABSORB",
+        "sfx": [
+          "efectos/sfx_skljstabssupport01.json"
+        ],
+        "ani": "SklJstEnchan",
+        "wav": [
+          "pcskillm-absorb01"
+        ]
+      },
+      {
+        "si": "SI_JST_SUP_BLEEDING",
+        "sfx": [
+          "efectos/sfx_skljstbldsupport01.json"
+        ],
+        "ani": "SklJstEnchan",
+        "wav": [
+          "pcskillm-bleeding01"
+        ]
+      },
+      {
+        "si": "SI_JST_SUP_POISON",
+        "sfx": [
+          "efectos/sfx_skljstpossupport01.json"
+        ],
+        "ani": "SklJstEnchan",
+        "wav": [
+          "pcskillm-poison01"
+        ]
+      },
+      {
+        "si": "SI_JST_YOYO_BACKSTAB",
+        "sfx": [
+          "efectos/sfx_skljstyoybackstab02.json"
+        ],
+        "ani": "SklJstBackst",
+        "wav": [
+          "pcskilld-backstab02"
+        ]
+      },
+      {
+        "si": "SI_JST_YOYO_CRITICALSWING",
+        "sfx": [
+          "efectos/sfx_skljstweasupport01.json"
+        ],
+        "ani": "SklJstSuppor",
+        "wav": [
+          "pcskillm-criticalswing01"
+        ]
+      },
+      {
+        "si": "SI_JST_YOYO_ESCAPE",
+        "sfx": [
+          "efectos/sfx_skljstescsupport01.json",
+          "efectos/sfx_skljstsupescape01.json"
+        ],
+        "ani": "SklJstEscape",
+        "wav": [
+          "pcskillm-escape01"
+        ]
+      },
+      {
+        "si": "SI_JST_YOYO_HITOFPENYA",
+        "sfx": [
+          "efectos/sfx_skljstyoyhfpenya02.json"
+        ],
+        "ani": "SklJstHfpeny",
+        "wav": [
+          "pcskilld-hitofpenya02"
+        ]
+      },
+      {
+        "si": "SI_JST_YOYO_VATALSTAB",
+        "sfx": [
+          "efectos/sfx_skljstyoyvatalstab02.json"
+        ],
+        "ani": "SklJstVatals",
+        "wav": [
+          "pcskilld-vatastab02"
+        ]
+      }
+    ],
+    "ELF": [
+      {
+        "si": "SI_KNT_HERO_DRAWING",
+        "sfx": [
+          "efectos/sfx_sklkntdrawing01.json",
+          "efectos/sfx_sklkntdrawing02.json"
+        ],
+        "ani": "SklKntSuppor",
+        "wav": [
+          "pcskilld-earthdiv"
+        ]
+      },
+      {
+        "si": "SI_KNT_MASTER_TWOHANDMASTER",
+        "sfx": [
+          "efectos/sfx_sklknttwohandmaster01.json",
+          "efectos/sfx_sklknttwohandmaster02.json"
+        ],
+        "ani": "SklKntSuppor",
+        "wav": [
+          "pcskillm-weamastery"
+        ]
+      },
+      {
+        "si": "SI_KNT_SUP_GUARD",
+        "sfx": [
+          "efectos/sfx_sklkntweasupport01.json",
+          "efectos/sfx_sklkntsupguard01.json"
+        ],
+        "ani": "SklKntSuppor",
+        "wav": [
+          "pcskilld-guard"
+        ]
+      },
+      {
+        "si": "SI_KNT_SUP_PAINREFLECTION",
+        "sfx": [
+          "efectos/sfx_sklkntweasupport01.json",
+          "efectos/sfx_sklkntsuppairef01.json"
+        ],
+        "ani": "SklKntSuppor",
+        "wav": [
+          "pcskilld-painref"
+        ]
+      },
+      {
+        "si": "SI_KNT_SUP_RAGE",
+        "sfx": [
+          "efectos/sfx_sklkntweasupport01.json",
+          "efectos/sfx_sklkntsuprage01.json"
+        ],
+        "ani": "SklKntSuppor",
+        "wav": [
+          "pcskilld-rage"
+        ]
+      },
+      {
+        "si": "SI_KNT_TWOAX_PAINDEALER",
+        "sfx": [
+          "efectos/sfx_sklknttaxpaidea01.json",
+          "efectos/sfx_sklknttaxpaidea03.json"
+        ],
+        "ani": "SklKntTwoPwswng",
+        "wav": [
+          "pcskilld-paindealer"
+        ]
+      },
+      {
+        "si": "SI_KNT_TWOAX_POWERSTUMP",
+        "sfx": [
+          "efectos/sfx_sklknttaxpwstum01.json",
+          "efectos/sfx_sklknttaxpwstum03.json"
+        ],
+        "ani": "SklKntTaxPwstum",
+        "wav": [
+          "pcskilld-powerstump"
+        ]
+      },
+      {
+        "si": "SI_KNT_TWOSW_CHARGE",
+        "sfx": [
+          "efectos/sfx_sklknttswcharge03.json"
+        ],
+        "ani": "SklKntTswCharge",
+        "wav": []
+      },
+      {
+        "si": "SI_KNT_TWOSW_EARTHDIVIDER",
+        "sfx": [
+          "efectos/sfx_sklknttswethdvd01.json",
+          "efectos/sfx_sklknttswethdvd02.json"
+        ],
+        "ani": "SklKntTswEthdvd",
+        "wav": [
+          "pcskilld-earthdiv"
+        ]
+      },
+      {
+        "si": "SI_KNT_TWO_POWERSWING",
+        "sfx": [
+          "efectos/sfx_sklknttwopwswng01.json",
+          "efectos/sfx_sklknttwopwswng02.json"
+        ],
+        "ani": "SklKntTwoPwswng",
+        "wav": [
+          "pcskilld-powerswing"
+        ]
+      },
+      {
+        "si": "SI_RIN_HEAL_GVURTIALLA",
+        "sfx": [
+          "efectos/sfx_sklrinhealraincasting01.json",
+          "efectos/sfx_sklringgvurtialla02.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskilld-gvurtialla"
+        ]
+      },
+      {
+        "si": "SI_RIN_HEAL_HEALRAIN",
+        "sfx": [
+          "efectos/sfx_sklrinhealraincasting01.json",
+          "efectos/sfx_sklringhealrain02.json"
+        ],
+        "ani": "SklRinHeal01",
+        "wav": [
+          "pcskilld-healrain"
+        ]
+      },
+      {
+        "si": "SI_RIN_SQU_GEBURAHTIPHRETH",
+        "sfx": [
+          "efectos/sfx_sklrinattackcasting01.json",
+          "efectos/sfx_sklringgeburahtiphreth02.json"
+        ],
+        "ani": "SklRinSquare01",
+        "wav": [
+          "pcskillm-geburah"
+        ]
+      },
+      {
+        "si": "SI_RIN_SUP_HOLYCROSS",
+        "sfx": [
+          "efectos/sfx_sklrinholycasting01.json",
+          "efectos/sfx_sklringholycross02.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskilld-holycross"
+        ]
+      },
+      {
+        "si": "SI_RIN_SUP_HOLYGUARD",
+        "sfx": [
+          "efectos/sfx_sklrinholycasting01.json",
+          "efectos/sfx_sklringholyguard02.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskilld-holyguard"
+        ]
+      },
+      {
+        "si": "SI_RIN_SUP_MERKABAHANZELRUSHA",
+        "sfx": [
+          "efectos/sfx_sklringanzelrusha02.json",
+          "efectos/sfx_sklringanzelrusha03.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskillm-anzelrusha"
+        ]
+      },
+      {
+        "si": "SI_RIN_SUP_PROTECT",
+        "sfx": [
+          "efectos/sfx_sklrinprotectcasting01.json",
+          "efectos/sfx_sklringprotect02.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskillm-protect"
+        ]
+      },
+      {
+        "si": "SI_RIN_SUP_SPIRITUREFORTUNE",
+        "sfx": [
+          "efectos/sfx_sklrinattackcasting01.json",
+          "efectos/sfx_sklringspiriturefortune02.json"
+        ],
+        "ani": "SklRinCure01",
+        "wav": [
+          "pcskillm-spiritefot"
+        ]
+      }
+    ]
+  }
+}

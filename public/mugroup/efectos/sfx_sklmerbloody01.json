@@ -1,0 +1,910 @@
+{
+  "name": "sfx_sklmerbloody01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "sfx_sklvagovercutter01-1.dds",
+      "texture": "sfx_sklvagovercutter01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            120.0
+          ],
+          "opacity": 50
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            1.399999976158142,
+            -0.30000001192092896
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            70.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 12,
+          "position": [
+            0.0,
+            1.399999976158142,
+            -0.4000000059604645
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 60
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            1.399999976158142,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklvagovercutter01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklvagovercutter01-1.dds",
+      "texture": "sfx_sklvagovercutter01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.4000000059604645,
+            0.0,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            20.0,
+            90.0,
+            130.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 5,
+          "position": [
+            -0.4000000059604645,
+            1.0,
+            -0.30000001192092896
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            20.0,
+            90.0,
+            90.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 12,
+          "position": [
+            -0.20000000298023224,
+            1.399999976158142,
+            -0.4000000059604645
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            20.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 60
+        },
+        {
+          "frame": 15,
+          "position": [
+            -0.20000000298023224,
+            1.399999976158142,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            20.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklvagovercutter01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklvagovercutter01-1.dds",
+      "texture": "sfx_sklvagovercutter01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.4000000059604645,
+            0.0,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            -20.0,
+            90.0,
+            130.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.4000000059604645,
+            1.0,
+            -0.30000001192092896
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            -20.0,
+            90.0,
+            90.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 12,
+          "position": [
+            0.20000000298023224,
+            1.399999976158142,
+            -0.4000000059604645
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            -20.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 60
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.20000000298023224,
+            1.399999976158142,
+            -0.5
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            -20.0,
+            90.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklvagovercutter01-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklvagovercutter01-2.dds",
+      "texture": "sfx_sklvagovercutter01-2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 13,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            2.299999952316284,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            -60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklvagovercutter01-2.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklvagovercutter01-2.dds",
+      "texture": "sfx_sklvagovercutter01-2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 13,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            2.299999952316284,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklvagovercutter01-2.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_sklasschecannonball01-3.dds",
+      "texture": "sfx_sklasschecannonball01-3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 13,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklasschecannonball01-3.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "sfx_genlevelup01-p01.dds",
+      "texture": "sfx_sklmerbloody03-3.dds",
+      "textureFrames": 3,
+      "textureLoop": 15,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 10,
+        "appear": 1,
+        "keep": 5,
+        "disappear": 20,
+        "startVariance": 0.20000000298023224,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.20000000298023224,
+        "xzLow": 0.0,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          -0.003000000026077032,
+          0.0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerbloody03-3.png",
+        "efectos/texturas/sfx_sklmerbloody03-2.png",
+        "efectos/texturas/sfx_sklmerbloody03-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_genlodelight01-1.dds",
+      "texture": "sfx_sklmerbloody02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            130.0
+          ],
+          "opacity": 50
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            0.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            130.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            0.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            130.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerbloody02.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_genlodestar01-1.dds",
+      "texture": "sfx_sklmerbloody01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 50
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.5,
+            0.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.5,
+            0.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerbloody01.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklmerbloody01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

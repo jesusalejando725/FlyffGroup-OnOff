@@ -1,0 +1,73 @@
+# Flyff v15 Reference Archive
+
+> **This directory is a read-only mirror of the original Flyff v15 source code, assets, and server configurations.**
+> Use it to understand game mechanics, look up original implementations, and reference protocol formats.
+
+## Directory Structure
+
+| Directory | Contents |
+|-----------|----------|
+| `source/` | C++ source code — 23 subdirectories covering all server and client components |
+| `resource/` | Game assets — 15 subdirectories with models, textures, sounds, world data, and data tables |
+| `config/` | Server INI configuration files |
+| `database/` | SQL schema files |
+
+## Where to Start
+
+- **New to the codebase?** Read [GLOSSARY.md](file:///Users/owner/Cyril/flyff-web-mmo/reference/GLOSSARY.md) — comprehensive cross-reference of every system, class, and file.
+- **Networking?** → `source/_Network/MsgHdr.h` (packet opcodes), `source/_Network/Misc/Include/ar.h` (CAr serialization)
+- **Entity system?** → `source/_Common/Obj.h` → `source/_Common/Mover.h`
+- **Rendering?** → `source/_Common/Project.h`, `source/_Common/ModelObject.h`, `source/_Common/World.h`
+- **HUD/UI?** → `source/_Interface/WndBase.h`, `source/_Interface/WndManager.h`, `resource/resData.inc`
+- **Combat?** → `source/_Common/MoverAttack.cpp`, `source/_Common/MoverSkill.cpp`
+- **Items?** → `source/_Common/Item.h`, `source/_Common/pocket.h`
+- **Database?** → `source/_Database/DbManager.h`, `database/1. Database.sql`
+- **AI?** → `source/_AIInterface/AIInterface.h`, `source/_AIInterface/FSM.h`
+- **Terrain?** → `source/_Common/landscape.h`, `source/_Common/World.h`, `resource/Terrain.inc`
+
+## Source Code Modules
+
+| Module | Role |
+|--------|------|
+| `_Common/` | Shared game logic (entities, world, rendering, items, combat) |
+| `_Interface/` | MFC-style UI window system (HUD, dialogs, controls) |
+| `_Network/` | Network library (sockets, DP layer, CAr serialization, packet opcodes) |
+| `_Database/` | Database manager (SQL queries, account cache) |
+| `_AIInterface/` | AI system (HFSM, monster behaviors) |
+| `_DirectX/` | DirectX SDK wrappers (D3D, DirectSound) |
+| `Neuz/` | Client executable (network handlers, game app) |
+| `WORLDSERVER/` | World server (game logic, player management, snapshots) |
+| `CERTIFIER/` | Certifier server (auth tokens) |
+| `LOGINSERVER/` | Login server (credential verification) |
+| `WORLDDIALOG/` | NPC dialog system (script engine) |
+| `AccountServer/` | Account server (management, billing) |
+| `CACHESERVER/` | Cache server (player data cache) |
+| `CORESERVER/` | Core server (inter-server comm) |
+
+## Key Files
+
+- [GLOSSARY.md](file:///Users/owner/Cyril/flyff-web-mmo/reference/GLOSSARY.md) — Complete cross-reference glossary
+- `source/_Network/MsgHdr.h` — All packet opcodes (1,038+ types)
+- `source/_Common/Mover.h` — Core entity class (1,790 lines)
+- `source/_Common/World.h` — World/terrain system (946 lines)
+- `source/_Common/Item.h` — Item system (1,017 lines)
+- `source/WORLDSERVER/User.h` — Server-side player (1,041 lines)
+- `source/WORLDDIALOG/NpcScript.h` — NPC dialog scripts (75,474 lines)
+- `resource/resData.inc` — UI window layout definitions
+- `resource/ResData.h` — WIDC_*/APP_* enums
+- `database/1. Database.sql` — Full SQL schema (611 KB)
+
+## Server Architecture
+
+```
+Client (Neuz) → Certifier → Login Server → Cache Server → World Server → Database Server
+                                      → Core Server (inter-server comm)
+```
+
+## Build
+
+The original source uses Visual Studio (MSVC). The `all/all.sln` solution file contains all projects. The web port does not compile these — they are reference only.
+
+## License
+
+This is original Flyff v15 source code. Use for reference only.

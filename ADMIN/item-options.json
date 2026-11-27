@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "byItem": {},
+  "maxEnhanceLevel": 15,
+  "enhanceStatPerLevelPct": 8,
+  "wingLightEnabled": true,
+  "wingAuraParticlesEnabled": true,
+  "itemSparkleTexture": "efectos/texturas/sfx_genitemshine01-1.png",
+  "itemParticleTexture": "efectos/texturas/sfx_itempatical01.png",
+  "glowByEnhanceLevel": [
+    { "minLevel": 0, "maxLevel": 2, "emissive": 0.02, "specular": 0.15, "sparkleRate": 0, "color": "#cbd5e1", "label": "Base" },
+    { "minLevel": 3, "maxLevel": 5, "emissive": 0.16, "specular": 0.42, "sparkleRate": 3, "color": "#38bdf8", "label": "Templado Azul" },
+    { "minLevel": 6, "maxLevel": 8, "emissive": 0.34, "specular": 0.68, "sparkleRate": 7, "color": "#f59e0b", "label": "Resplandor Ámbar" },
+    { "minLevel": 9, "maxLevel": 11, "emissive": 0.56, "specular": 0.88, "sparkleRate": 14, "color": "#fbbf24", "label": "Brillo Dorado +9" },
+    { "minLevel": 12, "maxLevel": 13, "emissive": 0.85, "specular": 1.0, "sparkleRate": 24, "color": "#a855f7", "label": "Aura Mítica" },
+    { "minLevel": 14, "maxLevel": 15, "emissive": 0.95, "specular": 1.0, "sparkleRate": 30, "color": "#e8c4ff", "label": "Aura Astral" }
+  ],
+  "excellentOptions": [
+    { "id": "exc_dmg", "label": "+10% Daño Excelente", "critPct": 10 },
+    { "id": "exc_atk_spd", "label": "+7 Velocidad de Ataque", "attackSpeed": 7 },
+    { "id": "exc_hp_kill", "label": "Recupera HP/8 al matar", "hpOnKillPct": 12 },
+    { "id": "exc_dr", "label": "Reducción de Daño +4%", "damageReductionPct": 4 },
+    { "id": "exc_hp", "label": "Vida Máxima +4%", "maxHpPct": 4 },
+    { "id": "exc_ref", "label": "Reflejo de Daño +5%", "reflectPct": 5 },
+    { "id": "exc_zen", "label": "+30% Zen al caer", "zenBonusPct": 30 }
+  ],
+  "jewels": [
+    { "id": "bless", "name": "Joya de Bless", "safeRange": "0..5", "bonusSuccessPct": 100 },
+    { "id": "soul", "name": "Joya de Soul", "safeRange": "6..9", "bonusSuccessPct": 75 },
+    { "id": "chaos", "name": "Joya de Chaos", "safeRange": "10..15", "bonusSuccessPct": 60 },
+    { "id": "life", "name": "Joya de Life", "effect": "+4% Defensa / Daño Adicional" },
+    { "id": "creation", "name": "Joya de Creation", "effect": "Forja Reliquias y Alas" },
+    { "id": "harmony", "name": "Joya de Harmony", "effect": "Opción Amarilla Elemental" }
+  ]
+}

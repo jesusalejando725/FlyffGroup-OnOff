@@ -1,0 +1,6 @@
+{
+  "name": "MuGro-up'",
+  "description": "Juego Web3D MuGro-up' Offline-First con Babylon.js (.glb), base de datos local IndexedDB (Dexie), sincronización en la nube por timestamp, vinculación local Wi-Fi, asesor Oráculo IA y Web/APK-WEB auto-actualizable.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

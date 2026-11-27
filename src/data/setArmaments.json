@@ -1,0 +1,74 @@
+{
+  "DK": [
+    "equipo/item_weaswoangel.glb",
+    "equipo/item_weaswoapple.glb",
+    "equipo/item_weaswoaxilow.glb",
+    "equipo/item_weaswobamboo.glb",
+    "equipo/item_weaswobigmas.glb",
+    "equipo/item_weaswobloody.glb",
+    "equipo/item_weaswobluesh.glb",
+    "equipo/item_weaswobreake.glb",
+    "equipo/item_weaswobroad.glb",
+    "equipo/item_weaswocomet.glb"
+  ],
+  "MG": [
+    "equipo/item_weaswocrystal.glb",
+    "equipo/item_weaswodwarf.glb",
+    "equipo/item_weaswofairli.glb",
+    "equipo/item_weaswofireis.glb",
+    "equipo/item_weaswogemini.glb",
+    "equipo/item_weaswohansel.glb",
+    "equipo/item_weaswojaim.glb",
+    "equipo/item_weaswokarmel.glb",
+    "equipo/item_weaswokehin.glb",
+    "equipo/item_weaswokhaica.glb"
+  ],
+  "DW": [
+    "equipo/item_weastaancient.glb",
+    "equipo/item_weastaangel.glb",
+    "equipo/item_weastaangeli.glb",
+    "equipo/item_weastabirdin.glb",
+    "equipo/item_weastabishap.glb",
+    "equipo/item_weastabloody.glb",
+    "equipo/item_weastacosmo.glb",
+    "equipo/item_weastacron.glb",
+    "equipo/item_weastacrosse.glb",
+    "equipo/item_weastacrystal.glb"
+  ],
+  "ELF": [
+    "equipo/item_weabowancient.glb",
+    "equipo/item_weabowangel.glb",
+    "equipo/item_weabowbloody.glb",
+    "equipo/item_weabowbrikie.glb",
+    "equipo/item_weabowciclon.glb",
+    "equipo/item_weabowclassi.glb",
+    "equipo/item_weabowcrusad.glb",
+    "equipo/item_weabowcrysta.glb",
+    "equipo/item_weabowcrystal.glb",
+    "equipo/item_weabowdarkne.glb"
+  ],
+  "DL": [
+    "equipo/item_weawanancient.glb",
+    "equipo/item_weawanangel.glb",
+    "equipo/item_weawanaurora.glb",
+    "equipo/item_weawanblackw.glb",
+    "equipo/item_weawanbloody2.glb",
+    "equipo/item_weawancrystal.glb",
+    "equipo/item_weawandazzle.glb",
+    "equipo/item_weawandivine.glb",
+    "equipo/item_weawandwarf.glb",
+    "equipo/item_weawaneclips.glb"
+  ],
+  "shield": [
+    "equipo/item_armshibuckle.glb",
+    "equipo/item_armshicatacop.glb",
+    "equipo/item_armshicoivel.glb",
+    "equipo/item_armshicresce.glb",
+    "equipo/item_armshicross.glb",
+    "equipo/item_armshidrain.glb",
+    "equipo/item_armshiguard.glb",
+    "equipo/item_armshiheart.glb",
+    "equipo/item_armshihillra.glb",
+    "equipo/item_armshilucid.glb"
+  ]
+}

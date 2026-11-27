@@ -1,0 +1,3 @@
+zen.webp: resized from htdocs/public/items/gold.jpg in
+https://github.com/marciobremer/FlyffWeb/tree/0a4780dd281767067a45457aa22445f7d5d6f2ed
+The lighting reference is client/invpreview.ts in the same revision.

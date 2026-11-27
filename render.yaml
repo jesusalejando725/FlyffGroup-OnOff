@@ -1,0 +1,28 @@
+# One Node instance owns the persistent backup and world files.
+services:
+  - type: web
+    name: mugroup-world
+    runtime: node
+    plan: starter
+    buildCommand: npx --yes bun@1.4.2 install --frozen-lockfile && npx --yes bun@1.4.2 run build
+    startCommand: NODE_ENV=production node server.ts
+    healthCheckPath: /api/account-service
+    disk:
+      name: world-data
+      mountPath: /var/data/mugroup
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: MU_WORLD_FILE
+        value: /var/data/mugroup/live-world.json
+      - key: MU_BACKUP_DIR
+        value: /var/data/mugroup/accounts
+      - key: MU_WORLD_ORIGINS
+        value: https://jesusalejando725.github.io
+      - key: MU_BACKUP_ORIGINS
+        value: https://jesusalejando725.github.io
+      - key: MU_RECOVERY_KEY
+        sync: false
+      - key: MU_ADMIN_PASSWORD
+        sync: false

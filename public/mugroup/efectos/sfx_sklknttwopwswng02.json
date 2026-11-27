@@ -1,0 +1,613 @@
+{
+  "name": "sfx_sklknttwopwswng02",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 2,
+      "name": "1",
+      "texture": "sfx_sklbillgvurtialbold14.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 38,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklbillgvurtialbold14.png"
+      ],
+      "particle": {
+        "createEvery": 2,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.001
+        ],
+        "scale": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed": [
+          0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "type": 1,
+      "name": "11",
+      "texture": "sfx_sklbillgvurtialbold14.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 32,
+          "position": [
+            -0.7319,
+            0.0,
+            0.3476
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklbillgvurtialbold14.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklpsypsychicbomb03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0027,
+            0.0,
+            -0.2037
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklpsypsychicbomb03.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed": [
+          0.1,
+          0.1,
+          0.1
+        ]
+      }
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklbillgvurtialbold05.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklbillgvurtialbold05.png"
+      ],
+      "particle": {
+        "createEvery": 5,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed": [
+          0.1,
+          0.1,
+          0.1
+        ]
+      }
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklbillgvurtialbold12.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            -0.0016,
+            0.0,
+            -0.0099
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklbillgvurtialbold12.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.1,
+          0.1,
+          0.1
+        ]
+      }
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklbillgvurtialbold15.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklbillgvurtialbold15.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 11,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.30000001192092896,
+        "startVarianceY": 0.0,
+        "yLow": -0.20000000298023224,
+        "yHigh": 0.2800000011920929,
+        "xzLow": 0.0,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          0.0,
+          -0.02
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "scaleSpeed": [
+          0.1,
+          0.1,
+          0.0
+        ]
+      }
+    },
+    {
+      "type": 4,
+      "name": "1",
+      "texture": "sfx_sklmaghotair02-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            10.0,
+            0.0,
+            2.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmaghotair02-1.png"
+      ],
+      "points": 15
+    }
+  ]
+}
