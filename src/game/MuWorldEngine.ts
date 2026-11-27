@@ -6,7 +6,7 @@ import { flightHeight } from './content/WingRig';
 import { invasionSites, invasionWindow, type Invasion } from '../data/worldInvasions';
 import { applyMonsterRule, canonicalMap, modelMonsters, positionsAt } from '../data/liveWorld';
 import { getLiveWorld, refreshLiveWorld, worldInvasions } from '../services/liveWorldService';
-import { CAMP_SIZE, MONSTER_WANDER_RADIUS, populateRegionalCamps, regionalTemplate, SpawnGrid, type CampMember } from './encounters';
+import { CAMP_SIZE, MONSTER_WANDER_RADIUS, populateRegionalCamps, reachableHuntingLand, regionalTemplate, SpawnGrid, type CampMember } from './encounters';
 import {
   AnimationGroup,
   ArcRotateCamera,
@@ -867,7 +867,7 @@ export class MuWorldEngine {
       localStorage.setItem(mob.id,String(mob.respawnAt));
       mob.respawnAt = Infinity; mob.strike = undefined;
       void this.callbacks.onKillMonster?.(0,e.zen,e);
-      const pool = [...ITEM_BY_ID.values()].filter(i => !i.id.startsWith('flyff_')).filter(i =>
+      const pool = [...ITEM_BY_ID.values()].filter(i => i.sourceLevel === undefined).filter(i =>
         ['helm','armor','pants','boots','gloves'].includes(i.slot) || (e.id !== 'red' && i.slot === 'weapon') ||
         (e.id !== 'red' && e.id !== 'selupan' && i.slot === 'shield')).map(i=>i.id);
       for (let i=0; i<e.pieces; i++) this.spawnLootDrop(mob.x+1.5*Math.cos(i*2.4),mob.z+1.5*Math.sin(i*2.4),0,true,pool);
@@ -1173,13 +1173,17 @@ export class MuWorldEngine {
     this.monsterRoamLimit = 40;
     this.monsterScan = 0;
     const size = MU_MAPS[0].worldSize;
+    const land = (x: number, z: number) => this.flyff.world.isHuntingLand(x, z);
+    const puerto = getMapById('puerto_bruma');
+    const reachable = reachableHuntingLand(size, puerto.spawn, land, (x, z) => this.flyff.world.getGroundHeight(x, z));
     const camps = populateRegionalCamps(size, MU_MAPS.map(map => {
       const key = map.id === 'puerto_bruma' ? 'puerto' : map.id === 'crater_ceniza' ? 'ceniza' : map.id;
       return {
         id: map.id,
         count: Math.max(1, Math.min(5000, Math.ceil(adminCfg['world-rules'].maps[key].targetMonsterCount / CAMP_SIZE))),
+        clusteredAt: map.id === puerto.id ? puerto.spawn : undefined,
         contains: (x, z) => nearestRegion(MU_MAPS, x, z).id === map.id,
-        allows: (x, z) => this.flyff.world.isHuntingLand(x, z) && !this.isSafePoint(x, z, 12),
+        allows: (x, z) => (map.id === puerto.id ? reachable(x, z) : land(x, z)) && !this.isSafePoint(x, z, 12),
       };
     }), madrigalSites);
     for (const map of MU_MAPS) this.addRegionMonsters(map, camps.get(map.id) ?? [], live, adminCfg);

@@ -119,3 +119,26 @@ test('the shared map fills each region up to its own quota using only complete c
   });
   centers.forEach((a, i) => centers.slice(i + 1).forEach(b => assert.ok(Math.hypot(a.x-b.x, a.z-b.z) >= 40)));
 });
+
+test('hunting grounds contain ten camps each and avoid land disconnected from arrival', async () => {
+  const { populateRegionalCamps, reachableHuntingLand } = await import('../src/game/encounters.ts');
+  const spawn = { x: 500, z: 600 };
+  const land = (x: number, _z: number) => x < 800 || x >= 875;
+  const ground = reachableHuntingLand(1200, spawn, land, (x, z) => x > 690 && z < 300 ? 100 : 10);
+  assert.equal(ground(950, 600), false, 'a dry island is not reachable');
+  assert.equal(ground(730, 250), false, 'a sheer rise is not reachable');
+  assert.equal(ground(660, 250), true, 'connected land is reachable');
+  const allowed = (x: number, z: number) => ground(x, z) && Math.hypot(x - spawn.x, z - spawn.z) > 262;
+  const region = { id: 'puerto', count: 40, clusteredAt: spawn, contains: () => true, allows: allowed };
+  const camps = populateRegionalCamps(1200, [region], []).get('puerto')!;
+  assert.equal(camps.length, 400);
+  assert.ok(camps.every(camp => allowed(camp.x, camp.z)));
+  const centers = camps.filter((_, index) => index % 10 === 0);
+  assert.ok(centers.some(camp => Math.hypot(camp.x - spawn.x, camp.z - spawn.z) < 300));
+  for (const [index, center] of centers.entries()) {
+    for (const [offset, other] of centers.slice(index + 1).entries()) {
+      const sameGround = Math.floor(index / 10) === Math.floor((index + offset + 1) / 10);
+      if (!sameGround) assert.ok(Math.hypot(center.x - other.x, center.z - other.z) >= 100);
+    }
+  }
+});

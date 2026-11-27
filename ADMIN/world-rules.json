@@ -37,7 +37,7 @@
     },
     "puerto": {
       "name": "Puerto de Bruma",
-      "cityRadius": 500,
+      "cityRadius": 250,
       "sizeMeters": 3072,
       "minLevel": 49,
       "maxLevel": 76,

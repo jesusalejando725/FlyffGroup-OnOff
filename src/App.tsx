@@ -1934,6 +1934,7 @@ export default function App() {
             open={activeDrawer === 'inventory'}
             character={character}
             items={items}
+            onOpenStats={() => setActiveDrawer('stats')}
             onClose={() => {
               setActiveDrawer('none');
               setForgeMessage(null);

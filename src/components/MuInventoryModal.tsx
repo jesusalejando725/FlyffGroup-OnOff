@@ -1,3 +1,5 @@
+import { previewModelFile, itemAssets } from '../data/itemVisualAssets';
+import { ShopModel } from './ShopModel';
 import { ItemPortrait } from './ItemPortrait';
 import React, { useState } from 'react';
 import { Gem, Hammer, Sparkles, X } from 'lucide-react';
@@ -9,6 +11,7 @@ interface MuInventoryModalProps {
   character: MuCharacter;
   items: MuItem[];
   onClose: () => void;
+  onOpenStats: () => void;
   onRepair: () => void;
   onEquip: (itemId: string) => void;
   onUse: (itemId: string) => void;
@@ -36,12 +39,14 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
   character,
   items,
   onClose,
+  onOpenStats,
   onEquip,
   onUse,
   onRepair,
   onUpgrade,
   forgeMessage,
 }) => {
+  const [previewId, setPreviewId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   if (!open) return null;
@@ -57,7 +62,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
   }
 
   const selectedItem = items.find((i) => i.id === selectedId) || items[0] || null;
-  const totalSlots = Math.max(24, Math.ceil(backpackItems.length / 6) * 6);
+  const totalSlots = Math.max(24, Math.ceil(backpackItems.length / 8) * 8);
 
   const getRarityStyle = (it: MuItem) => {
     if (it.rarity === 'ancient') return 'border-sky-400/90 bg-sky-950/60 text-sky-200';
@@ -77,6 +82,9 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
               Inventario (V) · {character.name} ({character.classType} Nv.{character.level})
             </h2>
           </div>
+          <button type="button" onClick={onOpenStats} className="ml-auto text-xs text-amber-200 p-2">
+            Atributos ({character.unspentPoints} pts)
+          </button>
           <button
             onClick={onClose}
             aria-label="Cerrar Inventario"
@@ -174,7 +182,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                 <span>Mochila · {backpackItems.length} objetos</span>
                 <span>Toca un cuadro para equipar o forjar</span>
               </div>
-              <div className="grid grid-cols-6 gap-1.5">
+              <div className="grid grid-cols-6 sm:grid-cols-8 gap-1.5">
                 {Array.from({ length: totalSlots }).map((_, idx) => {
                   const it = backpackItems[idx];
                   const active = it && selectedItem?.id === it.id;
@@ -192,7 +200,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                         <>
                           {renderSlotIcon(it)}
                           <span className="text-[9px] font-semibold leading-tight truncate w-full mt-0.5">
-                            +{it.enhanceLevel} {it.name.split(' ')[0]}
+                            {it.name}
                           </span>
                         </>
                       )}
@@ -204,6 +212,17 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
 
             {selectedItem && (
               <div className="p-3.5 rounded-lg bg-[#080d18] border border-amber-500/50 space-y-2">
+                <ItemPortrait item={selectedItem} sex={character.sex} large />
+                {itemAssets(selectedItem.name)?.appearance && <p className="text-xs text-slate-300">
+                  Apariencia: {itemAssets(selectedItem.name)?.appearance}
+                </p>}
+                {previewModelFile(selectedItem, character.sex) && <button type="button"
+                  onClick={() => setPreviewId(id => id === selectedItem.id ? null : selectedItem.id)}
+                  aria-expanded={previewId === selectedItem.id} className="text-xs text-sky-300">
+                  {previewId === selectedItem.id ? 'Cerrar vista 3D' : 'Ver modelo 3D'}
+                </button>}
+                {previewId === selectedItem.id && previewModelFile(selectedItem, character.sex) &&
+                  <ShopModel key={selectedItem.id} item={selectedItem} file={previewModelFile(selectedItem, character.sex)} />}
                 <div className="flex items-center justify-between gap-2">
                   <div
                     style={{ color: getItemVisualSpec(selectedItem).labelColor }}

@@ -1,5 +1,6 @@
+import { armorModelFile, isFullSuit, itemModelFile } from '../../data/itemVisualAssets';
 import { WingRig } from './WingRig';
-import { setArmament, artisanArmor, artisanWeapon, AURORA_WING_NAME } from '../../data/artisanEquipment';
+import { artisanArmor, artisanWeapon } from '../../data/artisanEquipment';
 import { buildArtisanWeapon } from './ArtisanWeapon';
 import {
   AbstractMesh,
@@ -26,12 +27,6 @@ import {
 } from '@babylonjs/core';
 import type { MuItem } from '../../types/game';
 import { getAdminConfigSync } from '../../services/adminConfigService';
-
-export interface EquipmentLibrary {
-  weapons: Record<string, string>;
-  wings: Record<string, string>;
-  sets: Record<string, { male: string; female: string }>;
-}
 
 export interface GearSlotState {
   slot: string;
@@ -91,22 +86,6 @@ const BODY_MESH_MAP: Record<string, string[]> = {
   hands: ['body_hands'],
   feet: ['body_feet'],
 };
-
-let cachedLibrary: EquipmentLibrary | null = null;
-
-export async function loadEquipmentLibrary(): Promise<EquipmentLibrary> {
-  if (cachedLibrary) return cachedLibrary;
-  try {
-    const res = await fetch('./mugroup/equipo.json');
-    if (res.ok) {
-      cachedLibrary = (await res.json()) as EquipmentLibrary;
-      return cachedLibrary;
-    }
-  } catch {
-    // fallback below
-  }
-  return { weapons: {}, wings: {}, sets: {} };
-}
 
 function resolveMugroupUrl(relPath: string): { rootUrl: string; fileName: string } {
   const full = new URL(relPath, new URL('./mugroup/', document.baseURI)).href;
@@ -303,7 +282,6 @@ export class EquipmentAppearance {
 
   public async apply(actor: FlyffActorLike, equippedItems: MuItem[]): Promise<void> {
     const token = ++this.reqCounter;
-    const lib = await loadEquipmentLibrary();
     if (token !== this.reqCounter || this.scene.isDisposed) return;
 
     const sex = actor.config.sex || 'male';
@@ -317,12 +295,12 @@ export class EquipmentAppearance {
       }
     }
 
+    const fullSuit = isFullSuit(slotItems.get('torso'));
     const setFilesToLoad = new Map<string, { file: string; slots: string[]; maxEnhance: number }>();
     for (const slot of actor.config.costume ? [] : ARMOR_SLOTS) {
       const it = slotItems.get(slot);
-      if (!it) continue;
-      const setEntry = lib.sets?.[artisanArmor(it.setName)?.base ?? it.setName];
-      const file = setEntry?.[sex];
+      if (!it || (slot === 'pants' && fullSuit)) continue;
+      const file = armorModelFile(it, sex);
       if (!file) continue;
       const existing = setFilesToLoad.get(file);
       if (existing) {
@@ -338,12 +316,10 @@ export class EquipmentAppearance {
     const offhandItem = slotItems.get('offhand');
     const wingItem = slotItems.get('wings');
 
-    const weaponFile = weaponItem ? setArmament(weaponItem.name) ?? lib.weapons?.[weaponItem.name] : undefined;
+    const weaponFile = weaponItem && itemModelFile(weaponItem);
     const artisan = weaponFile ? undefined : artisanWeapon(weaponItem?.name);
-    const offhandFile = offhandItem ? setArmament(offhandItem.name) ?? lib.weapons?.[offhandItem.name] : undefined;
-    const wingFile = wingItem
-      ? lib.wings?.[wingItem.name] ?? getAdminConfigSync().items.wingCatalog?.find((w: { name: string }) => w.name === wingItem.name)?.glb ?? (wingItem.name === AURORA_WING_NAME ? 'equipo/wing_mugroup_feather.glb' : undefined)
-      : undefined;
+    const offhandFile = offhandItem && itemModelFile(offhandItem);
+    const wingFile = wingItem && itemModelFile(wingItem);
 
     const loadContainer = async (rel: string): Promise<AssetContainer | null> => {
       try {
@@ -422,7 +398,7 @@ export class EquipmentAppearance {
 
         if (rawMesh.name.startsWith('equip_torso_')) {
           if ((wantTorso || wantPants) && rawMesh instanceof Mesh) {
-            const { torso, pants } = splitTorsoAndPantsMesh(rawMesh, this.scene, 0.85);
+            const { torso, pants } = wantTorso && fullSuit ? { torso: rawMesh, pants: null } : splitTorsoAndPantsMesh(rawMesh, this.scene, 0.85);
             const torsoEnh = slotItems.get('torso')?.enhanceLevel ?? 0;
             const pantsEnh = slotItems.get('pants')?.enhanceLevel ?? 0;
             if (torso && wantTorso) {
@@ -454,8 +430,10 @@ export class EquipmentAppearance {
               pants?.dispose(false, false);
             }
           }
-          rawMesh.setEnabled(false);
-          rawMesh.dispose(false, false);
+          if (!actor.gear.torso.meshes.includes(rawMesh)) {
+            rawMesh.setEnabled(false);
+            rawMesh.dispose(false, false);
+          }
           continue;
         }
 
@@ -556,7 +534,7 @@ export class EquipmentAppearance {
       actor.gear.weapon.equipped = true;
       actor.gear.weapon.file = tag;
       actor.gear.weapon.containers.push(container);
-    } else if (weaponItem) {
+    } else if (weaponItem && !weaponFile) {
       for (const m of actor.outfit.meshes) {
         if (m.name.startsWith('equip_weapon_')) {
           m.setEnabled(true);
@@ -764,7 +742,7 @@ export class EquipmentAppearance {
 
     // Synchronize underlying body meshes
     for (const [slot, bodyPrefixes] of Object.entries(BODY_MESH_MAP)) {
-      const showBody = !actor.gear[slot]?.equipped;
+      const showBody = !actor.gear[slot]?.equipped && !(slot === 'pants' && fullSuit && actor.gear.torso.equipped);
       for (const bm of actor.body.meshes) {
         if (bodyPrefixes.some((p) => bm.name.startsWith(p))) {
           bm.setEnabled(showBody);
