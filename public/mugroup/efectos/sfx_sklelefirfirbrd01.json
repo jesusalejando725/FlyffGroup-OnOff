@@ -1,0 +1,326 @@
+{
+  "name": "sfx_sklelefirfirbrd01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "obj_madaarmory02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 20,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.009999999776482582,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          -0.004000000189989805
+        ],
+        "scale": [
+          0.6000000238418579,
+          0.6000000238418579,
+          0.6000000238418579
+        ],
+        "scaleSpeed": [
+          0.009999999776482582,
+          0.009999999776482582,
+          0.009999999776482582
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        }
+      ],
+      "textures": [
+        "efectos/texturas/obj_madaarmory02.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "1",
+      "texture": "sfx_sklblddblcross01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.10000000149011612
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            -0.4000000059604645,
+            0.0
+          ],
+          "rotation": [
+            90.0,
+            -60.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            0.0,
+            0.10000000149011612
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            -0.4000000059604645,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "points": 15,
+      "textures": [
+        "efectos/texturas/sfx_sklblddblcross01.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "121",
+      "texture": "sfx_sklmagfircasting01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 2,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 20,
+        "startVariance": 0.10000000149011612,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0010000000474974513,
+        "xzLow": 0.0,
+        "xzHigh": 0.019999999552965164,
+        "acceleration": [
+          0.0,
+          -0.004000000189989805,
+          0.0
+        ],
+        "scale": [
+          0.20000000298023224,
+          0.20000000298023224,
+          0.20000000298023224
+        ],
+        "scaleSpeed": [
+          0.009999999776482582,
+          0.009999999776482582,
+          0.009999999776482582
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagfircasting01-1.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklelefirfirbrd01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

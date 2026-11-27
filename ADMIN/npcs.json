@@ -1,0 +1,206 @@
+{
+  "version": "2.0.0",
+  "interactRadiusMeters": 6.5,
+  "npcs": [
+    {
+      "id": "flaris-npc-hanzo",
+      "mapId": "flaris",
+      "name": "Hanzo el Herrero",
+      "title": "Forja de Flaris · Espadas, Sets y Escudos",
+      "role": "blacksmith",
+      "x": 1322,
+      "z": 1294,
+      "model": "npcs/boboku.glb"
+    },
+    {
+      "id": "flaris-npc-lumen",
+      "mapId": "flaris",
+      "name": "Lumen la Tabernera",
+      "title": "Posada de Flaris · Pociones y Joyería",
+      "role": "potions",
+      "x": 1350,
+      "z": 1294,
+      "model": "npcs/losha.glb"
+    },
+    {
+      "id": "flaris-npc-pasi",
+      "mapId": "flaris",
+      "name": "Pasi el Mago",
+      "title": "Academia Arcana · Báculos y Túnicas",
+      "role": "wizard",
+      "x": 1336,
+      "z": 1302,
+      "model": "npcs/juria.glb"
+    },
+    {
+      "id": "flaris-npc-chaos",
+      "mapId": "flaris",
+      "name": "Duende del Caos",
+      "title": "Chaos Machine · Mejoras y Alquimia",
+      "role": "chaos_goblin",
+      "x": 1324,
+      "z": 1268,
+      "model": "npcs/guidepang.glb"
+    },
+    {
+      "id": "flaris-artisan",
+      "mapId": "flaris",
+      "name": "Lira del Alba",
+      "title": "Forja de Madrigal · Armas, Sets y Alas",
+      "role": "blacksmith",
+      "x": 1330,
+      "z": 1288,
+      "model": "npcs/marche.glb"
+    },
+    {
+      "id": "robledal-npc-elf",
+      "mapId": "robledal",
+      "name": "Elf Lala del Robledal",
+      "title": "Arquería Silvana · Arcos, Sets y Joyas",
+      "role": "elf",
+      "x": 536,
+      "z": 2452,
+      "model": "npcs/tina.glb"
+    },
+    {
+      "id": "robledal-npc-smith",
+      "mapId": "robledal",
+      "name": "Artesano Silvano",
+      "title": "Armaduras, Escudos y Mascotas",
+      "role": "blacksmith",
+      "x": 504,
+      "z": 2452,
+      "model": "npcs/boboku.glb"
+    },
+    {
+      "id": "robledal-npc-potions",
+      "mapId": "robledal",
+      "name": "Curandera del Bosque",
+      "title": "Elixires, Joyería y Pergaminos",
+      "role": "potions",
+      "x": 520,
+      "z": 2460,
+      "model": "npcs/losha.glb"
+    },
+    {
+      "id": "robledal-npc-chaos",
+      "mapId": "robledal",
+      "name": "Alquimista Silvano",
+      "title": "Chaos Machine · Forja de Reliquias",
+      "role": "chaos_goblin",
+      "x": 520,
+      "z": 2422,
+      "model": "npcs/guidepang.glb"
+    },
+    {
+      "id": "robledal-artisan",
+      "mapId": "robledal",
+      "name": "Ari del Sendero",
+      "title": "Arcos y Armaduras del Bosque",
+      "role": "elf",
+      "x": 524,
+      "z": 2449,
+      "model": "npcs/tina.glb"
+    },
+    {
+      "id": "puerto-npc-guardian",
+      "mapId": "puerto",
+      "name": "Capitán de Bruma",
+      "title": "Anillos Marinos, Colgantes y Pociones",
+      "role": "potions",
+      "x": 2284,
+      "z": 2404,
+      "model": "npcs/losha.glb"
+    },
+    {
+      "id": "puerto-npc-smith",
+      "mapId": "puerto",
+      "name": "Forjador Naval",
+      "title": "Armas Excelentes y Sets de Puerto",
+      "role": "blacksmith",
+      "x": 2316,
+      "z": 2404,
+      "model": "npcs/boboku.glb"
+    },
+    {
+      "id": "puerto-npc-wizard",
+      "mapId": "puerto",
+      "name": "Navegante Arcano",
+      "title": "Báculos de Marea y Tomos",
+      "role": "wizard",
+      "x": 2300,
+      "z": 2410,
+      "model": "npcs/juria.glb"
+    },
+    {
+      "id": "puerto-npc-guard",
+      "mapId": "puerto",
+      "name": "Vigía del Faro",
+      "title": "Guarnición del Puerto · Joyería",
+      "role": "guard",
+      "x": 2300,
+      "z": 2372,
+      "model": "npcs/guard.glb"
+    },
+    {
+      "id": "puerto-artisan",
+      "mapId": "puerto",
+      "name": "Naira de las Velas",
+      "title": "Báculos y Gemas de Marea",
+      "role": "wizard",
+      "x": 2304,
+      "z": 2381,
+      "model": "npcs/lui.glb"
+    },
+    {
+      "id": "ceniza-npc-gladiator",
+      "mapId": "ceniza",
+      "name": "Maestro Gladiador",
+      "title": "Bastión de Ceniza · Armamento Supremo",
+      "role": "blacksmith",
+      "x": 2406,
+      "z": 912,
+      "model": "npcs/boboku.glb"
+    },
+    {
+      "id": "ceniza-npc-wizard",
+      "mapId": "ceniza",
+      "name": "Oráculo de Ceniza",
+      "title": "Báculos Supremos y Joyería Épica",
+      "role": "wizard",
+      "x": 2434,
+      "z": 912,
+      "model": "npcs/juria.glb"
+    },
+    {
+      "id": "ceniza-npc-tavern",
+      "mapId": "ceniza",
+      "name": "Tabernero de Hierro",
+      "title": "Refugio Volcánico · Pociones y Reliquias",
+      "role": "potions",
+      "x": 2420,
+      "z": 918,
+      "model": "npcs/losha.glb"
+    },
+    {
+      "id": "ceniza-npc-guard",
+      "mapId": "ceniza",
+      "name": "Centinela del Cráter",
+      "title": "Escolta de Respawn · Suministros",
+      "role": "guard",
+      "x": 2420,
+      "z": 884,
+      "model": "npcs/guard.glb"
+    },
+    {
+      "id": "ceniza-artisan",
+      "mapId": "ceniza",
+      "name": "Daro de la Fragua",
+      "title": "Forja de Lorencia · Armas y Sets",
+      "role": "blacksmith",
+      "x": 2411,
+      "z": 905,
+      "model": "npcs/marche.glb"
+    }
+  ]
+}

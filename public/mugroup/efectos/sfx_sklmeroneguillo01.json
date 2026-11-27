@@ -1,0 +1,1032 @@
+{
+  "name": "sfx_sklmeroneguillo01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-1.dds",
+      "texture": "sfx_npcranmagicblue01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-2.dds",
+      "texture": "sfx_npcranmagicblue01-2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 37
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-2.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-3.dds",
+      "texture": "sfx_npcranmagicblue01-3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-3.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-4.dds",
+      "texture": "sfx_npcranmagicblue01-4.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-4.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-1.dds",
+      "texture": "sfx_npcranmagicblue01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-1.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-2.dds",
+      "texture": "sfx_npcranmagicblue01-2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 37
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-2.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-3.dds",
+      "texture": "sfx_npcranmagicblue01-3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-3.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "sfx_npcranmagicblue01-4.dds",
+      "texture": "sfx_npcranmagicblue01-4.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_npcranmagicblue01-4.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklmerfury09.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 2,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 1.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.029999999329447746,
+        "yHigh": -0.029999999329447746,
+        "xzLow": 0.0,
+        "xzHigh": -0.10000000149011612,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.10000000149011612,
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "scaleSpeed": [
+          0.019999999552965164,
+          0.019999999552965164,
+          0.019999999552965164
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.800000011920929,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.04969650134444237,
+            0.800000011920929,
+            0.0009850469650700688
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury09.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "11",
+      "texture": "sfx_sklbillbloodfist06.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            -0.23333300650119781
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklbillbloodfist06.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "1",
+      "texture": "sfx_sklmeronemsuppo01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.2000000476837158,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmeronemsuppo01.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklmeroneguillo01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

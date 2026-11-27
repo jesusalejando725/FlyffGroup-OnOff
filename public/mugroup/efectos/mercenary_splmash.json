@@ -1,0 +1,186 @@
+{
+  "name": "mercenary_splmash",
+  "version": "old",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 4,
+      "name": "mercenary_splmash1.dds",
+      "texture": "mercenary_splmash1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            4.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            4.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/mercenary_splmash1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "mercenary_splmash1.dds",
+      "texture": "mercenary_splmash1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 35,
+          "position": [
+            0.003206999972462654,
+            0.0,
+            -0.017465999349951744
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 75
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 10,
+      "textures": [
+        "efectos/texturas/mercenary_splmash1.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/mercenary_splmash.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

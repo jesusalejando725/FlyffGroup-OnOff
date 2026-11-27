@@ -1,0 +1,13 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {SurfaceCollision} from '../src/game/content/SurfaceCollision.ts';
+const geometry=(vertices,indices=[0,1,2,0,2,3])=>({positions:vertices.flat(),indices});
+const wall=(z0,z1)=>geometry([[0,0,z0],[0,3,z0],[0,3,z1],[0,0,z1]]);
+const object=(g,extra={})=>({x:0,y:0,z:0,rotationY:0,scale:[1,1,1],geometry:g,...extra});
+const move=(c,x0,z0,x,z,feet=0)=>c.canMove(x0,z0,x,z,feet,()=>0,()=>true);
+test('triangle collision blocks swept movement through a thin wall',()=>{const c=new SurfaceCollision();c.rebuild([object(wall(-2,2))]);assert.equal(move(c,-2,0,2,0),false);assert.equal(move(c,-2,3,2,3),true)});
+test('doorway remains open within a building footprint',()=>{const c=new SurfaceCollision();c.rebuild([object(wall(-3,-.7)),object(wall(.7,3))]);assert.equal(move(c,-1,0,1,0),true);assert.equal(move(c,-1,2,1,2),false)});
+test('platform supports feet while high roofs cannot teleport the player',()=>{const c=new SurfaceCollision();c.rebuild([object(geometry([[-2,.4,-2],[2,.4,-2],[2,.4,2],[-2,.4,2]])),object(geometry([[-2,3,-2],[2,3,-2],[2,3,2],[-2,3,2]]))]);assert.equal(c.floor(0,0,.65,0),.4);assert.equal(c.floor(0,0,.2,0),0);assert.equal(c.floor(0,0,3.1,0),3)});
+test('scaled and rotated collider uses placement transforms',()=>{const c=new SurfaceCollision();c.rebuild([object(wall(-2,2),{x:10,z:10,rotationY:90,scale:[2,1,2]})]);assert.equal(move(c,10,8,10,12),false);assert.equal(move(c,15,8,15,12),true)});
+test('capsule has head clearance and cannot enter an unloaded sector',()=>{const c=new SurfaceCollision();c.rebuild([object(geometry([[-2,1.6,-2],[2,1.6,-2],[2,1.6,2],[-2,1.6,2]]))]);assert.equal(move(c,-1,0,1,0),false);c.rebuild([]);assert.equal(c.canMove(0,0,1,0,0,()=>0,x=>x<.5),false)});
+test('walkable ramp supplies continuous height',()=>{const c=new SurfaceCollision();c.rebuild([object(geometry([[0,0,-1],[4,2,-1],[4,2,1],[0,0,1]]))]);assert.equal(c.floor(1,0,1,0),.5);assert.equal(move(c,-.2,0,3.5,0),true)});

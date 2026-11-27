@@ -1,0 +1,646 @@
+{
+  "name": "sfx_sklpsypsychicbomb01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 2,
+      "name": "1",
+      "texture": "sfx_sklpsypsychicbomb06.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 3,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 20,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0010000000474974513,
+        "acceleration": [
+          0.0,
+          0.0,
+          -0.004999999888241291
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.4000000059604645
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.026355700567364693,
+            0.0,
+            -0.007095769979059696
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklpsypsychicbomb06.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklpsypsychicbomb01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5600000023841858,
+            0.5600000023841858,
+            0.5600000023841858
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklpsypsychicbomb01.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklpsypsychicbomb02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 33
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 66
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklpsypsychicbomb02.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklpsypsychicbomb01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

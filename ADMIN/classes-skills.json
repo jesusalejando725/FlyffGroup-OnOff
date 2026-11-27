@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "strictClassIsolation": true,
+  "classes": {
+    "DK": {
+      "title": "Blade Knight (M/F)",
+      "flyffArchetypes": ["Blade → Slayer", "Ranger → Crackshooter"],
+      "allowedSkillPrefixes": ["SI_BLD_", "SI_RAG_"],
+      "skillOverrides": {
+        "dk_slash": { "damageMultiplier": 1.08, "mpCost": 0, "agCost": 4, "cooldownSec": 0.45 },
+        "dk_twisting": { "damageMultiplier": 1.52, "mpCost": 10, "agCost": 10, "cooldownSec": 1.0 },
+        "dk_death_stab": { "damageMultiplier": 1.92, "mpCost": 14, "agCost": 15, "cooldownSec": 1.2 },
+        "dk_rageful_blow": { "damageMultiplier": 2.15, "mpCost": 18, "agCost": 20, "cooldownSec": 1.8 }
+      }
+    },
+    "DW": {
+      "title": "Soul Master (M/F)",
+      "flyffArchetypes": ["Psykeeper → Mentalist"],
+      "allowedSkillPrefixes": ["SI_PSY_"],
+      "skillOverrides": {
+        "dw_energy_bolt": { "damageMultiplier": 1.08, "mpCost": 0, "agCost": 4, "cooldownSec": 0.45 },
+        "dw_evil_spirit": { "damageMultiplier": 1.55, "mpCost": 14, "agCost": 10, "cooldownSec": 1.1 }
+      }
+    },
+    "MG": {
+      "title": "Magic Gladiator (M/F)",
+      "flyffArchetypes": ["Blade → Slayer", "Elementor → Arcanist"],
+      "allowedSkillPrefixes": ["SI_BLD_", "SI_ELE_"],
+      "skillOverrides": {
+        "mg_power_slash": { "damageMultiplier": 1.58, "mpCost": 12, "agCost": 10, "cooldownSec": 0.9 }
+      }
+    },
+    "DL": {
+      "title": "Dark Lord (M/F)",
+      "flyffArchetypes": ["Jester → Harlequin"],
+      "allowedSkillPrefixes": ["SI_JST_"],
+      "skillOverrides": {
+        "dl_fire_burst": { "damageMultiplier": 1.68, "mpCost": 14, "agCost": 12, "cooldownSec": 0.95 }
+      }
+    },
+    "ELF": {
+      "title": "Muse Elf (M/F)",
+      "flyffArchetypes": ["Knight → Templar", "Ringmaster → Seraph"],
+      "allowedSkillPrefixes": ["SI_KNT_", "SI_RIN_"],
+      "skillOverrides": {
+        "elf_triple": { "damageMultiplier": 1.38, "mpCost": 8, "agCost": 6, "cooldownSec": 0.65 }
+      }
+    }
+  }
+}

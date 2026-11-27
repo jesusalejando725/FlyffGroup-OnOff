@@ -1,0 +1,65 @@
+{
+  "brandName": "MuGro-up'",
+  "version": "2.0.0",
+  "cityRadiusMeters": 500,
+  "detailStreamRadiusMeters": 180,
+  "wingRunSpeedMultiplier": 1.0,
+  "baseRunSpeed": 14.0,
+  "stripManmadeStructures": false,
+  "safeZoneCombatBlocked": true,
+  "safeZoneMonsterExclusion": true,
+  "maps": {
+    "flaris": {
+      "name": "Flaris",
+      "cityRadius": 90,
+      "sizeMeters": 3072,
+      "minLevel": 1,
+      "maxLevel": 25,
+      "warpZen": 0,
+      "weather": "leaves",
+      "ambientBed": "wind",
+      "musicTheme": "flaris",
+      "targetMonsterCount": 40000,
+      "spawn": { "x": 1336, "z": 1281 }
+    },
+    "robledal": {
+      "name": "Villa del Robledal",
+      "cityRadius": 500,
+      "sizeMeters": 3072,
+      "minLevel": 20,
+      "maxLevel": 48,
+      "warpZen": 2500,
+      "weather": "petals",
+      "ambientBed": "wind",
+      "musicTheme": "robledal",
+      "targetMonsterCount": 40000,
+      "spawn": { "x": 520, "z": 2440 }
+    },
+    "puerto": {
+      "name": "Puerto de Bruma",
+      "cityRadius": 500,
+      "sizeMeters": 3072,
+      "minLevel": 45,
+      "maxLevel": 72,
+      "warpZen": 6000,
+      "weather": "leaves",
+      "ambientBed": "water",
+      "musicTheme": "puerto",
+      "targetMonsterCount": 40000,
+      "spawn": { "x": 2300, "z": 2390 }
+    },
+    "ceniza": {
+      "name": "Cráter de Ceniza",
+      "cityRadius": 500,
+      "sizeMeters": 3072,
+      "minLevel": 70,
+      "maxLevel": 99,
+      "warpZen": 12000,
+      "weather": "embers",
+      "ambientBed": "tower",
+      "musicTheme": "ceniza",
+      "targetMonsterCount": 40000,
+      "spawn": { "x": 2540, "z": 490 }
+    }
+  }
+}

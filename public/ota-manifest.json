@@ -1,0 +1,9 @@
+{
+  "appName": "MuGro-up'",
+  "version": "2.14.2",
+  "repo": "MuGro-Up/MuGro-Up",
+  "pagesUrl": "https://mugro-up.github.io/MuGro-Up/",
+  "apkwebUrl": "https://mugro-up.github.io/MuGro-Up/",
+  "buildTimestamp": "2026-11-26T05:00:00.000Z",
+  "offlineEngine": "Dexie.js (IndexedDB Offline-First) + Service Worker + Babylon.js GLB"
+}

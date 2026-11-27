@@ -1,0 +1,954 @@
+{
+  "name": "sfx_sklrinhealraincasting01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 4,
+      "name": "1",
+      "texture": "sfx_sklrinheahealra07.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 85,
+          "position": [
+            -0.0,
+            0.0,
+            0.0099
+          ],
+          "positionRotation": [
+            50.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 108,
+          "position": [
+            -0.0091,
+            0.0,
+            0.0139
+          ],
+          "positionRotation": [
+            49.375,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra07.png"
+      ],
+      "points": 20
+    },
+    {
+      "type": 1,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra08.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 75,
+          "position": [
+            0.0099,
+            0.0,
+            -0.0011
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            355.5
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra08.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra08.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 75,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.975,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            355.5
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra08.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra09.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 75,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            355.5
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra09.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "1",
+      "texture": "sfx_sklrinheahealra10.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 5,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            0.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 75,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            2.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            1.975,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            355.5,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra10.png"
+      ],
+      "points": 20
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra14.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.0755,
+            0.0,
+            0.0971
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 30
+        },
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra14.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 5,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.5,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.10000000149011612,
+        "acceleration": [
+          0.0,
+          0.0001,
+          0.0
+        ],
+        "scale": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "scaleSpeed": [
+          0.01,
+          0.01,
+          0.01
+        ]
+      }
+    },
+    {
+      "type": 2,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra11.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.0886,
+            0.0,
+            0.0077
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 90,
+          "position": [
+            -0.0102,
+            2.0,
+            0.0678
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 150
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra11.png"
+      ],
+      "particle": {
+        "createEvery": 4,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 30,
+        "startVariance": 0.30000001192092896,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.05000000074505806,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.001,
+          0.001,
+          0.001
+        ]
+      }
+    },
+    {
+      "type": 1,
+      "name": "11",
+      "texture": "sfx_sklrinheahealra12.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 31,
+          "position": [
+            0.0029,
+            1.0,
+            -0.9906
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            216.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 108,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra12.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "1",
+      "texture": "obj_riverred01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 110,
+          "position": [
+            -0.013,
+            1.0,
+            -0.9755
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/obj_riverred01.png"
+      ],
+      "particle": {
+        "createEvery": 1,
+        "createCount": 8,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 10,
+        "startVariance": 0.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.5,
+        "acceleration": [
+          0.0,
+          0.04,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "type": 1,
+      "name": "111",
+      "texture": "sfx_sklrinheahealra13.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 108,
+          "position": [
+            0.0073,
+            1.0,
+            -0.9936
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            6.0,
+            6.0,
+            6.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklrinheahealra13.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1211",
+      "texture": "sfx_sklasscheaccura04.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 98,
+          "position": [
+            0.0,
+            1.0,
+            -1.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 110,
+          "position": [
+            -0.0135,
+            1.0,
+            -0.9853
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            6.0,
+            6.0,
+            6.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklasscheaccura04.png"
+      ]
+    }
+  ]
+}

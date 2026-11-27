@@ -1,0 +1,611 @@
+{
+  "name": "sfx_sklmagmaglgtref01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "sfx_sklassresurrection01-4.dds",
+      "texture": "sfx_sklmagmaglgtref01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.0,
+            3.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 195,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 220,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            390.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklassresurrection01-1.dds",
+      "texture": "sfx_sklmagmaglgtref02-5.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 25,
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            -0.5,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref02-5.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklassresurrection01-2.dds",
+      "texture": "sfx_sklmagmaglgtref02-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            4.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            4.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 200,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            4.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            1000.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 220,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            2.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            7.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            1000.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref02-5.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-4.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-3.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-2.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-1.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "sfx_sklassresurrection01-3.dds",
+      "texture": "sfx_sklmagmaglgtref03-3.dds",
+      "textureFrames": 0,
+      "textureLoop": 0,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 20,
+        "createCount": 10,
+        "appear": 5,
+        "keep": 60,
+        "disappear": 90,
+        "startVariance": 0.30000001192092896,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.15000000596046448,
+        "xzLow": 0.0,
+        "xzHigh": 0.009999999776482582,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          2000.0,
+          2000.0,
+          2000.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 155,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref03-3.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklassresurrection01-1.dds",
+      "texture": "sfx_sklmagmaglgtref02-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 105,
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 155,
+          "position": [
+            0.0,
+            -0.5,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            -1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            4.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref02-5.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-4.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-3.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-2.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_genmonspawn01-2.dds",
+      "texture": "sfx_sklmagmaglgtref02-5.dds",
+      "textureFrames": 5,
+      "textureLoop": 10,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 155,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.0,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 220,
+          "position": [
+            -0.0015483599854633212,
+            0.0,
+            0.018862400203943253
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.1749999523162842,
+            3.799999952316284,
+            1.1749999523162842
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagmaglgtref02-5.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-4.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-3.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-2.png",
+        "efectos/texturas/sfx_sklmagmaglgtref02-1.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklmagmaglgtref01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

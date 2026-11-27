@@ -1,0 +1,276 @@
+{
+  "name": "magician_firebomb",
+  "version": "old",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "magician_firebomb1.dds",
+      "texture": "magician_firebomb1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 2,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 10,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            6.0,
+            6.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            5.0,
+            5.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/magician_firebomb1.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "magician_firebomb2.dds",
+      "texture": "magician_firebomb2.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 8,
+        "appear": 0,
+        "keep": 1,
+        "disappear": 10,
+        "startVariance": 2.0,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.20000000298023224,
+        "xzLow": 0.0,
+        "xzHigh": 0.20000000298023224,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.2999999523162842,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 95,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/magician_firebomb2.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "magician_firebomb3.dds",
+      "texture": "magician_firebomb3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            3.0,
+            2.0
+          ],
+          "rotation": [
+            0.0,
+            252.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.005886000115424395,
+            0.0,
+            0.021846000105142593
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            1.0,
+            3.0
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 6,
+      "textures": [
+        "efectos/texturas/magician_firebomb3.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/magician_firebomb.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

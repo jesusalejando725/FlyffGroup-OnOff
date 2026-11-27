@@ -1,0 +1,188 @@
+{
+  "name": "magician_fire_casting",
+  "version": "old",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 2,
+      "name": "levelup3.dds",
+      "texture": "levelup3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 2,
+        "createCount": 1,
+        "appear": 10,
+        "keep": 30,
+        "disappear": 60,
+        "startVariance": 0.699999988079071,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0,
+        "xzHigh": 0.0,
+        "acceleration": [
+          0.0,
+          0.0010000000474974513,
+          0.0
+        ],
+        "scale": [
+          0.10000000149011612,
+          0.10000000149011612,
+          1.0
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 190,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/levelup3.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "magician_fire_casting.dds",
+      "texture": "magician_fire_casting.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 39,
+          "position": [
+            0.0,
+            1.7000000476837158,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 170,
+          "position": [
+            0.0,
+            1.7000000476837158,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            3.4409940242767334,
+            3.4409940242767334,
+            3.4409940242767334
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            292.91925048828125
+          ],
+          "opacity": 250
+        },
+        {
+          "frame": 200,
+          "position": [
+            0.0,
+            1.7000000476837158,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": []
+    }
+  ],
+  "source": "reference/resource/SFX/magician_fire_casting.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": [
+    "reference/resource/SFX/Texture/magician_fire_casting.dds"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "mercenary_protection",
+  "version": "old",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "mercenary_protection.dds",
+      "texture": "mercenary_protection.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 1,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            45.0,
+            90.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 250
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            45.0,
+            90.0,
+            360.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 180,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            45.0,
+            90.0,
+            1080.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/mercenary_protection.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/mercenary_protection.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

@@ -1,0 +1,98 @@
+# Asset Setup
+
+The web-mmo project references original Flyff v15 game assets for data loading and asset conversion. These assets are **not included** in the repository due to copyright — you must obtain them separately.
+
+## Reference Source & Data
+
+A subset of reference material IS included in the repo under [`reference/`](../reference/):
+
+- **`reference/source/`** — Original C++ source code (all server + client components)
+- **`reference/resource/`** — Text-based game data files (`.txt`, `.inc`, `.csv`, `.h`, `.lua`)
+
+These cover item definitions, skill data, monster stats, quest data, and the full original source code for understanding game mechanics.
+
+## What You Need Externally
+
+For full functionality (3D models, textures, animations), you need the original Flyff v15 client and server files:
+
+### Resource Directory (`RESOURCE_DIR`)
+
+The server-side resource folder containing game data files:
+
+```
+Server/
+└── Resource/
+    ├── propItem.txt          # Item properties
+    ├── propMover.txt         # Monster/NPC properties
+    ├── propSkill.txt         # Skill definitions
+    ├── propCtrl.txt          # Control parameters
+    ├── defineItem.h          # Item ID constants
+    ├── defineSkill.h         # Skill ID constants
+    ├── ...                   # ~200+ data files
+    ├── Model/                # 3D model files
+    └── World/                # World/map data
+```
+
+### Client Directory (`CLIENT_DIR`)
+
+The client-side game files containing binary assets:
+
+```
+Client/
+├── Neuz.exe                  # Original game client (not needed for web-mmo)
+├── *.res                     # Resource archives (models, textures, sounds)
+├── Theme/                    # UI textures and layouts
+├── Model/                    # 3D model files (.o3d)
+├── World/                    # World/map data
+├── Sound/                    # Audio files
+├── Sfx/                      # Special effects
+└── ...
+```
+
+## Configuration
+
+1. Copy `.env.example` to `.env`
+2. Set the paths to match your local Flyff v15 installation:
+
+```bash
+RESOURCE_DIR=/path/to/flyff/v15/Server/Resource
+CLIENT_DIR=/path/to/flyff/v15/Client
+```
+
+On Windows, use forward slashes or escaped backslashes:
+
+```bash
+RESOURCE_DIR=H:/flyff/v15/Server/Resource
+CLIENT_DIR=H:/flyff/v15/Client
+```
+
+## Asset Conversion Tools
+
+The [`tools/`](../tools/) package provides utilities to convert original Flyff binary formats to web-friendly equivalents:
+
+| Tool | Converts | Output |
+|------|----------|--------|
+| `convert-dds` | `.dds` textures | `.png` / `.webp` |
+| `convert-anim` | Animation files | JSON |
+| `o3d-to-json` | `.o3d` 3D models | JSON geometry |
+| `convert-theme` | Theme UI images | `.png` |
+| `parse-resdata` | `.res` archives | Extracted files |
+| `build-window-tiles` | UI tile sheets | Individual sprites |
+| `extract-model-textures` | Model textures | `.png` |
+
+### Usage
+
+```bash
+# Convert all DDS textures to PNG
+pnpm --filter @flyff/tools convert-dds --input <CLIENT_DIR> --output <output_dir>
+
+# Convert .o3d models to JSON
+pnpm --filter @flyff/tools o3d-to-json --input <CLIENT_DIR> --output <output_dir>
+
+# Parse a .res archive
+pnpm --filter @flyff/tools parse-resdata --file <archive.res> --output <output_dir>
+```
+
+## Copyright Notice
+
+Flyff v15 is a game developed by Aeonsoft/Gala Lab. The game assets are proprietary. This project is a non-commercial fan reimplementation for educational purposes. Do not redistribute the original game files.

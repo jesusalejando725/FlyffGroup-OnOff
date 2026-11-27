@@ -1,0 +1,805 @@
+{
+  "name": "sfx_sklmagswordwind01",
+  "version": "SFX0.1",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 2,
+      "name": "sfx_gendustrun01.dds",
+      "texture": "sfx_gendustrun01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 10,
+        "appear": 1,
+        "keep": 0,
+        "disappear": 25,
+        "startVariance": 0.30000001192092896,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.05000000074505806,
+        "xzHigh": 0.05000000074505806,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.10000000149011612,
+          0.10000000149011612,
+          0.10000000149011612
+        ],
+        "scaleSpeed": [
+          0.019999999552965164,
+          0.019999999552965164,
+          0.019999999552965164
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 155,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_gendustrun01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklmerkeenwheel01-1.dds",
+      "texture": "sfx_sklmerkeenwheel01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.10000000149011612
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.10000000149011612
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerkeenwheel01-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklmerkeenwheel01-1.dds",
+      "texture": "sfx_sklmerkeenwheel01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.10000000149011612,
+            0.4000000059604645
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            1.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            100.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            2.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            200.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 150,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.5,
+            4.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            360.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerkeenwheel01-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklmerkeenwheel01-1.dds",
+      "texture": "sfx_sklmerkeenwheel01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 20,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 120,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerkeenwheel01-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklmerkeenwheel01-1.dds",
+      "texture": "sfx_sklmerkeenwheel01-1.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            3.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 120,
+          "position": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.0,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 135,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerkeenwheel01-1.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "sfx_sklmagswordwind01-3.dds",
+      "texture": "sfx_sklmagswordwind01-3.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 40,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            2.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            300.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 85,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            3.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            600.0,
+            0.0
+          ],
+          "opacity": 200
+        },
+        {
+          "frame": 135,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            5.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            4.0,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            900.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmagswordwind01-3.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklmagswordwind01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

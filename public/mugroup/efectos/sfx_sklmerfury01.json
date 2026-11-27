@@ -1,0 +1,2758 @@
+{
+  "name": "sfx_sklmerfury01",
+  "version": "SFX0.2",
+  "fps": 30,
+  "parts": [
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklmerfury01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.0006972210248932242,
+            0.0,
+            0.009970719926059246
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 1,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.05000000074505806,
+            0.4000000059604645,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 3,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            0.05000000074505806,
+            0.8333330154418945
+          ],
+          "rotation": [
+            360.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.30000001192092896,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            360.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            95.0,
+            370.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.00992968026548624,
+            2.0,
+            0.0011838700156658888
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6499999761581421,
+            0.6499999761581421,
+            0.675000011920929
+          ],
+          "rotation": [
+            0.0,
+            98.75,
+            377.5
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.699999988079071,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            100.0,
+            380.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            1.7999999523162842,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6499999761581421
+          ],
+          "rotation": [
+            0.0,
+            75.0,
+            285.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 152
+        },
+        {
+          "frame": 69,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury01.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklmerfury01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 1,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.05000000074505806,
+            0.4000000059604645,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 3,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            0.05000000074505806,
+            0.8333330154418945
+          ],
+          "rotation": [
+            360.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.30000001192092896,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            360.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5285710096359253,
+            0.5285710096359253,
+            0.7857139706611633
+          ],
+          "rotation": [
+            0.0,
+            94.89790344238281,
+            369.7959899902344
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.699999988079071,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            98.57140350341797,
+            377.14300537109375
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            100.0,
+            380.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 152
+        },
+        {
+          "frame": 69,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "\u00c6\u00f8\u00b9\u00df2",
+      "texture": "sfx_sklmerfury03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.0,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 68,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 74,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.699999988079071,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 90,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "points": 8,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury03.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "\u00c6\u00f8\u00b9\u00df",
+      "texture": "sfx_sklmerfury03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.0,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 63,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            1.399999976158142,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 69,
+          "position": [
+            0.0004177379887551069,
+            0.0,
+            0.02991650067269802
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            2.0,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.0,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury03.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "\u00c6\u00db\u00c1\u00fc1",
+      "texture": "sfx_sklmerfury03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 70,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 100,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 105,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury03.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "\u00c6\u00db\u00c1\u00fc1",
+      "texture": "sfx_sklmerfury03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 115,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury03.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "\u00c6\u00db\u00c1\u00fc1",
+      "texture": "sfx_sklmerfury03.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 90,
+          "position": [
+            -0.0001134470003307797,
+            0.0,
+            -0.005415900144726038
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 120,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 125,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            0.6000000238418579,
+            0.800000011920929
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 20,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury03.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "ppp",
+      "texture": "sfx_sklmerfury02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 3,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 2,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 15,
+        "startVariance": 0.6000000238418579,
+        "startVarianceY": 0.0,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0010000000474974513,
+        "xzHigh": -0.13500000536441803,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.20000000298023224,
+          0.20000000298023224,
+          0.20000000298023224
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.009995070286095142,
+            2.0,
+            0.0003141080087516457
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury02.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "pppp2",
+      "texture": "sfx_sklmerfury02.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 3,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 2,
+        "createCount": 1,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 15,
+        "startVariance": 0.800000011920929,
+        "startVarianceY": 0.800000011920929,
+        "yLow": 0.0,
+        "yHigh": 0.0,
+        "xzLow": 0.0010000000474974513,
+        "xzHigh": -0.13500000536441803,
+        "acceleration": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.20000000298023224,
+          0.20000000298023224,
+          0.20000000298023224
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.006758229807019234,
+            2.0,
+            0.010196899995207787
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            90.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury02.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklmerfury01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 1,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.05000000074505806,
+            0.4000000059604645,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 3,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            0.05000000074505806,
+            0.8333330154418945
+          ],
+          "rotation": [
+            360.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.30000001192092896,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            360.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 35,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5285710096359253,
+            0.5285710096359253,
+            0.7857139706611633
+          ],
+          "rotation": [
+            0.0,
+            94.89790344238281,
+            369.7959899902344
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.699999988079071,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            98.57140350341797,
+            377.14300537109375
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            100.0,
+            380.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 152
+        },
+        {
+          "frame": 69,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury01.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklmerfury01.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 0,
+          "position": [
+            -0.0006972210248932242,
+            0.0,
+            0.009970719926059246
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 1,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.05000000074505806,
+            0.4000000059604645,
+            1.0
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 3,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            0.05000000074505806,
+            0.8333330154418945
+          ],
+          "rotation": [
+            360.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 15,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.30000001192092896,
+            0.30000001192092896,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            90.0,
+            360.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 30,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.6000000238418579
+          ],
+          "rotation": [
+            0.0,
+            95.0,
+            370.0
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 45,
+          "position": [
+            0.00992968026548624,
+            2.0,
+            0.0011838700156658888
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6499999761581421,
+            0.6499999761581421,
+            0.675000011920929
+          ],
+          "rotation": [
+            0.0,
+            98.75,
+            377.5
+          ],
+          "opacity": 100
+        },
+        {
+          "frame": 50,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.699999988079071,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            100.0,
+            380.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 55,
+          "position": [
+            0.0,
+            1.7999999523162842,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.6000000238418579,
+            0.6000000238418579,
+            0.6499999761581421
+          ],
+          "rotation": [
+            0.0,
+            75.0,
+            285.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 152
+        },
+        {
+          "frame": 69,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury01.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "KK",
+      "texture": "sfx_sklmerfury05.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 76,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            800.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 145,
+          "position": [
+            -0.009694449603557587,
+            0.0,
+            0.0024530699010938406
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            2000.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 12,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury05.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "KK",
+      "texture": "sfx_sklmerfury05.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 80,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 91,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            800.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 160,
+          "position": [
+            0.00030061500729061663,
+            0.0,
+            0.0021389799658209085
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            2000.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 12,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury05.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "KK",
+      "texture": "sfx_sklmerfury05.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 95,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 106,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            800.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 170,
+          "position": [
+            -0.009694449603557587,
+            0.0,
+            0.0024530699010938406
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            2000.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 12,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury05.png"
+      ]
+    },
+    {
+      "type": 4,
+      "name": "KK",
+      "texture": "sfx_sklmerfury05.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 4,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 110,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 121,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            3.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            800.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 185,
+          "position": [
+            -0.009694449603557587,
+            0.0,
+            0.0024530699010938406
+          ],
+          "positionRotation": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            0.699999988079071,
+            0.4000000059604645,
+            0.699999988079071
+          ],
+          "rotation": [
+            0.0,
+            2000.0,
+            0.0
+          ],
+          "opacity": 0
+        }
+      ],
+      "points": 12,
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury05.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "kkk",
+      "texture": "sfx_sklmerfury06.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 60,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 76,
+          "position": [
+            -0.0006595570011995733,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 150
+        },
+        {
+          "frame": 80,
+          "position": [
+            -0.0006145869847387075,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 85,
+          "position": [
+            -0.0005995969986543059,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 136
+        },
+        {
+          "frame": 90,
+          "position": [
+            -0.0006258300272747874,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 228
+        },
+        {
+          "frame": 95,
+          "position": [
+            -0.0006025949842296541,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 160
+        },
+        {
+          "frame": 100,
+          "position": [
+            -0.0006205830140970647,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 209
+        },
+        {
+          "frame": 105,
+          "position": [
+            -0.0006072419928386807,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 174
+        },
+        {
+          "frame": 110,
+          "position": [
+            -0.0006169850239530206,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 199
+        },
+        {
+          "frame": 150,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 152,
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 157,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury06.png"
+      ]
+    },
+    {
+      "type": 2,
+      "name": "6767",
+      "texture": "sfx_sklmerfury09.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "particle": {
+        "createEvery": 1,
+        "createCount": 2,
+        "appear": 0,
+        "keep": 0,
+        "disappear": 20,
+        "startVariance": 0.5,
+        "startVarianceY": 0.20000000298023224,
+        "yLow": 0.0,
+        "yHigh": 0.008999999612569809,
+        "xzLow": 0.0,
+        "xzHigh": -0.05000000074505806,
+        "acceleration": [
+          0.0,
+          0.008999999612569809,
+          0.0
+        ],
+        "scale": [
+          0.20000000298023224,
+          0.20000000298023224,
+          0.20000000298023224
+        ],
+        "scaleSpeed": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationLow": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationHigh": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "repeatScale": false,
+        "repeat": false,
+        "scaleSpeedRange": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleSpeed2": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scaleEnd": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "keys": [
+        {
+          "frame": 65,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        },
+        {
+          "frame": 145,
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 100
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury09.png"
+      ]
+    },
+    {
+      "type": 1,
+      "name": "1",
+      "texture": "sfx_sklmerfury04.dds",
+      "textureFrames": 1,
+      "textureLoop": 1,
+      "enabled": true,
+      "billType": 1,
+      "alphaType": 2,
+      "keys": [
+        {
+          "frame": 135,
+          "position": [
+            0.0,
+            1.0,
+            0.05000000074505806
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            0.0,
+            0.30000001192092896
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 0
+        },
+        {
+          "frame": 165,
+          "position": [
+            0.0,
+            1.6171400547027588,
+            0.05000000074505806
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.0,
+            1.0,
+            0.8399999737739563
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 196
+        },
+        {
+          "frame": 170,
+          "position": [
+            0.0,
+            1.7200000286102295,
+            0.05000000074505806
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            0.0,
+            0.9300000071525574
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 229
+        },
+        {
+          "frame": 185,
+          "position": [
+            0.0,
+            1.7999999523162842,
+            0.05000000074505806
+          ],
+          "positionRotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.4000000059604645,
+            0.4000000059604645,
+            1.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "opacity": 255
+        }
+      ],
+      "textures": [
+        "efectos/texturas/sfx_sklmerfury04.png"
+      ]
+    }
+  ],
+  "source": "reference/resource/SFX/sfx_sklmerfury01.sfx",
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "missing": []
+}

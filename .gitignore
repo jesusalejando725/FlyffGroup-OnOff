@@ -1,0 +1,18 @@
+node_modules/
+build/
+dist/
+dev-dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+.mu-cloud-sync-store.json
+
+# Local Python conversion cache
+__pycache__/
+*.py[cod]
+
+.mugroup-backups/
+.mugroup-duels.json
+/ADMIN/live-world.local.json*

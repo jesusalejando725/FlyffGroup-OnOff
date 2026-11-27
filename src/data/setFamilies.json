@@ -1,0 +1,62 @@
+{
+  "DK": [
+    "Mer01",
+    "Bla01",
+    "Mer02",
+    "Bla02",
+    "Mer03",
+    "Bla03",
+    "Mer04",
+    "Bla04",
+    "Mer05",
+    "Bla05"
+  ],
+  "DW": [
+    "Mag01",
+    "Psy01",
+    "Mag02",
+    "Psy02",
+    "Mag03",
+    "Psy03",
+    "Mag04",
+    "Psy04",
+    "Mag05",
+    "Psy05"
+  ],
+  "ELF": [
+    "Kin01",
+    "Rin01",
+    "Kin02",
+    "Rin02",
+    "Kin03",
+    "Rin03",
+    "Kin04",
+    "Rin04",
+    "Kin05",
+    "Rin05"
+  ],
+  "DL": [
+    "Acr01",
+    "Jst01",
+    "Acr02",
+    "Jst02",
+    "Acr03",
+    "Jst03",
+    "Acr04",
+    "Jst04",
+    "Acr05",
+    "Jst05"
+  ],
+  "MG": [
+    "Ele01",
+    "Bla01",
+    "Ele02",
+    "Bla02",
+    "Ele03",
+    "Bla03",
+    "Ele04",
+    "Bla04",
+    "Ele05",
+    "Bla05"
+  ]
+}

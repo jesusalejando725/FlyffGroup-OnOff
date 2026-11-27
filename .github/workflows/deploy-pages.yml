@@ -1,0 +1,102 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      account_origin:
+        description: Origen HTTPS público del servidor de cuentas (opcional si ya está configurado)
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Type check application
+        run: bun run typecheck:app
+
+      - name: Verify game assets
+        run: bun run verify:flyff
+
+      - name: Build
+        env:
+          PUBLISH_RELEASE: ${{ github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch }}
+          VITE_WORLD_SERVER_URL: ${{ vars.VITE_WORLD_SERVER_URL || secrets.VITE_WORLD_SERVER_URL }}
+          VITE_BACKUP_URL: ${{ inputs.account_origin || vars.VITE_BACKUP_URL || secrets.VITE_BACKUP_URL }}
+        run: |
+          node scripts/write-server-connection.mjs "$RUNNER_TEMP/server-connection.json"
+          export VITE_BACKUP_URL="$(node -p 'require(process.argv[1]).origin' "$RUNNER_TEMP/server-connection.json")"
+          bun run build
+          cp "$RUNNER_TEMP/server-connection.json" dist/server-connection.json
+
+      - name: Run release tests
+        run: bun run test:release
+
+      - name: Add Pages marker
+        run: touch dist/.nojekyll
+
+      - name: Upload downloadable web build
+        uses: actions/upload-artifact@v7
+        with:
+          name: mugroup-web
+          path: dist
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+          include-hidden-files: true
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v6
+        continue-on-error: true
+
+      - name: Explain Pages setup
+        if: steps.pages.outcome == 'failure'
+        run: |
+          echo '::error::Activa GitHub Pages en Settings > Pages y elige GitHub Actions. GitHub Free requiere un repositorio público; para mantenerlo privado se necesita un plan compatible. Luego vuelve a ejecutar el flujo.'
+          exit 1
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
