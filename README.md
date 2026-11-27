@@ -196,18 +196,38 @@ La publicación de esta rama usa [FlyffGroup-OnOff](https://jesusalejando725.git
 
 Referencias para el desarrollo: [FlyffWeb](https://github.com/marciobremer/FlyffWeb) y [flyff-web-mmo](https://github.com/ed3ath/flyff-web-mmo).
 
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:470ae6fddd0ad4c5429b8caa2a65ead53d44370acee09b5485c67c47c51bcf09 -->
+
 ## Progresión de Madrigal y economía
 
 | Región | Nivel de monstruos | Monstruos en campamentos |
 | --- | ---: | ---: |
 | Flaris | 1–27 | 6.620 |
 | Villa del Robledal | 28–48 | 2.460 |
-| Puerto de Bruma | 49–76 | 3.550 |
+| Puerto de Bruma | 49–76 | 2.800 |
 | Cráter de Ceniza | 77–99 | 1.770 |
 
-El terreno original se comparte entre las cuatro regiones. Cada campamento contiene diez monstruos. La cuota es de hasta 7.000 por región, limitada por el suelo válido, las capitales y la separación de 40 m entre centros. Los monstruos patrullan hasta 6 m desde su punto de aparición y detectan al héroe a 10 m; los jefes, a 15 m. Las invasiones y los grupos publicados por administración se añaden aparte.
+El terreno original se comparte entre las cuatro regiones. Cada campamento contiene diez monstruos. La cuota es de hasta 7.000 por región, limitada por el suelo válido, las capitales y la separación de 40 m entre centros. En Puerto de Bruma, la zona segura es de 250 m. El terreno conectado al punto de llegada se puebla con zonas de caza de diez campamentos. Los centros de campamentos de distintas zonas quedan separados al menos 100 m. Los monstruos patrullan hasta 6 m desde su punto de aparición y detectan al héroe a 10 m; los jefes, a 15 m. Las invasiones y los grupos publicados por administración se añaden aparte.
+
+<!-- /coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:1a176ee43fe4be7687c0a5eb71068830366e051512efb21a4d43eab705ca6e9f -->
 
 **Hellpe** busca enemigos a 25 m, se acerca, usa combos cuando tiene MP y AG, se cura según los ajustes y se acerca al botín situado a 5 m según los filtros de recogida. Puedes tomar el control con el teclado o el joystick.
+
+### Inventario, tiendas y poderes
+
+La mochila abre la vista 3D del mismo modelo que muestra el comerciante y el que se usa al equipar el objeto. Desde la mochila, abre **Atributos** y usa los botones **+** junto al atributo. Las partidas, el reparto de puntos y los precios de la economía anterior conservan su comportamiento.
+
+Las ofertas originales compatibles se añadieron a seis comerciantes. Las categorías de la tienda separan armas, escudos, conjuntos, alas, joyería, mascotas y consumibles según la oferta del NPC. Las piezas de conjunto se venden por separado. Las tres representaciones del ítem se resuelven en [market-assets.json](public/mugroup/market-assets.json). Algunas alas de la economía personalizada usan apariencias existentes: el juego señala cuál. Los nombres personalizados sin correspondencia en la fuente pueden conservar un icono genérico.
+
+Elfo usa las animaciones y sonidos originales de arco, hielo y curación; Blade Knight usa animaciones de espada para Estocada y Barrido. Se conservaron los identificadores de habilidades guardados. Los importadores en `tools/world/` toman sus archivos de la revisión de Flyff fijada en el repositorio.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 [La tabla de economía](src/data/flyffEconomy.ts) define el botín y los precios en Penya (Zen en el HUD). Los monstruos normales sueltan consumibles, materiales y equipo común; los grupos normales configurados por administración no pueden soltar equipo competitivo. Los jefes dan una pieza común garantizada y tienen tiradas independientes de joyería, equipo raro y objetos exclusivos. Las piezas que en la tabla original exigen más de nivel 99 se equipan a nivel 99. Los precios de armadura publicados son por pieza.
 

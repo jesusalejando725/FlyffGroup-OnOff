@@ -220,6 +220,34 @@ for (const clip of ['stand', 'walk', 'atk1', 'atk2', 'atk3', 'dmg1', 'die1']) {
 }
 for (const clip of ['atk1', 'dmg1', 'die1']) await asset(`audio/npc_besibigfoot_${clip}.wav`);
 
+const market = await readJSON('market-assets.json');
+const stockIds = new Set();
+for (const row of market.stock) {
+  assert.ok(!stockIds.has(row.id), row.id);
+  stockIds.add(row.id);
+  assert.ok(Object.hasOwn(market.items, row.name) && row.npcs.length && row.cost > 0, row.name);
+  if (row.slot === 'consumable') assert.ok(row.heal > 0, row.name);
+  if (['weapon', 'shield'].includes(row.slot)) assert.ok(market.items[row.name].model, row.name);
+  if (row.setName) assert.ok(market.sets[row.setName]?.[row.sex], row.name);
+}
+for (const { icon, model } of Object.values(market.items)) {
+  await asset(icon);
+  if (model) await glb(model);
+}
+for (const set of Object.values(market.sets)) {
+  for (const file of Object.values(set)) {
+    const doc = await glb(file);
+    assert.ok(doc.images?.length && doc.skins?.[0]?.joints.length === 30, file);
+  }
+}
+for (const sex of ['male', 'female']) {
+  const elf = await glb(`personajes/ELF/ELF_${sex}.glb`);
+  const clips = elf.animations.filter(ani => /^power_/.test(ani.name));
+  assert.equal(clips.length, 6);
+  assert.equal(clips.find(clip => clip.name === 'power_3').extras.motion, 'SklRagIceArr');
+  assert.equal(clips.find(clip => clip.name === 'power_5').extras.motion, 'SklAcrRain');
+}
+
 console.log(
   JSON.stringify(
     {

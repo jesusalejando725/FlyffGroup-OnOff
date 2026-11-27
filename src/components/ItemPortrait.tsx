@@ -1,30 +1,21 @@
-import library from '../../public/mugroup/equipo.json';
-import { artisanArmor, artisanWeapon, setArmament, AURORA_WING_NAME } from '../data/artisanEquipment';
+import { artisanArmor, artisanWeapon } from '../data/artisanEquipment';
+import { armorModelFile, itemAssets, itemModelFile } from '../data/itemVisualAssets';
 import { getAdminConfigSync } from '../services/adminConfigService';
 import type { ItemSlot } from '../types/game';
 import { useState, type CSSProperties } from 'react';
 import { Gem, Sword, Shield, Shirt, HardHat, Hand, Footprints } from 'lucide-react';
 
 const hex = (v:number) => '#'+v.toString(16).padStart(6,'0');
-export function itemModelFile(item:{name:string;slot:ItemSlot}):string|undefined {
-  if (item.slot==='pet') return 'equipo/pet_angel_white.glb';
-  return setArmament(item.name) || (library.weapons as Record<string,string>)[item.name]
-    || (library.wings as Record<string,string>)[item.name]
-    || (item.slot==='wings' ? getAdminConfigSync().items.wingCatalog.find((w:{name:string})=>w.name===item.name)?.glb
-      || (item.name===AURORA_WING_NAME ? 'equipo/wing_mugroup_feather.glb' : undefined) : undefined);
-}
-export function armorModelFile(item:{slot:ItemSlot;setName?:string},sex:'male'|'female') {
-  const set=artisanArmor(item.setName)?.base ?? item.setName;
-  return ['armor','pants','helm','gloves','boots'].includes(item.slot) && set
-    ? (library.sets as Record<string,Record<string,string>>)[set]?.[sex] : undefined;
-}
 export function ItemPortrait({item,sex,large=false}: {item:{name:string;slot:ItemSlot;setName?:string;enhanceLevel?:number}; sex:'male'|'female';large?:boolean}) {
   const slot=item.slot, finish=artisanArmor(item.setName);
   const config=getAdminConfigSync();
   const file=itemModelFile(item);
   const armor = armorModelFile(item,sex);
   const key=(file || armor)?.split('/').pop()?.replace(/\.glb$/,'') || artisanWeapon(item.name)?.key;
-  const src = !key && ['ring1','ring2','pendant'].includes(slot) ? `./mugroup/ui/items/${slot}.webp` : key && `./mugroup/ui/items/${key}${armor && !file?'-'+slot:''}.webp`;
+  const original = itemAssets(item.name)?.icon;
+  const src = original ? './mugroup/' + original :
+    ['ring1','ring2','pendant'].includes(slot) ? `./mugroup/ui/items/${slot}.webp` :
+    key && `./mugroup/ui/items/${key}${armor && !file?'-'+slot:''}.webp`;
   const [missing,setMissing] = useState<string>();
   const size = large ? 'w-20 h-20' : 'w-9 h-9';
   const level=item.enhanceLevel ?? 0;

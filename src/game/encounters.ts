@@ -134,6 +134,7 @@ export const MONSTER_WANDER_RADIUS = 6;
 export interface HuntingRegion {
   id: string;
   count: number;
+  clusteredAt?: { x: number; z: number };
   contains(x: number, z: number): boolean;
   allows(x: number, z: number): boolean;
 }
@@ -143,13 +144,11 @@ export interface HuntingRegion {
 export function populateRegionalCamps(size: number, regions: readonly HuntingRegion[], sites: SpawnSite[]): Map<string, CampMember[]> {
   const result = new Map(regions.map(region => [region.id, [] as CampMember[]]));
   const centers = new SpawnGrid<{ x: number; z: number }>();
-  const add = (region: HuntingRegion, x: number, z: number, heading: number, site?: SpawnSite) => {
-    const members = result.get(region.id)!;
-    if (members.length >= region.count * CAMP_SIZE) return;
+  const makeCamp = (region: HuntingRegion, x: number, z: number, heading: number, site?: SpawnSite) => {
+    if (result.get(region.id)!.length >= region.count * CAMP_SIZE) return;
     for (const other of centers.near(x, z, CAMP_MIN_SPACING)) {
       if (Math.hypot(other.x - x, other.z - z) < CAMP_MIN_SPACING) return;
     }
-    const camp = members.length / CAMP_SIZE;
     const group: CampMember[] = [];
     for (let i = 0; i < CAMP_SIZE; i++) {
       const angle = heading + i * 2.399963;
@@ -158,15 +157,58 @@ export function populateRegionalCamps(size: number, regions: readonly HuntingReg
       const mz = z + Math.sin(angle) * radius;
       if (mx < MARGIN || mz < MARGIN || mx > size - MARGIN || mz > size - MARGIN ||
           !region.contains(mx, mz) || !region.allows(mx, mz)) return;
-      group.push({ camp, x: mx, z: mz, heading: angle, site });
+      group.push({ camp: -1, x: mx, z: mz, heading: angle, site });
     }
-    centers.add(x, z, { x, z });
-    members.push(...group);
+    return group;
+  };
+  const add = (region: HuntingRegion, group: CampMember[]) => {
+    const members = result.get(region.id)!;
+    const camp = members.length / CAMP_SIZE;
+    centers.add(group[0].x, group[0].z, group[0]);
+    members.push(...group.map(member => ({ ...member, camp })));
   };
 
+  // Fill whole hunting grounds near the capital first. Within a ground each
+  // camp has room to patrol; between grounds there is at least 100 m.
+  for (const region of regions) {
+    if (!region.clusteredAt) continue;
+    const { x: sx, z: sz } = region.clusteredAt;
+    const anchors: { x: number; z: number; distance: number }[] = [];
+    for (let z = 60; z < size - 60; z += 20) for (let x = 60; x < size - 60; x += 20) {
+      if (!region.contains(x, z) || !region.allows(x, z)) continue;
+      anchors.push({ x, z, distance: Math.hypot(x - sx, z - sz) });
+    }
+    anchors.sort((a, b) => a.distance - b.distance);
+    const accepted: CampMember[] = [];
+    for (const { x, z } of anchors) {
+      if (result.get(region.id)!.length + 100 > region.count * CAMP_SIZE) break;
+      if (accepted.some(member => Math.hypot(member.x - x, member.z - z) < 100)) continue;
+      for (const direction of [0, Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4]) {
+        const groups: CampMember[][] = [];
+        const cos = Math.cos(direction), sin = Math.sin(direction);
+        // Compact staggered pattern (3 + 4 + 3), with at least 24 m between camps.
+        for (const [row, columns] of [3, 4, 3].entries()) for (let col = 0; col < columns; col++) {
+          const dx = (col - (columns - 1) / 2) * 24, dz = (row - 1) * 21;
+          const px = x + dx * cos - dz * sin, pz = z + dx * sin + dz * cos;
+          if (accepted.some(member => Math.hypot(member.x - px, member.z - pz) < 100)) continue;
+          const group = makeCamp(region, px, pz, direction);
+          if (group) groups.push(group);
+        }
+        if (groups.length !== 10) continue;
+        for (const group of groups) {
+          accepted.push(group[0]);
+          add(region, group);
+        }
+        break;
+      }
+    }
+  }
   for (const site of sites) {
     const region = regions.find(candidate => candidate.contains(site.x, site.z));
-    if (region) add(region, site.x, site.z, site.x + site.z, site);
+    if (region && !region.clusteredAt) {
+      const group = makeCamp(region, site.x, site.z, site.x + site.z, site);
+      if (group) add(region, group);
+    }
   }
 
   const pitch = 40.5;
@@ -185,7 +227,38 @@ export function populateRegionalCamps(size: number, regions: readonly HuntingReg
   }
   for (const { x, z, heading } of candidates) {
     const region = regions.find(candidate => candidate.contains(x, z));
-    if (region) add(region, x, z, heading);
+    if (region && !region.clusteredAt) {
+      const group = makeCamp(region, x, z, heading);
+      if (group) add(region, group);
+    }
   }
   return result;
+}
+
+/** Restrict Puerto camps to land connected to the arrival point along gentle ground. */
+export function reachableHuntingLand(size: number, spawn: { x: number; z: number },
+  land: (x: number, z: number) => boolean, height: (x: number, z: number) => number,
+): (x: number, z: number) => boolean {
+  const step = 8, side = Math.ceil(size / step);
+  const point = (i: number) => ({ x: (i % side + .5) * step, z: (Math.floor(i / side) + .5) * step });
+  const index = (x: number, z: number) => Math.floor(z / step) * side + Math.floor(x / step);
+  const seen = new Uint8Array(side * side);
+  const start = index(spawn.x, spawn.z);
+  const queue = [start];
+  seen[start] = 1;
+  for (let read = 0; read < queue.length; read++) {
+    const i = queue[read], from = point(i), y = height(from.x, from.z);
+    for (const [dx, dz] of [[-step, 0], [step, 0], [0, -step], [0, step]]) {
+      const x = from.x + dx, z = from.z + dz;
+      if (x < 20 || z < 20 || x >= size - 20 || z >= size - 20) continue;
+      const next = index(x, z);
+      if (seen[next] || !land(x, z) || !land(from.x + dx/2, from.z + dz/2) ||
+          Math.abs(height(x, z) - y) > step * .65) continue;
+      seen[next] = 1;
+      queue.push(next);
+    }
+  }
+  return (x, z) => x >= 20 && z >= 20 && x < size - 20 && z < size - 20 &&
+    land(x, z) && seen[index(x, z)] === 1 &&
+    Math.abs(height(x, z) - height(point(index(x, z)).x, point(index(x, z)).z)) <= step * .65;
 }

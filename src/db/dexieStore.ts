@@ -717,7 +717,7 @@ export async function consumeInventoryPotion(charId: string, itemId: string): Pr
   return db.transaction('rw', db.items, db.characters, async () => {
     const [item, character] = await Promise.all([db.items.get(itemId), db.characters.get(charId)]);
     if (!character || item?.charId !== charId || !item.recovery) return null;
-    const hp = Math.min(character.maxHp, character.hp + Math.round((item.recovery.hp ?? 0) * character.maxHp));
+    const hp = Math.min(character.maxHp, character.hp + Math.round((item.recovery.hp ?? 0) * character.maxHp) + (item.recovery.hpFlat ?? 0));
     const mp = Math.min(character.maxMp, character.mp + Math.round((item.recovery.mp ?? 0) * character.maxMp));
     if (hp === character.hp && mp === character.mp) return null;
     await db.items.delete(itemId);

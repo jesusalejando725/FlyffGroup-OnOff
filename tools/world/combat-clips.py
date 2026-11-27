@@ -11,13 +11,17 @@ CLIPS={
 'ELF':'SklKntTswCharge SklKntTwoPwswng SklKntTswEthdvd SklKntTaxPwstum SklRincure03 SklRinHeal03',
 'DL':'SklJstVatals SklJstBackst SklJstHfpeny SklJstEnchan SklJstSuppor SklJstEscape',
 'MG':'SklBldDblCross SklBldDswBlddan SklEleFirCasting03 SklEleEleCasting03 SklEleWatCasting03 SklEleMulCasting03'}
-def attach(path,cls,sex):
+def attach(path,cls,sex,replace_powers=False):
     raw=path.read_bytes();length=struct.unpack_from('<I',raw,12)[0]
     g=GLB();g.doc=json.loads(raw[20:20+length]);g.bin=bytearray(raw[length+28:])
     names={g.doc['nodes'][i]['name'].lower():i for i in g.doc['skins'][0]['joints']}
     for j,suffix in enumerate((CLIPS[cls]+' GenFStand1-A').split()):
         name='flight' if j==6 else 'power_'+str(j)
-        if any(a['name']==name for a in g.doc['animations']):continue
+        old = next((a for a in g.doc['animations'] if a['name'] == name), None)
+        if old is not None:
+            if not replace_powers or j == 6: continue
+            if old.get('extras', {}).get('motion') == suffix: continue
+            g.doc['animations'].remove(old)
         ani=ani_data(fetch(MODEL+f'mvr_{sex}_{suffix}.ani'));nf=ani['frames']
         a={'name':name,'channels':[],'samplers':[],'extras':{'motion':suffix}}
         time=g.accessor(np.arange(nf)/30,kind='SCALAR',bounds=True)

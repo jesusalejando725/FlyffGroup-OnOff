@@ -1,0 +1,6359 @@
+{
+  "sourceRevision": "7986e75c884174892edc98cc2151df7fcda331fd",
+  "items": {
+    "Wooden Sword": {
+      "icon": "ui/items/flyff-wea-swo-wooden.webp",
+      "model": "equipo/item_weaswowooden.glb"
+    },
+    "Long Sword": {
+      "icon": "ui/items/flyff-wea-swo-long.webp",
+      "model": "equipo/item_weaswonormal.glb"
+    },
+    "Seal Wand": {
+      "icon": "ui/items/flyff-wea-wan-seal.webp",
+      "model": "equipo/item_weawanglass.glb"
+    },
+    "Bastard Sword": {
+      "icon": "ui/items/flyff-wea-swt-bastar.webp",
+      "model": "equipo/item_weaswtbastar.glb"
+    },
+    "Darkonizer": {
+      "icon": "ui/items/flyff-wea-swt-darkon.webp",
+      "model": "equipo/item_weaswtdarkon.glb"
+    },
+    "Kaleonizer": {
+      "icon": "ui/items/flyff-wea-swt-kaleon.webp",
+      "model": "equipo/item_weaswtkaleon.glb"
+    },
+    "Zeroth Sword": {
+      "icon": "ui/items/flyff-wea-swo-zeroth.webp",
+      "model": "equipo/item_weaswoshyer.glb"
+    },
+    "Shakyfin Axe": {
+      "icon": "ui/items/flyff-wea-axe-shakyfin.webp",
+      "model": "equipo/item_weaaxeneedre.glb"
+    },
+    "Emeryl Sword": {
+      "icon": "ui/items/flyff-wea-swo-emeryl.webp",
+      "model": "equipo/item_weasworowben.glb"
+    },
+    "Ultimate Guardian Sword": {
+      "icon": "ui/items/flyff-wea-swo-suhoum.webp",
+      "model": "equipo/item_weaswosuho.glb"
+    },
+    "Ultimate Historic Big Sword": {
+      "icon": "ui/items/flyff-wea-swt-usuum.webp",
+      "model": "equipo/item_weaswtdwarf.glb"
+    },
+    "Ultimate Legendary Golden Sword": {
+      "icon": "ui/items/flyff-wea-swo-leagendgum.webp",
+      "model": "equipo/item_weaswolegendg.glb"
+    },
+    "Ultimate Ancient Two-hand Sword": {
+      "icon": "ui/items/flyff-wea-swt-ancient.webp",
+      "model": "equipo/item_weaswtancient.glb"
+    },
+    "Ultimate Vampire Blade": {
+      "icon": "ui/items/flyff-wea-swo-vempire.webp",
+      "model": "equipo/item_weaswovempire.glb"
+    },
+    "Lusaka's Crystal Sword": {
+      "icon": "ui/items/flyff-wea-swo-luzam.webp",
+      "model": "equipo/item_weaswocrystal.glb"
+    },
+    "Mighteer+1": {
+      "icon": "ui/items/flyff-gen-jew-ear-u-earring01.webp"
+    },
+    "Penzeru+1": {
+      "icon": "ui/items/flyff-gen-jew-ear-u-earring04.webp"
+    },
+    "Poción HP pequeña": {
+      "icon": "ui/items/flyff-gen-foo-pil-yellow.webp"
+    },
+    "Poción HP mediana": {
+      "icon": "ui/items/flyff-gen-foo-pil-blue.webp"
+    },
+    "Poción HP grande": {
+      "icon": "ui/items/flyff-gen-foo-pil-red.webp"
+    },
+    "Poción MP pequeña": {
+      "icon": "ui/items/flyff-gen-ref-ref-first.webp"
+    },
+    "Poción MP mediana": {
+      "icon": "ui/items/flyff-gen-ref-ref-fifth.webp"
+    },
+    "Poción MP grande": {
+      "icon": "ui/items/flyff-gen-ref-ref-tenth.webp"
+    },
+    "Flechas": {
+      "icon": "ui/items/flyff-wea-sec-acr-arrow.webp"
+    },
+    "Topacio": {
+      "icon": "ui/items/flyff-gen-mat-topaz.webp"
+    },
+    "Rubí en bruto": {
+      "icon": "ui/items/flyff-gen-mat-ruby.webp"
+    },
+    "Comida para mascotas": {
+      "icon": "ui/items/flyff-sys-sys-feed-01.webp"
+    },
+    "Tarjeta de elemento": {
+      "icon": "ui/items/flyff-gen-mat-ele-spark.webp"
+    },
+    "Parmil Helmet": {
+      "icon": "ui/items/flyff-mvag03-cap.webp"
+    },
+    "Parmil Suit": {
+      "icon": "ui/items/flyff-mvag03-upper.webp"
+    },
+    "Parmil Gauntlets": {
+      "icon": "ui/items/flyff-mvag03-hand.webp"
+    },
+    "Parmil Boots": {
+      "icon": "ui/items/flyff-mvag03-foot.webp"
+    },
+    "Leaf Helmet": {
+      "icon": "ui/items/flyff-fvag03-cap.webp"
+    },
+    "Leaf Suit": {
+      "icon": "ui/items/flyff-fvag03-upper.webp"
+    },
+    "Leaf Gauntlets": {
+      "icon": "ui/items/flyff-fvag03-hand.webp"
+    },
+    "Leaf Boots": {
+      "icon": "ui/items/flyff-fvag03-foot.webp"
+    },
+    "Warpon Helmet": {
+      "icon": "ui/items/flyff-mkin02-cap.webp"
+    },
+    "Warpon Suit": {
+      "icon": "ui/items/flyff-mkin02-upper.webp"
+    },
+    "Warpon Gauntlets": {
+      "icon": "ui/items/flyff-mkin02-hand.webp"
+    },
+    "Warpon Boots": {
+      "icon": "ui/items/flyff-mkin02-foot.webp"
+    },
+    "Warspon Helmet": {
+      "icon": "ui/items/flyff-fkin02-cap.webp"
+    },
+    "Warspon Suit": {
+      "icon": "ui/items/flyff-fkin02-upper.webp"
+    },
+    "Warspon Gauntlets": {
+      "icon": "ui/items/flyff-fkin02-hand.webp"
+    },
+    "Warspon Boots": {
+      "icon": "ui/items/flyff-fkin02-foot.webp"
+    },
+    "Huedom Helmet": {
+      "icon": "ui/items/flyff-mbla04-cap.webp"
+    },
+    "Huedom Suit": {
+      "icon": "ui/items/flyff-mbla04-upper.webp"
+    },
+    "Huedom Gauntlets": {
+      "icon": "ui/items/flyff-mbla04-hand.webp"
+    },
+    "Huedom Boots": {
+      "icon": "ui/items/flyff-mbla04-foot.webp"
+    },
+    "Huaris Helmet": {
+      "icon": "ui/items/flyff-fbla04-cap.webp"
+    },
+    "Huaris Suit": {
+      "icon": "ui/items/flyff-fbla04-upper.webp"
+    },
+    "Huaris Gauntlets": {
+      "icon": "ui/items/flyff-fbla04-hand.webp"
+    },
+    "Huaris Boots": {
+      "icon": "ui/items/flyff-fbla04-foot.webp"
+    },
+    "Blain Helmet": {
+      "icon": "ui/items/flyff-mblaset03-cap.webp"
+    },
+    "Blain Suit": {
+      "icon": "ui/items/flyff-mblaset03-upper.webp"
+    },
+    "Blain Gauntlets": {
+      "icon": "ui/items/flyff-mblaset03-hand.webp"
+    },
+    "Blain Boots": {
+      "icon": "ui/items/flyff-mblaset03-foot.webp"
+    },
+    "Virain Helmet": {
+      "icon": "ui/items/flyff-fblaset03-cap.webp"
+    },
+    "Virain Suit": {
+      "icon": "ui/items/flyff-fblaset03-upper.webp"
+    },
+    "Virain Gauntlets": {
+      "icon": "ui/items/flyff-fblaset03-hand.webp"
+    },
+    "Virain Boots": {
+      "icon": "ui/items/flyff-fblaset03-foot.webp"
+    },
+    "Nox (M) Helmet": {
+      "icon": "ui/items/flyff-mblaset05-cap.webp"
+    },
+    "Nox (M) Suit": {
+      "icon": "ui/items/flyff-mblaset05-upper.webp"
+    },
+    "Nox (M) Gauntlets": {
+      "icon": "ui/items/flyff-mblaset05-hand.webp"
+    },
+    "Nox (M) Boots": {
+      "icon": "ui/items/flyff-mblaset05-foot.webp"
+    },
+    "Nox (F) Helmet": {
+      "icon": "ui/items/flyff-fblaset05-cap.webp"
+    },
+    "Nox (F) Suit": {
+      "icon": "ui/items/flyff-fblaset05-upper.webp"
+    },
+    "Nox (F) Gauntlets": {
+      "icon": "ui/items/flyff-fblaset05-hand.webp"
+    },
+    "Nox (F) Boots": {
+      "icon": "ui/items/flyff-fblaset05-foot.webp"
+    },
+    "Heraud Helmet": {
+      "icon": "ui/items/flyff-mblaset06-cap.webp"
+    },
+    "Heraud Suit": {
+      "icon": "ui/items/flyff-mblaset06-upper.webp"
+    },
+    "Heraud Gauntlets": {
+      "icon": "ui/items/flyff-mblaset06-hand.webp"
+    },
+    "Heraud Boots": {
+      "icon": "ui/items/flyff-mblaset06-foot.webp"
+    },
+    "Herainn Helmet": {
+      "icon": "ui/items/flyff-fblaset06-cap.webp"
+    },
+    "Herainn Suit": {
+      "icon": "ui/items/flyff-fblaset06-upper.webp"
+    },
+    "Herainn Gauntlets": {
+      "icon": "ui/items/flyff-fblaset06-hand.webp"
+    },
+    "Herainn Boots": {
+      "icon": "ui/items/flyff-fblaset06-foot.webp"
+    },
+    "Rimyth Helmet": {
+      "icon": "ui/items/flyff-mrinset03-cap.webp"
+    },
+    "Rimyth Suit": {
+      "icon": "ui/items/flyff-mrinset03-upper.webp"
+    },
+    "Rimyth Gauntlets": {
+      "icon": "ui/items/flyff-mrinset03-hand.webp"
+    },
+    "Rimyth Boots": {
+      "icon": "ui/items/flyff-mrinset03-foot.webp"
+    },
+    "Wing of Spint": {
+      "icon": "ui/items/wing_mugroup_feather02.webp",
+      "model": "equipo/wing_mugroup_feather02.glb",
+      "appearance": "Alas Pluma Dorada"
+    },
+    "Wing of Storm": {
+      "icon": "ui/items/wing_mugroup_angel01.webp",
+      "model": "equipo/wing_mugroup_angel01.glb",
+      "appearance": "Alas de Ángel"
+    },
+    "Wing of Vortex": {
+      "icon": "ui/items/wing_mugroup_prophet01.webp",
+      "model": "equipo/wing_mugroup_prophet01.glb",
+      "appearance": "Alas del Profeta"
+    },
+    "Wing of Doom": {
+      "icon": "ui/items/wing_mugroup_prophet02.webp",
+      "model": "equipo/wing_mugroup_prophet02.glb",
+      "appearance": "Alas del Profeta Épicas"
+    },
+    "Rodney Axe": {
+      "icon": "ui/items/flyff-wea-axe-rodney.webp",
+      "model": "equipo/item_weaaxecurin.glb"
+    },
+    "Morrow Axe": {
+      "icon": "ui/items/flyff-wea-axe-morrow.webp",
+      "model": "equipo/item_weaaxesteel.glb"
+    },
+    "Curning Axe": {
+      "icon": "ui/items/flyff-wea-axe-curning.webp",
+      "model": "equipo/item_weaaxecrenil.glb"
+    },
+    "Shyadin Axe": {
+      "icon": "ui/items/flyff-wea-axe-shyadin.webp",
+      "model": "equipo/item_weaaxesephir.glb"
+    },
+    "Bronze Axe": {
+      "icon": "ui/items/flyff-wea-axe-bronze.webp",
+      "model": "equipo/item_weaaxegorn.glb"
+    },
+    "Grang Axe": {
+      "icon": "ui/items/flyff-wea-axe-grang.webp",
+      "model": "equipo/item_weaaxevain.glb"
+    },
+    "Hitch Axe": {
+      "icon": "ui/items/flyff-wea-axe-hitch.webp",
+      "model": "equipo/item_weaaxephante.glb"
+    },
+    "Two Handed Axe": {
+      "icon": "ui/items/flyff-wea-axt-twohan.webp",
+      "model": "equipo/item_weaaxttwohan.glb"
+    },
+    "Great Axe": {
+      "icon": "ui/items/flyff-wea-axt-greata.webp",
+      "model": "equipo/item_weaaxtgreata.glb"
+    },
+    "Kergnition": {
+      "icon": "ui/items/flyff-wea-axt-kergni.webp",
+      "model": "equipo/item_weaaxtkergni.glb"
+    },
+    "Lurknition": {
+      "icon": "ui/items/flyff-wea-axt-lurkni.webp",
+      "model": "equipo/item_weaaxtlurkni.glb"
+    },
+    "Avnition": {
+      "icon": "ui/items/flyff-wea-axt-avniti.webp",
+      "model": "equipo/item_weaaxtavniti.glb"
+    },
+    "Kanainition": {
+      "icon": "ui/items/flyff-wea-axt-kanain.webp",
+      "model": "equipo/item_weaaxtkanain.glb"
+    },
+    "Pike Boots": {
+      "icon": "ui/items/flyff-arm-m-vag-boots02.webp"
+    },
+    "Iner Boots": {
+      "icon": "ui/items/flyff-arm-m-vag-boots03.webp"
+    },
+    "Silk Boots": {
+      "icon": "ui/items/flyff-arm-f-vag-boots02.webp"
+    },
+    "Rose Boots": {
+      "icon": "ui/items/flyff-arm-f-vag-boots03.webp"
+    },
+    "Woodness Bow": {
+      "icon": "ui/items/flyff-wea-bow-woodne.webp",
+      "model": "equipo/item_weabowwoode.glb"
+    },
+    "Greentin Bow": {
+      "icon": "ui/items/flyff-wea-bow-greent.webp",
+      "model": "equipo/item_weabowgreen.glb"
+    },
+    "Stienger Bow": {
+      "icon": "ui/items/flyff-wea-bow-stieng.webp",
+      "model": "equipo/item_weabowstinge.glb"
+    },
+    "Clasemit Bow": {
+      "icon": "ui/items/flyff-wea-bow-clasem.webp",
+      "model": "equipo/item_weabowclassi.glb"
+    },
+    "Setien Bow": {
+      "icon": "ui/items/flyff-wea-bow-setien.webp",
+      "model": "equipo/item_weabowsentin.glb"
+    },
+    "Varife Bow": {
+      "icon": "ui/items/flyff-wea-bow-varife.webp",
+      "model": "equipo/item_weabowvelinj.glb"
+    },
+    "Defnan Bow": {
+      "icon": "ui/items/flyff-wea-bow-defnan.webp",
+      "model": "equipo/item_weabowdarkne.glb"
+    },
+    "Hydron Bow": {
+      "icon": "ui/items/flyff-wea-bow-hydron.webp",
+      "model": "equipo/item_weabowhydra.glb"
+    },
+    "Cenatin Bow": {
+      "icon": "ui/items/flyff-wea-bow-cenati.webp",
+      "model": "equipo/item_weabowsaint.glb"
+    },
+    "Cyron Bow": {
+      "icon": "ui/items/flyff-wea-bow-cyron.webp",
+      "model": "equipo/item_weabowciclon.glb"
+    },
+    "Plim Stick": {
+      "icon": "ui/items/flyff-wea-chee-plim.webp",
+      "model": "equipo/item_weachemay.glb"
+    },
+    "Scull Stick": {
+      "icon": "ui/items/flyff-wea-chee-scull.webp",
+      "model": "equipo/item_weachesirin.glb"
+    },
+    "Huey Stick": {
+      "icon": "ui/items/flyff-wea-chee-huey.webp",
+      "model": "equipo/item_weachetim.glb"
+    },
+    "Kudos Stick": {
+      "icon": "ui/items/flyff-wea-chee-kudos.webp",
+      "model": "equipo/item_weachebopol.glb"
+    },
+    "Pinacle Stick": {
+      "icon": "ui/items/flyff-wea-chee-pinacle.webp",
+      "model": "equipo/item_weacheextreme.glb"
+    },
+    "Rave Stick": {
+      "icon": "ui/items/flyff-wea-chee-rave.webp",
+      "model": "equipo/item_weachemarple.glb"
+    },
+    "Fanta Stick": {
+      "icon": "ui/items/flyff-wea-chee-fanta.webp",
+      "model": "equipo/item_weachecherry.glb"
+    },
+    "Moralemine Stick": {
+      "icon": "ui/items/flyff-wea-chee-moralemine.webp",
+      "model": "equipo/item_weachefairmine.glb"
+    },
+    "Shinewing Stick": {
+      "icon": "ui/items/flyff-wea-chee-shinewing.webp",
+      "model": "equipo/item_weacheshabere.glb"
+    },
+    "Shalow Stick": {
+      "icon": "ui/items/flyff-wea-chee-shalow.webp",
+      "model": "equipo/item_weacherequer.glb"
+    },
+    "Pike Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-vag-gauntlet02.webp"
+    },
+    "Iner Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-vag-gauntlet03.webp"
+    },
+    "Silk Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-vag-gauntlet02.webp"
+    },
+    "Rose Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-vag-gauntlet03.webp"
+    },
+    "Pike Helmet": {
+      "icon": "ui/items/flyff-arm-m-vag-helmet02.webp"
+    },
+    "Silk Helmet": {
+      "icon": "ui/items/flyff-arm-f-vag-helmet02.webp"
+    },
+    "Iner Helmet": {
+      "icon": "ui/items/flyff-arm-m-vag-helmet03.webp"
+    },
+    "Rose Helmet": {
+      "icon": "ui/items/flyff-arm-f-vag-helmet03.webp"
+    },
+    "Overam Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-overam.webp",
+      "model": "equipo/item_weaknucram.glb"
+    },
+    "Sardine Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-sardine.webp",
+      "model": "equipo/item_weaknuspeck.glb"
+    },
+    "Twit Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-twit.webp",
+      "model": "equipo/item_weaknubeetle.glb"
+    },
+    "Xeno Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-xeno.webp",
+      "model": "equipo/item_weaknusledge.glb"
+    },
+    "Gravity Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-gravity.webp",
+      "model": "equipo/item_weaknuazuma.glb"
+    },
+    "Corean Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-corean.webp",
+      "model": "equipo/item_weaknuscalem.glb"
+    },
+    "Fistomber Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-fistomber.webp",
+      "model": "equipo/item_weaknuredorn.glb"
+    },
+    "Edoren Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-edoren.webp",
+      "model": "equipo/item_weaknusamure.glb"
+    },
+    "Skellock Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-skellock.webp",
+      "model": "equipo/item_weaknunecryn.glb"
+    },
+    "Goldross Knuckle": {
+      "icon": "ui/items/flyff-wea-knu-goldross.webp",
+      "model": "equipo/item_weaknucrossa.glb"
+    },
+    "Astrol Staff": {
+      "icon": "ui/items/flyff-wea-sta-astrol.webp",
+      "model": "equipo/item_weastawiz.glb"
+    },
+    "Sheikane Staff": {
+      "icon": "ui/items/flyff-wea-sta-sheikane.webp",
+      "model": "equipo/item_weastabishap.glb"
+    },
+    "Twenkeen Staff": {
+      "icon": "ui/items/flyff-wea-sta-twenkeen.webp",
+      "model": "equipo/item_weastaguadfo.glb"
+    },
+    "Ruofl Staff": {
+      "icon": "ui/items/flyff-wea-sta-ruofl.webp",
+      "model": "equipo/item_weastaflorel.glb"
+    },
+    "Featherwing Staff": {
+      "icon": "ui/items/flyff-wea-sta-featherwing.webp",
+      "model": "equipo/item_weastabirdin.glb"
+    },
+    "Holyous Staff": {
+      "icon": "ui/items/flyff-wea-sta-holyous.webp",
+      "model": "equipo/item_weastacrosse.glb"
+    },
+    "Pike Suit": {
+      "icon": "ui/items/flyff-arm-m-vag-suit02.webp"
+    },
+    "Iner Suit": {
+      "icon": "ui/items/flyff-arm-m-vag-suit03.webp"
+    },
+    "Silk Suit": {
+      "icon": "ui/items/flyff-arm-f-vag-suit02.webp"
+    },
+    "Rose Suit": {
+      "icon": "ui/items/flyff-arm-f-vag-suit03.webp"
+    },
+    "Hand Claw": {
+      "icon": "ui/items/flyff-wea-swo-handclaw.webp",
+      "model": "equipo/item_weaswohandsa.glb"
+    },
+    "Parmil Sword": {
+      "icon": "ui/items/flyff-wea-swo-parmil.webp",
+      "model": "equipo/item_weaswoleaf.glb"
+    },
+    "Crimson Sword": {
+      "icon": "ui/items/flyff-wea-swo-crimson.webp",
+      "model": "equipo/item_weaswopenel.glb"
+    },
+    "Petal Sword": {
+      "icon": "ui/items/flyff-wea-swo-petal.webp",
+      "model": "equipo/item_weaswoflower.glb"
+    },
+    "Blink Sword": {
+      "icon": "ui/items/flyff-wea-swo-blink.webp",
+      "model": "equipo/item_weaswostar.glb"
+    },
+    "Outlaw Sword": {
+      "icon": "ui/items/flyff-wea-swo-outlaw.webp",
+      "model": "equipo/item_weaswoslogge.glb"
+    },
+    "Fairslender Sword": {
+      "icon": "ui/items/flyff-wea-swo-fairslender.webp",
+      "model": "equipo/item_weaswofairli.glb"
+    },
+    "Two Handed Sword": {
+      "icon": "ui/items/flyff-wea-swt-twohan.webp",
+      "model": "equipo/item_weaswttwohan.glb"
+    },
+    "Adaptizer": {
+      "icon": "ui/items/flyff-wea-swt-adapti.webp",
+      "model": "equipo/item_weaswtadapti.glb"
+    },
+    "Zweigazer": {
+      "icon": "ui/items/flyff-wea-swt-zweiga.webp",
+      "model": "equipo/item_weaswtzweiga.glb"
+    },
+    "Splhail Wand": {
+      "icon": "ui/items/flyff-wea-wan-splhail.webp",
+      "model": "equipo/item_weawanrainbo.glb"
+    },
+    "Mirage Wand": {
+      "icon": "ui/items/flyff-wea-wan-mirage.webp",
+      "model": "equipo/item_weawanillusi.glb"
+    },
+    "Aris Wand": {
+      "icon": "ui/items/flyff-wea-wan-aris.webp",
+      "model": "equipo/item_weawanflupim.glb"
+    },
+    "Moira Wand": {
+      "icon": "ui/items/flyff-wea-wan-moira.webp",
+      "model": "equipo/item_weawandivine.glb"
+    },
+    "Arcadia Wand": {
+      "icon": "ui/items/flyff-wea-wan-arcadia.webp",
+      "model": "equipo/item_weawanneplus.glb"
+    },
+    "Taris Wand": {
+      "icon": "ui/items/flyff-wea-wan-taris.webp",
+      "model": "equipo/item_weawantripal.glb"
+    },
+    "Itun": {
+      "icon": "ui/items/flyff-wea-yoy-itun.webp",
+      "model": "equipo/item_weayoyiron.glb"
+    },
+    "Slepint": {
+      "icon": "ui/items/flyff-wea-yoy-slepin.webp",
+      "model": "equipo/item_weayoysleepe.glb"
+    },
+    "Client": {
+      "icon": "ui/items/flyff-wea-yoy-client.webp",
+      "model": "equipo/item_weayoycleepe.glb"
+    },
+    "Tensu": {
+      "icon": "ui/items/flyff-wea-yoy-tensu.webp",
+      "model": "equipo/item_weayoytripin.glb"
+    },
+    "Repoyit": {
+      "icon": "ui/items/flyff-wea-yoy-repoyi.webp",
+      "model": "equipo/item_weayoyredeye.glb"
+    },
+    "Gelonde": {
+      "icon": "ui/items/flyff-wea-yoy-gelond.webp",
+      "model": "equipo/item_weayoygoldbu.glb"
+    },
+    "Wingfull": {
+      "icon": "ui/items/flyff-wea-yoy-wingfu.webp",
+      "model": "equipo/item_weayoywingfo.glb"
+    },
+    "Anakun": {
+      "icon": "ui/items/flyff-wea-yoy-anakun.webp",
+      "model": "equipo/item_weayoyaquabr.glb"
+    },
+    "Circern": {
+      "icon": "ui/items/flyff-wea-yoy-circer.webp",
+      "model": "equipo/item_weayoycisica.glb"
+    },
+    "Mishend": {
+      "icon": "ui/items/flyff-wea-yoy-mishen.webp",
+      "model": "equipo/item_weayoyhander.glb"
+    },
+    "Keimay Helmet": {
+      "icon": "ui/items/flyff-arm-m-kin-helmet02.webp"
+    },
+    "Rukips Helmet": {
+      "icon": "ui/items/flyff-arm-m-kin-helmet04.webp"
+    },
+    "Godchent Helmet": {
+      "icon": "ui/items/flyff-arm-m-kin-helmet06.webp"
+    },
+    "Darkbin Helmet": {
+      "icon": "ui/items/flyff-arm-m-bla-helmet02.webp"
+    },
+    "Nipedot Helmet": {
+      "icon": "ui/items/flyff-arm-m-bla-helmet04.webp"
+    },
+    "Saremender Helmet": {
+      "icon": "ui/items/flyff-arm-m-bla-helmet06.webp"
+    },
+    "Keriphis Helmet": {
+      "icon": "ui/items/flyff-arm-f-kin-helmet02.webp"
+    },
+    "Rufoen Helmet": {
+      "icon": "ui/items/flyff-arm-f-kin-helmet04.webp"
+    },
+    "Godvean Helmet": {
+      "icon": "ui/items/flyff-arm-f-kin-helmet06.webp"
+    },
+    "Darkomet Helmet": {
+      "icon": "ui/items/flyff-arm-f-bla-helmet02.webp"
+    },
+    "Nirufy Helmet": {
+      "icon": "ui/items/flyff-arm-f-bla-helmet04.webp"
+    },
+    "Saryeve Helmet": {
+      "icon": "ui/items/flyff-arm-f-bla-helmet06.webp"
+    },
+    "Henen Helmet": {
+      "icon": "ui/items/flyff-arm-m-jst-helmet02.webp"
+    },
+    "Rokai Helmet": {
+      "icon": "ui/items/flyff-arm-m-jst-helmet04.webp"
+    },
+    "Spacon Helmet": {
+      "icon": "ui/items/flyff-arm-m-jst-helmet06.webp"
+    },
+    "Grantus Helmet": {
+      "icon": "ui/items/flyff-arm-m-rag-helmet02.webp"
+    },
+    "Geiler Helmet": {
+      "icon": "ui/items/flyff-arm-m-rag-helmet04.webp"
+    },
+    "Ruisil Helmet": {
+      "icon": "ui/items/flyff-arm-m-rag-helmet06.webp"
+    },
+    "Heintis Helmet": {
+      "icon": "ui/items/flyff-arm-f-jst-helmet02.webp"
+    },
+    "Rokhantia Helmet": {
+      "icon": "ui/items/flyff-arm-f-jst-helmet04.webp"
+    },
+    "Spimel Helmet": {
+      "icon": "ui/items/flyff-arm-f-jst-helmet06.webp"
+    },
+    "Grentio Helmet": {
+      "icon": "ui/items/flyff-arm-f-rag-helmet02.webp"
+    },
+    "Gesanan Helmet": {
+      "icon": "ui/items/flyff-arm-f-rag-helmet04.webp"
+    },
+    "Luses Helmet": {
+      "icon": "ui/items/flyff-arm-f-rag-helmet06.webp"
+    },
+    "Mectic Helmet": {
+      "icon": "ui/items/flyff-arm-m-rin-helmet02.webp"
+    },
+    "Havey Helmet": {
+      "icon": "ui/items/flyff-arm-m-rin-helmet04.webp"
+    },
+    "Ferraol Helmet": {
+      "icon": "ui/items/flyff-arm-m-rin-helmet06.webp"
+    },
+    "Oriene Helmet": {
+      "icon": "ui/items/flyff-arm-m-bil-helmet02.webp"
+    },
+    "Phasleb Helmet": {
+      "icon": "ui/items/flyff-arm-m-bil-helmet04.webp"
+    },
+    "Cupo Helmet": {
+      "icon": "ui/items/flyff-arm-m-bil-helmet06.webp"
+    },
+    "Mecarine Helmet": {
+      "icon": "ui/items/flyff-arm-f-rin-helmet02.webp"
+    },
+    "Hanel Helmet": {
+      "icon": "ui/items/flyff-arm-f-rin-helmet04.webp"
+    },
+    "Festein Helmet": {
+      "icon": "ui/items/flyff-arm-f-rin-helmet06.webp"
+    },
+    "Orgon Helmet": {
+      "icon": "ui/items/flyff-arm-f-bil-helmet02.webp"
+    },
+    "Phaisel Helmet": {
+      "icon": "ui/items/flyff-arm-f-bil-helmet04.webp"
+    },
+    "Cumel Helmet": {
+      "icon": "ui/items/flyff-arm-f-bil-helmet06.webp"
+    },
+    "Keimay Suit": {
+      "icon": "ui/items/flyff-arm-m-kin-suit02.webp"
+    },
+    "Rukips Suit": {
+      "icon": "ui/items/flyff-arm-m-kin-suit04.webp"
+    },
+    "Godchent Suit": {
+      "icon": "ui/items/flyff-arm-m-kin-suit06.webp"
+    },
+    "Darkbin Suit": {
+      "icon": "ui/items/flyff-arm-m-bla-suit02.webp"
+    },
+    "Nipedot Suit": {
+      "icon": "ui/items/flyff-arm-m-bla-suit04.webp"
+    },
+    "Saremender Suit": {
+      "icon": "ui/items/flyff-arm-m-bla-suit06.webp"
+    },
+    "Keriphis Suit": {
+      "icon": "ui/items/flyff-arm-f-kin-suit02.webp"
+    },
+    "Rufoen Suit": {
+      "icon": "ui/items/flyff-arm-f-kin-suit04.webp"
+    },
+    "Godvean Suit": {
+      "icon": "ui/items/flyff-arm-f-kin-suit06.webp"
+    },
+    "Darkomet Suit": {
+      "icon": "ui/items/flyff-arm-f-bla-suit02.webp"
+    },
+    "Nirufy Suit": {
+      "icon": "ui/items/flyff-arm-f-bla-suit04.webp"
+    },
+    "Saryeve Suit": {
+      "icon": "ui/items/flyff-arm-f-bla-suit06.webp"
+    },
+    "Henen Suit": {
+      "icon": "ui/items/flyff-arm-m-jst-suit02.webp"
+    },
+    "Rokai Suit": {
+      "icon": "ui/items/flyff-arm-m-jst-suit04.webp"
+    },
+    "Spacon Suit": {
+      "icon": "ui/items/flyff-arm-m-jst-suit06.webp"
+    },
+    "Grantus Suit": {
+      "icon": "ui/items/flyff-arm-m-rag-suit02.webp"
+    },
+    "Geiler Suit": {
+      "icon": "ui/items/flyff-arm-m-rag-suit04.webp"
+    },
+    "Ruisil Suit": {
+      "icon": "ui/items/flyff-arm-m-rag-suit06.webp"
+    },
+    "Heintis Suit": {
+      "icon": "ui/items/flyff-arm-f-jst-suit02.webp"
+    },
+    "Rokhantia Suit": {
+      "icon": "ui/items/flyff-arm-f-jst-suit04.webp"
+    },
+    "Spimel Suit": {
+      "icon": "ui/items/flyff-arm-f-jst-suit06.webp"
+    },
+    "Grentio Suit": {
+      "icon": "ui/items/flyff-arm-f-rag-suit02.webp"
+    },
+    "Gesanan Suit": {
+      "icon": "ui/items/flyff-arm-f-rag-suit04.webp"
+    },
+    "Luses Suit": {
+      "icon": "ui/items/flyff-arm-f-rag-suit06.webp"
+    },
+    "Mectic Suit": {
+      "icon": "ui/items/flyff-arm-m-rin-suit02.webp"
+    },
+    "Havey Suit": {
+      "icon": "ui/items/flyff-arm-m-rin-suit04.webp"
+    },
+    "Ferraol Suit": {
+      "icon": "ui/items/flyff-arm-m-rin-suit06.webp"
+    },
+    "Oriene Suit": {
+      "icon": "ui/items/flyff-arm-m-bil-suit02.webp"
+    },
+    "Phasleb Suit": {
+      "icon": "ui/items/flyff-arm-m-bil-suit04.webp"
+    },
+    "Cupo Suit": {
+      "icon": "ui/items/flyff-arm-m-bil-suit06.webp"
+    },
+    "Mecarine Suit": {
+      "icon": "ui/items/flyff-arm-f-rin-suit02.webp"
+    },
+    "Hanel Suit": {
+      "icon": "ui/items/flyff-arm-f-rin-suit04.webp"
+    },
+    "Festein Suit": {
+      "icon": "ui/items/flyff-arm-f-rin-suit06.webp"
+    },
+    "Orgon Suit": {
+      "icon": "ui/items/flyff-arm-f-bil-suit02.webp"
+    },
+    "Phaisel Suit": {
+      "icon": "ui/items/flyff-arm-f-bil-suit04.webp"
+    },
+    "Cumel Suit": {
+      "icon": "ui/items/flyff-arm-f-bil-suit06.webp"
+    },
+    "Keimay Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-kin-gauntlet02.webp"
+    },
+    "Rukips Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-kin-gauntlet04.webp"
+    },
+    "Godchent Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-kin-gauntlet06.webp"
+    },
+    "Darkbin Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bla-gauntlet02.webp"
+    },
+    "Nipedot Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bla-gauntlet04.webp"
+    },
+    "Saremender Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bla-gauntlet06.webp"
+    },
+    "Keriphis Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-kin-gauntlet02.webp"
+    },
+    "Rufoen Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-kin-gauntlet04.webp"
+    },
+    "Godvean Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-kin-gauntlet06.webp"
+    },
+    "Darkomet Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bla-gauntlet02.webp"
+    },
+    "Nirufy Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bla-gauntlet04.webp"
+    },
+    "Saryeve Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bla-gauntlet06.webp"
+    },
+    "Henen Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-jst-gauntlet02.webp"
+    },
+    "Rokai Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-jst-gauntlet04.webp"
+    },
+    "Spacon Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-jst-gauntlet06.webp"
+    },
+    "Grantus Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rag-gauntlet02.webp"
+    },
+    "Geiler Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rag-gauntlet04.webp"
+    },
+    "Ruisil Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rag-gauntlet06.webp"
+    },
+    "Heintis Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-jst-gauntlet02.webp"
+    },
+    "Rokhantia Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-jst-gauntlet04.webp"
+    },
+    "Spimel Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-jst-gauntlet06.webp"
+    },
+    "Grentio Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rag-gauntlet02.webp"
+    },
+    "Gesanan Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rag-gauntlet04.webp"
+    },
+    "Luses Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rag-gauntlet06.webp"
+    },
+    "Mectic Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rin-gauntlet02.webp"
+    },
+    "Havey Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rin-gauntlet04.webp"
+    },
+    "Ferraol Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-rin-gauntlet06.webp"
+    },
+    "Oriene Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bil-gauntlet02.webp"
+    },
+    "Phasleb Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bil-gauntlet04.webp"
+    },
+    "Cupo Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-bil-gauntlet06.webp"
+    },
+    "Mecarine Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rin-gauntlet02.webp"
+    },
+    "Hanel Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rin-gauntlet04.webp"
+    },
+    "Festein Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-rin-gauntlet06.webp"
+    },
+    "Orgon Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bil-gauntlet02.webp"
+    },
+    "Phaisel Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bil-gauntlet04.webp"
+    },
+    "Cumel Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-bil-gauntlet06.webp"
+    },
+    "Keimay Boots": {
+      "icon": "ui/items/flyff-arm-m-kin-boots02.webp"
+    },
+    "Rukips Boots": {
+      "icon": "ui/items/flyff-arm-m-kin-boots04.webp"
+    },
+    "Godchent Boots": {
+      "icon": "ui/items/flyff-arm-m-kin-boots06.webp"
+    },
+    "Darkbin Boots": {
+      "icon": "ui/items/flyff-arm-m-bla-boots02.webp"
+    },
+    "Nipedot Boots": {
+      "icon": "ui/items/flyff-arm-m-bla-boots04.webp"
+    },
+    "Saremender Boots": {
+      "icon": "ui/items/flyff-arm-m-bla-boots06.webp"
+    },
+    "Keriphis Boots": {
+      "icon": "ui/items/flyff-arm-f-kin-boots02.webp"
+    },
+    "Rufoen Boots": {
+      "icon": "ui/items/flyff-arm-f-kin-boots04.webp"
+    },
+    "Godvean Boots": {
+      "icon": "ui/items/flyff-arm-f-kin-boots06.webp"
+    },
+    "Darkomet Boots": {
+      "icon": "ui/items/flyff-arm-f-bla-boots02.webp"
+    },
+    "Nirufy Boots": {
+      "icon": "ui/items/flyff-arm-f-bla-boots04.webp"
+    },
+    "Saryeve Boots": {
+      "icon": "ui/items/flyff-arm-f-bla-boots06.webp"
+    },
+    "Henen Boots": {
+      "icon": "ui/items/flyff-arm-m-jst-boots02.webp"
+    },
+    "Rokai Boots": {
+      "icon": "ui/items/flyff-arm-m-jst-boots04.webp"
+    },
+    "Spacon Boots": {
+      "icon": "ui/items/flyff-arm-m-jst-boots06.webp"
+    },
+    "Grantus Boots": {
+      "icon": "ui/items/flyff-arm-m-rag-boots02.webp"
+    },
+    "Geiler Boots": {
+      "icon": "ui/items/flyff-arm-m-rag-boots04.webp"
+    },
+    "Ruisil Boots": {
+      "icon": "ui/items/flyff-arm-m-rag-boots06.webp"
+    },
+    "Heintis Boots": {
+      "icon": "ui/items/flyff-arm-f-jst-boots02.webp"
+    },
+    "Rokhantia Boots": {
+      "icon": "ui/items/flyff-arm-f-jst-boots04.webp"
+    },
+    "Spimel Boots": {
+      "icon": "ui/items/flyff-arm-f-jst-boots06.webp"
+    },
+    "Grentio Boots": {
+      "icon": "ui/items/flyff-arm-f-rag-boots02.webp"
+    },
+    "Gesanan Boots": {
+      "icon": "ui/items/flyff-arm-f-rag-boots04.webp"
+    },
+    "Luses Boots": {
+      "icon": "ui/items/flyff-arm-f-rag-boots06.webp"
+    },
+    "Mectic Boots": {
+      "icon": "ui/items/flyff-arm-m-rin-boots02.webp"
+    },
+    "Havey Boots": {
+      "icon": "ui/items/flyff-arm-m-rin-boots04.webp"
+    },
+    "Ferraol Boots": {
+      "icon": "ui/items/flyff-arm-m-rin-boots06.webp"
+    },
+    "Oriene Boots": {
+      "icon": "ui/items/flyff-arm-m-bil-boots02.webp"
+    },
+    "Phasleb Boots": {
+      "icon": "ui/items/flyff-arm-m-bil-boots04.webp"
+    },
+    "Cupo Boots": {
+      "icon": "ui/items/flyff-arm-m-bil-boots06.webp"
+    },
+    "Mecarine Boots": {
+      "icon": "ui/items/flyff-arm-f-rin-boots02.webp"
+    },
+    "Hanel Boots": {
+      "icon": "ui/items/flyff-arm-f-rin-boots04.webp"
+    },
+    "Festein Boots": {
+      "icon": "ui/items/flyff-arm-f-rin-boots06.webp"
+    },
+    "Orgon Boots": {
+      "icon": "ui/items/flyff-arm-f-bil-boots02.webp"
+    },
+    "Phaisel Boots": {
+      "icon": "ui/items/flyff-arm-f-bil-boots04.webp"
+    },
+    "Cumel Boots": {
+      "icon": "ui/items/flyff-arm-f-bil-boots06.webp"
+    },
+    "Green Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-green.webp",
+      "model": "equipo/item_armshiwooden.glb"
+    },
+    "Round Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-round.webp",
+      "model": "equipo/item_armshibuckle.glb"
+    },
+    "Sentinel Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-sentinel.webp",
+      "model": "equipo/item_armshiguard.glb"
+    },
+    "Sparkle Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-sparkle.webp",
+      "model": "equipo/item_armshiturtle.glb"
+    },
+    "Shurain Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-shurain.webp",
+      "model": "equipo/item_armshiscale.glb"
+    },
+    "Plate Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-plate.webp",
+      "model": "equipo/item_armshitower.glb"
+    },
+    "Kite Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-kite.webp",
+      "model": "equipo/item_armshiheart.glb"
+    },
+    "Lollipop": {
+      "icon": "ui/items/flyff-gen-foo-ins-lollipop.webp"
+    },
+    "Biscuit": {
+      "icon": "ui/items/flyff-gen-foo-ins-biscuit.webp"
+    },
+    "Chocolate Bar": {
+      "icon": "ui/items/flyff-gen-foo-ins-chocolate.webp"
+    },
+    "Milk": {
+      "icon": "ui/items/flyff-gen-foo-ins-milk.webp"
+    },
+    "Roll Bread": {
+      "icon": "ui/items/flyff-gen-foo-ins-bread.webp"
+    },
+    "Hot Dog": {
+      "icon": "ui/items/flyff-gen-foo-ins-hotdog.webp"
+    },
+    "Pizza": {
+      "icon": "ui/items/flyff-gen-foo-ins-hodduk.webp"
+    },
+    "Kimbap": {
+      "icon": "ui/items/flyff-gen-foo-ins-kimbap.webp"
+    },
+    "Chicken Stick": {
+      "icon": "ui/items/flyff-gen-foo-ins-chickenstick.webp"
+    },
+    "Star Candy": {
+      "icon": "ui/items/flyff-gen-foo-ins-starcandy.webp"
+    }
+  },
+  "sets": {
+    "Parmil": {
+      "male": "equipo/Vag03_male.glb"
+    },
+    "Leaf": {
+      "female": "equipo/Vag03_female.glb"
+    },
+    "Warpon": {
+      "male": "equipo/Kin02_male.glb"
+    },
+    "Warspon": {
+      "female": "equipo/Kin02_female.glb"
+    },
+    "Huedom": {
+      "male": "equipo/Bla04_male.glb"
+    },
+    "Huaris": {
+      "female": "equipo/Bla04_female.glb"
+    },
+    "Blain": {
+      "male": "equipo/BlaSet03_male.glb"
+    },
+    "Virain": {
+      "female": "equipo/BlaSet03_female.glb"
+    },
+    "Nox (M)": {
+      "male": "equipo/BlaSet05_male.glb"
+    },
+    "Nox (F)": {
+      "female": "equipo/BlaSet05_female.glb"
+    },
+    "Heraud": {
+      "male": "equipo/BlaSet06_male.glb"
+    },
+    "Herainn": {
+      "female": "equipo/BlaSet06_female.glb"
+    },
+    "Rimyth": {
+      "male": "equipo/RinSet03_male.glb"
+    },
+    "Pike": {
+      "male": "equipo/Vag02_male.glb"
+    },
+    "Iner": {
+      "male": "equipo/Vag03_male.glb"
+    },
+    "Silk": {
+      "female": "equipo/Vag02_female.glb"
+    },
+    "Rose": {
+      "female": "equipo/Vag03_female.glb"
+    },
+    "Keimay": {
+      "male": "equipo/Kin01_male.glb"
+    },
+    "Rukips": {
+      "male": "equipo/Kin02_male.glb"
+    },
+    "Godchent": {
+      "male": "equipo/Kin03_male.glb"
+    },
+    "Darkbin": {
+      "male": "equipo/Bla01_male.glb"
+    },
+    "Nipedot": {
+      "male": "equipo/Bla02_male.glb"
+    },
+    "Saremender": {
+      "male": "equipo/Bla03_male.glb"
+    },
+    "Keriphis": {
+      "female": "equipo/Kin01_female.glb"
+    },
+    "Rufoen": {
+      "female": "equipo/Kin02_female.glb"
+    },
+    "Godvean": {
+      "female": "equipo/Kin03_female.glb"
+    },
+    "Darkomet": {
+      "female": "equipo/Bla01_female.glb"
+    },
+    "Nirufy": {
+      "female": "equipo/Bla02_female.glb"
+    },
+    "Saryeve": {
+      "female": "equipo/Bla03_female.glb"
+    },
+    "Henen": {
+      "male": "equipo/Jst01_male.glb"
+    },
+    "Rokai": {
+      "male": "equipo/Jst02_male.glb"
+    },
+    "Spacon": {
+      "male": "equipo/Jst03_male.glb"
+    },
+    "Grantus": {
+      "male": "equipo/Rag01_male.glb"
+    },
+    "Geiler": {
+      "male": "equipo/Rag02_male.glb"
+    },
+    "Ruisil": {
+      "male": "equipo/Rag03_male.glb"
+    },
+    "Heintis": {
+      "female": "equipo/Jst01_female.glb"
+    },
+    "Rokhantia": {
+      "female": "equipo/Jst02_female.glb"
+    },
+    "Spimel": {
+      "female": "equipo/Jst03_female.glb"
+    },
+    "Grentio": {
+      "female": "equipo/Rag01_female.glb"
+    },
+    "Gesanan": {
+      "female": "equipo/Rag02_female.glb"
+    },
+    "Luses": {
+      "female": "equipo/Rag03_female.glb"
+    },
+    "Mectic": {
+      "male": "equipo/Rin01_male.glb"
+    },
+    "Havey": {
+      "male": "equipo/Rin02_male.glb"
+    },
+    "Ferraol": {
+      "male": "equipo/Rin03_male.glb"
+    },
+    "Oriene": {
+      "male": "equipo/Bil01_male.glb"
+    },
+    "Phasleb": {
+      "male": "equipo/Bil02_male.glb"
+    },
+    "Cupo": {
+      "male": "equipo/Bil03_male.glb"
+    },
+    "Mecarine": {
+      "female": "equipo/Rin01_female.glb"
+    },
+    "Hanel": {
+      "female": "equipo/Rin02_female.glb"
+    },
+    "Festein": {
+      "female": "equipo/Rin03_female.glb"
+    },
+    "Orgon": {
+      "female": "equipo/Bil01_female.glb"
+    },
+    "Phaisel": {
+      "female": "equipo/Bil02_female.glb"
+    },
+    "Cumel": {
+      "female": "equipo/Bil03_female.glb"
+    }
+  },
+  "stock": [
+    {
+      "id": "native_ii_wea_axe_rodney",
+      "name": "Rodney Axe",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 9,
+      "cost": 1200,
+      "kind": "IK3_AXE",
+      "min": 25,
+      "max": 33,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_morrow",
+      "name": "Morrow Axe",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 13,
+      "cost": 3300,
+      "kind": "IK3_AXE",
+      "min": 31,
+      "max": 39,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_curning",
+      "name": "Curning Axe",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4700,
+      "kind": "IK3_AXE",
+      "min": 38,
+      "max": 46,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_shyadin",
+      "name": "Shyadin Axe",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 19,
+      "cost": 6800,
+      "kind": "IK3_AXE",
+      "min": 48,
+      "max": 56,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_bronze",
+      "name": "Bronze Axe",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 10100,
+      "kind": "IK3_AXE",
+      "min": 52,
+      "max": 60,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_grang",
+      "name": "Grang Axe",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 17100,
+      "kind": "IK3_AXE",
+      "min": 64,
+      "max": 72,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axe_hitch",
+      "name": "Hitch Axe",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3452400,
+      "kind": "IK3_AXE",
+      "min": 267,
+      "max": 275,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_twohan",
+      "name": "Two Handed Axe",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 537900,
+      "kind": "IK3_AXE",
+      "min": 248,
+      "max": 252,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_greata",
+      "name": "Great Axe",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 597200,
+      "kind": "IK3_AXE",
+      "min": 251,
+      "max": 255,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_kergni",
+      "name": "Kergnition",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 752100,
+      "kind": "IK3_AXE",
+      "min": 295,
+      "max": 299,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_lurkni",
+      "name": "Lurknition",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 75,
+      "cost": 1052000,
+      "kind": "IK3_AXE",
+      "min": 298,
+      "max": 302,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_avniti",
+      "name": "Avnition",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 80,
+      "cost": 1351900,
+      "kind": "IK3_AXE",
+      "min": 303,
+      "max": 309,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_axt_kanain",
+      "name": "Kanainition",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 85,
+      "cost": 1573600,
+      "kind": "IK3_AXE",
+      "min": 324,
+      "max": 333,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_boots02",
+      "name": "Pike Boots",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 140,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Pike",
+      "defense": 24,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_boots03",
+      "name": "Iner Boots",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 9,
+      "cost": 500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Iner",
+      "defense": 42,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_boots02",
+      "name": "Silk Boots",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 140,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Silk",
+      "defense": 24,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_boots03",
+      "name": "Rose Boots",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 9,
+      "cost": 500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Rose",
+      "defense": 42,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_woodne",
+      "name": "Woodness Bow",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4400,
+      "kind": "IK3_BOW",
+      "min": 36,
+      "max": 37,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_greent",
+      "name": "Greentin Bow",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 19,
+      "cost": 6300,
+      "kind": "IK3_BOW",
+      "min": 45,
+      "max": 46,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_stieng",
+      "name": "Stienger Bow",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 9500,
+      "kind": "IK3_BOW",
+      "min": 48,
+      "max": 50,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_clasem",
+      "name": "Clasemit Bow",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 15900,
+      "kind": "IK3_BOW",
+      "min": 59,
+      "max": 61,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_setien",
+      "name": "Setien Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 418000,
+      "kind": "IK3_BOW",
+      "min": 151,
+      "max": 153,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_varife",
+      "name": "Varife Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 580000,
+      "kind": "IK3_BOW",
+      "min": 180,
+      "max": 181,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_defnan",
+      "name": "Defnan Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 1050000,
+      "kind": "IK3_BOW",
+      "min": 196,
+      "max": 198,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_hydron",
+      "name": "Hydron Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 76,
+      "cost": 1610000,
+      "kind": "IK3_BOW",
+      "min": 210,
+      "max": 212,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_cenati",
+      "name": "Cenatin Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 80,
+      "cost": 2760000,
+      "kind": "IK3_BOW",
+      "min": 235,
+      "max": 237,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_bow_cyron",
+      "name": "Cyron Bow",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3220000,
+      "kind": "IK3_BOW",
+      "min": 239,
+      "max": 241,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_plim",
+      "name": "Plim Stick",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4200,
+      "kind": "IK3_CHEERSTICK",
+      "min": 40,
+      "max": 42,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_scull",
+      "name": "Scull Stick",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 21,
+      "cost": 6100,
+      "kind": "IK3_CHEERSTICK",
+      "min": 50,
+      "max": 52,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_huey",
+      "name": "Huey Stick",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 9200,
+      "kind": "IK3_CHEERSTICK",
+      "min": 54,
+      "max": 56,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_kudos",
+      "name": "Kudos Stick",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 15400,
+      "kind": "IK3_CHEERSTICK",
+      "min": 66,
+      "max": 68,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_pinacle",
+      "name": "Pinacle Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 405000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 168,
+      "max": 170,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_rave",
+      "name": "Rave Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 560000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 200,
+      "max": 202,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_fanta",
+      "name": "Fanta Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 1010000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 218,
+      "max": 220,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_moralemine",
+      "name": "Moralemine Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 76,
+      "cost": 1560000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 234,
+      "max": 236,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_shinewing",
+      "name": "Shinewing Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 81,
+      "cost": 2680000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 262,
+      "max": 264,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_chee_shalow",
+      "name": "Shalow Stick",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3120000,
+      "kind": "IK3_CHEERSTICK",
+      "min": 266,
+      "max": 268,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_gauntlet02",
+      "name": "Pike Gauntlet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 180,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Pike",
+      "defense": 31,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_gauntlet03",
+      "name": "Iner Gauntlet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 10,
+      "cost": 700,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Iner",
+      "defense": 55,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_gauntlet02",
+      "name": "Silk Gauntlet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 180,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Silk",
+      "defense": 31,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_gauntlet03",
+      "name": "Rose Gauntlet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 10,
+      "cost": 700,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Rose",
+      "defense": 55,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_helmet02",
+      "name": "Pike Helmet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 110,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Pike",
+      "defense": 19,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_helmet02",
+      "name": "Silk Helmet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 2,
+      "cost": 110,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Silk",
+      "defense": 19,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_helmet03",
+      "name": "Iner Helmet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 8,
+      "cost": 400,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Iner",
+      "defense": 34,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_helmet03",
+      "name": "Rose Helmet",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 8,
+      "cost": 400,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Rose",
+      "defense": 34,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_overam",
+      "name": "Overam Knuckle",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4200,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 40,
+      "max": 42,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_sardine",
+      "name": "Sardine Knuckle",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 19,
+      "cost": 6100,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 50,
+      "max": 52,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_twit",
+      "name": "Twit Knuckle",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 9200,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 54,
+      "max": 56,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_xeno",
+      "name": "Xeno Knuckle",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 15400,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 66,
+      "max": 68,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_gravity",
+      "name": "Gravity Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 405000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 168,
+      "max": 170,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_corean",
+      "name": "Corean Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 560000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 200,
+      "max": 202,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_fistomber",
+      "name": "Fistomber Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 1010000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 218,
+      "max": 220,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_edoren",
+      "name": "Edoren Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 76,
+      "cost": 1560000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 234,
+      "max": 236,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_skellock",
+      "name": "Skellock Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 81,
+      "cost": 2680000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 262,
+      "max": 264,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_knu_goldross",
+      "name": "Goldross Knuckle",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3120000,
+      "kind": "IK3_KNUCKLEHAMMER",
+      "min": 266,
+      "max": 268,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_astrol",
+      "name": "Astrol Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 422000,
+      "kind": "IK3_STAFF",
+      "min": 163,
+      "max": 166,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_sheikane",
+      "name": "Sheikane Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 590000,
+      "kind": "IK3_STAFF",
+      "min": 195,
+      "max": 198,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_twenkeen",
+      "name": "Twenkeen Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 1060000,
+      "kind": "IK3_STAFF",
+      "min": 213,
+      "max": 216,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_ruofl",
+      "name": "Ruofl Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 76,
+      "cost": 1630000,
+      "kind": "IK3_STAFF",
+      "min": 229,
+      "max": 232,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_featherwing",
+      "name": "Featherwing Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 81,
+      "cost": 2790000,
+      "kind": "IK3_STAFF",
+      "min": 257,
+      "max": 260,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_sta_holyous",
+      "name": "Holyous Staff",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3250000,
+      "kind": "IK3_STAFF",
+      "min": 261,
+      "max": 264,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_suit02",
+      "name": "Pike Suit",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 3,
+      "cost": 420,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Pike",
+      "defense": 48,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_vag_suit03",
+      "name": "Iner Suit",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 11,
+      "cost": 1700,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Iner",
+      "defense": 84,
+      "classes": null,
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_suit02",
+      "name": "Silk Suit",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 3,
+      "cost": 420,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Silk",
+      "defense": 48,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_vag_suit03",
+      "name": "Rose Suit",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 11,
+      "cost": 1700,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Rose",
+      "defense": 84,
+      "classes": null,
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_handclaw",
+      "name": "Hand Claw",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 7,
+      "cost": 590,
+      "kind": "IK3_SWD",
+      "min": 16,
+      "max": 18,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_parmil",
+      "name": "Parmil Sword",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 10,
+      "cost": 1400,
+      "kind": "IK3_SWD",
+      "min": 29,
+      "max": 31,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_crimson",
+      "name": "Crimson Sword",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 13,
+      "cost": 3000,
+      "kind": "IK3_SWD",
+      "min": 34,
+      "max": 36,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_petal",
+      "name": "Petal Sword",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4400,
+      "kind": "IK3_SWD",
+      "min": 40,
+      "max": 42,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_blink",
+      "name": "Blink Sword",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 19,
+      "cost": 6300,
+      "kind": "IK3_SWD",
+      "min": 50,
+      "max": 52,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_outlaw",
+      "name": "Outlaw Sword",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 9500,
+      "kind": "IK3_SWD",
+      "min": 54,
+      "max": 56,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_fairslender",
+      "name": "Fairslender Sword",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 15900,
+      "kind": "IK3_SWD",
+      "min": 66,
+      "max": 68,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swt_twohan",
+      "name": "Two Handed Sword",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 460000,
+      "kind": "IK3_SWD",
+      "min": 247,
+      "max": 250,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swt_adapti",
+      "name": "Adaptizer",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 75,
+      "cost": 810000,
+      "kind": "IK3_SWD",
+      "min": 294,
+      "max": 296,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swt_zweiga",
+      "name": "Zweigazer",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 80,
+      "cost": 1050000,
+      "kind": "IK3_SWD",
+      "min": 299,
+      "max": 302,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_splhail",
+      "name": "Splhail Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 362000,
+      "kind": "IK3_WAND",
+      "min": 168,
+      "max": 170,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_mirage",
+      "name": "Mirage Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 500000,
+      "kind": "IK3_WAND",
+      "min": 200,
+      "max": 202,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_aris",
+      "name": "Aris Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 910000,
+      "kind": "IK3_WAND",
+      "min": 218,
+      "max": 220,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_moira",
+      "name": "Moira Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 78,
+      "cost": 1400000,
+      "kind": "IK3_WAND",
+      "min": 234,
+      "max": 236,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_arcadia",
+      "name": "Arcadia Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 81,
+      "cost": 2390000,
+      "kind": "IK3_WAND",
+      "min": 262,
+      "max": 264,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_wan_taris",
+      "name": "Taris Wand",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 2790000,
+      "kind": "IK3_WAND",
+      "min": 266,
+      "max": 268,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DW",
+        "DL"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_itun",
+      "name": "Itun",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 15,
+      "cost": 4400,
+      "kind": "IK3_YOYO",
+      "min": 32,
+      "max": 33,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_slepin",
+      "name": "Slepint",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 19,
+      "cost": 6300,
+      "kind": "IK3_YOYO",
+      "min": 40,
+      "max": 41,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_client",
+      "name": "Client",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 23,
+      "cost": 9500,
+      "kind": "IK3_YOYO",
+      "min": 43,
+      "max": 44,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_tensu",
+      "name": "Tensu",
+      "npcs": [
+        "flaris-npc-hanzo"
+      ],
+      "level": 27,
+      "cost": 15900,
+      "kind": "IK3_YOYO",
+      "min": 52,
+      "max": 54,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_repoyi",
+      "name": "Repoyit",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 60,
+      "cost": 418000,
+      "kind": "IK3_YOYO",
+      "min": 134,
+      "max": 136,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_gelond",
+      "name": "Gelonde",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 65,
+      "cost": 580000,
+      "kind": "IK3_YOYO",
+      "min": 160,
+      "max": 161,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_wingfu",
+      "name": "Wingfull",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 70,
+      "cost": 1050000,
+      "kind": "IK3_YOYO",
+      "min": 174,
+      "max": 176,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_anakun",
+      "name": "Anakun",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 76,
+      "cost": 1610000,
+      "kind": "IK3_YOYO",
+      "min": 187,
+      "max": 188,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_circer",
+      "name": "Circern",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 80,
+      "cost": 2760000,
+      "kind": "IK3_YOYO",
+      "min": 209,
+      "max": 211,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_yoy_mishen",
+      "name": "Mishend",
+      "npcs": [
+        "ceniza-npc-gladiator"
+      ],
+      "level": 86,
+      "cost": 3220000,
+      "kind": "IK3_YOYO",
+      "min": 212,
+      "max": 214,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "ELF"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_helmet02",
+      "name": "Keimay Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 536000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Keimay",
+      "defense": 253,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_helmet04",
+      "name": "Rukips Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 738000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Rukips",
+      "defense": 281,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_helmet06",
+      "name": "Godchent Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 943000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Godchent",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_helmet02",
+      "name": "Darkbin Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 536000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Darkbin",
+      "defense": 253,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_helmet04",
+      "name": "Nipedot Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 738000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Nipedot",
+      "defense": 281,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_helmet06",
+      "name": "Saremender Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 943000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Saremender",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_helmet02",
+      "name": "Keriphis Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 536000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Keriphis",
+      "defense": 253,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_helmet04",
+      "name": "Rufoen Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 738000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Rufoen",
+      "defense": 281,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_helmet06",
+      "name": "Godvean Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 943000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Godvean",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_helmet02",
+      "name": "Darkomet Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 536000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Darkomet",
+      "defense": 253,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_helmet04",
+      "name": "Nirufy Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 738000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Nirufy",
+      "defense": 281,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_helmet06",
+      "name": "Saryeve Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 943000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Saryeve",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_helmet02",
+      "name": "Henen Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509200,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Henen",
+      "defense": 240,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_helmet04",
+      "name": "Rokai Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701100,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Rokai",
+      "defense": 266,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_helmet06",
+      "name": "Spacon Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895850,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Spacon",
+      "defense": 284,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_helmet02",
+      "name": "Grantus Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509200,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Grantus",
+      "defense": 211,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_helmet04",
+      "name": "Geiler Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701100,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Geiler",
+      "defense": 234,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_helmet06",
+      "name": "Ruisil Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895850,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Ruisil",
+      "defense": 249,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_helmet02",
+      "name": "Heintis Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509200,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Heintis",
+      "defense": 240,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_helmet04",
+      "name": "Rokhantia Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701100,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Rokhantia",
+      "defense": 266,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_helmet06",
+      "name": "Spimel Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895850,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Spimel",
+      "defense": 284,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_helmet02",
+      "name": "Grentio Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509200,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Grentio",
+      "defense": 211,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_helmet04",
+      "name": "Gesanan Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701100,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Gesanan",
+      "defense": 234,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_helmet06",
+      "name": "Luses Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895850,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Luses",
+      "defense": 249,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_helmet02",
+      "name": "Mectic Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Mectic",
+      "defense": 215,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_helmet04",
+      "name": "Havey Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Havey",
+      "defense": 239,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_helmet06",
+      "name": "Ferraol Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Ferraol",
+      "defense": 254,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_helmet02",
+      "name": "Oriene Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Oriene",
+      "defense": 215,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_helmet04",
+      "name": "Phasleb Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Phasleb",
+      "defense": 239,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_helmet06",
+      "name": "Cupo Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Cupo",
+      "defense": 254,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_helmet02",
+      "name": "Mecarine Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Mecarine",
+      "defense": 215,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_helmet04",
+      "name": "Hanel Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Hanel",
+      "defense": 239,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_helmet06",
+      "name": "Festein Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Festein",
+      "defense": 254,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_helmet02",
+      "name": "Orgon Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 59,
+      "cost": 509000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Orgon",
+      "defense": 215,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_helmet04",
+      "name": "Phaisel Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 71,
+      "cost": 701000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Phaisel",
+      "defense": 239,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_helmet06",
+      "name": "Cumel Helmet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 83,
+      "cost": 895000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Cumel",
+      "defense": 254,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_suit02",
+      "name": "Keimay Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 2011000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Keimay",
+      "defense": 634,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_suit04",
+      "name": "Rukips Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2768000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Rukips",
+      "defense": 702,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_suit06",
+      "name": "Godchent Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3537000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Godchent",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_suit02",
+      "name": "Darkbin Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 2011000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Darkbin",
+      "defense": 634,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_suit04",
+      "name": "Nipedot Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2768000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Nipedot",
+      "defense": 702,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_suit06",
+      "name": "Saremender Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3537000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Saremender",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_suit02",
+      "name": "Keriphis Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 2011000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Keriphis",
+      "defense": 634,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_suit04",
+      "name": "Rufoen Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2768000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Rufoen",
+      "defense": 702,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_suit06",
+      "name": "Godvean Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3537000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Godvean",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_suit02",
+      "name": "Darkomet Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 2011000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Darkomet",
+      "defense": 634,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_suit04",
+      "name": "Nirufy Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2768000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Nirufy",
+      "defense": 702,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_suit06",
+      "name": "Saryeve Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3537000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Saryeve",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_suit02",
+      "name": "Henen Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910450,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Henen",
+      "defense": 570,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_suit04",
+      "name": "Rokai Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629600,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Rokai",
+      "defense": 631,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_suit06",
+      "name": "Spacon Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360150,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Spacon",
+      "defense": 672,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_suit02",
+      "name": "Grantus Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910450,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Grantus",
+      "defense": 518,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_suit04",
+      "name": "Geiler Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629600,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Geiler",
+      "defense": 574,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_suit06",
+      "name": "Ruisil Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360150,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Ruisil",
+      "defense": 611,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_suit02",
+      "name": "Heintis Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910450,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Heintis",
+      "defense": 570,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_suit04",
+      "name": "Rokhantia Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629600,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Rokhantia",
+      "defense": 631,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_suit06",
+      "name": "Spimel Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360150,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Spimel",
+      "defense": 672,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_suit02",
+      "name": "Grentio Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910450,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Grentio",
+      "defense": 518,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_suit04",
+      "name": "Gesanan Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629600,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Gesanan",
+      "defense": 574,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_suit06",
+      "name": "Luses Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360150,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Luses",
+      "defense": 611,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_suit02",
+      "name": "Mectic Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Mectic",
+      "defense": 539,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_suit04",
+      "name": "Havey Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Havey",
+      "defense": 596,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_suit06",
+      "name": "Ferraol Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Ferraol",
+      "defense": 635,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_suit02",
+      "name": "Oriene Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Oriene",
+      "defense": 539,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_suit04",
+      "name": "Phasleb Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Phasleb",
+      "defense": 596,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_suit06",
+      "name": "Cupo Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Cupo",
+      "defense": 635,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_suit02",
+      "name": "Mecarine Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Mecarine",
+      "defense": 539,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_suit04",
+      "name": "Hanel Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Hanel",
+      "defense": 596,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_suit06",
+      "name": "Festein Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Festein",
+      "defense": 635,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_suit02",
+      "name": "Orgon Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 62,
+      "cost": 1910000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Orgon",
+      "defense": 539,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_suit04",
+      "name": "Phaisel Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 74,
+      "cost": 2629000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Phaisel",
+      "defense": 596,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_suit06",
+      "name": "Cumel Suit",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 86,
+      "cost": 3360000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Cumel",
+      "defense": 635,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_gauntlet02",
+      "name": "Keimay Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 871000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Keimay",
+      "defense": 412,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_gauntlet04",
+      "name": "Rukips Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1199000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Rukips",
+      "defense": 456,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_gauntlet06",
+      "name": "Godchent Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1532000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Godchent",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_gauntlet02",
+      "name": "Darkbin Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 871000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Darkbin",
+      "defense": 412,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_gauntlet04",
+      "name": "Nipedot Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1199000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Nipedot",
+      "defense": 456,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_gauntlet06",
+      "name": "Saremender Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1532000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Saremender",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_gauntlet02",
+      "name": "Keriphis Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 871000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Keriphis",
+      "defense": 412,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_gauntlet04",
+      "name": "Rufoen Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1199000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Rufoen",
+      "defense": 456,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_gauntlet06",
+      "name": "Godvean Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1532000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Godvean",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_gauntlet02",
+      "name": "Darkomet Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 871000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Darkomet",
+      "defense": 412,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_gauntlet04",
+      "name": "Nirufy Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1199000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Nirufy",
+      "defense": 456,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_gauntlet06",
+      "name": "Saryeve Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1532000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Saryeve",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_gauntlet02",
+      "name": "Henen Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827450,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Henen",
+      "defense": 370,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_gauntlet04",
+      "name": "Rokai Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139050,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Rokai",
+      "defense": 410,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_gauntlet06",
+      "name": "Spacon Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455400,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Spacon",
+      "defense": 437,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_gauntlet02",
+      "name": "Grantus Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827450,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Grantus",
+      "defense": 336,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_gauntlet04",
+      "name": "Geiler Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139050,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Geiler",
+      "defense": 373,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_gauntlet06",
+      "name": "Ruisil Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455400,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Ruisil",
+      "defense": 397,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_gauntlet02",
+      "name": "Heintis Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827450,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Heintis",
+      "defense": 370,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_gauntlet04",
+      "name": "Rokhantia Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139050,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Rokhantia",
+      "defense": 410,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_gauntlet06",
+      "name": "Spimel Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455400,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Spimel",
+      "defense": 437,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_gauntlet02",
+      "name": "Grentio Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827450,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Grentio",
+      "defense": 336,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_gauntlet04",
+      "name": "Gesanan Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139050,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Gesanan",
+      "defense": 373,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_gauntlet06",
+      "name": "Luses Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455400,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Luses",
+      "defense": 397,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_gauntlet02",
+      "name": "Mectic Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Mectic",
+      "defense": 350,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_gauntlet04",
+      "name": "Havey Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Havey",
+      "defense": 387,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_gauntlet06",
+      "name": "Ferraol Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Ferraol",
+      "defense": 413,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_gauntlet02",
+      "name": "Oriene Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Oriene",
+      "defense": 350,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_gauntlet04",
+      "name": "Phasleb Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Phasleb",
+      "defense": 387,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_gauntlet06",
+      "name": "Cupo Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Cupo",
+      "defense": 413,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_gauntlet02",
+      "name": "Mecarine Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Mecarine",
+      "defense": 350,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_gauntlet04",
+      "name": "Hanel Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Hanel",
+      "defense": 387,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_gauntlet06",
+      "name": "Festein Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Festein",
+      "defense": 413,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_gauntlet02",
+      "name": "Orgon Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 61,
+      "cost": 827000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Orgon",
+      "defense": 350,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_gauntlet04",
+      "name": "Phaisel Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 73,
+      "cost": 1139000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Phaisel",
+      "defense": 387,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_gauntlet06",
+      "name": "Cumel Gauntlet",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 85,
+      "cost": 1455000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Cumel",
+      "defense": 413,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_boots02",
+      "name": "Keimay Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 670000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Keimay",
+      "defense": 317,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_boots04",
+      "name": "Rukips Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 922000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Rukips",
+      "defense": 351,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_boots06",
+      "name": "Godchent Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1179000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Godchent",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_boots02",
+      "name": "Darkbin Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 670000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Darkbin",
+      "defense": 317,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_boots04",
+      "name": "Nipedot Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 922000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Nipedot",
+      "defense": 351,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bla_boots06",
+      "name": "Saremender Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1179000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Saremender",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_boots02",
+      "name": "Keriphis Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 670000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Keriphis",
+      "defense": 317,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_boots04",
+      "name": "Rufoen Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 922000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Rufoen",
+      "defense": 351,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_boots06",
+      "name": "Godvean Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1179000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Godvean",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_boots02",
+      "name": "Darkomet Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 670000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Darkomet",
+      "defense": 317,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_boots04",
+      "name": "Nirufy Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 922000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Nirufy",
+      "defense": 351,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bla_boots06",
+      "name": "Saryeve Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1179000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Saryeve",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_boots02",
+      "name": "Henen Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Henen",
+      "defense": 285,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_boots04",
+      "name": "Rokai Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875900,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Rokai",
+      "defense": 315,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_jst_boots06",
+      "name": "Spacon Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120050,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Spacon",
+      "defense": 336,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_boots02",
+      "name": "Grantus Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Grantus",
+      "defense": 259,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_boots04",
+      "name": "Geiler Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875900,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Geiler",
+      "defense": 286,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rag_boots06",
+      "name": "Ruisil Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 90,
+      "cost": 1120050,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Ruisil",
+      "defense": 305,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_boots02",
+      "name": "Heintis Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Heintis",
+      "defense": 285,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_boots04",
+      "name": "Rokhantia Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875900,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Rokhantia",
+      "defense": 315,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_jst_boots06",
+      "name": "Spimel Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120050,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Spimel",
+      "defense": 336,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_boots02",
+      "name": "Grentio Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636500,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Grentio",
+      "defense": 259,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_boots04",
+      "name": "Gesanan Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875900,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Gesanan",
+      "defense": 286,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rag_boots06",
+      "name": "Luses Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 90,
+      "cost": 1120050,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Luses",
+      "defense": 305,
+      "classes": [
+        "ELF"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_boots02",
+      "name": "Mectic Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Mectic",
+      "defense": 269,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_boots04",
+      "name": "Havey Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Havey",
+      "defense": 299,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_rin_boots06",
+      "name": "Ferraol Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Ferraol",
+      "defense": 318,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_boots02",
+      "name": "Oriene Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Oriene",
+      "defense": 269,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_boots04",
+      "name": "Phasleb Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Phasleb",
+      "defense": 299,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_bil_boots06",
+      "name": "Cupo Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Cupo",
+      "defense": 318,
+      "classes": [
+        "DL"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_boots02",
+      "name": "Mecarine Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Mecarine",
+      "defense": 269,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_boots04",
+      "name": "Hanel Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Hanel",
+      "defense": 299,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_rin_boots06",
+      "name": "Festein Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Festein",
+      "defense": 318,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_boots02",
+      "name": "Orgon Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 60,
+      "cost": 636000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Orgon",
+      "defense": 269,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_boots04",
+      "name": "Phaisel Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 72,
+      "cost": 875000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Phaisel",
+      "defense": 299,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_bil_boots06",
+      "name": "Cumel Boots",
+      "npcs": [
+        "puerto-npc-smith"
+      ],
+      "level": 84,
+      "cost": 1120000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Cumel",
+      "defense": 318,
+      "classes": [
+        "DL"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_green",
+      "name": "Green Shield",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 3,
+      "cost": 130,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 18,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_round",
+      "name": "Round Shield",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 9,
+      "cost": 1500,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 46,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_sentinel",
+      "name": "Sentinel Shield",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 15,
+      "cost": 2500,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 60,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_sparkle",
+      "name": "Sparkle Shield",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 20,
+      "cost": 5400,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 82,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_shurain",
+      "name": "Shurain Shield",
+      "npcs": [
+        "flaris-artisan"
+      ],
+      "level": 28,
+      "cost": 12300,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 109,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_plate",
+      "name": "Plate Shield",
+      "npcs": [
+        "puerto-artisan"
+      ],
+      "level": 52,
+      "cost": 106000,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 198,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_kite",
+      "name": "Kite Shield",
+      "npcs": [
+        "puerto-artisan"
+      ],
+      "level": 58,
+      "cost": 219000,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 222,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_gen_foo_ins_lollipop",
+      "name": "Lollipop",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 4,
+      "cost": 20,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 70
+    },
+    {
+      "id": "native_ii_gen_foo_ins_biscuit",
+      "name": "Biscuit",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 14,
+      "cost": 35,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 140
+    },
+    {
+      "id": "native_ii_gen_foo_ins_chocolate",
+      "name": "Chocolate Bar",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 24,
+      "cost": 50,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 200
+    },
+    {
+      "id": "native_ii_gen_foo_ins_milk",
+      "name": "Milk",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 33,
+      "cost": 70,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 260
+    },
+    {
+      "id": "native_ii_gen_foo_ins_bread",
+      "name": "Roll Bread",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 43,
+      "cost": 80,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 330
+    },
+    {
+      "id": "native_ii_gen_foo_ins_hotdog",
+      "name": "Hot Dog",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 52,
+      "cost": 110,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 429
+    },
+    {
+      "id": "native_ii_gen_foo_ins_hodduk",
+      "name": "Pizza",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 62,
+      "cost": 144,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 552
+    },
+    {
+      "id": "native_ii_gen_foo_ins_kimbap",
+      "name": "Kimbap",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 72,
+      "cost": 188,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 676
+    },
+    {
+      "id": "native_ii_gen_foo_ins_chickenstick",
+      "name": "Chicken Stick",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 81,
+      "cost": 231,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 812
+    },
+    {
+      "id": "native_ii_gen_foo_ins_starcandy",
+      "name": "Star Candy",
+      "npcs": [
+        "flaris-npc-lumen"
+      ],
+      "level": 91,
+      "cost": 285,
+      "kind": "IK3_INSTANT",
+      "min": 0,
+      "max": 0,
+      "slot": "consumable",
+      "setName": "",
+      "defense": 0,
+      "classes": null,
+      "sex": null,
+      "heal": 975
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import { MU_SKILLS } from '../data/muSkillsAndClasses';
 import {
   MAX_HERO_LEVEL,
   MAX_STAT_POINTS,
+  POINTS_PER_LEVEL,
   TEN_CHARACTER_TABLES,
   computeHeroDamageStats,
   evaluateAchievements,
@@ -87,8 +88,8 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
   }> = [
     { key: 'str', label: 'Fuerza (STR)', value: character.str, hint: 'Aumenta daño físico (máx 65,000)' },
     { key: 'agi', label: 'Agilidad (AGI)', value: character.agi, hint: 'Aumenta defensa, crítico y cadencia (máx 65,000)' },
-    { key: 'vit', label: 'Vitalidad (VIT)', value: character.vit, hint: 'Aumenta HP (+8) y aguante frontal (máx 65,000)' },
-    { key: 'ene', label: 'Energía (ENE)', value: character.ene, hint: 'Aumenta poder mágico y MP (+6) (máx 65,000)' },
+    { key: 'vit', label: 'Vitalidad (VIT)', value: character.vit, hint: 'Aumenta HP (+4 por punto) y aguante frontal (máx 65,000)' },
+    { key: 'ene', label: 'Energía (ENE)', value: character.ene, hint: 'Aumenta poder mágico y MP (+3 por punto) (máx 65,000)' },
     { key: 'cmd', label: 'Comando (CMD)', value: character.cmd, hint: 'Potencia ataque táctico, crítico y mascotas (máx 65,000)' },
   ];
 
@@ -167,7 +168,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                     {character.classType} · Nivel {character.level}/{MAX_HERO_LEVEL} · Resets: {character.resets} · Kills {character.kills}
                   </div>
                   <div className="text-[11px] text-slate-400">
-                    XP: {character.xp} / {character.xpToNext} (+5 pts/nivel · Full a 65,000 c/u)
+                    XP: {character.xp} / {character.xpToNext} (+{POINTS_PER_LEVEL} pts/nivel · Full a 65,000 c/u)
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -220,6 +221,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                         {[1, 5, 50, 500].map((amt) => (
                           <button
                             key={amt}
+                            aria-label={`Añadir hasta ${amt} a ${row.label}`}
                             onClick={() => onAllocateStat(row.key, amt)}
                             disabled={character.unspentPoints <= 0 || isFull}
                             className="min-h-[34px] px-2 rounded bg-amber-600 hover:bg-amber-500 disabled:opacity-35 text-slate-950 font-bold text-[11px] inline-flex items-center gap-0.5 cursor-pointer"

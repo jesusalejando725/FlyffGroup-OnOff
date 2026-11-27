@@ -91,7 +91,7 @@ interface FlyffItemRules {
   setBonus?: GearBonuses;
   sexFilter?: 'male' | 'female';
   classFilter?: HeroClass[];
-  recovery?: { hp?: number; mp?: number };
+  recovery?: { hp?: number; mp?: number; hpFlat?: number };
 }
 
 export interface MuItem extends FlyffItemRules {
@@ -262,6 +262,7 @@ export interface ShopItemDef extends FlyffItemRules {
   excellentOpt: string;
   zenCost: number;
   vendorRoles: Array<NpcDef['role']>;
+  vendorIds?: string[];
   fixedPrice?: boolean;
   dropExclusive?: boolean;
 }

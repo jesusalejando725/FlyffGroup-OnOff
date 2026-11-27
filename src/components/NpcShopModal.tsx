@@ -1,5 +1,6 @@
 import { ShopModel } from './ShopModel';
-import { ItemPortrait, armorModelFile, itemModelFile } from './ItemPortrait';
+import { ItemPortrait } from './ItemPortrait';
+import { itemAssets, previewModelFile } from '../data/itemVisualAssets';
 import { ITEM_CATALOG } from '../data/itemCatalog';
 import { inventorySellValue } from '../data/itemPricing';
 import { getAdminConfigSync } from '../services/adminConfigService';
@@ -7,6 +8,13 @@ import React, { useState } from 'react';
 import { Flame, Gem, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { MU_CHAOS_WINGS_RECIPES } from '../data/muWorldData';
 import type { MuCharacter, MuItem, NpcDef, ShopItemDef } from '../types/game';
+
+const SECTIONS = [
+  ['all', 'Todo'], ['weapon', 'Armas'], ['armor', 'Sets y armaduras'], ['shield', 'Escudos'],
+  ['wings', 'Alas'], ['pet', 'Mascotas'], ['jewelry', 'Joyería'], ['consumable', 'Consumibles'],
+] as const;
+type Section = typeof SECTIONS[number][0];
+const sectionOf = (item: ShopItemDef) => item.slot === 'shield' ? 'shield' : item.category;
 
 interface NpcShopModalProps {
   open: boolean;
@@ -33,6 +41,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   onSellItem,
   onChaosMixWing,
 }) => {
+  const [section, setSection] = useState<Section>('all');
   const [preview,setPreview]=useState<string|null>(null);
   const [tab, setTab] = useState<'buy' | 'jewels' | 'sell' | 'chaos'>(
     npc?.role === 'chaos_goblin' ? 'chaos' : 'buy',
@@ -45,9 +54,12 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   const customStock = npc.stock;
   const catalogForNpc = ITEM_CATALOG
     .filter(item => {
-      if (item.dropExclusive || (item.sourceLevel !== undefined && !item.vendorRoles.length)) return false;
+      if (item.dropExclusive) return false;
       if (item.sexFilter && item.sexFilter !== character.sex) return false;
       if (item.classFilter && !item.classFilter.includes(character.classType)) return false;
+      if (item.vendorIds?.length) return item.vendorIds.includes(npc.id) &&
+        (!customStock || Object.hasOwn(customStock, item.id));
+      if (item.sourceLevel !== undefined && !item.vendorRoles.length) return false;
       if (item.fixedPrice) return item.vendorRoles.includes(npc.role) &&
         (!customStock || Object.hasOwn(customStock, item.id));
       if (customStock) return Object.hasOwn(customStock, item.id) &&
@@ -56,6 +68,9 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
     })
     .map(item => ({ ...item, zenCost: item.fixedPrice ? item.zenCost : customStock?.[item.id] ??
       Math.round(item.zenCost * (Number.isFinite(priceMultiplier) && priceMultiplier >= 0 ? priceMultiplier : 1)) }));
+  const availableSections = SECTIONS.filter(([id]) => id === 'all' || catalogForNpc.some(item => sectionOf(item) === id));
+  const selectedSection = availableSections.some(([id]) => id === section) ? section : 'all';
+  const visibleStock = catalogForNpc.filter(item => selectedSection === 'all' || sectionOf(item) === selectedSection);
   const sellableItems = items.filter((i) => !i.isEquipped);
 
   const jewelOffers: Array<{
@@ -140,8 +155,15 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
 
         <div className="flex-1 overflow-y-auto mu-scroll p-3 sm:p-4 space-y-2.5">
           {tab === 'buy' && (
+            <>
+            <nav aria-label="Categorías de tienda" className="flex flex-wrap gap-1.5">
+              {availableSections.map(([id, label]) => <button key={id} onClick={() => { setSection(id); setPreview(null); }}
+                aria-pressed={selectedSection === id}
+                className={`rounded border border-amber-700/60 px-2 py-1.5 text-xs ${selectedSection === id ? 'bg-amber-700 text-white' : 'text-slate-300'}`}
+              >{label}</button>)}
+            </nav>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {catalogForNpc.map((s) => (
+              {visibleStock.map((s) => (
                 <div
                   key={s.id}
                   className={`p-3 rounded-lg border flex flex-col justify-between gap-2 ${
@@ -170,6 +192,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                       {s.magicPower > 0 && `Magia +${s.magicPower} · `}
                       {s.defense > 0 && `Def +${s.defense}`}
                     </div>
+                    {itemAssets(s.name)?.appearance && <div className="text-[11px] text-slate-300">Apariencia: {itemAssets(s.name)?.appearance}</div>}
                     {s.requiredLevel && <div className="text-[11px] text-slate-300">Nivel requerido: {s.requiredLevel}</div>}
                     {s.setName && <div className="mt-1 text-[11px] text-slate-300">Conjunto: {s.setName}</div>}
                     {s.classFilter?.length ? <div className="mt-1 text-[11px] text-slate-300">Clases: {s.classFilter.join(', ')}</div> : null}
@@ -177,11 +200,11 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                     <div className="text-[11px] text-emerald-300 mt-0.5">{s.excellentOpt}</div>
                     </div>
                   </div>
-                  <>
+                  {previewModelFile(s, character.sex) && <>
                     <button className="text-xs text-sky-300 text-left py-1" aria-expanded={preview===s.id}
                       onClick={()=>setPreview(preview===s.id ? null : s.id)}>{preview===s.id ? 'Cerrar vista 3D' : 'Ver modelo 3D'}</button>
-                    {preview===s.id && <ShopModel item={s} file={itemModelFile(s) ?? armorModelFile(s,character.sex) ?? (s.slot==='pendant' ? 'equipo/jewelry_pendant.glb' : ['ring1','ring2'].includes(s.slot) ? 'equipo/jewelry_ring.glb' : undefined)} />}
-                  </>
+                    {preview===s.id && <ShopModel item={s} file={previewModelFile(s, character.sex)} />}
+                  </>}
                   <button
                     onClick={() => onBuyItem(s)}
                     disabled={character.zen < s.zenCost}
@@ -192,6 +215,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                 </div>
               ))}
             </div>
+            </>
           )}
 
           {tab === 'jewels' && (

@@ -119,7 +119,15 @@
     "bgm_robledal": "audio/music/bgm_robledal.ogg",
     "bgm_puerto": "audio/music/bgm_puerto.ogg",
     "bgm_ceniza": "audio/music/bgm_ceniza.ogg",
-    "bgm_dungeon": "audio/music/bgm_dungeon.ogg"
+    "bgm_dungeon": "audio/music/bgm_dungeon.ogg",
+    "flyff_bow_shot": "audio/flyff_bow_shot.wav",
+    "flyff_bow_volley": "audio/flyff_bow_volley.wav",
+    "flyff_bow_aimed": "audio/flyff_bow_aimed.wav",
+    "flyff_ice_arrow": "audio/flyff_ice_arrow.wav",
+    "flyff_healing": "audio/flyff_healing.wav",
+    "flyff_arrow_rain": "audio/flyff_arrow_rain.wav",
+    "flyff_sword_thrust": "audio/flyff_sword_thrust.wav",
+    "flyff_sword_sweep": "audio/flyff_sword_sweep.wav"
   },
   "classSkillCatalog": {
     "DK": [

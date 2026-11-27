@@ -3,10 +3,11 @@ import { ArcRotateCamera, Color3, Color4, DirectionalLight, Engine, Mesh, Hemisp
 import '@babylonjs/loaders';
 import { buildArtisanWeapon } from '../game/content/ArtisanWeapon';
 import { applyEnhanceGlow, splitTorsoAndPantsMesh } from '../game/content/EquipmentAppearance';
+import { isFullSuit } from '../data/itemVisualAssets';
 import { artisanWeapon, artisanArmor } from '../data/artisanEquipment';
-import type { ShopItemDef } from '../types/game';
+import type { MuItem } from '../types/game';
 
-export function ShopModel({item,file}:{item:ShopItemDef;file?:string}) {
+export function ShopModel({item,file}:{item:Pick<MuItem, 'id' | 'name' | 'slot' | 'setName' | 'enhanceLevel'>;file?:string}) {
   const ref=useRef<HTMLCanvasElement>(null), [failed,setFailed]=useState(false);
   useEffect(()=>{
     const canvas=ref.current;
@@ -31,7 +32,7 @@ export function ShopModel({item,file}:{item:ShopItemDef;file?:string}) {
         if(part) for(const mesh of container.meshes) {
           if(!(mesh instanceof Mesh) || !mesh.getTotalVertices()) continue;
           if(!mesh.name.startsWith('equip_'+part+'_')) mesh.setEnabled(false);
-          else if(part==='torso'){
+          else if(part==='torso' && !isFullSuit(item)){
             const pieces=splitTorsoAndPantsMesh(mesh,scene);
             (item.slot==='pants'?pieces.torso:pieces.pants)?.dispose();
             mesh.setEnabled(false);

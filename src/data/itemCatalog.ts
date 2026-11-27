@@ -1,3 +1,4 @@
+import { NATIVE_NPC_CATALOG } from './nativeNpcStock';
 import { FLYFF_ECONOMY_CATALOG } from './flyffEconomy';
 import { ARTISAN_CATALOG } from './artisanEquipment';
 import { MU_SHOP_CATALOG } from './muWorldData';
@@ -5,7 +6,7 @@ import { getAdminConfigSync } from '../services/adminConfigService';
 import type { ShopItemDef } from '../types/game';
 
 const options = getAdminConfigSync()['item-options'].byItem ?? {};
-export const ITEM_CATALOG = [...MU_SHOP_CATALOG, ...ARTISAN_CATALOG, ...FLYFF_ECONOMY_CATALOG].map(item => {
+export const ITEM_CATALOG = [...MU_SHOP_CATALOG, ...ARTISAN_CATALOG, ...FLYFF_ECONOMY_CATALOG, ...NATIVE_NPC_CATALOG].map(item => {
   const rule = options[item.id];
   if (!rule || item.fixedPrice || item.dropExclusive) return item;
   const result: ShopItemDef = { ...item };
