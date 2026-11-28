@@ -151,18 +151,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="flex items-center justify-between text-xs font-semibold text-slate-200">
               <span className="inline-flex items-center gap-1.5">
                 <Camera className="w-4 h-4 text-purple-400" />
-                Distancia de Cámara 3D
+                Cámara Distancia
               </span>
               <span className="font-mono-tabular text-purple-300">
-                {(settings.cameraDistance ?? 15.5).toFixed(1)} m
+                {(settings.cameraDistance ?? 7).toFixed(1)} m
               </span>
             </div>
             <input
               type="range"
-              min={7}
-              max={28}
+              min={2}
+              max={50}
               step={0.5}
-              value={settings.cameraDistance ?? 15.5}
+              value={settings.cameraDistance ?? 7}
               onChange={(e) => patch({ cameraDistance: Number(e.target.value) })}
               className="w-full accent-purple-500 cursor-pointer"
             />

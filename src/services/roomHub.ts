@@ -19,18 +19,21 @@ interface ServerRoom {
   bossMaxHp: number;
   peers: Map<string, { peer: RoomPeer; ws: RoomConnection }>;
   sharedFeed: SharedLedgerEntry[];
+  encounters: Map<string,{hp:number; reset:number}>;
   pendingTrades: Map<string,{ sender: string; recipient: string; item: MuItem; entry: SharedLedgerEntry }>;
   tradedItems: Set<string>;
   createdAt: number;
 }
 
 function generateRoomCode(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let suffix = '';
-  for (let i = 0; i < 4; i++) {
-    suffix += chars[Math.floor(Math.random() * chars.length)];
+  let code = '';
+  while (code.length < 32) {
+    for (const n of crypto.getRandomValues(new Uint8Array(40))) {
+      if (n < 250) code += String(n % 10);
+      if (code.length === 32) break;
+    }
   }
-  return `MU-${suffix}`;
+  return code;
 }
 
 function serializeRoom(room: ServerRoom): RoomState {
@@ -83,7 +86,7 @@ export function createRoomHub(options: {
           if (!peer || typeof peer.peerId !== 'string' || !peer.peerId || typeof peer.name !== 'string') return;
           const eventType = (msg.eventType as EventType) || 'blood_castle';
           const transport = options.transport || (msg.transport as TransportMode) || 'wifi';
-          let code = (msg.preferredCode as string) || generateRoomCode();
+          let code = generateRoomCode();
           while (rooms.has(code)) {
             code = generateRoomCode();
           }
@@ -100,7 +103,7 @@ export function createRoomHub(options: {
             bossMaxHp: 1200,
             peers: new Map(),
             sharedFeed: [],
-            pendingTrades: new Map(),
+            encounters: new Map(), pendingTrades: new Map(),
             tradedItems: new Set(),
             createdAt: Date.now(),
           };
@@ -122,7 +125,7 @@ export function createRoomHub(options: {
           if (!peer || typeof peer.peerId !== 'string' || !peer.peerId || typeof peer.name !== 'string') return;
           const transport = options.transport || (msg.transport as TransportMode) || 'wifi';
           const room = rooms.get(code);
-          if (!room || room.peers.has(peer.peerId) || (options.transport && room.peers.size >= 8)) {
+          if (!room || room.peers.has(peer.peerId) || room.peers.size >= 32) {
             ws.send(
               JSON.stringify({
                 type: 'room:error',
@@ -145,10 +148,25 @@ export function createRoomHub(options: {
         const room = rooms.get(currentRoomCode);
         if (!room || room.peers.get(currentPeerId)?.ws !== ws) return;
 
+        if (msg.type === 'mob:hit') {
+          const peer = room.peers.get(currentPeerId)!.peer, id = String(msg.id);
+          const event=id.startsWith('event-'+peer.currentMapId+'-') && /^event-[a-z_]+-[a-z]+-\d{1,2}-\d{13}$/.test(id);
+          if (!event && !(id.startsWith('mob-'+peer.currentMapId+'-') && /^mob-[a-z_]+-\d{1,5}$/.test(id))) return;
+          const max = Number(msg.maxHp), damage = Number(msg.damage);
+          if (!Number.isSafeInteger(max)||max<=0||!Number.isSafeInteger(damage)||damage<=0) return;
+          const now = Date.now(), prev = room.encounters.get(id);
+          if (prev?.hp===0 && prev.reset>now) return;
+          const hp = Math.max(0, (prev && prev.hp>0 ? prev.hp : max) - damage);
+          room.encounters.set(id,{hp,reset:hp===0 ? now+(event ? 4800000 : 4000) : 0});
+          broadcastRoom(room,{type:'mob:state',id,hp,mapId:peer.currentMapId});
+          return;
+        }
         if (msg.type === 'peer:update') {
           const entry = room.peers.get(currentPeerId);
           if (!entry) return;
           const patch = msg.patch as Partial<RoomPeer>;
+          if (patch.nearby) patch.nearby = currentPeerId===room.hostPeerId && Array.isArray(patch.nearby) ?
+            patch.nearby.slice(0,96).filter(p=>p && typeof p.id==='string' && [p.x,p.z,p.rot].every(Number.isFinite)) : undefined;
           entry.peer = { ...entry.peer, ...patch, peerId: currentPeerId, role: entry.peer.role, transport: entry.peer.transport };
           broadcastRoom(
             room,
@@ -322,6 +340,7 @@ export function createRoomHub(options: {
             rooms.delete(room.code);
           } else {
             room.peers.delete(currentPeerId);
+            ws.send(JSON.stringify({type:"room:ended",message:"Has salido del grupo."}));
             broadcastRoom(room, { type: 'room:state', room: serializeRoom(room) });
           }
           currentRoomCode = null;
@@ -340,12 +359,8 @@ export function createRoomHub(options: {
         rooms.delete(currentRoomCode);
       } else {
         if (room.hostPeerId === currentPeerId) {
-          const nextHost = room.peers.values().next().value;
-          if (nextHost) {
-            nextHost.peer.role = 'host';
-            room.hostPeerId = nextHost.peer.peerId;
-            room.hostName = nextHost.peer.name;
-          }
+          broadcastRoom(room,{type:'room:ended',message:'El anfitrión se ha desconectado.'});
+          rooms.delete(currentRoomCode); return;
         }
         broadcastRoom(room, { type: 'room:state', room: serializeRoom(room) });
       }
@@ -354,7 +369,6 @@ export function createRoomHub(options: {
   return {
     attach,
     listRooms: () => [...rooms.values()].map(room => ({
-      code: room.code,
       eventType: room.eventType,
       hostName: room.hostName,
       transport: room.transport,

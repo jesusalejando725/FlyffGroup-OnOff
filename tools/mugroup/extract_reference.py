@@ -596,7 +596,7 @@ def extract_45_monsters() -> list[dict[str, Any]]:
         'sfx_HitSword01', 'sfx_HitStick01', 'sfx_HitWand01', 'sfx_hitbow01',
         'sfx_hityoy01', 'sfx_hitKnuckle01', 'sfx_hitCritical01',
         'sfx_genmonspawn01', 'sfx_genlevelup01', 'sfx_genposion',
-        'sfx_genintsuccess', 'sfx_genintfail', 'sfx_genintinchant02',
+        'sfx_genintfail', 'sfx_genintinchant02',
         'sfx_GenDustJump01', 'sfx_gendustrun01', 'sfx_heavenfire01',
         'obj_thunder01', 'obj_fire01', 'sfx_npcsp1dirfiresp01',
     ]:

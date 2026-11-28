@@ -270,7 +270,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                     Progresión Profunda de Habilidades y Especialización
                   </div>
                   <div className="text-[11px] text-slate-400">
-                    Sube cada skill hasta Rango 10 (+8.5% daño por rango) usando Puntos de Habilidad y Zen.
+                    Invierte puntos de habilidad y Zen en el poder que elijas. Cada poder tiene 100 rangos.
                   </div>
                 </div>
                 <div className="text-right font-mono-tabular shrink-0">
@@ -323,7 +323,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                   const cost = getSkillUpgradeCost(rank);
                   const cd = getSkillCooldownSec(sk);
                   const canUpgrade =
-                    rank < 10 && (character.skillPoints ?? 0) >= cost.skillPoints && character.zen >= cost.zenCost;
+                    rank < 100 && (character.skillPoints ?? 0) >= cost.skillPoints && character.zen >= cost.zenCost;
                   return (
                     <div
                       key={sk.id}
@@ -333,7 +333,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="text-xs font-bold text-slate-100">{sk.name}</span>
                           <span className="px-1.5 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-[10px] font-mono-tabular text-amber-300">
-                            Rango {rank}/10
+                            Rango {rank}/100
                           </span>
                           <span className="text-[10px] font-mono-tabular text-sky-300">
                             Mult x{effMult} · CD {cd}s · MP {sk.mpCost}
@@ -346,7 +346,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                         disabled={!canUpgrade}
                         className="min-h-[38px] px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-40 text-slate-950 font-bold text-xs whitespace-nowrap shrink-0 cursor-pointer disabled:cursor-not-allowed"
                       >
-                        {rank >= 10
+                        {rank >= 100
                           ? 'Rango Máximo'
                           : `Subir (${cost.skillPoints}pt · ${cost.zenCost.toLocaleString()} Zen)`}
                       </button>

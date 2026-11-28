@@ -127,7 +127,11 @@
     "flyff_healing": "audio/flyff_healing.wav",
     "flyff_arrow_rain": "audio/flyff_arrow_rain.wav",
     "flyff_sword_thrust": "audio/flyff_sword_thrust.wav",
-    "flyff_sword_sweep": "audio/flyff_sword_sweep.wav"
+    "flyff_sword_sweep": "audio/flyff_sword_sweep.wav",
+    "pcskillm-swordwind1": "audio/skills/pcskillm-swordwind1.wav",
+    "pcskilll-icemissile1": "audio/skills/pcskilll-icemissile1.wav",
+    "pcskilld-iceshark": "audio/skills/pcskilld-iceshark.wav",
+    "pcskillm-healing": "audio/skills/pcskillm-healing.wav"
   },
   "classSkillCatalog": {
     "DK": [

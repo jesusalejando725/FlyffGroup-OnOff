@@ -88,6 +88,7 @@ export interface TargetMonsterInfo {
 
 export interface EngineCallbacks {
   onEquipmentWear?: (slot: ItemSlot, durability: number) => void;
+  onGroupHit?: (id:string, damage:number,maxHp:number)=>boolean;
   onKillMonster?: (xp: number, zen: number, invasion?: Invasion) => void | Promise<void>;
   onPickupLoot?: (drop: LootDropInfo) => void | Promise<void>;
   onPlayerDamaged?: (rawAmount: number, isCrit: boolean) => void;
@@ -288,7 +289,7 @@ export class MuWorldEngine {
   private targetFps: 30 | 45 | 60 = 60;
   private autoHuntEnabled = false;
   private helperRange = 3;
-  private activeBonuses = { atkBonusPct: 0, speedBonusPct: 0, critBonusPct: 0 };
+  private activeBonuses = { magicBonusPct:0, atkBonusPct: 0, speedBonusPct: 0, critBonusPct: 0 };
 
   private monsters: ActiveMonster[] = [];
   private campMarkers: {x:number;z:number}[] = [];
@@ -383,10 +384,10 @@ export class MuWorldEngine {
     this.camera.panningSensibility = 0;
     this.camera.minZ = 0.2;
     this.camera.maxZ = 950;
-    this.camera.lowerRadiusLimit = 5;
-    this.camera.upperRadiusLimit = 36;
-    this.camera.lowerBetaLimit = 0.35;
-    this.camera.upperBetaLimit = 1.44;
+    this.camera.lowerRadiusLimit = 2;
+    this.camera.upperRadiusLimit = 50;
+    this.camera.lowerBetaLimit = 0.08;
+    this.camera.upperBetaLimit = Math.PI - .08;
     if (this.canvas) {
       this.camera.attachControl(this.canvas, true);
     }
@@ -454,7 +455,7 @@ export class MuWorldEngine {
   }
 
   public setCameraDistance(dist: number): void {
-    this.cameraDistance = Math.max(6, Math.min(34, dist));
+    this.cameraDistance = Math.max(2, Math.min(50, dist));
     if (this.mode === 'playing') this.camera.radius = this.cameraDistance;
   }
 
@@ -472,7 +473,7 @@ export class MuWorldEngine {
     if (enabled) this.autoHuntAccum = 1.1;
   }
 
-  public setActiveEffectBonuses(bonuses: { atkBonusPct: number; speedBonusPct: number; critBonusPct: number }): void {
+  public setActiveEffectBonuses(bonuses: { magicBonusPct:number; atkBonusPct: number; speedBonusPct: number; critBonusPct: number }): void {
     this.activeBonuses = bonuses;
   }
 
@@ -492,7 +493,7 @@ export class MuWorldEngine {
       soundSynth.setMapMusic('login');
       if (mode === 'character_select') void this.showSelectionRegion();
     } else {
-      this.camera.lowerRadiusLimit = 5;
+      this.camera.lowerRadiusLimit = 2;
       this.camera.radius = this.cameraDistance;
       this.camera.beta = 1.14;
       const rules = getAdminConfigSync()['world-rules'];
@@ -657,8 +658,8 @@ export class MuWorldEngine {
     soundSynth.playJump(this.heroStats?.sex);
   }
 
-  public getHeroPose(): { x: number; z: number; rotY: number; mapId: MapId } {
-    return { x: this.heroX, z: this.heroZ, rotY: this.heroRotY, mapId: nearestRegion(MU_MAPS,this.heroX,this.heroZ).id };
+  public getHeroPose(): { x: number; z: number; rotY: number; mapId: MapId; altitude:number } {
+    return { altitude:this.hoverOffset, x: this.heroX, z: this.heroZ, rotY: this.heroRotY, mapId: nearestRegion(MU_MAPS,this.heroX,this.heroZ).id };
   }
 
   public getEffectiveCityRadius(): number {
@@ -716,7 +717,7 @@ export class MuWorldEngine {
       }
       entry.peer = peer;
       const py = this.flyff.world.getGroundHeight(peer.x, peer.z);
-      entry.node.position.set(peer.x, py + 0.9, peer.z);
+      entry.node.position.set(peer.x, py + .9 + (peer.altitude ?? 0), peer.z);
       entry.node.rotation.y = peer.rotY || 0;
     }
 
@@ -733,7 +734,7 @@ export class MuWorldEngine {
     const actor = this.flyff.actor;
     if (!actor) return skill.isBuff ? 'cast_release' : 'attack';
 
-    const slotIdx = Math.max(0, Math.min(5, Number(skill.keyHint || 1) - 1));
+    const slotIdx = Math.max(0, Math.min(6, Number(skill.keyHint || 1) - 1));
     const clip = 'power_'+slotIdx;
     if (actor.hasClip(clip)) return clip;
     if ((skill.isBuff || cls === 'DW' || (cls === 'DL' && slotIdx >= 1) || (cls === 'MG' && slotIdx >= 2)) && actor.hasClip('cast_release')) return 'cast_release';
@@ -806,6 +807,7 @@ export class MuWorldEngine {
     const critChance = (stats?.critPct ?? 14) + this.activeBonuses.critBonusPct;
     if (stats) {
       const magical = (this.heroStats?.classType === 'DW') || (this.heroStats?.classType !== 'ELF' && style === 'bolt');
+      if (magical) baseStatPower *= 1+this.activeBonuses.magicBonusPct/100;
       baseStatPower *= .65 + .35*(magical ? stats.magicPower : stats.physicalPower)/stats.avgAttack;
     }
     for (const mob of affected) {
@@ -822,7 +824,7 @@ export class MuWorldEngine {
       const effectiveDefense = mob.defense * (1 - (gear.ignoreDefensePct ?? 0) / 100);
       const finalDmg = this.damageToMonster(mob, rawDmg, effectiveDefense);
 
-      mob.hp = Math.max(0, mob.hp - finalDmg);
+      if (!this.callbacks.onGroupHit?.(this.groupMobId(mob),finalDmg,mob.maxHp)) mob.hp = Math.max(0, mob.hp - finalDmg);
       if (!mob.strike && mob.actionTime <= 0) this.playMonsterAnim(mob, 'hit', false);
       this.playMonsterSound(mob, 'dmg1');
 
@@ -871,36 +873,20 @@ export class MuWorldEngine {
     });
   }
 
+  private lootGoal: ActiveLoot | null = null;
   public collectAutoLoot(filters: LootFilterSettings): void {
-    const heroX = this.heroX;
-    const heroZ = this.heroZ;
-    for (let i = this.loots.length - 1; i >= 0; i--) {
-      const loot = this.loots[i];
-      if (!filters[loot.info.kind]) continue;
-      if (Math.hypot(loot.info.x-heroX,loot.info.z-heroZ,loot.info.y-this.heroY-this.hoverOffset) <= 5.5) {
-        this.pickupLootIndex(i);
+    this.lootGoal = null;
+    let best = Infinity;
+    for (const loot of this.loots) {
+      const d = Math.hypot(loot.info.x-this.heroX,loot.info.z-this.heroZ);
+      const height = Math.abs(this.heroY+this.hoverOffset-(loot.info.y-.35));
+      if (filters[loot.info.kind] && d <= 6 && height <= 4.01 && d < best) {
+        this.lootGoal = loot;
+        best = d;
       }
     }
   }
-
-  public pickupNearestLoot(manual = false, filters?: LootFilterSettings): void {
-    let bestIdx = -1;
-    let bestDist = manual ? 9.0 : 5.5;
-    for (let i = 0; i < this.loots.length; i++) {
-      const loot = this.loots[i];
-      if (filters && !filters[loot.info.kind]) continue;
-      const d = Math.hypot(loot.info.x-this.heroX,loot.info.z-this.heroZ,loot.info.y-this.heroY-this.hoverOffset);
-      if (d < bestDist) {
-        bestDist = d;
-        bestIdx = i;
-      }
-    }
-    if (bestIdx >= 0) {
-      this.pickupLootIndex(bestIdx);
-    } else if (manual) {
-      this.callbacks.onFloatingText?.('No hay botín cerca', '#94a3b8');
-    }
-  }
+  public cancelLootApproach() { this.lootGoal = null; }
 
   private pickupLootIndex(idx: number): void {
     const loot = this.loots[idx];
@@ -931,6 +917,28 @@ export class MuWorldEngine {
       mob.root.position.set(mob.x, this.flyff.world.getGroundHeight(mob.x, mob.z), mob.z);
       this.playMonsterAnim(mob, 'stand', true);
     }
+  }
+
+  private groupMobId(m: ActiveMonster) {
+    return m.invasion ? `event-${m.invasion.map}-${m.invasion.id}-${m.id.split(':').pop()}-${m.respawnAt}` : m.id;
+  }
+  public groupPositions(): NonNullable<RoomPeer['nearby']> {
+    return [...this.loadedMonsters].filter(m=>m.alive).slice(0,96).map(m=>({id:this.groupMobId(m),x:m.x,z:m.z,rot:m.rotY}));
+  }
+  public applyGroupPositions(peer:RoomPeer) {
+    if (peer.currentMapId!==this.currentMap.id || !peer.nearby?.length) return;
+    const poses=new Map(peer.nearby.map(p=>[p.id,p]));
+    for (const m of this.loadedMonsters) {
+      const p=poses.get(this.groupMobId(m));
+      if (p && m.alive) {m.x=p.x;m.z=p.z;m.rotY=p.rot;if(m.root)m.root.rotation.y=p.rot;}
+    }
+  }
+  public applyGroupHealth(id:string,hp:number,mapId:string) {
+    if (this.mode!=='playing' || this.currentMap.id!==mapId) return;
+    const mob=id.startsWith("event-") ? this.eventMobs.find(m=>this.groupMobId(m)===id) : this.monsters.find(m=>m.id===id);
+    if (!mob?.alive) return;
+    mob.hp=Math.min(mob.maxHp,hp);
+    if (mob.hp===0) this.handleMonsterDefeated(mob);
   }
 
   private handleMonsterDefeated(mob: ActiveMonster): void {
@@ -1633,6 +1641,21 @@ export class MuWorldEngine {
       }
     }
 
+    const loot = this.lootGoal;
+    let retrieving = false;
+    if (loot && this.loots.includes(loot)) {
+      const dx = loot.info.x-this.heroX, dz = loot.info.z-this.heroZ, d = Math.hypot(dx,dz);
+      const height = Math.abs(this.heroY+this.hoverOffset-loot.info.y+.35);
+      if (d > 6 || height > 4.01) this.lootGoal = null;
+      else if (d <= .85 && height <= 1) {
+        this.pickupLootIndex(this.loots.indexOf(loot)); this.lootGoal = null;
+      } else if (!manualInput) {
+        retrieving = true;
+        const a = this.camera.alpha, n = Math.max(1,d);
+        moveX = d < .4 ? 0 : (-Math.sin(a)*dx+Math.cos(a)*dz)/n;
+        moveZ = d < .4 ? 0 : (-Math.cos(a)*dx-Math.sin(a)*dz)/n;
+      }
+    }
     const len = Math.hypot(moveX, moveZ);
     const moving = len > 0.08;
 
@@ -1669,7 +1692,7 @@ export class MuWorldEngine {
     const inCity = this.isInSafeCity();
     if (!hasWings && this.flightMode === 'flight') this.flightMode = 'landing';
     const manualFlight = this.flightMode === 'flight' || this.flightMode === 'landing';
-    const proposed = flightAltitude(this.flightMode, this.altitude, this.camera.beta, moving ? Math.min(1,len) : 0, dt);
+    const proposed = retrieving ? Math.max(.45,this.altitude-5*dt) : flightAltitude(this.flightMode, this.altitude, this.camera.beta, moving ? Math.min(1,len) : 0, dt);
     if (manualFlight) {
       this.altitude = this.flyff.world.collision.airHeight(this.heroX,this.heroZ,this.heroY+this.altitude,this.heroY+proposed)-this.heroY;
       this.altitude = Math.max(0,Math.min(500,this.altitude));
@@ -1694,7 +1717,9 @@ export class MuWorldEngine {
       if (mob.alive) clearance = Math.min(clearance,Math.max(0,(Math.hypot(mob.x-this.heroX,mob.z-this.heroZ)-28)/16));
     }
     this.openSky += ((flying ? clearance : 0)-this.openSky)*(1-Math.exp(-dt*5));
+    const previousHover=this.hoverOffset;
     this.hoverOffset = manualFlight ? this.altitude : this.flightMode === 'ground' ? 0 : (1.1+(flightHeight(this.wingPhase)-1.1)*this.openSky)*this.wingLift;
+    if (retrieving && this.flightMode === "auto") this.hoverOffset = Math.max(.45, Math.min(this.hoverOffset,previousHover-5*dt));
     if (this.flyff.actor) this.flyff.actor.wingPhase = flying ? this.wingPhase : (this.flyff.worldClock / 2) % 1;
 
     const groundY = this.flyff.world.collision.floor(
@@ -1722,16 +1747,19 @@ export class MuWorldEngine {
     this.scene.fogEnd = 450 + this.altitude;
 
     // Keep the camera above rising ground behind the character, including while orbiting.
-    let maxBeta = manualFlight ? 2.65 : 1.44;
-    const reach = Math.max(1, this.camera.radius) * Math.sin(this.camera.beta);
-    for (let i = 1; i <= 5; i++) {
-      const distance = reach * i / 5;
-      const terrain = this.flyff.world.getGroundHeight(this.heroX + Math.cos(this.camera.alpha) * distance,
-        this.heroZ + Math.sin(this.camera.alpha) * distance);
-      const rise = terrain + 0.45 - this.camera.target.y;
-      if (rise > 0) maxBeta = Math.min(maxBeta, Math.atan2(distance, rise));
+    // Retract the boom at terrain instead of locking the viewing angle.
+    const desiredRadius = this.cameraDistance;
+    const sin = Math.sin(this.camera.beta), cos = Math.cos(this.camera.beta);
+    let radius = desiredRadius;
+    const samples = Math.ceil(Math.min(32,desiredRadius*2));
+    for (let i=1; i<=samples; i++) {
+      const d = desiredRadius*i/samples;
+      const ground = this.flyff.world.getGroundHeight(this.heroX + Math.cos(this.camera.alpha)*d*sin,
+        this.heroZ + Math.sin(this.camera.alpha)*d*sin);
+      if (this.camera.target.y + d*cos < ground + .3) { radius = Math.max(.35,d-desiredRadius/samples); break; }
     }
-    this.camera.upperBetaLimit = Math.max(0.35, maxBeta);
+    this.camera.lowerRadiusLimit = .35;
+    this.camera.radius = radius;
     if (this.attackSwingTimer > 0) {
       this.attackSwingTimer = Math.max(0, this.attackSwingTimer - dt);
     } else if (this.flyff.actor) {
@@ -1927,7 +1955,8 @@ export class MuWorldEngine {
         this.callbacks.onPlayerDamaged?.(damage, !blocked && Math.random() < 0.12);
         const reflected = Math.round(damage * (gear.reflectPct ?? 0) / 100);
         if (reflected > 0) {
-          mob.hp = Math.max(0, mob.hp - this.damageToMonster(mob, reflected, 0));
+          const dealt=this.damageToMonster(mob, reflected, 0);
+          if (!this.callbacks.onGroupHit?.(this.groupMobId(mob),dealt,mob.maxHp)) mob.hp = Math.max(0, mob.hp - dealt);
           if (!mob.hp) this.handleMonsterDefeated(mob);
         }
         soundSynth.playHit(this.heroStats?.sex);

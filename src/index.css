@@ -124,3 +124,7 @@
 .flyff-vitals footer {font-size:10px;margin-top:5px;text-align:center;line-height:1.3}
 [data-hud-layout] button:not([aria-pressed=true]),[data-testid=hud-joystick] {border-color:#ac8c59;background-image:linear-gradient(150deg,#e7c88b32,transparent 38%,#20140c52);box-shadow:inset 0 0 0 1px #393026,inset 0 0 0 2px #dcc19455,0 2px 4px #17110c88}
 [data-testid=hud-joystick] {background:radial-gradient(circle,#5a4a38c9,#29231de0 66%,#90764c 68%,#33271b 72%);border:2px solid #b09057}
+
+.flyff-vitals { width:clamp(175px,24vw,235px);padding:6px 9px;min-height:0;font-variant-numeric:tabular-nums }
+.flyff-vitals aside {position:static;width:auto;text-align:left;padding:2px 0;color:#ebd4a8}
+.flyff-vitals .flyff-gauge {margin:2px 0;background:none}.flyff-vitals .flyff-gauge b {color:#f2e1c9}.flyff-vitals footer {border-top:1px solid #aa907080;padding-top:3px}

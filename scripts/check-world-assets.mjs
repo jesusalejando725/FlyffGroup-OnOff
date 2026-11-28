@@ -144,10 +144,11 @@ for (const [cls, recipes] of Object.entries(RECIPES)) {
       for (const texture of part.textures ?? []) await asset(texture);
       if (part.mesh) await asset(part.mesh);
     }
+    await asset(`ui/skill-${cls}-${i}.webp`);
     skills++;
   }
 }
-assert.equal(skills, 30, 'Expected 30 distinct class skills');
+assert.equal(skills, 35, 'Expected seven distinct skills for each of five classes');
 
 // Verify water & weather & sparkle textures + NPC GLBs + >= 40 Monster GLBs
 for (const tex of [
@@ -197,7 +198,7 @@ for (const file of monsterFiles) {
 }
 for (const c of characters) {
   const doc=await glb(c.model);
-  for (const clip of [...Array.from({length:6},(_,i)=>'power_'+i),'flight']) assert(doc.animations.some(a=>a.name===clip && a.channels.length),c.id+': '+clip);
+  for (const clip of [...Array.from({length:7},(_,i)=>'power_'+i),'flight']) assert(doc.animations.some(a=>a.name===clip && a.channels.length),c.id+': '+clip);
 }
 const loadData = async name => JSON.parse(await readFile(new URL('../src/data/'+name+'.json',import.meta.url),'utf8'));
 const families=await loadData('setFamilies'), arms=await loadData('setArmaments');
@@ -246,7 +247,7 @@ for (const set of Object.values(market.sets)) {
 for (const sex of ['male', 'female']) {
   const elf = await glb(`personajes/ELF/ELF_${sex}.glb`);
   const clips = elf.animations.filter(ani => /^power_/.test(ani.name));
-  assert.equal(clips.length, 6);
+  assert.equal(clips.length, 7);
   assert.equal(clips.find(clip => clip.name === 'power_3').extras.motion, 'SklRagIceArr');
   assert.equal(clips.find(clip => clip.name === 'power_5').extras.motion, 'SklAcrRain');
 }

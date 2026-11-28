@@ -8,7 +8,7 @@ import { inventorySellValue } from '../data/itemPricing';
 import Dexie, { type Table } from 'dexie';
 import {
   DEFAULT_BUTTON_LAYOUTS,
-  MU_CLASSES,
+  MU_CLASSES, MU_SKILLS,
   getDefaultComboConfig,
   getStarterItemsForMuClass,
 } from '../data/muSkillsAndClasses';
@@ -924,33 +924,38 @@ export async function upgradeSkillRank(
   skillId: string,
 ): Promise<{ ok: boolean; character: MuCharacter; message: string }> {
   await initDexie();
-  const currentRank = getSkillRank(character, skillId);
-  if (currentRank >= 10) {
-    return { ok: false, character, message: 'Este poder ya alcanzó el Rango máximo (R10).' };
-  }
-  const cost = getSkillUpgradeCost(currentRank);
-  if ((character.skillPoints ?? 0) < cost.skillPoints) {
-    return { ok: false, character, message: 'No tienes suficientes Puntos de Skill (sube de nivel).' };
-  }
-  if (character.zen < cost.zenCost) {
-    return { ok: false, character, message: `Necesitas ${cost.zenCost.toLocaleString()} Zen para mejorar este poder.` };
-  }
+  return db.transaction('rw', db.characters, async () => {
+    const current = await db.characters.get(character.id);
+    if (!current || !MU_SKILLS[current.classType].some(skill=>skill.id===skillId)) return {ok:false,character,message:'Poder no disponible.'};
+    character = current;
+    const currentRank = getSkillRank(character, skillId);
+    if (currentRank >= 100) {
+      return { ok: false, character, message: 'Este poder ya alcanzó el Rango máximo (R100).' };
+    }
+    const cost = getSkillUpgradeCost(currentRank);
+    if ((character.skillPoints ?? 0) < cost.skillPoints) {
+      return { ok: false, character, message: 'No tienes suficientes Puntos de Skill (sube de nivel).' };
+    }
+    if (character.zen < cost.zenCost) {
+      return { ok: false, character, message: `Necesitas ${cost.zenCost.toLocaleString()} Zen para mejorar este poder.` };
+    }
 
-  const nextRank = currentRank + 1;
-  const saved = await updateCharacter({
-    ...character,
-    skillPoints: (character.skillPoints ?? 0) - cost.skillPoints,
-    zen: character.zen - cost.zenCost,
-    skillRanks: {
-      ...(character.skillRanks || {}),
-      [skillId]: nextRank,
-    },
+    const nextRank = currentRank + 1;
+    const saved = await updateCharacter({
+      ...character,
+      skillPoints: (character.skillPoints ?? 0) - cost.skillPoints,
+      zen: character.zen - cost.zenCost,
+      skillRanks: {
+        ...(character.skillRanks || {}),
+        [skillId]: nextRank,
+      },
+    });
+    return {
+      ok: true,
+      character: saved,
+      message: `Poder mejorado a Rango ${nextRank} (-${cost.zenCost.toLocaleString()} Zen).`,
+    };
   });
-  return {
-    ok: true,
-    character: saved,
-    message: `Poder mejorado a Rango ${nextRank} (-${cost.zenCost.toLocaleString()} Zen).`,
-  };
 }
 
 export async function setCharacterSpecialization(
@@ -1011,7 +1016,7 @@ export async function loadGameSettings(): Promise<GameSettings> {
   await initDexie();
   const rec = await db.kvMeta.get('gameSettings');
   const saved = (rec?.value as Partial<GameSettings> | undefined) || {};
-  return { ...DEFAULT_SETTINGS, ...saved };
+  return { ...DEFAULT_SETTINGS, ...saved, cameraDistance: !saved.cameraDistanceMigratedV4 && saved.cameraDistance === 15.5 ? 7 : saved.cameraDistance ?? DEFAULT_CAMERA_DISTANCE, cameraDistanceMigratedV4: true };
 }
 
 export async function saveGameSettings(next: GameSettings): Promise<void> {

@@ -24,7 +24,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
-import { DEFAULT_BUTTON_LAYOUTS, MU_SKILLS, skillPresentation } from '../data/muSkillsAndClasses';
+import { DEFAULT_BUTTON_LAYOUTS, MU_CLASSES, MU_SKILLS, skillPresentation } from '../data/muSkillsAndClasses';
 import { getMapById } from '../data/muWorldData';
 import type {
   ActiveEffect,
@@ -1129,7 +1129,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
       )}
 
       {wrapButton('vitals', <div className="flyff-vitals" style={{backgroundImage:'url("./mugroup/ui/WndStatus.png")'}}>
-        <strong>{character.name} · Nv. {character.level}</strong><aside>{character.classType}<small>Zen {character.zen.toLocaleString()}<br/>B:{character.bless} · S:{character.soul}</small></aside>
+        <strong>{character.name} · Nv. {character.level}</strong><aside>{MU_CLASSES.find(c=>c.id===character.classType)?.name} · Zen {character.zen.toLocaleString()} · B:{character.bless} S:{character.soul}</aside>
         {([['HP',hpPct,character.hp,character.maxHp,'#e93949'],['MP',mpPct,character.mp,character.maxMp,'#3578db'],
           ['AG',agPct,character.ag,character.maxAg,'#58a74b'],['SD',sdPct,character.sd,character.maxSd,'#d6ae46'],
           ['EXP',xpPct,Math.floor(xpPct),100,'#a28bc6']] as const).map(([label,pct,current,max,color]) =>

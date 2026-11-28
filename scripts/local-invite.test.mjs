@@ -14,7 +14,7 @@ test('a Wi-Fi trade is confirmed only after the recipient acknowledges local sto
     await once(ws,'open');
     return {
       history,
-      peer:{ peerId:'fixture-'+name,name,level:5,classType:'DK',x:0,z:0 },
+      peer:{ peerId:'fixture-'+name,name,level:5,classType:'DK',currentMapId:'flaris',x:100,z:100 },
       send: payload => ws.send(JSON.stringify(payload)),
       wait: async (type, check = () => true) => {
         const deadline = Date.now()+1500;
@@ -31,8 +31,17 @@ test('a Wi-Fi trade is confirmed only after the recipient acknowledges local sto
     const owner = await client('Host'), guest = await client('Guest');
     owner.send({type:'room:create',peer:owner.peer,eventType:'free_trade',transport:'wifi'});
     const { room } = await owner.wait('room:state');
+    assert.match(room.code,/^\d{32}$/);
     guest.send({type:'room:join',peer:guest.peer,code:room.code,transport:'wifi'});
     await guest.wait('room:state', event => event.room.peers.length === 2);
+    for (const who of [owner,guest]) who.send({type:'mob:hit',id:'mob-flaris-7',damage:60,maxHp:100});
+    await guest.wait('mob:state', event=>event.hp===0); await owner.wait('mob:state', event=>event.hp===0);
+    for (let n=2; n<=32; n++) {
+      const extra=await client('Extra'+n);
+      extra.send({type:'room:join',peer:extra.peer,code:room.code,transport:'wifi'});
+      await extra.wait(n===32?'room:error':'room:state');
+    }
+    assert(!JSON.stringify(await (await fetch('http://127.0.0.1:3000/api/rooms')).json()).includes(room.code));
     const offer = {type:'trade:send_item',targetPeerId:guest.peer.peerId,item:{id:'fixture-item',name:'Espada de prueba',enhanceLevel:1}};
     owner.send(offer);
     const accepted = await guest.wait('trade:received');

@@ -599,46 +599,46 @@ export class EquipmentAppearance {
       actor.wingRig = new WingRig(actor.root, wingSocket, upperSpine, torso);
 
       const baseName = wingFile.split('/').pop() || wingFile;
-      // Calibrated local alignment & measured deformed span per wing family so Evo 1 = ~1.50m wingspan
-      let alignRot = new Vector3(0, 0, 0);
-      let modelOffset = new Vector3(0, -0.87, -0.14);
-      let rawAnimatedSpan = 1.5;
-      let verticalFit = 1;
-
-      if (baseName.startsWith('wing_mugroup_feather')) {
-        alignRot = new Vector3(0, 0, 0);
-        modelOffset = new Vector3(0, -0.87, -0.14);
-        rawAnimatedSpan = 1.27;
-        // The numbered feather models have a lower bind pose than the original.
-        if (/^wing_mugroup_feather0[12]\.glb$/.test(baseName)) modelOffset.y = -0.25;
-      } else if (baseName.startsWith('wing_mugroup_angel')) {
-        alignRot = new Vector3(0, 0, 0);
-        modelOffset = new Vector3(0, -1.02, -0.22);
-        rawAnimatedSpan = 3.57;
-      } else if (baseName.startsWith('wing_mugroup_prophet')) {
-        alignRot = new Vector3(0, 0, 0);
-        modelOffset = new Vector3(0, -1.55, -0.39);
-        rawAnimatedSpan = 4.27;
-        verticalFit = 0.43;
-      }
-
-      const normalizedBase = 1.15 / rawAnimatedSpan;
-      const finalScale = normalizedBase * evoFactor;
-
-      const wingBackAnchor = new TransformNode(`wing_back_anchor_${Date.now()}`, this.scene);
+      // Each imported family has a different pivot. Fit the geometry at its
+      // inner feather roots; never interpret the item's floor origin as a socket.
+      const wingBackAnchor = new TransformNode('wing_back_anchor', this.scene);
       wingBackAnchor.parent = wingSocket;
-      wingBackAnchor.position.set(0, 0, 0);
-      // Upgrades widen the wings, while their vertical fit remains anchored
-      // to the back so the lower tips do not grow through the character's feet.
-      wingBackAnchor.scaling.set(finalScale, normalizedBase * verticalFit, finalScale);
-
-      const wingAlign = new TransformNode(`wing_align_${Date.now()}`, this.scene);
+      const wingAlign = new TransformNode('wing_align',this.scene);
       wingAlign.parent = wingBackAnchor;
-      wingAlign.position.copyFrom(modelOffset);
-      wingAlign.rotation.copyFrom(alignRot);
-
       for (const node of container.rootNodes) {
         if (node instanceof TransformNode) node.parent = wingAlign;
+      }
+
+      // The standalone mount clips animate their carrier's translation too.
+      // The character spine supplies that translation; keep the wing rotations.
+      for (const group of container.animationGroups) {
+        for (const track of [...group.targetedAnimations]) {
+          if (track.animation.targetProperty === 'position' && /^bone_?f$/i.test(track.target.name))
+            group.removeTargetedAnimation(track.animation);
+        }
+      }
+      const samples: Vector3[] = [];
+      const inverse = wingAlign.computeWorldMatrix(true).clone().invert();
+      for (const mesh of container.meshes) {
+        if (!mesh.getTotalVertices()) continue;
+        mesh.skeleton?.prepare(true);
+        const positions = mesh.getPositionData(true);
+        if (!positions) continue;
+        const local = mesh.computeWorldMatrix(true).multiply(inverse);
+        for (let i=0;i<positions.length;i+=3)
+          samples.push(Vector3.TransformCoordinates(Vector3.FromArray(positions,i),local));
+      }
+      if (samples.length) {
+        samples.sort((a,b)=>Math.abs(a.x)-Math.abs(b.x));
+        const roots = samples.slice(0, Math.max(1,Math.ceil(samples.length*.05)));
+        const pivot = roots.reduce((sum,v)=>sum.addInPlace(v),Vector3.Zero()).scaleInPlace(1/roots.length);
+        const halfSpan = Math.max(.1,Math.abs(samples[samples.length-1].x));
+        const fit = .85/halfSpan;
+        wingAlign.position.copyFrom(pivot).scaleInPlace(-1);
+        wingBackAnchor.scaling.set(fit*evoFactor,fit,fit);
+        // Broad feather wings lie flat in the item file. Raise the tips
+        // outward from the centre seam without rotating the actor's spine.
+        if (baseName.includes('feather')) wingBackAnchor.rotation.x = -.45;
       }
 
       for (const m of container.meshes) {

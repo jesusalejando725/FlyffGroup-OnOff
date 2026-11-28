@@ -32,6 +32,7 @@ export interface EventRewardPayload {
 export interface LocalSyncCallbacks {
   onConnectionChange?: (connected: boolean) => void;
   onRoomState?: (room: RoomState) => void;
+  onMobState?: (id:string,hp:number,mapId:string)=>void;
   onPeerMoved?: (peer: RoomPeer) => void;
   onBossHp?: (bossHp: number, bossMaxHp: number) => void;
   onEventCompleted?: (room: RoomState, reward: EventRewardPayload) => void;
@@ -98,6 +99,7 @@ export class LocalSyncManager {
         ws.onclose = () => {
           if (this.ws === ws) {
             this.ws = null;
+            this.callbacks.onRoomEnded?.("Conexión local cerrada.");
           }
           this.callbacks.onConnectionChange?.(false);
           this.connectPromise = null;
@@ -116,6 +118,8 @@ export class LocalSyncManager {
       const msg = JSON.parse(raw) as { type: string; [key: string]: unknown };
       if (msg.type === 'room:state' && msg.room) {
         this.callbacks.onRoomState?.(msg.room as RoomState);
+      } else if (msg.type === 'mob:state') {
+        this.callbacks.onMobState?.(String(msg.id),Number(msg.hp),String(msg.mapId));
       } else if (msg.type === 'peer:moved' && msg.peer) {
         this.callbacks.onPeerMoved?.(msg.peer as RoomPeer);
       } else if (msg.type === 'event:boss_hp') {
@@ -157,7 +161,7 @@ export class LocalSyncManager {
     }
     const ok = await this.ensureConnected();
     if (!ok) {
-      this.callbacks.onError?.('No hay servidor WebSocket local activo (/ws). Usa tokens MUDUEL1 para jugar offline.');
+      this.callbacks.onError?.('No hay servidor WebSocket local activo (/ws).');
       return;
     }
     this.send(message);
@@ -177,6 +181,8 @@ export class LocalSyncManager {
     }
     this.send(message);
   }
+
+  public hitMob(id:string, damage:number,maxHp:number) { this.send({type:"mob:hit",id,damage,maxHp}); }
 
   public sendPeerUpdate(patch: Partial<RoomPeer>): void {
     this.send({ type: 'peer:update', patch });

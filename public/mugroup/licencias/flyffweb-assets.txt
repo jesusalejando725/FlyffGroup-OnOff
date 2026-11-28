@@ -5,3 +5,4 @@ The lighting reference is client/invpreview.ts in the same revision.
 WndInventory.png, WndInventory3D.png, WndStatus.png, WndTaskBar.png and icons/hp_potion.png, icons/mp_potion.png:
 packages/client/assets/ui/ at ed3ath/flyff-web-mmo, revision
 7986e75c884174892edc98cc2151df7fcda331fd. Resource ownership is unchanged.
+Skill names and 35 skill icons: reference/resource/propSkill.txt, propSkill.txt.txt and Icon/*.dds at the same pinned ed3ath/flyff-web-mmo revision. Additional skill sounds: PcSkillM-SwordWind1, PcSkillL-IceMissile1, PcSkillD-IceShark, PCSkillM-Healing; Ice Shark texture SFX/Texture/sfx_skleleeleeleenc01.dds.
