@@ -175,10 +175,10 @@ export function createRoomHub(options: {
           room.bossHp = Math.max(0, room.bossHp - dmg);
           if (room.bossHp <= 0) {
             const rewardNames: Record<EventType, string> = {
-              blood_castle: 'Espada del Arcángel Bendita',
-              chaos_castle: 'Coraza del Caos Antigua',
-              kundun_boss: 'Báculo de Kundun Supremo',
-              free_trade: "Alas de MuGro-up' Doradas",
+              blood_castle: 'Entanale Sword',
+              chaos_castle: 'Ancient Shield',
+              kundun_boss: 'Astrol Staff',
+              free_trade: "Wing of Spint",
             };
             const rewardId = `ev-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
             const rewardItemName = rewardNames[room.eventType];

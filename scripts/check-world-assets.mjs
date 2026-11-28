@@ -92,6 +92,9 @@ for (const appearance of HERO_APPEARANCES) {
   assert(!variantBytes[0].equals(variantBytes[1]), appearance.id);
 }
 
+for (const frame of ['WndInventory','WndInventory3D']) await asset('ui/'+frame+'.png');
+assert.deepEqual((await readdir(new URL('openmu/models/',publicRoot))).sort(), ['drop_bless.glb','drop_life.glb','drop_soul.glb']);
+for (const jewel of ['bless','soul','life']) await glb('../openmu/models/drop_'+jewel+'.glb');
 const equipment = await readJSON('equipo.json');
 await asset('equipo.json');
 for (const file of new Set(Object.values(equipment.weapons))) await glb(file);

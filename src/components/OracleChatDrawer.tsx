@@ -167,7 +167,7 @@ export const OracleChatDrawer: React.FC<OracleChatDrawerProps> = ({
         {/* Intelligent Build Analyzer Strip */}
         <div className="px-5 py-3 bg-[#0d111a] border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <span className="text-xs text-slate-300">
-            Analiza tu equipo IndexedDB actual ({character.classType} Nv.{character.level}) y preparación para Blood Castle / Kundun.
+            Analiza tu equipo IndexedDB actual ({character.classType} Nv.{character.level}) y preparación para el asedio de Flaris y las invasiones de Madrigal.
           </span>
           <button
             onClick={runBuildAnalysis}

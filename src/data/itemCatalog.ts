@@ -6,7 +6,7 @@ import { getAdminConfigSync } from '../services/adminConfigService';
 import type { ShopItemDef } from '../types/game';
 
 const options = getAdminConfigSync()['item-options'].byItem ?? {};
-export const ITEM_CATALOG = [...MU_SHOP_CATALOG, ...ARTISAN_CATALOG, ...FLYFF_ECONOMY_CATALOG, ...NATIVE_NPC_CATALOG].map(item => {
+export const ITEM_CATALOG = [...MU_SHOP_CATALOG.filter(i=>i.id==='shop_wing_feather'), ...ARTISAN_CATALOG.filter(i=>!i.name.includes('Lorencia') && !/\bMU\b|OpenMU/.test(i.name)),  ...FLYFF_ECONOMY_CATALOG, ...NATIVE_NPC_CATALOG].map(item => {
   const rule = options[item.id];
   if (!rule || item.fixedPrice || item.dropExclusive) return item;
   const result: ShopItemDef = { ...item };

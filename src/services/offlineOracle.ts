@@ -83,7 +83,7 @@ export function generateOfflineBuildAnalysis(
 
   const recommendations = [
     `Raza ${MU_CLASSES.find((c) => c.id === character.classType)?.name ?? character.classType}: combina ${tip.keySkill}.`,
-    `Joyas disponibles: ${character.bless} Bless · ${character.soul} Soul · ${character.chaos} Chaos · ${character.life} Life.`,
+    `Joyas disponibles: ${character.bless} Bless · ${character.soul} Soul · ${character.life} Life.`,
     wings
       ? `Alas equipadas (${wings.name}): mantienes velocidad 1.0x estable con aura y luz dinámica.`
       : 'Forja tus Alas en el Duende del Caos para ganar absorción de daño y aura visual.',

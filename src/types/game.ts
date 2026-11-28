@@ -72,7 +72,10 @@ export type HudButtonId =
   | 'damageBox'
   | 'editToolbar';
 
+export type WalletKey = 'zen'|'bless'|'soul'|'life';
 export interface MuAccount {
+  vault?: MuItem[];
+  vaultWallet?: Partial<Record<WalletKey,number>>;
   id: string;
   username: string;
   passwordHash: string;

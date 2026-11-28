@@ -1,3 +1,4 @@
+import { itemAssets, itemModelFile, armorModelFile } from '../data/itemVisualAssets';
 import { flightAltitude, type FlightMode } from './flight';
 import { equippedGearBonuses, rollFlyffDrops } from '../data/flyffEconomy';
 import madrigalSites from '../data/madrigalSpawns.json';
@@ -125,6 +126,7 @@ interface ActiveMonster {
   defense: number;
   x: number;
   z: number;
+  approachHeight?: number;
   homeX: number;
   homeZ: number;
   rotY: number;
@@ -285,7 +287,6 @@ export class MuWorldEngine {
   private autoAimAssist = true;
   private targetFps: 30 | 45 | 60 = 60;
   private autoHuntEnabled = false;
-  private helperLootFilters?: LootFilterSettings;
   private helperRange = 3;
   private activeBonuses = { atkBonusPct: 0, speedBonusPct: 0, critBonusPct: 0 };
 
@@ -415,6 +416,7 @@ export class MuWorldEngine {
       if (this.targetFps < 60 && rawDt < 1 / this.targetFps) {
         return;
       }
+      this.elapsedFrame = (now-this.lastFrameTime)/1000;
       this.lastFrameTime = now;
       this.step(rawDt);
       this.scene.render();
@@ -453,7 +455,7 @@ export class MuWorldEngine {
 
   public setCameraDistance(dist: number): void {
     this.cameraDistance = Math.max(6, Math.min(34, dist));
-    this.camera.radius = this.cameraDistance;
+    if (this.mode === 'playing') this.camera.radius = this.cameraDistance;
   }
 
   public setAutoAimAssist(enabled: boolean): void {
@@ -464,9 +466,8 @@ export class MuWorldEngine {
     this.targetFps = fps;
   }
 
-  public setAutoHuntEnabled(enabled: boolean, range = 3, filters?: LootFilterSettings): void {
+  public setAutoHuntEnabled(enabled: boolean, range = 3): void {
     this.helperRange = range;
-    this.helperLootFilters = filters;
     this.autoHuntEnabled = enabled;
     if (enabled) this.autoHuntAccum = 1.1;
   }
@@ -484,11 +485,12 @@ export class MuWorldEngine {
     if (mode !== 'playing') {
       soundSynth.setShoreline(0);
       this.camera.lowerRadiusLimit = 2;
-      this.camera.radius = 3.25;
+      this.camera.radius = 5.25;
       this.camera.beta = 1.28;
       this.camera.alpha = -Math.PI / 2;
       this.camera.target.set(this.heroX, this.heroY + 1.15, this.heroZ);
       soundSynth.setMapMusic('login');
+      if (mode === 'character_select') void this.showSelectionRegion();
     } else {
       this.camera.lowerRadiusLimit = 5;
       this.camera.radius = this.cameraDistance;
@@ -497,6 +499,20 @@ export class MuWorldEngine {
       const mapCfg = rules.maps?.[this.currentMap.id] || rules.maps?.[this.currentMap.id.replace('_bruma', '').replace('crater_', '')];
       soundSynth.setMapMusic(mapCfg?.musicTheme || this.currentMap.id);
     }
+  }
+
+  private async showSelectionRegion() {
+    const map = MU_MAPS[Math.floor(Math.random() * MU_MAPS.length)];
+    const version = ++this.mapVersion;
+    const { x, z } = map.spawn;
+    try {
+      await this.flyff.world.stream(x, z, 0, 450);
+      if (this.disposed || this.mode !== 'character_select' || version !== this.mapVersion) return;
+      this.heroX = x; this.heroZ = z;
+      this.heroY = this.flyff.world.getGroundHeight(x,z);
+      this.heroRoot.position.set(x,this.heroY,z);
+      this.camera.target.set(x,this.heroY+1.15,z);
+    } catch (error) { console.warn('Vista del mapa no disponible', error); }
   }
 
   public updateHeroStats(character: MuCharacter | null): void {
@@ -515,7 +531,7 @@ export class MuWorldEngine {
         this.warmedSkillClasses.add(classType);
         const skills = MU_SKILLS[classType].map(skill => skillPresentation(classType, skill));
         void Promise.all(skills.map(({ effect }) => this.flyff.fx.preloadEffect(effect)));
-        void soundSynth.preloadSkill(skills[0].sound);
+        void Promise.all(skills.map(({ sound }) => soundSynth.preloadSkill(sound)));
       }
       actor.root.parent = this.heroRoot;
       actor.root.position.set(0, 0, 0);
@@ -726,16 +742,21 @@ export class MuWorldEngine {
 
   public executeSkill(skill: SkillDef, _comboStep = 1, baseStatPower = 40): void {
     if (this.mode !== 'playing') return;
-    const cls = this.heroStats?.classType || 'DK';
     if (!skill.isBuff && this.isInSafeCity()) return;
     const skillIndex = Math.max(0, Number(skill.keyHint) - 1);
-    const { element, style, effect, sound } = skillPresentation(cls, skill);
-
-
     const clipName = this.resolveHeroSkillClip(skill);
     this.attackSwingTimer = this.flyff.actor?.playClip(clipName, false) || 0.48;
     if (!clipName.startsWith('power_')) this.flyff.actor?.setCombatMotion(this.attackSwingTimer, skillIndex, !!skill.isBuff);
 
+    const version=this.mapVersion, actorId=this.heroStats?.id;
+    window.setTimeout(()=>{
+      if (this.disposed || this.mode!=='playing' || version!==this.mapVersion || actorId!==this.heroStats?.id || (!skill.isBuff && this.isInSafeCity())) return;
+      this.resolveImpact(skill,baseStatPower);
+    }, Math.min(155,this.attackSwingTimer*300));
+  }
+
+  private resolveImpact(skill: SkillDef, baseStatPower: number) {
+    const {element,style,effect,sound}=skillPresentation(this.heroStats?.classType ?? 'DK',skill);
     const origin = new Vector3(this.heroX, this.heroY + this.hoverOffset + 0.9, this.heroZ);
     const forward = new Vector3(Math.sin(this.heroRotY), 0, Math.cos(this.heroRotY));
     const reach = skill.range + (this.autoAimAssist ? 2.5 : 1.5);
@@ -749,7 +770,7 @@ export class MuWorldEngine {
     }
 
     const fxPos = targetMob
-      ? new Vector3(targetMob.x, this.flyff.world.getGroundHeight(targetMob.x, targetMob.z) + 0.65, targetMob.z)
+      ? new Vector3(targetMob.x, this.mobY(targetMob) + 0.65, targetMob.z)
       : skill.isBuff ? origin : origin.add(forward.scale(2.4));
 
     void this.flyff.fx.play(effect, fxPos, 1.05, {
@@ -769,19 +790,24 @@ export class MuWorldEngine {
     const hits: ActiveMonster[] = [];
     for (const mob of this.nearMonsters(reach)) {
       if (!mob.alive || this.isSafePoint(mob.x, mob.z)) continue;
-      const d = Math.hypot(mob.x - this.heroX, mob.z - this.heroZ, this.altitude);
+      const d = this.distanceToMob(mob);
       if (d <= reach) {
         hits.push(mob);
       }
     }
     hits.sort(
       (a, b) =>
-        Math.hypot(a.x - this.heroX, a.z - this.heroZ) -
-        Math.hypot(b.x - this.heroX, b.z - this.heroZ),
+        this.distanceToMob(a) - this.distanceToMob(b),
     );
     const affected = skill.damageMultiplier >= 2.0 ? hits.slice(0, 4) : hits.slice(0, 1);
 
     const gear = equippedGearBonuses(this.flyff.getLastEquippedItems());
+    const stats = this.heroStats && computeHeroDamageStats(this.heroStats,this.flyff.getLastEquippedItems());
+    const critChance = (stats?.critPct ?? 14) + this.activeBonuses.critBonusPct;
+    if (stats) {
+      const magical = (this.heroStats?.classType === 'DW') || (this.heroStats?.classType !== 'ELF' && style === 'bolt');
+      baseStatPower *= .65 + .35*(magical ? stats.magicPower : stats.physicalPower)/stats.avgAttack;
+    }
     for (const mob of affected) {
       if (mob.def.evasionPct && Math.random() * 100 < Math.max(0, mob.def.evasionPct - (gear.accuracyPct ?? 0))) {
         this.emitDamageNumber(48, 34, 'Esquiva', '#94a3b8', false);
@@ -791,13 +817,13 @@ export class MuWorldEngine {
         ? getEffectiveSkillMultiplier(skill, this.heroStats)
         : skill.damageMultiplier;
       const atkBonus = 1 + this.activeBonuses.atkBonusPct / 100;
-      const isCrit = Math.random() * 100 < 14 + this.activeBonuses.critBonusPct + (gear.critPct ?? 0);
+      const isCrit = Math.random() * 100 < critChance;
       const rawDmg = baseStatPower * mult * atkBonus * (isCrit ? 1.55 + (gear.critDamagePct ?? 0) / 100 : 0.92 + Math.random() * 0.16);
       const effectiveDefense = mob.defense * (1 - (gear.ignoreDefensePct ?? 0) / 100);
       const finalDmg = this.damageToMonster(mob, rawDmg, effectiveDefense);
 
       mob.hp = Math.max(0, mob.hp - finalDmg);
-      this.playMonsterAnim(mob, 'hit', false);
+      if (!mob.strike && mob.actionTime <= 0) this.playMonsterAnim(mob, 'hit', false);
       this.playMonsterSound(mob, 'dmg1');
 
       this.emitDamageNumber(
@@ -851,7 +877,7 @@ export class MuWorldEngine {
     for (let i = this.loots.length - 1; i >= 0; i--) {
       const loot = this.loots[i];
       if (!filters[loot.info.kind]) continue;
-      if (Math.hypot(loot.info.x - heroX, loot.info.z - heroZ) <= 5.5) {
+      if (Math.hypot(loot.info.x-heroX,loot.info.z-heroZ,loot.info.y-this.heroY-this.hoverOffset) <= 5.5) {
         this.pickupLootIndex(i);
       }
     }
@@ -863,7 +889,7 @@ export class MuWorldEngine {
     for (let i = 0; i < this.loots.length; i++) {
       const loot = this.loots[i];
       if (filters && !filters[loot.info.kind]) continue;
-      const d = Math.hypot(loot.info.x - this.heroX, loot.info.z - this.heroZ);
+      const d = Math.hypot(loot.info.x-this.heroX,loot.info.z-this.heroZ,loot.info.y-this.heroY-this.hoverOffset);
       if (d < bestDist) {
         bestDist = d;
         bestIdx = i;
@@ -886,7 +912,7 @@ export class MuWorldEngine {
   }
 
   private damageToMonster(mob: ActiveMonster, damage: number, defense = mob.defense): number {
-    return damageAgainstMonster(damage, defense, this.heroStats?.level ?? mob.scaledLevel, this.heroStats?.resets ?? 0, mob.scaledLevel);
+    return damageAgainstMonster(damage, defense, this.heroStats?.level ?? 1, this.heroStats?.resets ?? 0, mob.scaledLevel);
   }
 
   private reviveMonster(mob: ActiveMonster, now: number): void {
@@ -894,6 +920,7 @@ export class MuWorldEngine {
     mob.alive = true;
     mob.hp = mob.maxHp;
     mob.energy = mob.maxEnergy;
+    mob.approachHeight = undefined;
     mob.x = mob.homeX;
     mob.z = mob.homeZ;
     mob.hitCooldown = 1.2;
@@ -916,7 +943,7 @@ export class MuWorldEngine {
       localStorage.setItem(mob.id,String(mob.respawnAt));
       mob.respawnAt = Infinity; mob.strike = undefined;
       void this.callbacks.onKillMonster?.(0,e.zen,e);
-      const pool = [...ITEM_BY_ID.values()].filter(i => i.sourceLevel === undefined).filter(i =>
+      const pool = [...ITEM_BY_ID.values()].filter(i => !i.dropExclusive).filter(i =>
         ['helm','armor','pants','boots','gloves'].includes(i.slot) || (e.id !== 'red' && i.slot === 'weapon') ||
         (e.id !== 'red' && e.id !== 'selupan' && i.slot === 'shield')).map(i=>i.id);
       if (Math.random() < .2) this.spawnLootDrop(mob.x,mob.z,0,true,['soul','bless','life']);
@@ -938,33 +965,8 @@ export class MuWorldEngine {
   }
 
   private spawnLootDrop(x: number, z: number, zenAmount: number, isBoss?: boolean, allowed?: string[]): void {
-    const roll = Math.random();
     let kind: LootDropInfo['kind'] = 'zen';
-    let label = `${zenAmount} Zen`;
-    let amount = zenAmount;
-    let color = '#fbbf24';
-
-    if (roll < (isBoss ? 0.45 : 0.14)) {
-      kind = 'bless';
-      label = 'Jewel of Bless';
-      amount = 1;
-      color = '#f87171';
-    } else if (roll < (isBoss ? 0.72 : 0.25)) {
-      kind = 'soul';
-      label = 'Jewel of Soul';
-      amount = 1;
-      color = '#60a5fa';
-    } else if (roll < (isBoss ? 0.85 : 0.31)) {
-      kind = 'chaos';
-      label = 'Jewel of Chaos';
-      amount = 1;
-      color = '#f59e0b';
-    } else if (roll < 0.35) {
-      kind = 'life';
-      label = 'Jewel of Life';
-      amount = 1;
-      color = '#c084fc';
-    }
+    let amount = zenAmount, label = `${amount} Zen`, color = '#fbbf24';
 
     const y = this.flyff.world.getGroundHeight(x, z) + 0.35;
     const id = `loot-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
@@ -979,18 +981,52 @@ export class MuWorldEngine {
       label = item?.name ?? (kind === 'zen' ? `${amount} Zen` : kind.toUpperCase());
     }
 
-    const mesh = MeshBuilder.CreatePolyhedron(id, { type: 1, size: 0.32 }, this.scene);
-    mesh.position.set(x, y, z);
-    mesh.isPickable = false;
-
-    let mat = this.lootMatCache.get(color);
+    const item = catalogId ? ITEM_BY_ID.get(catalogId) : undefined;
+    const sex = item?.sexFilter ?? this.heroStats?.sex ?? 'male';
+    const model = item ? itemModelFile(item) ?? armorModelFile(item,sex) : ['soul','bless','life'].includes(kind) ? '../openmu/models/drop_'+kind+'.glb' : undefined;
+    const icon = item ? itemAssets(item.name)?.icon ?? (item.recovery ? 'ui/hp_potion.png' : undefined) :
+      kind === 'zen' ? 'ui/items/zen.webp' : ['soul','bless','life'].includes(kind) ? 'ui/items/jewel-'+kind+'.webp' : undefined;
+    const palette: Record<string,string> = {zen:'#e6bb53',bless:'#ed7564',soul:'#79a8ff',life:'#d183ef'};
+    color = item?.recovery ? item.recovery.mp && !item.recovery.hp ? '#519bed' : '#d85560' : palette[kind] ?? color;
+    const mesh = item?.recovery ? MeshBuilder.CreateLathe(id,{shape:[new Vector3(.11,0,0),new Vector3(.21,.07,0),new Vector3(.19,.26,0),new Vector3(.08,.32,0),new Vector3(.08,.41,0)],tessellation:10},this.scene) :
+      item?.id==='flyff_cannonball' ? MeshBuilder.CreateSphere(id,{diameter:.38,segments:10},this.scene) :
+      item?.id==='flyff_element_card' ? MeshBuilder.CreateBox(id,{height:.45,width:.29,depth:.025},this.scene) :
+      item?.id==='flyff_arrow' ? MeshBuilder.CreateCylinder(id,{height:.8,diameterTop:.025,diameterBottom:.06},this.scene) :
+      kind === 'zen' ? MeshBuilder.CreateCylinder(id,{diameter:.55,height:.13,tessellation:18},this.scene) :
+      MeshBuilder.CreatePolyhedron(id,{type:kind==='soul'?2:1,size:.27},this.scene);
+    mesh.position.set(x,y,z);
+    mesh.isPickable=false;
+    let mat=this.lootMatCache.get(color);
     if (!mat) {
-      mat = new StandardMaterial(`loot_mat_${color}`, this.scene);
-      mat.diffuseColor = Color3.FromHexString(color);
-      mat.emissiveColor = Color3.FromHexString(color).scale(0.55);
-      this.lootMatCache.set(color, mat);
+      mat=new StandardMaterial('drop-'+color,this.scene);
+      mat.diffuseColor=Color3.FromHexString(color); mat.emissiveColor=mat.diffuseColor.scale(.48);
+      this.lootMatCache.set(color,mat);
     }
-    mesh.material = mat;
+    mesh.material=mat;
+    if (icon) {
+      let badge=this.lootMatCache.get(icon);
+      if (!badge) {
+        badge=new StandardMaterial('drop-'+icon,this.scene);
+        badge.diffuseTexture=new Texture('./mugroup/'+icon,this.scene);
+        badge.diffuseTexture.hasAlpha=true; badge.useAlphaFromDiffuseTexture=true;
+        badge.emissiveColor=Color3.White(); badge.backFaceCulling=false;
+        this.lootMatCache.set(icon,badge);
+      }
+      const plane=MeshBuilder.CreatePlane(id+'-icon',{size:.72},this.scene);
+      plane.parent=mesh; plane.position.y=.68; plane.billboardMode=Mesh.BILLBOARDMODE_ALL;
+      plane.material=badge; plane.isPickable=false;
+    }
+    if (model) void this.getOrLoadEntityContainer(model).then(container=>{
+      if (!container || mesh.isDisposed() || this.disposed) return;
+      const built=this.instantiateNormalizedModel(container,id,.85);
+      built.root.parent=mesh;
+      for (const anim of built.animations) anim.dispose();
+      const part = item && ({helm:'helmet',armor:'torso',pants:'torso',boots:'feet',gloves:'hands'} as Partial<Record<ItemSlot,string>>)[item.slot];
+      if (part) for (const child of built.root.getChildMeshes()) {
+        if (child.getTotalVertices() && !child.name.includes('equip_'+part+'_')) child.setEnabled(false);
+      }
+      mesh.visibility=0;
+    });
 
     this.loots.push({
       info: { id, kind, catalogId, label, amount, x, y, z },
@@ -1080,7 +1116,6 @@ export class MuWorldEngine {
       }
     }
 
-    root.onDisposeObservable.addOnce(()=>{ for (const skeleton of inst.skeletons) skeleton.dispose(); });
     return { root, animations: [...inst.animationGroups] };
   }
 
@@ -1089,7 +1124,7 @@ export class MuWorldEngine {
     mob.activeAnim = name;
     if (!loop) {
       mob.actionTime = name === 'atk1' ? 0.6 : 0.25;
-      if (name === 'hit') mob.strike = undefined;
+      // A hit cannot cancel an attack that is already winding up.
     }
     const clip = mob.glbFile === 'monstruos/besibigfoot.glb' && name === 'hit' ? 'dmg1' :
       mob.glbFile === 'monstruos/besibigfoot.glb' && name === 'death' ? 'die1' : name;
@@ -1097,7 +1132,7 @@ export class MuWorldEngine {
     const ag =
       mob.animations.find((a) => a.name.toLowerCase() === lower) ||
       mob.animations.find((a) => a.name.toLowerCase().includes(lower)) ||
-      mob.animations[0];
+      (name === 'fly' ? mob.animations.find(a => /walk/i.test(a.name)) : undefined) || mob.animations[0];
     if (!ag) return;
     for (const other of mob.animations) {
       if (other !== ag && other.isPlaying) other.stop();
@@ -1262,7 +1297,7 @@ export class MuWorldEngine {
     const templates: Template[] = [];
     const naturalTemplates: Template[] = BESTIARY.filter(s => s.map === map.id).map((species, i) => {
       const level = Math.min(map.maxLevel, map.minLevel + (i % 12));
-      return { speciesId: species.id, glb: resolveMonsterGlb(glbOverrides[species.id], i), def: {
+      return { speciesId: species.id, glb: resolveMonsterGlb(species.shape==='wyvern' ? 'monstruos/meteonyker.glb' : species.shape==='bird' ? 'monstruos/mothbee.glb' : glbOverrides[species.id], i), def: {
         id: species.id, name: species.name, type: 'spider', level, scale: 1,
         colorHex: species.power.colorHex, maxHp: 110 + level * 30,
         attack: 11 + level * 2, defense: level, xpReward: 25 + level * 16,
@@ -1398,7 +1433,7 @@ export class MuWorldEngine {
         roamRadius: number(group.roamRadius, MONSTER_WANDER_RADIUS, 0, 200),
         respawnSeconds: number(group.respawnSeconds, Number(adminCfg.monsters?.respawnSeconds ?? CAMP_RESPAWN_SECONDS), 1, 3600),
         drops: Array.isArray(group.drops) ? group.drops.filter((key: string) =>
-          ['zen', 'bless', 'soul', 'life', 'chaos', 'creation', 'talisman'].includes(key) || ITEM_BY_ID.has(key)) : undefined,
+          ['zen', 'bless', 'soul', 'life'].includes(key) || ITEM_BY_ID.has(key)) : undefined,
       };
       const count = Math.round(number(group.count, 1, 1, 16));
       for (let n = 0; n < count; n++) {
@@ -1512,12 +1547,26 @@ export class MuWorldEngine {
     }
   }
 
+  private mobFlight(m: ActiveMonster) {
+    const shape = m.originalSpecies && SPECIES_BY_ID.get(m.originalSpecies)?.shape;
+    if (shape !== 'bird' && shape !== 'wyvern' && !/(aibatt|flybat|mothbee|flbyrigen|roachfl|meteonyker|burudeng|luia)\.glb$/i.test(m.glbFile)) return 0;
+    return (m.approachHeight ?? [2,5,7,8][Math.abs(Math.round(m.homeX + m.homeZ)) % 4]) + .22*Math.sin(this.flyff.worldClock*4 + m.homeX);
+  }
+
+  private mobY(m: ActiveMonster) {
+    return this.flyff.world.getGroundHeight(m.x,m.z) + this.mobFlight(m);
+  }
+
+  private distanceToMob(m: ActiveMonster) {
+    return Math.hypot(m.x-this.heroX,m.z-this.heroZ,this.mobY(m)-this.heroY-this.hoverOffset);
+  }
+
   private findNearestTarget(maxDist = 18): ActiveMonster | null {
     let best: ActiveMonster | null = null;
     let bestD = maxDist;
     for (const m of this.nearMonsters(maxDist)) {
       if (!m.alive || this.isSafePoint(m.x, m.z)) continue;
-      const d = Math.hypot(m.x - this.heroX, m.z - this.heroZ, this.altitude);
+      const d = this.distanceToMob(m);
       if (d < bestD) {
         bestD = d;
         best = m;
@@ -1537,8 +1586,9 @@ export class MuWorldEngine {
     });
   }
 
+  private elapsedFrame = 0;
   private step(dt: number): void {
-    this.fpsAccum += dt;
+    this.fpsAccum += this.elapsedFrame;
     this.fpsFrames += 1;
     if (this.fpsAccum >= 0.6) {
       this.callbacks.onFpsUpdate?.(Math.round(this.fpsFrames / this.fpsAccum));
@@ -1568,20 +1618,17 @@ export class MuWorldEngine {
 
     const manualInput = Math.hypot(moveX, moveZ) > 0.08;
     let helperCanAttack = false;
-    if (this.autoHuntEnabled && !manualInput && !document.hidden) {
-      const loot = this.helperLootFilters && this.loots.find(({ info }) =>
-        this.helperLootFilters?.[info.kind] && Math.hypot(info.x - this.heroX, info.z - this.heroZ) <= 5);
-      const mob = !loot && !this.isInSafeCity() ? this.findNearestTarget(25) : null;
-      const goal = loot ? loot.info : mob;
-      if (goal) {
-        const dx = goal.x - this.heroX, dz = goal.z - this.heroZ;
-        const distance = Math.hypot(dx, dz);
-        if (loot && distance <= 1.6) this.pickupLootIndex(this.loots.indexOf(loot));
-        else if (mob && distance <= this.helperRange) helperCanAttack = true;
-        else if (distance > 0 && this.attackSwingTimer <= 0) {
-          const a = this.camera.alpha;
-          moveX = (-Math.sin(a) * dx + Math.cos(a) * dz) / distance;
-          moveZ = (-Math.cos(a) * dx - Math.sin(a) * dz) / distance;
+    if (this.autoHuntEnabled && !document.hidden && !this.isInSafeCity()) {
+      const mob = this.findNearestTarget(25);
+      if (mob) {
+        helperCanAttack = this.distanceToMob(mob) <= this.helperRange;
+        if (!manualInput && !helperCanAttack) {
+          const dx = mob.x-this.heroX, dz = mob.z-this.heroZ, distance = Math.hypot(dx,dz);
+          if (distance > .15) {
+            const a = this.camera.alpha;
+            moveX = (-Math.sin(a)*dx + Math.cos(a)*dz)/distance;
+            moveZ = (-Math.cos(a)*dx - Math.sin(a)*dz)/distance;
+          }
         }
       }
     }
@@ -1591,7 +1638,7 @@ export class MuWorldEngine {
 
     if (moving) {
       const speedMult = (1 + this.activeBonuses.speedBonusPct / 100) * wingSpeedMult;
-      const speed = baseSpeed * speedMult * Math.min(1, len);
+      const speed = baseSpeed * (1 + Math.max(0,this.heroStats?.agi ?? 0) / (180 + Math.max(0,this.heroStats?.agi ?? 0))) * speedMult * Math.min(1, len);
       // ArcRotate alpha points from target to camera. Project screen right/up onto the ground.
       const a = this.camera.alpha;
       const nx = (-Math.sin(a) * moveX - Math.cos(a) * moveZ) / len;
@@ -1613,7 +1660,7 @@ export class MuWorldEngine {
         this.heroX = nextX;
         this.heroZ = nextZ;
       }
-      if (this.attackSwingTimer <= 0) this.heroRotY = Math.atan2(nx, nz);
+      if (manualInput || this.attackSwingTimer <= 0) this.heroRotY = Math.atan2(nx, nz);
       if (this.flyff.actor) {
         this.flyff.actor.root.rotation.y = this.heroRotY;
       }
@@ -1736,6 +1783,7 @@ export class MuWorldEngine {
     }
   }
 
+  private nextAmbientFlap = 0;
   private stepMonsters(dt: number): void {
     const safeCity = this.isInSafeCity();
     const normalAggro = Number(getAdminConfigSync().monsters?.aggroRadiusMeters ?? 10);
@@ -1751,6 +1799,7 @@ export class MuWorldEngine {
     for (const mob of this.loadedMonsters) {
       const root = mob.root!;
       mob.actionTime = Math.max(0, mob.actionTime - dt);
+      mob.hitCooldown = Math.max(0,mob.hitCooldown-dt);
       mob.powerCooldown = Math.max(0, mob.powerCooldown - dt);
       if (!mob.alive) {
         if (mob.model && !mob.animations.length) mob.model.rotation.z = (1 - mob.actionTime / 0.25) * Math.PI / 2;
@@ -1759,7 +1808,15 @@ export class MuWorldEngine {
         if (!mob.alive) continue;
       }
 
-      const d = Math.hypot(this.heroX - mob.x, this.heroZ - mob.z, this.altitude);
+      const cruise = [2,5,7,8][Math.abs(Math.round(mob.homeX+mob.homeZ))%4];
+      if (this.mobFlight(mob)) {
+        const ground = this.flyff.world.getGroundHeight(mob.x,mob.z);
+        const close = !safeCity && Math.hypot(this.heroX-mob.x,this.heroZ-mob.z) < normalAggro;
+        const goal = close ? Math.max(1.6,Math.min(cruise,this.heroY+this.hoverOffset-ground+1)) : cruise;
+        const height = mob.approachHeight ?? cruise;
+        mob.approachHeight = height + Math.max(-dt*2,Math.min(dt*2,goal-height));
+      }
+      const d = this.distanceToMob(mob);
       if (!mob.model && !mob.modelPending && performance.now() >= (mob.retryAt || 0)) {
         mob.modelPending = true;
         void this.getOrLoadEntityContainer(mob.glbFile).then(container => {
@@ -1784,7 +1841,7 @@ export class MuWorldEngine {
         }).finally(() => { if (mob.root === root) mob.modelPending = false; });
       }
       if (root.isEnabled() !== (d <= radius)) root.setEnabled(d <= radius);
-      if (!mob.model || d > radius) { mob.strike = undefined; continue; }
+      if (d > radius) { mob.strike = undefined; continue; }
       mob.energy = Math.min(mob.maxEnergy, mob.energy + dt * (mob.def.isBoss ? 4 : 3));
       const aggroRadius = mob.invasion ? 22 : mob.def.isBoss ? 15 : normalAggro;
       const engaged = !safeCity && d <= aggroRadius;
@@ -1793,8 +1850,9 @@ export class MuWorldEngine {
         const patrol = this.flyff.worldClock * 0.36 + mob.homeX + mob.homeZ;
         const radius = Math.min(leash, MONSTER_WANDER_RADIUS) * (0.65 + 0.3 * Math.sin(patrol * 0.6));
         const chasing = engaged && d > 2.4;
-        const tx = chasing ? this.heroX : mob.homeX + Math.cos(patrol) * radius;
-        const tz = chasing ? this.heroZ : mob.homeZ + Math.sin(patrol) * radius;
+        const leashFactor = Math.min(1, leash*.97 / Math.max(.01,Math.hypot(this.heroX-mob.homeX,this.heroZ-mob.homeZ)));
+        const tx = chasing ? mob.homeX + (this.heroX-mob.homeX)*leashFactor : mob.homeX + Math.cos(patrol) * radius;
+        const tz = chasing ? mob.homeZ + (this.heroZ-mob.homeZ)*leashFactor : mob.homeZ + Math.sin(patrol) * radius;
         let dx = tx - mob.x, dz = tz - mob.z;
         let distance = Math.hypot(dx, dz);
         const speed = chasing ? mob.def.moveSpeed ?? 3.4 : 2.1;
@@ -1811,16 +1869,28 @@ export class MuWorldEngine {
           return true;
         };
         let moving = (!engaged || chasing) && advance();
+        if (!moving && (!engaged || chasing) && distance > .15) {
+          const ax=dx, az=dz;
+          for (const angle of [.65,-.65,1.3,-1.3]) {
+            dx=ax*Math.cos(angle)-az*Math.sin(angle); dz=ax*Math.sin(angle)+az*Math.cos(angle);
+            if (advance()) { moving=true; break; }
+          }
+        }
         if (!moving && !engaged) {
           dx = mob.homeX - mob.x; dz = mob.homeZ - mob.z;
           distance = Math.hypot(dx, dz);
-          moving = distance > Math.min(leash, MONSTER_WANDER_RADIUS) && advance();
+          moving = distance > .2 && advance();
         }
-        this.playMonsterAnim(mob, moving ? 'walk' : 'stand', true);
+        this.playMonsterAnim(mob, this.mobFlight(mob) ? 'fly' : moving ? 'walk' : 'stand', true);
       }
 
-      const my = this.flyff.world.getGroundHeight(mob.x, mob.z);
+      const my = this.mobY(mob);
       root.position.set(mob.x, my, mob.z);
+      if (mob.activeAnim === 'fly' && d < 12 && now >= this.nextAmbientFlap) {
+        this.nextAmbientFlap = now + 1400;
+        soundSynth.playWingFlap();
+        void this.flyff.fx.play('sfx_hitbow01', new Vector3(mob.x,my-.4,mob.z),.24,{colorHex:'#badce5'});
+      }
 
       if (mob.model && !mob.animations.length) {
         const stride = Math.sin(this.flyff.worldClock * 9 + mob.homeX);
@@ -1871,7 +1941,7 @@ export class MuWorldEngine {
       const style = special ? (species?.power.style ?? profile.style) : 'cleave';
       const range = style === 'bolt' ? 9 : style === 'pulse' ? 5.5 : 2.9;
       if (d > range) continue;
-      mob.hitCooldown -= dt;
+
       if (mob.hitCooldown <= 0) {
         mob.hitCooldown = 1.65;
         const power = special ? this.monsterPowers(mob, profile.name)[0] : undefined;
@@ -1890,7 +1960,9 @@ export class MuWorldEngine {
   private stepLoots(dt: number): void {
     for (let i = this.loots.length - 1; i >= 0; i--) {
       const loot = this.loots[i];
+      const age = (performance.now()-loot.createdAt)/1000;
       loot.mesh.rotation.y += dt * 1.8;
+      loot.mesh.position.y = loot.info.y + (age < .5 ? Math.sin(age*2*Math.PI)*.7 : .09*Math.sin((age-.5)*3));
       if (performance.now() - loot.createdAt > 45000) {
         loot.mesh.dispose();
         this.loots.splice(i, 1);

@@ -1,10 +1,11 @@
+import { equipmentRequirements } from '../data/equipmentRules';
 import { ShopModel } from './ShopModel';
 import { ItemPortrait } from './ItemPortrait';
 import { itemAssets, previewModelFile } from '../data/itemVisualAssets';
 import { ITEM_CATALOG } from '../data/itemCatalog';
 import { inventorySellValue } from '../data/itemPricing';
 import { getAdminConfigSync } from '../services/adminConfigService';
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Flame, Gem, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { MU_CHAOS_WINGS_RECIPES } from '../data/muWorldData';
 import type { MuCharacter, MuItem, NpcDef, ShopItemDef } from '../types/game';
@@ -25,7 +26,7 @@ interface NpcShopModalProps {
   onClose: () => void;
   onBuyItem: (shopItem: ShopItemDef) => void;
   onBuyJewel: (jewel: 'bless' | 'soul' | 'chaos' | 'life' | 'harmony', cost: number) => void;
-  onSellItem: (itemId: string) => void;
+  onSellItem: (itemId: string | string[]) => void;
   onChaosMixWing: (tier: 1 | 2 | 3 | 4) => void;
 }
 
@@ -41,18 +42,20 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   onSellItem,
   onChaosMixWing,
 }) => {
+  const [sale,setSale] = useState<{ids:string[];total:number}|null>(null);
+  useEffect(()=>setSale(null),[open,npc?.id,character.id]);
   const [section, setSection] = useState<Section>('all');
   const [preview,setPreview]=useState<string|null>(null);
   const [tab, setTab] = useState<'buy' | 'jewels' | 'sell' | 'chaos'>(
     npc?.role === 'chaos_goblin' ? 'chaos' : 'buy',
   );
 
-  if (!open || !npc) return null;
+  const catalogForNpc = useMemo(()=>{
+    if (!open || !npc) return [];
 
-  const isChaosNpc = npc.role === 'chaos_goblin';
   const priceMultiplier = Number(getAdminConfigSync().items.priceMultiplier);
   const customStock = npc.stock;
-  const catalogForNpc = ITEM_CATALOG
+  return ITEM_CATALOG
     .filter(item => {
       if (item.id === 'flyff_heal_pack') return true;
       if (item.dropExclusive) return false;
@@ -69,6 +72,8 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
     })
     .map(item => ({ ...item, zenCost: item.fixedPrice ? item.zenCost : customStock?.[item.id] ??
       Math.round(item.zenCost * (Number.isFinite(priceMultiplier) && priceMultiplier >= 0 ? priceMultiplier : 1)) }));
+  },[open,npc,character.sex,character.classType]);
+  if (!open || !npc) return null;
   const availableSections = SECTIONS.filter(([id]) => id === 'all' || catalogForNpc.some(item => sectionOf(item) === id));
   const selectedSection = availableSections.some(([id]) => id === section) ? section : 'all';
   const visibleStock = catalogForNpc.filter(item => selectedSection === 'all' || sectionOf(item) === selectedSection);
@@ -83,9 +88,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   }> = [
     { key: 'bless', name: 'Jewel of Bless', cost: 2500, desc: 'Mejora hasta +6', color: 'text-rose-300' },
     { key: 'soul', name: 'Jewel of Soul', cost: 3500, desc: 'Hasta +9; combinar joyas para +10 a +13', color: 'text-sky-300' },
-    { key: 'chaos', name: 'Jewel of Chaos', cost: 4500, desc: 'Necesaria en Chaos Mix', color: 'text-amber-300' },
     { key: 'life', name: 'Jewel of Life', cost: 5500, desc: 'Añade opciones o pierde una al azar', color: 'text-purple-300' },
-    { key: 'harmony', name: 'Jewel of Harmony', cost: 9000, desc: 'Refina +13 a +15', color: 'text-emerald-300' },
   ];
 
   return (
@@ -97,7 +100,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
               {npc.name} · {npc.title}
             </h2>
             <p className="text-[11px] font-mono-tabular text-slate-300">
-              <img src="./mugroup/ui/items/zen.webp" width={20} height={16} className="inline-block mr-1 rounded-sm" alt="" />Zen: {character.zen.toLocaleString()} · Bless {character.bless} · Soul {character.soul} · Chaos {character.chaos}
+              <img src="./mugroup/ui/items/zen.webp" width={20} height={16} className="inline-block mr-1 rounded-sm" alt="" />Zen: {character.zen.toLocaleString()} · Bless {character.bless} · Soul {character.soul} · Life {character.life}
             </p>
           </div>
           <button
@@ -144,7 +147,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
             }`}
           >
             <Flame className="w-3.5 h-3.5 text-rose-400" />
-            {isChaosNpc ? 'Chaos Mix' : 'Forja Alas'}
+            Forja de alas
           </button>
         </div>
 
@@ -194,7 +197,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                       {s.defense > 0 && `Def +${s.defense}`}
                     </div>
                     {itemAssets(s.name)?.appearance && <div className="text-[11px] text-slate-300">Apariencia: {itemAssets(s.name)?.appearance}</div>}
-                    {s.requiredLevel && <div className="text-[11px] text-slate-300">Nivel requerido: {s.requiredLevel}</div>}
+                    {s.slot !== 'consumable' && <div className="text-[11px] text-amber-200">Requiere: {Object.entries(equipmentRequirements(s)).map(([key,n])=>({level:'Nv.',str:'FUE',agi:'AGI',vit:'VIT',ene:'ENE',cmd:'CMD'}[key]+' '+n)).join(' · ')}</div>}
                     {s.setName && <div className="mt-1 text-[11px] text-slate-300">Conjunto: {s.setName}</div>}
                     {s.classFilter?.length ? <div className="mt-1 text-[11px] text-slate-300">Clases: {s.classFilter.join(', ')}</div> : null}
                     {s.luck && <div className="text-[11px] text-amber-300">Suerte</div>}
@@ -244,6 +247,16 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
 
           {tab === 'sell' && (
             <div className="space-y-2">
+              {sellableItems.length > 0 && <button className="realm-button p-2" onClick={()=>{
+                const ids = sellableItems.map(i=>i.id);
+                const total = sellableItems.reduce((n,i)=>n+inventorySellValue(i),0);
+                setSale({ids,total});
+              }}>Vender toda la mochila</button>}
+              {sale && <div role="group" aria-label="Confirmar venta" className="realm-board p-3 text-sm">
+                ¿Vender los {sale.ids.length} lotes seleccionados por {sale.total.toLocaleString()} Zen?
+                <button className="realm-button px-3 py-1 mx-2" onClick={()=>{onSellItem(sale.ids);setSale(null)}}>Sí, vender</button>
+                <button className="realm-button px-3 py-1" onClick={()=>setSale(null)}>Cancelar</button>
+              </div>}
               {sellableItems.length === 0 ? (
                 <div className="p-6 text-center text-xs text-slate-400">
                   No tienes ítems sin equipar en la mochila para vender.
@@ -259,12 +272,12 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                       <ItemPortrait item={it} sex={character.sex} />
                       <div className="flex-1">
                         <div className="text-xs font-bold text-slate-100">
-                          {it.name} +{it.enhanceLevel}
+                          {it.name} +{it.slot === 'consumable' ? it.quantity ?? 1 : it.enhanceLevel}
                         </div>
                         <div className="text-[11px] text-slate-400">{it.setName}</div>
                       </div>
                       <button
-                        onClick={() => onSellItem(it.id)}
+                        onClick={() => {setSale(null);onSellItem(it.id)}}
                         className="min-h-[38px] px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs cursor-pointer"
                       >
                         Vender (+{val.toLocaleString()} Zen)
@@ -281,7 +294,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
               <div className="p-3 rounded-lg bg-[#14111d] border border-rose-500/40 text-xs text-slate-200 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>
-                  Máquina del Chaos Goblin: combina Joyas y Zen para forjar Alas Evo 1, Evo 2, Evo 3 y Evo 4 para tu clase ({character.classType}).
+                  Combina Joyas y Zen para forjar Alas Evo 1, Evo 2, Evo 3 y Evo 4 para tu clase ({character.classType}).
                 </span>
               </div>
 
@@ -302,7 +315,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                   </div>
                   <div className="text-[11px] text-emerald-300">{rec.excellentOpt}</div>
                   <div className="text-xs font-mono-tabular text-slate-300">
-                    Costo: {rec.blessCost} Bless · {rec.soulCost} Soul · {rec.chaosCost} Chaos ·{' '}
+                    Costo: {rec.blessCost} Bless · {rec.soulCost} Soul · {rec.chaosCost} Life ·{' '}
                     {rec.zenCost.toLocaleString()} Zen
                   </div>
                   <button
