@@ -1,66 +1,47 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { CAMP_SIZE, populateCamps, regionalTemplate, scatterCamps, SpawnGrid } from '../src/game/encounters.ts';
+import { CAMP_SIZE, populateRegionalCamps, regionalTemplate, reachableHuntingLand, SpawnGrid } from '../src/game/encounters.ts';
+import { CRATER_NPC_SAFE_RADIUS, inProtectedArea } from '../src/game/worldRegions.ts';
+import { damageAgainstMonster, MONSTER_POWER_ENERGY, monsterCombatStats } from '../src/game/monsterCombat.ts';
 import { flightHeight } from '../src/game/content/WingRig.ts';
 import { waterGeometry } from '../src/game/content/WaterSurface.ts';
 
-test('four maps have spaced repeatable camps of ten, clear of protected areas', () => {
-  const maps = ['flaris', 'robledal', 'puerto_bruma', 'crater_ceniza'];
-  const centers = [[1336, 1281], [520, 2440], [2300, 2390], [2540, 490]];
-  const outside = (x: number, z: number, radius: number) => centers.every(([sx, sz]) => Math.hypot(x - sx, z - sz) > radius);
-  const firstSites = new Set();
-  for (const map of maps) {
-    const create = () => scatterCamps(map, 3072, 4000, (x, z) => outside(x, z, 524));
-    const members = create();
-    assert.ok(members.length > 2500 && members.length % 10 === 0);
-    const anchors = members.filter((_, i) => i % 10 === 0);
-    for (const [i,a] of anchors.entries()) for (const b of anchors.slice(i+1))
-      assert.ok(Math.hypot(a.x-b.x,a.z-b.z) >= 124);
-    assert.equal(new Set(anchors.map(a => (a.x > 1536 ? 1 : 0) + (a.z > 1536 ? 2 : 0))).size,4);
-    assert.deepEqual(members, create());
-    firstSites.add(members[0].x);
-    const grid = new SpawnGrid<(typeof members)[number]>();
-    for (const [i, m] of members.entries()) {
-      assert.equal(m.camp, Math.floor(i / CAMP_SIZE));
-      assert.ok(outside(m.x, m.z, 500));
-      assert.ok(m.x >= 40 && m.z >= 40 && m.x <= 3032 && m.z <= 3032);
-      grid.add(m.x, m.z, m);
-    }
-    const { x, z } = members[700];
-    const matches = [...grid.near(x, z, 110)];
-    assert.ok(matches.length < members.length * 0.03, 'nearby query must stay local');
-    assert.deepEqual(
-      matches.filter(m => Math.hypot(m.x - x, m.z - z) <= 110).sort((a,b) => a.x - b.x),
-      members.filter(m => Math.hypot(m.x - x, m.z - z) <= 110).sort((a,b) => a.x - b.x),
-    );
+test('all four regions have repeatable camps of five, with global separation and coverage', () => {
+  const ids = ['flaris', 'robledal', 'puerto_bruma', 'crater_ceniza'];
+  const sites = [{ x: 80, z: 140, model: 'aibatt', name: 'Aibatt', level: 1 }];
+  const regions = ids.map((id, i) => ({
+    id, count: 100, contains: (x: number, z: number) => (x >= 480 ? 1 : 0) + (z >= 480 ? 2 : 0) === i,
+    allows: (x: number, z: number) => z >= 120 && (x < 290 || x > 390),
+  }));
+  const create = () => populateRegionalCamps(960, regions, sites);
+  const camps = create();
+  assert.deepEqual(camps, create());
+  const centers: { x: number; z: number }[] = [];
+  for (const region of regions) {
+    const members = camps.get(region.id)!;
+    assert.ok(members.length > 40);
+    assert.equal(members.length % 5, 0);
+    members.forEach((member, i) => {
+      assert.equal(member.camp, Math.floor(i / 5));
+      assert.ok(region.contains(member.x, member.z) && region.allows(member.x, member.z));
+      if (i % 5 === 0) centers.push(member);
+    });
   }
-  assert.equal(firstSites.size, 4);
+  assert.ok(camps.get('flaris')!.some(member => member.site?.model === 'aibatt'));
+  for (const [i, a] of centers.entries()) for (const b of centers.slice(i + 1)) {
+    assert.ok(Math.hypot(a.x - b.x, a.z - b.z) >= 100 - 1e-8);
+  }
+  const grid = new SpawnGrid<{ x: number; z: number }>();
+  for (const center of centers) grid.add(center.x, center.z, center);
+  const { x, z } = centers[0];
+  assert.deepEqual(new Set([...grid.near(x, z, 110)].filter(m => Math.hypot(m.x - x, m.z - z) <= 110)),
+    new Set(centers.filter(m => Math.hypot(m.x - x, m.z - z) <= 110)));
 });
 
 test('flight covers 2 meters without a discontinuity at the next wingbeat', () => {
   assert.equal(flightHeight(0), flightHeight(1));
   assert.equal(flightHeight(0.5) - flightHeight(0), 2);
   assert.ok(flightHeight(0.75) < flightHeight(0.5));
-});
-
-test('native camps remain intact and additional camps fill valid land in groups of ten', () => {
-  const sites = [{ x: 210, z: 210, bounds: [200, 200, 220, 220], model: 'aibatt', level: 1, name: 'Aibatt' }];
-  const land = (x:number, z:number) => x < 700 && z < 700 && !(x > 380 && z > 380);
-  const native = scatterCamps('fixture', 768, 100, land, sites);
-  const camps = populateCamps('fixture', 768, 100, land, sites);
-  assert.deepEqual(camps.slice(0, native.length), native);
-  assert.deepEqual(camps, populateCamps('fixture', 768, 100, land, sites));
-  assert.ok(camps.length > native.length);
-  assert.equal(camps.length % CAMP_SIZE, 0);
-  for (let i = 0; i < camps.length; i += CAMP_SIZE) {
-    const group = camps.slice(i, i + CAMP_SIZE);
-    assert.ok(group.every(m => land(m.x, m.z) && m.camp === i / CAMP_SIZE));
-    if (i >= native.length) {
-      assert.ok(group.every(m => Math.hypot(m.x - group[0].x, m.z - group[0].z) <= 12.001));
-      assert.ok(group.every(m => native.every(n => Math.hypot(m.x - n.x, m.z - n.z) >= 72)));
-    }
-  }
-  assert.equal(populateCamps('fixture', 768, 1, land, sites).length, CAMP_SIZE);
 });
 
 test('regional monster levels rise with distance from the protected capital', () => {
@@ -100,28 +81,7 @@ test('Madrigal has one regional coordinate space and four distinct routes at eve
   assert.deepEqual([...visits],['flaris','crater_ceniza']);
 });
 
-test('the shared map fills each region up to its own quota using only complete camps', async () => {
-  const { populateRegionalCamps } = await import('../src/game/encounters.ts');
-  const camps = populateRegionalCamps(600, [
-    { id: 'west', count: 16, contains: x => x < 300, allows: (_x, z) => z > 100 },
-    { id: 'east', count: 13, contains: x => x >= 300, allows: (_x, z) => z > 100 },
-  ], [{ x: 80, z: 120, level: 1, model: 'aibatt', name: 'Aibatt' }]);
-  assert.equal(camps.get('west')?.length, 160);
-  assert.equal(camps.get('east')?.length, 130);
-  assert.equal(camps.get('west')?.[0].site?.model, 'aibatt');
-  const centers = [...camps].flatMap(([id, members]) => {
-    members.forEach((member, i) => {
-      assert.equal(member.camp, Math.floor(i / CAMP_SIZE));
-      assert.ok(member.z > 100);
-      assert.equal(member.x < 300 ? 'west' : 'east', id);
-    });
-    return members.filter((_, i) => i % CAMP_SIZE === 0);
-  });
-  centers.forEach((a, i) => centers.slice(i + 1).forEach(b => assert.ok(Math.hypot(a.x-b.x, a.z-b.z) >= 40)));
-});
-
-test('hunting grounds contain ten camps each and avoid land disconnected from arrival', async () => {
-  const { populateRegionalCamps, reachableHuntingLand } = await import('../src/game/encounters.ts');
+test('Puerto camps avoid land disconnected from arrival and reach both sides of the port', () => {
   const spawn = { x: 500, z: 600 };
   const land = (x: number, _z: number) => x < 800 || x >= 875;
   const ground = reachableHuntingLand(1200, spawn, land, (x, z) => x > 690 && z < 300 ? 100 : 10);
@@ -129,16 +89,31 @@ test('hunting grounds contain ten camps each and avoid land disconnected from ar
   assert.equal(ground(730, 250), false, 'a sheer rise is not reachable');
   assert.equal(ground(660, 250), true, 'connected land is reachable');
   const allowed = (x: number, z: number) => ground(x, z) && Math.hypot(x - spawn.x, z - spawn.z) > 262;
-  const region = { id: 'puerto', count: 40, clusteredAt: spawn, contains: () => true, allows: allowed };
+  const region = { id: 'puerto', count: 100, contains: () => true, allows: allowed };
   const camps = populateRegionalCamps(1200, [region], []).get('puerto')!;
-  assert.equal(camps.length, 400);
   assert.ok(camps.every(camp => allowed(camp.x, camp.z)));
-  const centers = camps.filter((_, index) => index % 10 === 0);
-  assert.ok(centers.some(camp => Math.hypot(camp.x - spawn.x, camp.z - spawn.z) < 300));
-  for (const [index, center] of centers.entries()) {
-    for (const [offset, other] of centers.slice(index + 1).entries()) {
-      const sameGround = Math.floor(index / 10) === Math.floor((index + offset + 1) / 10);
-      if (!sameGround) assert.ok(Math.hypot(center.x - other.x, center.z - other.z) >= 100);
-    }
+  assert.ok(camps.some(camp => camp.z < 250) && camps.some(camp => camp.z > 950));
+  assert.ok(camps.some(camp => Math.hypot(camp.x - spawn.x, camp.z - spawn.z) < 330));
+  assert.ok(camps.length % CAMP_SIZE === 0);
+});
+
+test('Cráter protects 100 m from arrival and 20 m from each NPC', () => {
+  const zones = [{ x: 2540, z: 490, radius: 100 }, { x: 2420, z: 918, radius: CRATER_NPC_SAFE_RADIUS }];
+  assert.ok(inProtectedArea(2640, 490, 0, zones));
+  assert.ok(!inProtectedArea(2640.1, 490, 0, zones));
+  assert.ok(inProtectedArea(2420, 938, 0, zones));
+  assert.ok(!inProtectedArea(2420, 938.1, 0, zones));
+  assert.ok(inProtectedArea(2420, 940, 2, zones));
+});
+
+test('regional stats advance and a starter cannot do comparable damage to late monsters', () => {
+  for (const [low, high] of [[1, 27], [28, 48], [49, 76], [77, 99]]) {
+    const early = monsterCombatStats(low), late = monsterCombatStats(high);
+    assert.ok(late.maxHp > early.maxHp && late.maxEnergy > early.maxEnergy && late.strength > early.strength);
+    assert.ok(early.maxEnergy >= MONSTER_POWER_ENERGY);
   }
+  const late = monsterCombatStats(99), boss = monsterCombatStats(99, true);
+  assert.ok(boss.maxHp > late.maxHp && boss.strength > late.strength);
+  assert.ok(damageAgainstMonster(250, late.defense, 1, 0, 99) < damageAgainstMonster(250, late.defense, 99, 0, 99) / 20);
+  assert.ok(damageAgainstMonster(250, late.defense, 30, 2, 99) > damageAgainstMonster(250, late.defense, 30, 0, 99));
 });

@@ -34,23 +34,26 @@ export class FlyffEffectRuntime {
     return this.manifest;
   }
 
-  async loadEffectDef(effectName) {
-    if (!effectName) return null;
+  loadEffectDef(effectName) {
+    if (!effectName) return Promise.resolve(null);
     const clean = effectName.replace(/^efectos\//, '').replace(/\.json$/, '');
-    if (this.effectCache.has(clean)) return this.effectCache.get(clean);
-    try {
-      const url = `./mugroup/efectos/${clean}.json`;
-      const res = await fetch(url);
-      if (!res.ok) {
-        this.effectCache.set(clean, null);
+    const cached = this.effectCache.get(clean);
+    if (cached) return cached;
+    const request = fetch(`./mugroup/efectos/${clean}.json`)
+      .then(res => res.ok ? res.json() : null)
+      .catch(() => {
+        this.effectCache.delete(clean);
         return null;
-      }
-      const def = await res.json();
-      this.effectCache.set(clean, def);
-      return def;
-    } catch {
-      this.effectCache.set(clean, null);
-      return null;
+      });
+    this.effectCache.set(clean, request);
+    return request;
+  }
+
+  async preloadEffect(effectName) {
+    const def = await this.loadEffectDef(effectName);
+    if (this.scene.isDisposed) return;
+    for (const part of def?.parts ?? []) {
+      if (part.enabled !== false) for (const texture of part.textures ?? []) this.getTexture(texture);
     }
   }
 
@@ -63,6 +66,7 @@ export class FlyffEffectRuntime {
     try {
       const tex = new Texture(clean, this.scene, false, true);
       tex.hasAlpha = true;
+      tex.getAlphaFromRGB = true;
       this.textureCache.set(clean, tex);
       return tex;
     } catch {
@@ -144,7 +148,6 @@ export class FlyffEffectRuntime {
         const tex = texPath ? this.getTexture(texPath) : null;
         plane.setEnabled(!!tex?.isReady());
         if (tex) {
-          tex.getAlphaFromRGB = true;
           mat.emissiveTexture = mat.diffuseTexture = tex;
           mat.opacityTexture = tex;
           mat.useAlphaFromDiffuseTexture = true;
@@ -192,8 +195,9 @@ export class FlyffEffectRuntime {
         const texture = this.getTexture(frames[texIndex]);
         if (!texture?.isReady()) { plane.setEnabled(false); continue; }
         plane.setEnabled(true);
-        texture.getAlphaFromRGB = true;
-        mat.emissiveTexture = mat.diffuseTexture = mat.opacityTexture = texture;
+        if (mat.emissiveTexture !== texture) {
+          mat.emissiveTexture = mat.diffuseTexture = mat.opacityTexture = texture;
+        }
         mat.alpha = mix(a?.opacity ?? 255, b?.opacity ?? 255) / 255 * Math.min(1, (1 - t) * 5);
       }
       if (t >= 1) {

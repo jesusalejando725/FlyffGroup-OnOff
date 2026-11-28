@@ -394,10 +394,13 @@ export class FlyffWorldStreamer {
   private volcanicTextures?: [Texture,Texture];
   private collisionCache = new Map<string, CollisionGeometryData>();
   private streamingLock: Promise<void> | null = null;
+  private manifestRequest: Promise<MundoManifest> | null = null;
   private getWorldClock: () => number;
   private waterMaterial: ShaderMaterial | null = null;
   private lastHeroX = 1336;
   private lastHeroZ = 1281;
+  private lastVisibilityX = NaN;
+  private lastVisibilityZ = NaN;
 
   constructor(scene: Scene, getWorldClock: () => number) {
     this.scene = scene;
@@ -406,7 +409,7 @@ export class FlyffWorldStreamer {
 
   public setDetailRadius(radiusMeters: number): void {
     this.detailRadius = Math.max(40, Math.min(480, Number(radiusMeters) || 100));
-    this.updateDetailVisibility(this.lastHeroX, this.lastHeroZ);
+    this.updateDetailVisibility(this.lastHeroX, this.lastHeroZ, true);
   }
 
   public setStripManmadeStructures(strip: boolean): void {
@@ -415,13 +418,18 @@ export class FlyffWorldStreamer {
 
   public async ensureManifest(): Promise<MundoManifest> {
     if (this.manifest && this.heightmap) return this.manifest;
+    this.manifestRequest ??= this.loadTerrainManifest().finally(() => { this.manifestRequest = null; });
+    return this.manifestRequest;
+  }
+
+  private async loadTerrainManifest(): Promise<MundoManifest> {
     const [mRes, hRes] = await Promise.all([
       fetch('./mugroup/mundo/mundo.json'),
       fetch('./mugroup/mundo/heightmap.f32'),
     ]);
     if (!mRes.ok || !hRes.ok) throw new Error('No se encontraron los datos del mundo.');
-    this.manifest = (await mRes.json()) as MundoManifest;
-    const buf = await hRes.arrayBuffer();
+    const [manifest, buf] = await Promise.all([mRes.json() as Promise<MundoManifest>, hRes.arrayBuffer()]);
+    this.manifest = manifest;
     this.heightmap = new Float32Array(buf);
     for (const tile of this.manifest.tiles) for (const w of tile.water ?? [])
       this.waterLevels.set(Math.floor(w.z / 32)*1024 + Math.floor(w.x / 32), w.height);
@@ -483,14 +491,16 @@ export class FlyffWorldStreamer {
     }
   }
 
-  public updateDetailVisibility(heroX: number, heroZ: number): void {
+  public updateDetailVisibility(heroX: number, heroZ: number, force = false): void {
     this.lastHeroX = heroX;
     this.lastHeroZ = heroZ;
-    const radius = this.detailRadius;
+    if (!force && heroX === this.lastVisibilityX && heroZ === this.lastVisibilityZ) return;
+    this.lastVisibilityX = heroX;
+    this.lastVisibilityZ = heroZ;
+    const radiusSquared = this.detailRadius ** 2;
     for (const tile of this.tiles.values()) {
       for (const instRoot of tile.details.values()) {
-        const dist = Math.hypot(instRoot.position.x - heroX, instRoot.position.z - heroZ);
-        const visible = dist <= radius;
+        const visible = (instRoot.position.x - heroX) ** 2 + (instRoot.position.z - heroZ) ** 2 <= radiusSquared;
         if (instRoot.isEnabled() !== visible) {
           instRoot.setEnabled(visible);
         }

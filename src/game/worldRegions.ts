@@ -13,3 +13,12 @@ export function capitalPortals<T extends Site>(regions: readonly T[]) {
     z:from.spawn.z + Math.sin(i*Math.PI/2)*24,
   })));
 }
+
+export const CRATER_NPC_SAFE_RADIUS = 20;
+
+export function inProtectedArea(
+  x: number, z: number, margin: number,
+  zones: readonly { x: number; z: number; radius: number }[],
+): boolean {
+  return zones.some(zone => (x - zone.x) ** 2 + (z - zone.z) ** 2 <= (zone.radius + margin) ** 2);
+}
