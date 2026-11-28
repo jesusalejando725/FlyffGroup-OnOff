@@ -221,6 +221,8 @@ export default function App() {
   const skillCooldownsRef = useRef<Record<string, number>>({});
   const charRef = useRef<MuCharacter | null>(null);
   const itemsRef = useRef<MuItem[]>([]);
+  const buffRef = useRef<ActiveEffect[]>([]);
+  buffRef.current = activeEffects;
   const roomRef = useRef<RoomState | null>(null);
   const settingsRef = useRef<GameSettings>(INITIAL_SETTINGS);
   const screenStageRef = useRef(screenStage);
@@ -560,6 +562,7 @@ export default function App() {
   useEffect(() => {
     const agg = aggregateActiveEffects(activeEffects);
     engineRef.current?.setActiveEffectBonuses({
+      magicBonusPct: activeEffects.reduce((n,e)=>n+(e.bonus?.magic??0),0),
       atkBonusPct: agg.atkBonusPct,
       speedBonusPct: agg.speedBonusPct,
       critBonusPct: agg.critBonusPct,
@@ -615,6 +618,13 @@ export default function App() {
     const manager = new LocalSyncManager({
       onConnectionChange: (connected) => setWsConnected(connected),
       onRoomState: (room) => {
+        if (!roomRef.current && room.hostPeerId !== syncRef.current?.peerId) {
+          const host=room.peers.find(p=>p.peerId===room.hostPeerId);
+          if(host && charRef.current) {
+            void engineRef.current?.loadMap(host.currentMapId,true,{x:host.x+1,z:host.z,rotY:host.rotY});
+            setCharacter(c=>c && {...c,currentMapId:host.currentMapId,lastX:host.x+1,lastZ:host.z});
+          }
+        }
         setRoomState(room);
         engineRef.current?.setEventActive(room.activeEvent, room.eventType);
         if (syncRef.current) {
@@ -633,7 +643,9 @@ export default function App() {
           lootSummary: `En curso (${room.peers.length} jugadores)`,
         }).then(async () => setEventHistory(await getEventSessions()));
       },
+      onMobState:(id,hp,map)=>engineRef.current?.applyGroupHealth(id,hp,map),
       onPeerMoved: (peer) => {
+        if (peer.peerId===roomRef.current?.hostPeerId) engineRef.current?.applyGroupPositions(peer);
         setRoomState((prev) => {
           if (!prev) return prev;
           const peers = prev.peers.map((p) => (p.peerId === peer.peerId ? peer : p));
@@ -821,10 +833,14 @@ export default function App() {
         setCharacter(prev => prev?.id === char.id ? { ...applyGearHealth(prev, next), equipment: next.filter(i=>i.isEquipped), inventory: next.filter(i=>!i.isEquipped) } : prev);
         void wearEquipment(char.id, slot, durability, next.find(i => i.isEquipped && i.slot === slot)?.id).catch(error => pushBanner(String(error), '#f87171'));
       },
+      onGroupHit:(id,damage,maxHp)=>{
+        if (!roomRef.current || roomRef.current.peers.length<2 || !syncRef.current) return false;
+        syncRef.current.hitMob(id,damage,maxHp);return true;
+      },
       onKillMonster: async (xp, zen, invasion) => {
         const c = charRef.current;
         if (!c) return;
-        let nextXp = c.xp + xp;
+        let nextXp = c.xp + xp * ((roomRef.current?.peers.length ?? 0)>1 ? 2 : 1);
         let nextLevel = c.level;
         let nextXpToNext = c.xpToNext;
         let nextMaxHp = c.maxHp;
@@ -931,7 +947,7 @@ export default function App() {
       onPlayerDamaged: (rawAmount, isCrit) => {
         const cur = charRef.current;
         if (!cur) return;
-        const { finalDamage } = computeHeroDefenseMitigation(rawAmount, Boolean(isCrit), cur, itemsRef.current);
+        const { finalDamage } = computeHeroDefenseMitigation(rawAmount/(1+buffRef.current.reduce((n,e)=>n+(e.bonus?.guard??0),0)/100), Boolean(isCrit), cur, itemsRef.current);
         const sdAbsorb = Math.min(cur.sd, Math.round(finalDamage * 0.55));
         const hpDamage = Math.max(1, finalDamage - sdAbsorb);
         const nextHp = Math.max(0, cur.hp - hpDamage);
@@ -981,7 +997,7 @@ export default function App() {
       },
       onHeroMoveSync: (x, z, rotY, action) => {
         if (roomRef.current && syncRef.current) {
-          syncRef.current.sendPeerUpdate({ x, z, rotY, action, currentMapId: charRef.current?.currentMapId, sex: charRef.current?.sex, equipment: itemsRef.current.filter(i => i.isEquipped) });
+          syncRef.current.sendPeerUpdate({ x, z, rotY, action, altitude:engineRef.current?.getHeroPose().altitude, nearby:roomRef.current.hostPeerId===syncRef.current.peerId && roomRef.current.peers.length>1 ? engineRef.current?.groupPositions() : undefined, currentMapId: charRef.current?.currentMapId, sex: charRef.current?.sex, equipment: itemsRef.current.filter(i => i.isEquipped) });
         }
       },
       onBossHitInEvent: (damage) => {
@@ -1087,9 +1103,9 @@ export default function App() {
         if (!prev) return prev;
         return {
           ...prev,
-          mp: Math.max(0, prev.mp - useSkill.mpCost),
+          mp: Math.min(prev.maxMp,Math.max(0, prev.mp - useSkill.mpCost) + (useSkill.isBuff && ['Mental Sign','Water Master'].includes(useSkill.name) ? Math.round(prev.maxMp*(.1+getSkillRank(prev,useSkill.id)/1000)) : 0)),
           ag: Math.max(0, prev.ag - useSkill.agCost),
-          hp: useSkill.isBuff ? Math.min(prev.maxHp, prev.hp + 55) : prev.hp,
+          hp: useSkill.isBuff ? Math.min(prev.maxHp, prev.hp + 55 + getSkillRank(prev,useSkill.id)*2) : prev.hp,
           sd: useSkill.isBuff ? Math.min(prev.maxSd, prev.sd + 45) : prev.sd,
         };
       });
@@ -1465,7 +1481,7 @@ export default function App() {
     const timer = window.setInterval(() => {
       if (helperEnabled || lootFiltersRef.current.autoLootEnabled) {
         engineRef.current?.collectAutoLoot(lootFiltersRef.current);
-      }
+      } else engineRef.current?.cancelLootApproach();
       if (document.hidden) return;
       if (helperEnabled || comboArmed) {
         const c = charRef.current;
@@ -1695,9 +1711,9 @@ export default function App() {
       level: c.level,
       role: 'host',
       transport: 'wifi',
-      x: 0,
-      z: 6,
-      rotY: Math.PI,
+      x: engineRef.current?.getHeroPose().x ?? c.lastX ?? getMapById(c.currentMapId).spawn.x,
+      z: engineRef.current?.getHeroPose().z ?? c.lastZ ?? getMapById(c.currentMapId).spawn.z,
+      rotY: engineRef.current?.getHeroPose().rotY ?? Math.PI,
       action: 'idle',
       equippedSet: eqArmor?.setName || 'Básico',
       equippedWeapon: eqWeapon?.name || 'Espada',
@@ -1854,7 +1870,7 @@ export default function App() {
             onCastSkill={handleCastSkill}
             onUpdateComboConfig={handleUpdateComboConfig}
             onHealPotion={handleHealPotion}
-            onPickupLoot={() => engineRef.current?.pickupNearestLoot(true, lootFiltersRef.current)}
+            onPickupLoot={() => { handleUpdateLootFilters({...lootFiltersRef.current, autoLootEnabled:true}); engineRef.current?.collectAutoLoot(lootFiltersRef.current); }}
             onTalkNpc={(npc) => {
               if (npc.warpTarget) { void handleWarpToMap(npc.warpTarget); return; }
               setActiveNpc(npc);

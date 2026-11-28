@@ -9,6 +9,7 @@ export const RECIPES: Record<HeroClass, Array<[effect: string, sound: string]>> 
     ['sfx_sklknttwopwswng02', 'flyff_sword_sweep'],
     ['mercenary_protection', 'dk_swell'],
     ['sfx_sklmeroneguillo01', 'dk_stab'],
+    ['sfx_sklmagswordwind01', 'pcskillm-swordwind1'],
   ],
   DW: [
     ['sfx_sklpsypsychicbomb01', 'dw_orb'],
@@ -17,6 +18,7 @@ export const RECIPES: Record<HeroClass, Array<[effect: string, sound: string]>> 
     ['sfx_sklmagmaglgtref01', 'dw_ice'],
     ['sfx_sklacrdefsupport01', 'buff'],
     ['sfx_sklpsymaximumcrisis01', 'dw_meteor'],
+    ['sfx_sklmagwaticemis01', 'pcskilll-icemissile1'],
   ],
   ELF: [
     ['sfx_sklacrbowautoshot01', 'flyff_bow_shot'],
@@ -25,6 +27,7 @@ export const RECIPES: Record<HeroClass, Array<[effect: string, sound: string]>> 
     ['sfx_sklragbowicearrow01', 'flyff_ice_arrow'],
     ['sfx_sklrinhealraincasting01', 'flyff_healing'],
     ['sfx_sklacrbowarrowrain01', 'flyff_arrow_rain'],
+    ['guardian-rain', 'arrow'],
   ],
   DL: [
     ['sfx_sklmerimpowe01', 'hit_bow'],
@@ -33,6 +36,7 @@ export const RECIPES: Record<HeroClass, Array<[effect: string, sound: string]>> 
     ['harlequin-shadow', 'dl_chaotic'],
     ['sfx_sklmerbloody01', 'rage'],
     ['harlequin-fire', 'dl_firebird'],
+    ['sfx_sklassheahealing01', 'pcskillm-healing'],
   ],
   MG: [
     ['sfx_hitwand01', 'mg_swordwind'],
@@ -41,5 +45,6 @@ export const RECIPES: Record<HeroClass, Array<[effect: string, sound: string]>> 
     ['sfx_sklelemullgtstm01', 'mg_eleshock'],
     ['sfx_sklelewatcasting01', 'ice'],
     ['sfx_sklelefirfirbrd01', 'firebird'],
+    ['sfx_sklelewaticeshk01', 'pcskilld-iceshark'],
   ],
 };

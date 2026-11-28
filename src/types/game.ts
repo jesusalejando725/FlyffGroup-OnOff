@@ -298,11 +298,13 @@ export interface GameSettings {
   cameraDistance?: number;
   cameraDistanceMigratedV2?: boolean;
   cameraDistanceMigratedV3?: boolean;
+  cameraDistanceMigratedV4?: boolean;
   autoAimAssist?: boolean;
   targetFps: 30 | 45 | 60;
 }
 
 export interface ActiveEffect {
+  bonus?: {attack?:number; magic?:number; guard?:number; speed?:number};
   id: string;
   name: string;
   kind: 'buff' | 'debuff';
@@ -374,6 +376,8 @@ export interface BuildAnalysisResult {
 }
 
 export interface RoomPeer {
+  altitude?:number;
+  nearby?: {id:string;x:number;z:number;rot:number}[];
   peerId: string;
   name: string;
   classType: HeroClass;

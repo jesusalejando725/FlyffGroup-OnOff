@@ -298,7 +298,7 @@ export function getXpRequiredForLevel(level: number): number {
 }
 
 export function getSkillRank(character: MuCharacter, skillId: string): number {
-  return Math.max(1, Math.min(10, Number(character.skillRanks?.[skillId] ?? 1)));
+  return Math.max(1, Math.min(100, Number(character.skillRanks?.[skillId] ?? 1)));
 }
 
 export function getSkillCooldownSec(skill: SkillDef): number {
@@ -324,7 +324,7 @@ export function getEffectiveSkillMultiplier(
   const baseMult = typeof baseMultiplierOrSkill === 'number' ? baseMultiplierOrSkill : baseMultiplierOrSkill.damageMultiplier;
   const rank = typeof rankOrCharacter === 'number' ? rankOrCharacter : getSkillRank(rankOrCharacter, (baseMultiplierOrSkill as SkillDef).id);
   const spec = specialization ?? (typeof rankOrCharacter === 'object' ? rankOrCharacter.specialization : undefined) ?? 'balanced';
-  const rankBonus = 1 + (Math.max(1, rank) - 1) * 0.085;
+  const rankBonus = 1 + (Math.min(10,Math.max(1,rank)) - 1) * .085 + Math.max(0,Math.min(100,rank)-10)*.022;
   const specBonus = spec === 'berserk' ? 1.08 : spec === 'arcane' ? 1.05 : 1.0;
   return Number((baseMult * rankBonus * specBonus).toFixed(2));
 }
@@ -429,12 +429,14 @@ export function computeHeroDefenseMitigation(
 }
 
 export function createSkillBuffEffect(skill: SkillDef, rank: number): ActiveEffect {
-  const duration = 18 + (rank - 1) * 3;
+  const duration = 18 + Math.floor(rank / 4);
+  const strength = 10 + Math.ceil(rank / 2);
+  const bonus = skill.name==='Protection' ? {guard:strength} : skill.name==='Mental Sign' || skill.name==='Water Master' ? {magic:strength} :
+    skill.name==='Fast Shot' ? {speed:strength} : skill.name==='Heal' || skill.name==='Heal Rain' ? {} : {attack:strength};
   return {
-    id: `buff-${skill.id}`,
-    name: `${skill.shortName} Nv.${rank}`,
-    kind: 'buff',
-    statHint: `+${10 + rank * 3}% ATK / +${8 + rank * 2}% Vel`,
+    id: `buff-${skill.id}`, name: `${skill.shortName} Nv.${rank}`,kind:'buff', bonus,
+    statHint:bonus.guard ? `+${strength}% protección` : bonus.magic ? `+${strength}% magia y PM` :
+      bonus.attack ? `+${strength}% ataque` : bonus.speed ? `+${strength}% velocidad` : 'Recupera vida y escudo',
     color: skill.colorHex,
     remainingSec: duration,
     totalSec: duration,
@@ -451,9 +453,9 @@ export function aggregateActiveEffects(effects: ActiveEffect[]): {
   let critBonusPct = 0;
   for (const eff of effects) {
     if (eff.kind === 'buff') {
-      atkBonusPct += 14;
-      speedBonusPct += 10;
-      critBonusPct += 6;
+      atkBonusPct += eff.bonus?.attack ?? (eff.bonus ? 0 : 14);
+      speedBonusPct += eff.bonus?.speed ?? (eff.bonus ? 0 : 10);
+      critBonusPct += eff.bonus ? 0 : 6;
     } else {
       atkBonusPct -= 5;
       speedBonusPct -= 8;

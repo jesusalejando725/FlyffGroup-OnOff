@@ -28,7 +28,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Mer01",
     "weapon": "Item_weaSwoWooden"
@@ -62,7 +63,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Mer01",
     "weapon": "Item_weaSwoWooden"
@@ -96,7 +98,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Acr01",
     "weapon": "Item_WeaBowWoode"
@@ -130,7 +133,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Acr01",
     "weapon": "Item_WeaBowWoode"
@@ -164,7 +168,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Mag01",
     "weapon": "Item_WeaStaWiz"
@@ -198,7 +203,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Mag01",
     "weapon": "Item_WeaStaWiz"
@@ -232,7 +238,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Ass01",
     "weapon": "Item_WeaWanMisty"
@@ -266,7 +273,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Ass01",
     "weapon": "Item_WeaWanMisty"
@@ -300,7 +308,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Vag02",
     "weapon": "Item_WeaSwoBamboo"
@@ -334,7 +343,8 @@
       "power_3",
       "power_4",
       "power_5",
-      "flight"
+      "flight",
+      "power_6"
     ],
     "outfit": "Vag02",
     "weapon": "Item_WeaSwoBamboo"

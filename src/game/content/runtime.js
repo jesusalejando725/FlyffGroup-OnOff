@@ -35,7 +35,7 @@ export class FlyffEffectRuntime {
   }
 
   loadEffectDef(effectName) {
-    if (!effectName) return Promise.resolve(null);
+    if (!effectName || /genintsuccess/i.test(effectName)) return Promise.resolve(null);
     const clean = effectName.replace(/^efectos\//, '').replace(/\.json$/, '');
     const cached = this.effectCache.get(clean);
     if (cached) return cached;
@@ -125,7 +125,7 @@ export class FlyffEffectRuntime {
 
     const fps = def?.fps || 30;
     const tracks = [];
-    const parts = (def?.parts || []).filter(part => part.enabled !== false && part.textures?.length);
+    const parts = (def?.parts || []).filter(part => part.enabled !== false && part.textures?.length && !/genintsuccess|sklpsymaximumcrisis05/i.test([part.name,part.texture,...part.textures].join(' ')));
     const duration = Math.max(0.35, ...parts.map(p => (p.keys?.at(-1)?.frame || 20) / fps));
     if (parts.length > 0) {
       parts.forEach((part, idx) => {

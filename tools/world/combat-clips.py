@@ -11,12 +11,13 @@ CLIPS={
 'ELF':'SklKntTswCharge SklKntTwoPwswng SklKntTswEthdvd SklKntTaxPwstum SklRincure03 SklRinHeal03',
 'DL':'SklJstVatals SklJstBackst SklJstHfpeny SklJstEnchan SklJstSuppor SklJstEscape',
 'MG':'SklBldDblCross SklBldDswBlddan SklEleFirCasting03 SklEleEleCasting03 SklEleWatCasting03 SklEleMulCasting03'}
+SEVENTH={'DK':'SklMagWinCasting02','DW':'SklEleWatCasting02','ELF':'SklAcrSuppor','DL':'SklRinHeal01','MG':'SklEleWatCasting03'}
 def attach(path,cls,sex,replace_powers=False):
     raw=path.read_bytes();length=struct.unpack_from('<I',raw,12)[0]
     g=GLB();g.doc=json.loads(raw[20:20+length]);g.bin=bytearray(raw[length+28:])
     names={g.doc['nodes'][i]['name'].lower():i for i in g.doc['skins'][0]['joints']}
-    for j,suffix in enumerate((CLIPS[cls]+' GenFStand1-A').split()):
-        name='flight' if j==6 else 'power_'+str(j)
+    for j,suffix in enumerate((CLIPS[cls]+' GenFStand1-A '+SEVENTH[cls]).split()):
+        name='flight' if j==6 else 'power_'+str(6 if j==7 else j)
         old = next((a for a in g.doc['animations'] if a['name'] == name), None)
         if old is not None:
             if not replace_powers or j == 6: continue
@@ -49,6 +50,6 @@ if __name__=='__main__':
     manifest=ROOT/'personajes.json';records=json.loads(manifest.read_text())
     for rec in records:
         attach(ROOT/rec['model'],rec['classId'],rec['sex'])
-        rec['clips']=list(dict.fromkeys(rec['clips']+['power_'+str(i) for i in range(6)]+['flight']))
+        rec['clips']=list(dict.fromkeys(rec['clips']+['power_'+str(i) for i in range(7)]+['flight']))
     for sex in ['male','female']:attach(ROOT/'personajes/mobilee'/f'hechicera_{sex}.glb','DW',sex)
     manifest.write_text(json.dumps(records,indent=2,ensure_ascii=False)+'\n')

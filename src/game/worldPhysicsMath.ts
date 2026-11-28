@@ -1,7 +1,7 @@
 import { getMapById } from '../data/muWorldData';
 import type { MapId } from '../types/game';
 
-export const DEFAULT_CAMERA_DISTANCE = 15.5;
+export const DEFAULT_CAMERA_DISTANCE = 7;
 
 export type LootFilterKey =
   | 'equipment'
