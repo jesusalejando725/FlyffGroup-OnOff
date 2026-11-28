@@ -1,3 +1,4 @@
+import { forge } from '../data/jewelForge';
 import { equippedGearBonuses } from '../data/flyffEconomy';
 import { findHeroAppearance } from '../data/heroAppearances';
 import { inventorySellValue } from '../data/itemPricing';
@@ -573,104 +574,26 @@ export async function upgradeItemWithJewel(
   jewel: 'bless' | 'soul' | 'life' | 'harmony',
 ): Promise<{ success: boolean; character: MuCharacter; items: MuItem[]; message: string }> {
   await initDexie();
-  const item = await db.items.get(itemId);
-  if (!item || item.charId !== character.id) {
-    return {
-      success: false,
-      character,
-      items: await getItemsForCharacter(character.id),
-      message: 'Ítem no encontrado.',
-    };
-  }
-
-  if (character[jewel] <= 0) {
-    return {
-      success: false,
-      character,
-      items: await getItemsForCharacter(character.id),
-      message: `No tienes Jewel of ${jewel.toUpperCase()} suficiente.`,
-    };
-  }
-
-  let nextLevel = item.enhanceLevel;
-  let nextOpt = item.excellentOpt;
-  let success = true;
-  let message = '';
-
-  if (jewel === 'bless') {
-    if (item.enhanceLevel >= 6) {
-      return {
-        success: false,
-        character,
-        items: await getItemsForCharacter(character.id),
-        message: 'Jewel of Bless sube ítems hasta +6. Usa Soul para +7 a +13.',
-      };
-    }
-    nextLevel = item.enhanceLevel + 1;
-    message = `¡${item.name} subió a +${nextLevel} con Jewel of Bless!`;
-  } else if (jewel === 'soul') {
-    if (item.enhanceLevel >= 13) {
-      return {
-        success: false,
-        character,
-        items: await getItemsForCharacter(character.id),
-        message: 'Este ítem ya es +13. Usa Jewel of Harmony para +14/+15.',
-      };
-    }
-    const chance = item.luck ? 0.8 : 0.6;
-    success = Math.random() < chance;
-    if (success) {
-      nextLevel = item.enhanceLevel + 1;
-      message = `¡Éxito! ${item.name} ascendió a +${nextLevel} con Jewel of Soul.`;
-    } else {
-      nextLevel = item.enhanceLevel >= 7 ? Math.max(0, item.enhanceLevel - 1) : item.enhanceLevel;
-      message = `Falló la mejora de Soul. ${item.name} quedó en +${nextLevel}.`;
-    }
-  } else if (jewel === 'life') {
-    nextOpt = item.excellentOpt?.includes('+16')
-      ? item.excellentOpt
-      : `${item.excellentOpt ? `${item.excellentOpt} · ` : ''}Opción Adicional +16`;
-    message = `¡Jewel of Life imbuyó ${item.name} con Opción Adicional +16!`;
-  } else {
-    if (item.enhanceLevel < 13 || item.enhanceLevel >= 15) {
-      return {
-        success: false,
-        character,
-        items: await getItemsForCharacter(character.id),
-        message: 'Jewel of Harmony refina ítems de +13 a +14/+15.',
-      };
-    }
-    const chance = item.luck ? 0.75 : 0.55;
-    success = Math.random() < chance;
-    if (success) {
-      nextLevel = item.enhanceLevel + 1;
-      message = `¡Refinamiento perfecto! ${item.name} ahora es +${nextLevel}!`;
-    } else {
-      message = `El refinamiento Harmony no surtió efecto esta vez.`;
-    }
-  }
-
-  const nextMinDmg = item.minDmg > 0 && success && jewel !== 'life' ? item.minDmg + 4 : item.minDmg;
-  const nextMaxDmg = item.maxDmg > 0 && success && jewel !== 'life' ? item.maxDmg + 6 : item.maxDmg;
-  const nextDef = item.defense > 0 && success && jewel !== 'life' ? item.defense + 4 : item.defense;
-  const nextMag = item.magicPower > 0 && success && jewel !== 'life' ? item.magicPower + 5 : item.magicPower;
-
-  await db.items.update(item.id, {
-    enhanceLevel: nextLevel,
-    minDmg: nextMinDmg,
-    maxDmg: nextMaxDmg,
-    defense: nextDef,
-    magicPower: nextMag,
-    excellentOpt: nextOpt,
+  return db.transaction('rw', db.items, db.characters, async () => {
+    const current = await db.characters.get(character.id);
+    const item = await db.items.get(itemId);
+    const result = current && item?.charId === current.id && forge(item, current, jewel);
+    if (!result || !item || !current) return { success: false, character: current ?? character,
+      items: await db.items.where('charId').equals(character.id).toArray(), message: 'Revisa el equipo, el nivel y las joyas de la receta.' };
+    const { cost, level, options, success } = result;
+    await db.characters.update(current.id, { bless: current.bless-cost.bless, soul: current.soul-cost.soul,
+      life: current.life-cost.life, harmony: current.harmony-cost.harmony });
+    const delta = level - item.enhanceLevel;
+    const previousSteps = item.forgeSteps ?? 0;
+    const steps = Math.max(0, previousSteps + delta);
+    const stat = (value:number, per:number) => value > 0 ? value + (steps - previousSteps) * per : 0;
+    await db.items.update(item.id, { enhanceLevel:level, forgeSteps:steps, lifeOptions:options, minDmg:stat(item.minDmg,4),
+      maxDmg:stat(item.maxDmg,6), magicPower:stat(item.magicPower,5), defense:stat(item.defense,4) });
+    const updated = await touchCharacterWithItems(current.id);
+    return { success, character: updated!, items: await db.items.where('charId').equals(current.id).toArray(),
+      message: jewel === 'life' ? `${item.name}: ${options.length} opciones Life.` :
+        `${success ? 'Mejora conseguida' : 'Intento fallido'}: ${item.name} +${level}.` };
   });
-
-  const updatedChar = await updateCharacter({
-    ...character,
-    [jewel]: character[jewel] - 1,
-  });
-  const nextItems = await getItemsForCharacter(character.id);
-
-  return { success, character: updatedChar, items: nextItems, message };
 }
 
 function buildCatalogItem(character: MuCharacter, shopItem: ShopItemDef): MuItem {
@@ -695,7 +618,7 @@ function buildCatalogItem(character: MuCharacter, shopItem: ShopItemDef): MuItem
     classFilter: shopItem.classFilter,
     gearBonus: shopItem.gearBonus,
     setBonus: shopItem.setBonus,
-    recovery: shopItem.recovery,
+    recovery: shopItem.recovery, quantity: shopItem.quantity,
     durability: 100,
     isEquipped: false,
     originalOwner: character.name,
@@ -712,16 +635,21 @@ export async function addCatalogItem(character: MuCharacter, shopItem: ShopItemD
   });
 }
 
-export async function consumeInventoryPotion(charId: string, itemId: string): Promise<MuCharacter | null> {
+export async function consumeInventoryPotion(charId: string, itemId: string, live?: () => Pick<MuCharacter,'id'|'hp'|'mp'|'sd'|'ag'> | null): Promise<MuCharacter | null> {
   await initDexie();
   return db.transaction('rw', db.items, db.characters, async () => {
     const [item, character] = await Promise.all([db.items.get(itemId), db.characters.get(charId)]);
     if (!character || item?.charId !== charId || !item.recovery) return null;
-    const hp = Math.min(character.maxHp, character.hp + Math.round((item.recovery.hp ?? 0) * character.maxHp) + (item.recovery.hpFlat ?? 0));
-    const mp = Math.min(character.maxMp, character.mp + Math.round((item.recovery.mp ?? 0) * character.maxMp));
-    if (hp === character.hp && mp === character.mp) return null;
-    await db.items.delete(itemId);
-    await db.characters.update(charId, { hp, mp });
+    const vitals = live ? live() : character;
+    if (vitals?.id !== charId) return null;
+    const hp = Math.min(character.maxHp, vitals.hp + Math.round((item.recovery.hp ?? 0) * character.maxHp) + (item.recovery.hpFlat ?? 0));
+    const mp = Math.min(character.maxMp, vitals.mp + Math.round((item.recovery.mp ?? 0) * character.maxMp));
+    const sd = Math.min(character.maxSd, vitals.sd + Math.round((item.recovery.hp ?? 0) * .65 * character.maxSd));
+    const ag = Math.min(character.maxAg, vitals.ag + Math.round((item.recovery.mp ?? 0) * .5 * character.maxAg));
+    if (hp === vitals.hp && mp === vitals.mp && sd === vitals.sd && ag === vitals.ag) return null;
+    if ((item.quantity ?? 1) > 1) await db.items.update(itemId, {quantity:item.quantity! - 1});
+    else await db.items.delete(itemId);
+    await db.characters.update(charId, { hp, mp, sd, ag });
     return touchCharacterWithItems(charId);
   });
 }
@@ -751,7 +679,7 @@ export async function buyShopItem(
     ok: true,
     character: updatedChar,
     items: nextItems,
-    message: `Compraste ${shopItem.name} +${shopItem.enhanceLevel} y se guardó en tu mochila.`,
+    message: `Compraste ${shopItem.name} ${shopItem.quantity ? '×' + shopItem.quantity : '+' + shopItem.enhanceLevel} y se guardó en tu mochila.`,
   };
 }
 

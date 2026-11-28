@@ -103,6 +103,44 @@ NPCS = {"MaFl_Boboku": "flaris-npc-hanzo", "MaFl_Losha": "flaris-npc-lumen",
 ARMOR_SLOTS = {"IK3_SUIT": "armor", "IK3_HELMET": "helm", "IK3_GAUNTLET": "gloves", "IK3_BOOTS": "boots"}
 ARMOR_CLASSES = {0: None, 6: ["DK", "MG"], 7: ["DK", "MG"], 8: ["ELF"], 9: ["ELF"], 10: ["DL"], 11: ["DL"]}
 
+def add_armory(data):
+    """Extra smith stock from propItem; the full Flyff suits include their trousers."""
+    names = dict(line.split("\t", 1) for line in read("propItem.txt.txt").splitlines() if "\t" in line)
+    selected = {"II_WEA_SWO_ENTANALE": ("weapon", "WeaSwoRunaic"), "II_ARM_ARM_SHI_ANCIENT": ("shield", "ArmShiCresce")}
+    for gender in ("M", "F"):
+        for part, slot in (("HELMET","helm"), ("SUIT","armor"), ("GAUNTLET","gloves"), ("BOOTS","boots")):
+            selected[f"II_ARM_{gender}_KIN_{part}_SET_09"] = (slot, None)
+    rows = {r["id"]:r for r in data["stock"]}
+    with TemporaryDirectory(prefix="flyff-armory-") as temp:
+        c.OUT = Path(temp)
+        for line in read("propItem.txt").splitlines():
+            f = line.split()
+            if len(f) < 32 or f[1] not in selected: continue
+            key = f[1]
+            slot, model = selected[key]
+            name = names[f[2]].strip()
+            icon = dds(line)
+            visual = {"icon":save_icon("flyff-" + key[3:].lower().replace("_","-"), icon)}
+            sex, set_name = None, ""
+            if model:
+                visual["model"] = convert_model(model)
+            else:
+                match = re.fullmatch(r"itm_([mf])(.*?)(Cap|Upper|Hand|Foot)\.dds", icon, re.I)
+                gender, family, _ = match.groups()
+                sex = "male" if gender.lower()=="m" else "female"
+                set_name = name.split()[0]
+                file = f"equipo/{family}_{sex}.glb"
+                if not (OUT/file).exists(): equipment.outfit(family,sex)
+                data["sets"].setdefault(set_name,{})[sex] = file
+            data["items"][name] = visual
+            id = "native_"+key.lower()
+            rows[id] = dict(id=id,name=name,npcs=["flaris-artisan","puerto-artisan"], level=int(f[23]),
+                cost=int(f[12]),kind=f[7],min=int(f[30]) if slot=="weapon" else 0,
+                max=int(f[31]) if slot=="weapon" else 0,slot=slot,setName=set_name,
+                defense=0 if slot=="weapon" else int(f[30]),classes=None if slot=="shield" else ["DK","MG"],sex=sex,heal=0)
+    data["stock"] = list(rows.values())
+    return data
+
 def market_assets():
     names = dict(line.split("\t", 1) for line in read("propItem.txt.txt").splitlines() if "\t" in line)
     models = {key: name for name, key in re.findall(r'^\s*"([^"]+)"\s+(II_\w+)\s+MODELTYPE', read("mdlDyna.inc"), re.M)}
@@ -200,7 +238,7 @@ def market_assets():
             if not (OUT / model).is_file():
                 equipment.outfit(family, sex)
     data = {"sourceRevision": REV, "items": visuals, "sets": sets, "stock": stock}
-    (OUT / "market-assets.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    (OUT / "market-assets.json").write_text(json.dumps(add_armory(data), ensure_ascii=False, indent=2) + "\n")
     print(f"{len(icons)} iconos, {len(models_to_build)} modelos, {len(sets)} conjuntos, {len(stock)} ofertas")
 
 if __name__ == "__main__":

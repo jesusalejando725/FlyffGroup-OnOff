@@ -54,6 +54,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
   const customStock = npc.stock;
   const catalogForNpc = ITEM_CATALOG
     .filter(item => {
+      if (item.id === 'flyff_heal_pack') return true;
       if (item.dropExclusive) return false;
       if (item.sexFilter && item.sexFilter !== character.sex) return false;
       if (item.classFilter && !item.classFilter.includes(character.classType)) return false;
@@ -80,10 +81,10 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
     desc: string;
     color: string;
   }> = [
-    { key: 'bless', name: 'Jewel of Bless', cost: 2500, desc: 'Mejora +0 a +6 (100%)', color: 'text-rose-300' },
-    { key: 'soul', name: 'Jewel of Soul', cost: 3500, desc: 'Mejora +7 a +13', color: 'text-sky-300' },
+    { key: 'bless', name: 'Jewel of Bless', cost: 2500, desc: 'Mejora hasta +6', color: 'text-rose-300' },
+    { key: 'soul', name: 'Jewel of Soul', cost: 3500, desc: 'Hasta +9; combinar joyas para +10 a +13', color: 'text-sky-300' },
     { key: 'chaos', name: 'Jewel of Chaos', cost: 4500, desc: 'Necesaria en Chaos Mix', color: 'text-amber-300' },
-    { key: 'life', name: 'Jewel of Life', cost: 5500, desc: 'Opción Adicional +16', color: 'text-purple-300' },
+    { key: 'life', name: 'Jewel of Life', cost: 5500, desc: 'Añade opciones o pierde una al azar', color: 'text-purple-300' },
     { key: 'harmony', name: 'Jewel of Harmony', cost: 9000, desc: 'Refina +13 a +15', color: 'text-emerald-300' },
   ];
 
@@ -181,7 +182,7 @@ export const NpcShopModal: React.FC<NpcShopModalProps> = ({
                     <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-xs font-bold text-amber-200">
-                        {s.name.replace(/ \+\d+$/, '')} +{s.enhanceLevel}
+                        {s.name.replace(/ \+\d+$/, '')} {s.quantity ? '×' + s.quantity : '+' + s.enhanceLevel}
                       </span>
                       <span className="text-[10px] font-mono-tabular uppercase text-slate-300">
                         {s.rarity}

@@ -34,6 +34,7 @@ import type {
   HudButtonId,
   MinimapEntitySnapshot,
   MuCharacter,
+  MuItem,
   NpcDef,
   SkillDef,
   SyncStatusInfo,
@@ -41,7 +42,7 @@ import type {
 import type { TargetMonsterInfo } from '../game/MuWorldEngine';
 import { getSkillRank } from '../game/combatAndProgression';
 import {
-  POTION_TIERS,
+
   projectToMinimap,
   type LootFilterKey,
   type LootFilterSettings,
@@ -50,6 +51,8 @@ import {
 import { PubgJoystick } from './PubgJoystick';
 
 export interface WorldTelemetryInfo {
+  flightMode?: string;
+  altitude?: number;
   x: number;
   z: number;
   inSafeCity: boolean;
@@ -86,6 +89,8 @@ interface MuHudOverlayProps {
   onUpdatePotionConfig: (next: PotionConfig) => void;
   onJoystickVector: (x: number, y: number) => void;
   onPressAttack: () => void;
+  potions: MuItem[];
+  onFlight: () => void;
   onJump: () => void;
   onToggleComboArmed: () => void;
   onCastSkill: (skill: SkillDef) => void;
@@ -140,7 +145,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
   onUpdatePotionConfig,
   onJoystickVector,
   onPressAttack,
-  onJump,
+  potions, onFlight, onJump,
   onToggleComboArmed,
   onCastSkill,
   onUpdateComboConfig,
@@ -764,8 +769,8 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
             }}
             className="w-12 h-12 rounded-full bg-[#1a0f14]/92 border-2 border-rose-500/70 text-rose-200 flex flex-col items-center justify-center shadow-lg active:scale-95 cursor-pointer touch-none select-none"
           >
-            <Heart className="w-4 h-4 text-rose-400 pointer-events-none" />
-            <span className="text-[9px] font-bold pointer-events-none">HP/MP</span>
+            <span className="flex"><img alt="" width="16" src="./mugroup/ui/hp_potion.png"/><img alt="" width="16" src="./mugroup/ui/mp_potion.png"/></span>
+            <span className="text-[9px] font-bold pointer-events-none">HP/MP · {potions.reduce((sum,p) => sum + (p.quantity ?? 1),0)}</span>
           </button>
 
           <button
@@ -805,26 +810,13 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
                 </button>
               </div>
               <div className="space-y-1">
-                {POTION_TIERS.map((tier) => {
-                  const selected = potionConfig.tierId === tier.id;
-                  return (
-                    <button
-                      key={tier.id}
-                      type="button"
-                      onClick={() => onUpdatePotionConfig({ ...potionConfig, tierId: tier.id })}
-                      className={`w-full px-2 py-1.5 rounded-lg border text-left text-[10px] flex items-center justify-between cursor-pointer ${
-                        selected
-                          ? 'bg-rose-600/25 border-rose-400 text-rose-100 font-bold'
-                          : 'bg-[#141b2b] border-slate-700 text-slate-300'
-                      }`}
-                    >
-                      <span>{tier.shortName}</span>
-                      <span className="font-mono-tabular text-amber-300">
-                        {tier.zenCost > 0 ? `${tier.zenCost} Zen` : 'Gratis'}
-                      </span>
-                    </button>
-                  );
-                })}
+                <label>Cura preferida
+                  <select value={potionConfig.preferredPotion ?? ''} className="w-full bg-slate-900"
+                    onChange={e => onUpdatePotionConfig({...potionConfig, preferredPotion:e.target.value})}>
+                    <option value="">Automática</option>
+                    {[...new Set(potions.map(i => i.name))].map(name => <option key={name}>{name}</option>)}
+                  </select>
+                </label>
               </div>
               <div className="pt-1 border-t border-slate-800 space-y-1">
                 <div className="text-[10px] text-slate-300 font-semibold">
@@ -969,6 +961,10 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
         </button>,
       )}
 
+      {wrapButton('flight', <button type="button" title="Equipa alas. Avanza mirando hacia arriba o abajo para cambiar de altura. Vuelve a pulsar para aterrizar." onClick={() => !editMode && onFlight()} className="rounded-full border-2 border-amber-300 bg-slate-900/95 px-2 py-2 text-[10px] font-bold text-amber-100">
+        {worldTelemetry.flightMode === 'flight' ? 'Aterrizar' : worldTelemetry.flightMode === 'landing' ? 'Descenso' : 'Volar'} · {worldTelemetry.altitude ?? 0} m
+      </button>)}
+
       {/* SEPARATED PODERES BUTTON + 10 SMALL SKILL/MAGIC SQUARES (5x2) */}
       {wrapButton(
         'skillTray',
@@ -1040,7 +1036,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
           </div>
 
           {powersOpen && (
-            <div className="grid grid-cols-5 gap-1 rounded-lg bg-[#0b1019]/92 border border-amber-700/60 p-1 shadow-xl">
+            <div style={{backgroundImage:'url("./mugroup/ui/WndTaskBar.png")'}} className="flyff-action-slots grid grid-cols-6 gap-1 rounded-lg bg-[#0b1019]/92 border border-amber-700/60 p-1 shadow-xl">
               {classSkills.slice(0, 10).map((sk) => {
                 const media = skillPresentation(character.classType, sk);
                 const isDefault = sk.id === defaultSkill.id;
@@ -1078,7 +1074,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
                     }}
                     className="relative w-9 h-9 rounded bg-[#151c2c] hover:bg-[#1f2940] border flex flex-col items-center justify-center text-center cursor-pointer active:scale-95 overflow-hidden touch-none select-none"
                   >
-                    <img src={media.icon} alt="" className="w-4 h-4 rounded-sm pointer-events-none" />
+                    <img src={media.icon} alt="" className="w-6 h-6 rounded-sm pointer-events-none" />
                     <span className="text-[7.5px] font-bold text-slate-100 leading-none truncate max-w-[32px] pointer-events-none">
                       {sk.shortName}
                     </span>
@@ -1164,67 +1160,20 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
               : 'bg-gradient-to-b from-amber-500 to-amber-700 border-amber-200 text-slate-950'
           }`}
         >
-          <Sword className="w-7 h-7 pointer-events-none" />
+          <img alt="" className="w-8 h-8 rounded-sm pointer-events-none" src={skillPresentation(character.classType,defaultSkill).icon} />
           <span className="text-[10px] font-extrabold leading-tight mt-0.5 max-w-[68px] truncate pointer-events-none">
             {comboArmed ? 'Atacar x5' : defaultSkill.shortName}
           </span>
         </button>,
       )}
 
-      {/* AUTHENTIC MU ONLINE BOTTOM HP/MP GLOBES + SD/AG/XP BAR */}
-      {wrapButton('vitals', <div className="pointer-events-none flex items-end gap-1 sm:gap-2 pb-1">
-        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#130b0d] border-2 border-amber-700/90 overflow-hidden shadow-2xl flex items-center justify-center">
-          <div
-            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rose-800 via-rose-600 to-red-500 transition-all"
-            style={{ height: `${hpPct}%` }}
-          />
-          <span className="relative z-10 text-[10px] font-mono-tabular font-bold text-white drop-shadow">
-            {character.hp}
-          </span>
-        </div>
+      {wrapButton('vitals', <div className="flyff-vitals" style={{backgroundImage:'url("./mugroup/ui/WndStatus.png")'}}>
+        <strong>{character.name} · Nv. {character.level}</strong><aside>{character.classType}<small>Zen {character.zen.toLocaleString()}<br/>B:{character.bless} · S:{character.soul}</small></aside>
+        {([['HP',hpPct,character.hp,character.maxHp,'#e93949'],['MP',mpPct,character.mp,character.maxMp,'#3578db'],
+          ['AG',agPct,character.ag,character.maxAg,'#58a74b'],['SD',sdPct,character.sd,character.maxSd,'#d6ae46'],
+          ['EXP',xpPct,Math.floor(xpPct),100,'#a28bc6']] as const).map(([label,pct,current,max,color]) =>
+            <div className="flyff-gauge" key={label}><b>{label}</b><span><i style={{width:pct+'%',backgroundColor:color}}/><em>{current}/{max}</em></span></div>)}
 
-        <div className="w-44 sm:w-64 rounded-t-lg bg-[#0d111a]/95 border border-b-0 border-amber-700/70 px-2.5 py-1.5 space-y-1 shadow-xl">
-          <div className="grid grid-cols-2 gap-1.5">
-            <div>
-              <div className="flex justify-between text-[9px] font-mono-tabular text-amber-200">
-                <span>SD</span>
-                <span>{character.sd}</span>
-              </div>
-              <div className="h-1.5 rounded bg-slate-800 overflow-hidden">
-                <div className="h-full bg-amber-400" style={{ width: `${sdPct}%` }} />
-              </div>
-            </div>
-            <div>
-              <div className="flex justify-between text-[9px] font-mono-tabular text-purple-200">
-                <span>AG</span>
-                <span>{character.ag}</span>
-              </div>
-              <div className="h-1.5 rounded bg-slate-800 overflow-hidden">
-                <div className="h-full bg-purple-500" style={{ width: `${agPct}%` }} />
-              </div>
-            </div>
-          </div>
-
-          <div className="h-1.5 w-full rounded bg-slate-900 border border-slate-700 overflow-hidden">
-            <div className="h-full bg-amber-500 transition-all" style={{ width: `${xpPct}%` }} />
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] font-mono-tabular text-slate-300">
-            <span>Zen {character.zen.toLocaleString()}</span>
-            <span className="text-rose-300">B:{character.bless}</span>
-            <span className="text-sky-300">S:{character.soul}</span>
-          </div>
-        </div>
-
-        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#09101a] border-2 border-amber-700/90 overflow-hidden shadow-2xl flex items-center justify-center">
-          <div
-            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-blue-900 via-blue-600 to-sky-400 transition-all"
-            style={{ height: `${mpPct}%` }}
-          />
-          <span className="relative z-10 text-[10px] font-mono-tabular font-bold text-white drop-shadow">
-            {character.mp}
-          </span>
-        </div>
       </div>)}
 
       {/* SMALL MU ONLINE SKILL & 5-POWER COMBO CONFIGURATOR POPOVER */}

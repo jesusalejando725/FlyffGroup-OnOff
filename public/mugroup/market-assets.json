@@ -1113,6 +1113,38 @@
     },
     "Star Candy": {
       "icon": "ui/items/flyff-gen-foo-ins-starcandy.webp"
+    },
+    "Wees Boots": {
+      "icon": "ui/items/flyff-arm-m-kin-boots-set-09.webp"
+    },
+    "Weeshian Boots": {
+      "icon": "ui/items/flyff-arm-f-kin-boots-set-09.webp"
+    },
+    "Wees Gauntlet": {
+      "icon": "ui/items/flyff-arm-m-kin-gauntlet-set-09.webp"
+    },
+    "Weeshian Gauntlet": {
+      "icon": "ui/items/flyff-arm-f-kin-gauntlet-set-09.webp"
+    },
+    "Wees Helmet": {
+      "icon": "ui/items/flyff-arm-m-kin-helmet-set-09.webp"
+    },
+    "Weeshian Helmet": {
+      "icon": "ui/items/flyff-arm-f-kin-helmet-set-09.webp"
+    },
+    "Wees Suit": {
+      "icon": "ui/items/flyff-arm-m-kin-suit-set-09.webp"
+    },
+    "Weeshian Suit": {
+      "icon": "ui/items/flyff-arm-f-kin-suit-set-09.webp"
+    },
+    "Entanale Sword": {
+      "icon": "ui/items/flyff-wea-swo-entanale.webp",
+      "model": "equipo/item_weasworunaic.glb"
+    },
+    "Ancient Shield": {
+      "icon": "ui/items/flyff-arm-arm-shi-ancient.webp",
+      "model": "equipo/item_armshicresce.glb"
     }
   },
   "sets": {
@@ -1274,6 +1306,12 @@
     },
     "Cumel": {
       "female": "equipo/Bil03_female.glb"
+    },
+    "Wees": {
+      "male": "equipo/Kin03_male.glb"
+    },
+    "Weeshian": {
+      "female": "equipo/Kin03_female.glb"
     }
   },
   "stock": [
@@ -6354,6 +6392,223 @@
       "classes": null,
       "sex": null,
       "heal": 975
+    },
+    {
+      "id": "native_ii_arm_m_kin_boots_set_09",
+      "name": "Wees Boots",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1356000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Wees",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_boots_set_09",
+      "name": "Weeshian Boots",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1356000,
+      "kind": "IK3_BOOTS",
+      "min": 0,
+      "max": 0,
+      "slot": "boots",
+      "setName": "Weeshian",
+      "defense": 374,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_gauntlet_set_09",
+      "name": "Wees Gauntlet",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1763000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Wees",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_gauntlet_set_09",
+      "name": "Weeshian Gauntlet",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1763000,
+      "kind": "IK3_GAUNTLET",
+      "min": 0,
+      "max": 0,
+      "slot": "gloves",
+      "setName": "Weeshian",
+      "defense": 486,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_helmet_set_09",
+      "name": "Wees Helmet",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1227000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Wees",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_helmet_set_09",
+      "name": "Weeshian Helmet",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 1227000,
+      "kind": "IK3_HELMET",
+      "min": 0,
+      "max": 0,
+      "slot": "helm",
+      "setName": "Weeshian",
+      "defense": 299,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_m_kin_suit_set_09",
+      "name": "Wees Suit",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 4069000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Wees",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "male",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_f_kin_suit_set_09",
+      "name": "Weeshian Suit",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 90,
+      "cost": 4069000,
+      "kind": "IK3_SUIT",
+      "min": 0,
+      "max": 0,
+      "slot": "armor",
+      "setName": "Weeshian",
+      "defense": 747,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": "female",
+      "heal": 0
+    },
+    {
+      "id": "native_ii_wea_swo_entanale",
+      "name": "Entanale Sword",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 30,
+      "cost": 3120,
+      "kind": "IK3_SWD",
+      "min": 125,
+      "max": 128,
+      "slot": "weapon",
+      "setName": "",
+      "defense": 0,
+      "classes": [
+        "DK",
+        "MG"
+      ],
+      "sex": null,
+      "heal": 0
+    },
+    {
+      "id": "native_ii_arm_arm_shi_ancient",
+      "name": "Ancient Shield",
+      "npcs": [
+        "flaris-artisan",
+        "puerto-artisan"
+      ],
+      "level": 57,
+      "cost": 162000,
+      "kind": "IK3_SHIELD",
+      "min": 0,
+      "max": 0,
+      "slot": "shield",
+      "setName": "",
+      "defense": 348,
+      "classes": null,
+      "sex": null,
+      "heal": 0
     }
   ]
 }

@@ -12,8 +12,9 @@
     { "minLevel": 3, "maxLevel": 5, "emissive": 0.16, "specular": 0.42, "sparkleRate": 3, "color": "#38bdf8", "label": "Templado Azul" },
     { "minLevel": 6, "maxLevel": 8, "emissive": 0.34, "specular": 0.68, "sparkleRate": 7, "color": "#f59e0b", "label": "Resplandor Ámbar" },
     { "minLevel": 9, "maxLevel": 11, "emissive": 0.56, "specular": 0.88, "sparkleRate": 14, "color": "#fbbf24", "label": "Brillo Dorado +9" },
-    { "minLevel": 12, "maxLevel": 13, "emissive": 0.85, "specular": 1.0, "sparkleRate": 24, "color": "#a855f7", "label": "Aura Mítica" },
-    { "minLevel": 14, "maxLevel": 15, "emissive": 0.95, "specular": 1.0, "sparkleRate": 30, "color": "#e8c4ff", "label": "Aura Astral" }
+    { "minLevel": 12, "maxLevel": 12, "emissive": 0.85, "specular": 1.0, "sparkleRate": 24, "color": "#a855f7", "label": "Aura Mítica" },
+    { "minLevel": 13, "maxLevel": 13, "emissive": 1.12, "specular": 1.0, "sparkleRate": 28, "color": "#d4afff", "label": "Aura radiante +13" },
+    { "minLevel": 14, "maxLevel": 15, "emissive": 1.2, "specular": 1.0, "sparkleRate": 30, "color": "#e8c4ff", "label": "Aura Astral" }
   ],
   "excellentOptions": [
     { "id": "exc_dmg", "label": "+10% Daño Excelente", "critPct": 10 },
@@ -25,8 +26,8 @@
     { "id": "exc_zen", "label": "+30% Zen al caer", "zenBonusPct": 30 }
   ],
   "jewels": [
-    { "id": "bless", "name": "Joya de Bless", "safeRange": "0..5", "bonusSuccessPct": 100 },
-    { "id": "soul", "name": "Joya de Soul", "safeRange": "6..9", "bonusSuccessPct": 75 },
+    { "id": "bless", "name": "Joya de Bless", "safeRange": "0..5", "bonusSuccessPct": 30 },
+    { "id": "soul", "name": "Joya de Soul", "safeRange": "0..8", "bonusSuccessPct": 30 },
     { "id": "chaos", "name": "Joya de Chaos", "safeRange": "10..15", "bonusSuccessPct": 60 },
     { "id": "life", "name": "Joya de Life", "effect": "+4% Defensa / Daño Adicional" },
     { "id": "creation", "name": "Joya de Creation", "effect": "Forja Reliquias y Alas" },

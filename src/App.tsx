@@ -81,7 +81,6 @@ import {
   DEFAULT_CAMERA_DISTANCE,
   DEFAULT_LOOT_FILTERS,
   DEFAULT_POTION_CONFIG,
-  computeDualPotionRestore,
   type LootFilterSettings,
   type PotionConfig,
 } from './game/worldPhysicsMath';
@@ -1436,51 +1435,27 @@ export default function App() {
     void savePotionConfig(next);
   };
 
+  const usingPotion = useRef(false);
   const handleHealPotion = useCallback(async () => {
     const c = charRef.current;
-    if (!c) return;
-    const cfg = potionConfigRef.current;
-    let res = computeDualPotionRestore({
-      hp: c.hp,
-      maxHp: c.maxHp,
-      mp: c.mp,
-      maxMp: c.maxMp,
-      sd: c.sd,
-      maxSd: c.maxSd,
-      ag: c.ag,
-      maxAg: c.maxAg,
-      tierId: cfg.tierId,
-    });
-    if (c.zen < res.tier.zenCost) {
-      res = computeDualPotionRestore({
-        hp: c.hp,
-        maxHp: c.maxHp,
-        mp: c.mp,
-        maxMp: c.maxMp,
-        sd: c.sd,
-        maxSd: c.maxSd,
-        ag: c.ag,
-        maxAg: c.maxAg,
-        tierId: 'menor',
-      });
+    if (!c || usingPotion.current) return;
+    const choices = itemsRef.current.filter(i => i.recovery &&
+      (((i.recovery.hp || i.recovery.hpFlat) && c.hp < c.maxHp) || (i.recovery.mp && (c.mp < c.maxMp || c.ag < c.maxAg)) || (i.recovery.hp && c.sd < c.maxSd)));
+    const item = choices.find(i => i.name === potionConfigRef.current.preferredPotion) ?? choices[0];
+    if (!item) {
+      if (c.hp < c.maxHp || c.mp < c.maxMp) pushBanner('Sin curas útiles en la mochila', '#fbbf24');
+      return;
     }
-    const updated: MuCharacter = {
-      ...c,
-      hp: res.nextHp,
-      mp: res.nextMp,
-      sd: res.nextSd,
-      ag: res.nextAg,
-      zen: Math.max(0, c.zen - res.tier.zenCost),
-    };
-    charRef.current = updated;
-    setCharacter(updated);
-    soundSynth.playPotion();
-    pushBanner(
-      `+${res.restoredHp} HP / +${res.restoredMp} MP${res.tier.zenCost > 0 ? ` (-${res.tier.zenCost} Zen)` : ''}`,
-      '#4ade80',
-    );
-    const saved = await updateCharacter(updated);
-    setCharacter(normalizeCharacterRecord(saved));
+    usingPotion.current = true;
+    try {
+      const updated = await consumeInventoryPotion(c.id,item.id, () => charRef.current);
+      if (!updated || charRef.current?.id !== c.id) return;
+      charRef.current = updated;
+      setCharacter(updated);
+      setItems(await getItemsForCharacter(c.id));
+      soundSynth.playPotion();
+      pushBanner(item.name, '#4ade80');
+    } finally { usingPotion.current = false; }
   }, [pushBanner]);
 
   // Auto-loot (filtered) & auto-heal loop when playing
@@ -1529,7 +1504,7 @@ export default function App() {
   const handleUsePotion = async (itemId: string) => {
     const c = charRef.current;
     if (!c) return;
-    const updated = await consumeInventoryPotion(c.id, itemId);
+    const updated = await consumeInventoryPotion(c.id, itemId, () => charRef.current);
     if (!updated) { setForgeMessage('No necesitas recuperar PV o PM con esta poción.'); return; }
     if (charRef.current?.id !== c.id) return;
     setCharacter(updated);
@@ -1866,6 +1841,8 @@ export default function App() {
             onUpdatePotionConfig={handleUpdatePotionConfig}
             onJoystickVector={(x, y) => engineRef.current?.setJoystickVector(x, y)}
             onPressAttack={handlePressAttack}
+            potions={items.filter(i => i.recovery)}
+            onFlight={() => engineRef.current?.toggleFlight()}
             onJump={() => engineRef.current?.jump()}
             onToggleComboArmed={() => {
               setComboArmed(!comboArmed);

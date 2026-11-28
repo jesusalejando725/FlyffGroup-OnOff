@@ -55,6 +55,7 @@ export type HudButtonId =
   | 'joystick'
   | 'attack'
   | 'jump'
+  | 'flight'
   | 'combo'
   | 'potion'
   | 'loot'
@@ -91,10 +92,13 @@ interface FlyffItemRules {
   setBonus?: GearBonuses;
   sexFilter?: 'male' | 'female';
   classFilter?: HeroClass[];
+  quantity?: number;
+  lifeOptions?: import("../data/jewelForge").LifeOption[];
   recovery?: { hp?: number; mp?: number; hpFlat?: number };
 }
 
 export interface MuItem extends FlyffItemRules {
+  forgeSteps?: number;
   id: string;
   charId: string;
   name: string;

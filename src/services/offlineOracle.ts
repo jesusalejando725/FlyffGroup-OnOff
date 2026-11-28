@@ -68,10 +68,10 @@ export function generateOfflineBuildAnalysis(
 
   const upgradePriority = !weapon
     ? 'Equipa un arma de tu clase primero en la Herrería de la capital.'
-    : weapon.enhanceLevel < 7
-      ? `Usa Jewel of Bless en ${weapon.name} (actual +${weapon.enhanceLevel}) hasta alcanzar +7.`
+    : weapon.enhanceLevel < 6
+      ? `Usa Jewel of Bless en ${weapon.name} (actual +${weapon.enhanceLevel}) hasta alcanzar +6.`
       : weapon.enhanceLevel < 13
-        ? `Aplica Jewel of Soul sobre ${weapon.name} (+${weapon.enhanceLevel}) hacia +13 para desbloquear destello dorado.`
+        ? `Aplica Jewel of Soul sobre ${weapon.name} (+${weapon.enhanceLevel}) hasta +9; después combina Bless, Soul y Life hasta +13.`
         : `${weapon.name} está en +${weapon.enhanceLevel}. Prioriza subir armadura, alas y anillos a +${Math.min(15, weapon.enhanceLevel)}.`;
 
   const statAdvice = `Prioriza ${tip.primaryStat}. Tienes ${character.unspentPoints} pts libres · STR:${character.str} AGI:${character.agi} VIT:${character.vit} ENE:${character.ene} CMD:${character.cmd}.`;
@@ -114,9 +114,9 @@ export function generateOfflineOracleReply(
     return [
       `[Oráculo Offline · MuGro-up'] Consejo de Forja para ${playerContext.name} (${playerContext.classType} Nv.${playerContext.level}):`,
       `• Tienes ${playerContext.bless} Jewel of Bless y ${playerContext.soul} Jewel of Soul.`,
-      `• +0 a +6: usa Jewel of Bless (100% seguro).`,
+      `• +0 a +6: usa Jewel of Bless.`,
       `• +7 a +9: usa Jewel of Soul (añade brillo de aura por nivel).`,
-      `• +10 a +15: usa Chaos Machine con Talismán para evitar pérdidas y desbloquear chispas doradas y prisma.`,
+      `• +10 a +13: combina Bless, Soul y Life en tu mochila. Para +14/+15 usa Harmony.`,
       `• Prioriza tu arma equipada antes que guantes o botas.`,
     ].join('\n');
   }

@@ -117,3 +117,15 @@ test('regional stats advance and a starter cannot do comparable damage to late m
   assert.ok(damageAgainstMonster(250, late.defense, 1, 0, 99) < damageAgainstMonster(250, late.defense, 99, 0, 99) / 20);
   assert.ok(damageAgainstMonster(250, late.defense, 30, 2, 99) > damageAgainstMonster(250, late.defense, 30, 0, 99));
 });
+
+test('flight follows camera pitch, stays aloft, caps at 500 m and lands gradually', async () => {
+  const {flightAltitude} = await import('../src/game/flight.ts');
+  let h = 0;
+  for (let i=0;i<2000;i++) h=flightAltitude('flight',h,2.4,1,.02);
+  assert.equal(h,500);
+  assert.equal(flightAltitude('flight',h,1.1,0,.1),500);
+  for(let i=0;i<2000;i++) h=flightAltitude('flight',h,.7,1,.02);
+  assert.equal(h,4);
+  assert.ok(flightAltitude('landing',h,1,1,.05) < h);
+  assert.equal(flightAltitude('landing',1,1,1,.1),0);
+});

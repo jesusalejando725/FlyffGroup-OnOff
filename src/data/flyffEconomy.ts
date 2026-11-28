@@ -1,3 +1,4 @@
+import { lifeOptions } from './jewelForge.ts';
 import type { ItemSlot, MonsterSpawnDef, MuItem, ShopItemDef } from '../types/game.ts';
 
 export interface GearBonuses {
@@ -123,7 +124,8 @@ const high = [
 const card = supplies('element_card', 'Tarjeta de elemento');
 
 export const FLYFF_ECONOMY_CATALOG = [...commonLow, ...commonHigh, ...shop, spike, crystal, vampire, ...rimyth,
-  ...jewelry, ...low, ...high, card];
+  ...jewelry, ...low, ...high, card, base('heal_pack', 'Pociones duales HP/MP', 1, 'consumable', 'consumable',
+    { recovery:{ hp:.28, mp:.25 }, quantity:100, vendorRoles:['potion','guard','blacksmith','magic','chaos_goblin'], fixedPrice:true, zenCost:1400 })];
 
 const legacyJewels = new Set(['bless', 'soul', 'chaos', 'life', 'creation', 'talisman']);
 
@@ -136,15 +138,20 @@ export function rollFlyffDrops(monster: Pick<MonsterSpawnDef, 'id' | 'name' | 'l
     item => (item.requiredLevel ?? 1) <= monster.level + 5 &&
       (monster.level <= 60 || (item.requiredLevel ?? 1) >= 60),
   );
+  const jewels = ['soul','bless','life'].filter(id => !monster.drops || monster.drops.includes(id));
+  const withJewels = () => {
+    if (jewels.length && random() < .20) drops.push(pick(jewels));
+    return drops;
+  };
   if (!monster.isBoss) {
     const resources = (monster.level <= 60 ? low : high).map(item => item.id);
     const configured = monster.drops?.filter(id => resources.includes(id) || legacyJewels.has(id) ||
       common.some(item => item.id === id));
-    const eligible = configured?.length ? configured : resources;
-    if (random() < .72) drops.push(pick(eligible));
+    const eligible = (configured?.length ? configured : resources).filter(id => !jewels.includes(id));
+    if (eligible.length && random() < .72) drops.push(pick(eligible));
     if (common.length && random() < .04) drops.push(pick(common).id);
     if (monster.level > 60 && random() < .006) drops.push(card.id);
-    return drops;
+    return withJewels();
   }
 
   const gear = common.length ? common : commonLow;
@@ -165,7 +172,7 @@ export function rollFlyffDrops(monster: Pick<MonsterSpawnDef, 'id' | 'name' | 'l
     if (random() < .0005) drops.push(rimyth[1].id);
     if (random() < .0005) drops.push(pick(rimyth.filter(item => item.slot !== 'armor')).id);
   }
-  return drops;
+  return withJewels();
 }
 
 const bonusSources = Object.keys({ hp:0, hpPct:0, hpRecoveryPct:0, defensePct:0, blockPct:0, str:0, critPct:0,
@@ -179,6 +186,7 @@ export function equippedGearBonuses(items: readonly MuItem[]): GearBonuses {
   };
   for (const item of items) {
     if (!item.isEquipped || (item.durability ?? 100) <= 0) continue;
+    for (const key of item.lifeOptions ?? []) add({ [key]: lifeOptions[key][1] });
     if (item.gearBonus) add(item.gearBonus);
     if (item.setBonus && armorSlots.some(([slot]) => slot === item.slot)) {
       const set = sets.get(item.setName) ?? { slots: new Set(), bonus: item.setBonus };
