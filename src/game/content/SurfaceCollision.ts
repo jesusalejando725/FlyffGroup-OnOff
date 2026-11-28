@@ -294,6 +294,17 @@ export class SurfaceCollision {
     return best;
   }
 
+  public airHeight(x:number,z:number,feet:number,target:number):number {
+    let result = target;
+    for (const index of this.queryPointCandidates(x,z)) {
+      const h = interpolateTriHeight(x,z,this.triangles[index]);
+      if (h === null) continue;
+      if (target > feet && h >= feet + HEAD_HEIGHT) result = Math.min(result,h - HEAD_HEIGHT);
+      if (target < feet && h <= feet) result = Math.max(result,h);
+    }
+    return result;
+  }
+
   public canMove(
     x0: number,
     z0: number,
@@ -302,6 +313,7 @@ export class SurfaceCollision {
     feet: number,
     getGround: (px: number, pz: number) => number,
     isLoaded: (px: number, pz: number) => boolean,
+    airborne = false,
   ): boolean {
     if (!isLoaded(x, z)) return false;
 
@@ -320,7 +332,7 @@ export class SurfaceCollision {
 
       const ground = getGround(px, pz);
       const nextFloor = this.floor(px, pz, currFeet + STEP_HEIGHT, ground);
-      currFeet = Math.max(ground, nextFloor);
+      currFeet = Math.max(ground, nextFloor, airborne ? feet : -Infinity);
 
       const candidates = this.queryRadiusCandidates(px, pz, CAPSULE_RADIUS);
       for (const idx of candidates) {

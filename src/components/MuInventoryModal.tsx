@@ -1,3 +1,4 @@
+import { forgeSlots, lifeOptions, recipe } from '../data/jewelForge';
 import { previewModelFile, itemAssets } from '../data/itemVisualAssets';
 import { ShopModel } from './ShopModel';
 import { ItemPortrait } from './ItemPortrait';
@@ -244,8 +245,8 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
 
                 {selectedItem.requiredLevel && <div className="text-xs">Nivel requerido: {selectedItem.requiredLevel}</div>}
                 <div className="text-xs text-emerald-300">
-                  {selectedItem.luck ? 'Suerte (Crítico +5% / Joya +25%)' : 'Sin Suerte'}
-                  {selectedItem.excellentOpt ? ` · ${selectedItem.excellentOpt}` : ''}
+                  {selectedItem.luck ? 'Suerte (crítico)' : 'Sin Suerte'}
+                  {(selectedItem.lifeOptions ?? []).map(key => ' · ' + lifeOptions[key][0]).join('')}{selectedItem.excellentOpt ? ` · ${selectedItem.excellentOpt}` : ''}
                 </div>
 
                 <div className="text-[11px] text-slate-400">
@@ -268,7 +269,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   )}
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'bless')}
-                    disabled={selectedItem.slot === 'consumable' || character.bless <= 0 || selectedItem.enhanceLevel >= 6}
+                    disabled={!forgeSlots.has(selectedItem.slot) || character.bless <= 0 || selectedItem.enhanceLevel >= 6}
                     className="min-h-[40px] px-3 rounded-lg bg-rose-700 hover:bg-rose-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Hammer className="w-3.5 h-3.5" />
@@ -276,15 +277,15 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   </button>
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'soul')}
-                    disabled={selectedItem.slot === 'consumable' || character.soul <= 0 || selectedItem.enhanceLevel >= 13}
+                    disabled={!forgeSlots.has(selectedItem.slot) || Object.entries(recipe(selectedItem.enhanceLevel,'soul')).some(([k,v]) => character[k as 'soul'|'bless'|'life'|'harmony'] < v) || selectedItem.enhanceLevel >= 13}
                     className="min-h-[40px] px-3 rounded-lg bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Hammer className="w-3.5 h-3.5" />
-                    +Soul
+                    {selectedItem.enhanceLevel >= 9 && selectedItem.enhanceLevel < 13 ? `+${selectedItem.enhanceLevel+1}: ${selectedItem.enhanceLevel-7} Soul + ${selectedItem.enhanceLevel-7} Bless + ${selectedItem.enhanceLevel-8} Life` : '+Soul'}
                   </button>
                   <button
                     onClick={() => onUpgrade(selectedItem.id, 'life')}
-                    disabled={selectedItem.slot === 'consumable' || character.life <= 0}
+                    disabled={!forgeSlots.has(selectedItem.slot) || character.life <= 0}
                     className="min-h-[40px] px-3 rounded-lg bg-purple-700 hover:bg-purple-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
                   >
                     <Gem className="w-3.5 h-3.5" />

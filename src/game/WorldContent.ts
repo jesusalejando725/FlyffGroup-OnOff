@@ -134,7 +134,7 @@ export class FlyffActor {
   public wingScaleMultiplier = 1;
   private activeClip = '';
   private combatMotion: HeroMotion | null = null;
-  private wingMode: 'stand' | 'walk' | '' = '';
+  private wingMode: 'stand' | 'walk' | 'landing' | '' = '';
 
   constructor(scene: Scene, config: PersonajeConfig) {
     this.scene = scene;
@@ -143,7 +143,7 @@ export class FlyffActor {
     const restorePose = scene.onBeforeAnimationsObservable.add(() => this.combatMotion?.restore());
     const followSpine = scene.onAfterAnimationsObservable.add(() => {
       this.combatMotion?.pose();
-      this.wingRig?.update(this.wingPhase, this.wingMode === 'walk');
+      this.wingRig?.update(this.wingPhase, this.wingMode === 'walk' || this.wingMode === 'landing');
     });
     this.root.onDisposeObservable.addOnce(() => {
       scene.onBeforeAnimationsObservable.remove(restorePose);
@@ -268,18 +268,19 @@ export class FlyffActor {
     return Math.max(0.16, (group.to - group.from) / (fps * (loop ? 1 : 1.18)));
   }
 
-  public playWingAnimation(mode: 'stand' | 'walk'): void {
+  public playWingAnimation(mode: 'stand' | 'walk' | 'landing'): void {
     if (!this.gear.wings?.equipped) return;
     if (this.wingMode === mode && this.wingAnimations.some((a) => a.isPlaying)) {
       return;
     }
     this.wingMode = mode;
+    const clip = mode === 'landing' ? 'walk' : mode;
     const target =
-      this.wingAnimations.find((a) => a.name.toLowerCase() === mode) ||
-      this.wingAnimations.find((a) => a.name.toLowerCase().includes(mode)) ||
+      this.wingAnimations.find((a) => a.name.toLowerCase() === clip) ||
+      this.wingAnimations.find((a) => a.name.toLowerCase().includes(clip)) ||
       this.wingAnimations[0];
     if (!target) return;
-    const speedRatio =
+    const speedRatio = mode === 'landing' ? .7 :
       target.name.toLowerCase().includes('action') || target.name.toLowerCase().includes('wing')
         ? mode === 'walk'
           ? 1.45
@@ -870,7 +871,7 @@ export class WorldContentManager {
     return this.lastEquippedItems;
   }
 
-  public update(dt: number, groundHeight = 0, wingMode: 'stand' | 'walk' = 'stand', heroX = 1336, heroZ = 1281): void {
+  public update(dt: number, groundHeight = 0, wingMode: 'stand' | 'walk' | 'landing' = 'stand', heroX = 1336, heroZ = 1281): void {
     this.worldClock += dt;
     this.world.update(dt, heroX, heroZ);
     if (this.actor) {

@@ -1,3 +1,4 @@
+import { flightAltitude, type FlightMode } from './flight';
 import { equippedGearBonuses, rollFlyffDrops } from '../data/flyffEconomy';
 import madrigalSites from '../data/madrigalSpawns.json';
 import { capitalPortals, CRATER_NPC_SAFE_RADIUS, inProtectedArea, nearestRegion } from './worldRegions';
@@ -251,6 +252,24 @@ export class MuWorldEngine {
   private heroZ = 1281;
   private hoverOffset = 0;
   private wingPhase = 0;
+  private altitude = 0;
+  private flightMode: FlightMode = 'auto';
+
+  public toggleFlight(): void {
+    if (this.mode !== 'playing') return;
+    if (this.flightMode === 'flight') { this.flightMode = 'landing'; return; }
+    if (!this.flyff.actor?.gear.wings?.equipped) {
+      this.callbacks.onFloatingText?.('Equipa alas para volar', '#fbbf24');
+      return;
+    }
+    this.altitude = Math.max(this.altitude, this.hoverOffset);
+    this.flightMode = 'flight';
+  }
+
+  private resetFlight(): void {
+    this.altitude = this.hoverOffset = this.wingLift = 0;
+    this.flightMode = 'auto';
+  }
   private wingLift = 0;
   private openSky = 0;
   private heroRotY = Math.PI;
@@ -509,6 +528,7 @@ export class MuWorldEngine {
     resetPose = true,
     savedPose?: { x: number; z: number; rotY?: number },
   ): Promise<void> {
+    this.resetFlight();
     const version = ++this.mapVersion;
     await Promise.all([loadAdminConfig(), refreshLiveWorld()]);
     if (version !== this.mapVersion || this.disposed) return;
@@ -648,6 +668,7 @@ export class MuWorldEngine {
   }
 
   public respawnInCurrentCity(): { x: number; z: number; rotY: number } {
+    this.resetFlight();
     this.heroX = this.currentMap.spawn.x;
     this.heroZ = this.currentMap.spawn.z;
     this.heroY = this.flyff.world.getGroundHeight(this.heroX, this.heroZ);
@@ -748,7 +769,7 @@ export class MuWorldEngine {
     const hits: ActiveMonster[] = [];
     for (const mob of this.nearMonsters(reach)) {
       if (!mob.alive || this.isSafePoint(mob.x, mob.z)) continue;
-      const d = Math.hypot(mob.x - this.heroX, mob.z - this.heroZ);
+      const d = Math.hypot(mob.x - this.heroX, mob.z - this.heroZ, this.altitude);
       if (d <= reach) {
         hits.push(mob);
       }
@@ -898,6 +919,7 @@ export class MuWorldEngine {
       const pool = [...ITEM_BY_ID.values()].filter(i => i.sourceLevel === undefined).filter(i =>
         ['helm','armor','pants','boots','gloves'].includes(i.slot) || (e.id !== 'red' && i.slot === 'weapon') ||
         (e.id !== 'red' && e.id !== 'selupan' && i.slot === 'shield')).map(i=>i.id);
+      if (Math.random() < .2) this.spawnLootDrop(mob.x,mob.z,0,true,['soul','bless','life']);
       for (let i=0; i<e.pieces; i++) this.spawnLootDrop(mob.x+1.5*Math.cos(i*2.4),mob.z+1.5*Math.sin(i*2.4),0,true,pool);
       return;
     }
@@ -1495,7 +1517,7 @@ export class MuWorldEngine {
     let bestD = maxDist;
     for (const m of this.nearMonsters(maxDist)) {
       if (!m.alive || this.isSafePoint(m.x, m.z)) continue;
-      const d = Math.hypot(m.x - this.heroX, m.z - this.heroZ);
+      const d = Math.hypot(m.x - this.heroX, m.z - this.heroZ, this.altitude);
       if (d < bestD) {
         bestD = d;
         best = m;
@@ -1582,9 +1604,10 @@ export class MuWorldEngine {
         this.heroZ,
         nextX,
         nextZ,
-        this.heroY,
+        this.heroY + this.altitude,
         (x: number, z: number) => this.flyff.world.getGroundHeight(x, z),
         (x: number, z: number) => this.flyff.world.isPointLoaded(x, z),
+        this.altitude > 0,
       );
       if (canMove) {
         this.heroX = nextX;
@@ -1597,10 +1620,22 @@ export class MuWorldEngine {
     }
 
     const inCity = this.isInSafeCity();
-    const flying = hasWings && !inCity;
+    if (!hasWings && this.flightMode === 'flight') this.flightMode = 'landing';
+    const manualFlight = this.flightMode === 'flight' || this.flightMode === 'landing';
+    const proposed = flightAltitude(this.flightMode, this.altitude, this.camera.beta, moving ? Math.min(1,len) : 0, dt);
+    if (manualFlight) {
+      this.altitude = this.flyff.world.collision.airHeight(this.heroX,this.heroZ,this.heroY+this.altitude,this.heroY+proposed)-this.heroY;
+      this.altitude = Math.max(0,Math.min(500,this.altitude));
+      if (this.flightMode === 'landing' && this.altitude >= proposed && (this.altitude === 0 || this.altitude > proposed + .001)) {
+        this.heroY += this.altitude;
+        this.altitude = 0;
+        this.flightMode = 'ground';
+      }
+    }
+    const flying = this.flightMode === 'auto' ? hasWings && !inCity : manualFlight && this.flightMode !== 'ground';
     this.wingLift += ((flying ? 1 : 0) - this.wingLift) * (1 - Math.exp(-dt * 6));
     if (flying) {
-      this.wingPhase += dt / 1.28;
+      this.wingPhase += dt / (this.flightMode === 'landing' ? 2.1 : 1.28);
       if (this.wingPhase >= 1) {
         this.wingPhase %= 1;
         soundSynth.playWingFlap();
@@ -1612,7 +1647,7 @@ export class MuWorldEngine {
       if (mob.alive) clearance = Math.min(clearance,Math.max(0,(Math.hypot(mob.x-this.heroX,mob.z-this.heroZ)-28)/16));
     }
     this.openSky += ((flying ? clearance : 0)-this.openSky)*(1-Math.exp(-dt*5));
-    this.hoverOffset = (1.1+(flightHeight(this.wingPhase)-1.1)*this.openSky)*this.wingLift;
+    this.hoverOffset = manualFlight ? this.altitude : this.flightMode === 'ground' ? 0 : (1.1+(flightHeight(this.wingPhase)-1.1)*this.openSky)*this.wingLift;
     if (this.flyff.actor) this.flyff.actor.wingPhase = flying ? this.wingPhase : (this.flyff.worldClock / 2) % 1;
 
     const groundY = this.flyff.world.collision.floor(
@@ -1636,9 +1671,11 @@ export class MuWorldEngine {
     this.heroRoot.position.set(this.heroX, this.heroY + this.hoverOffset, this.heroZ);
     // 3rd-person camera angled above wings to see the horizon clearly ahead
     this.camera.target.set(this.heroX, this.heroY + this.hoverOffset + 1.55, this.heroZ);
+    this.scene.fogStart = 230 + this.altitude;
+    this.scene.fogEnd = 450 + this.altitude;
 
     // Keep the camera above rising ground behind the character, including while orbiting.
-    let maxBeta = 1.44;
+    let maxBeta = manualFlight ? 2.65 : 1.44;
     const reach = Math.max(1, this.camera.radius) * Math.sin(this.camera.beta);
     for (let i = 1; i <= 5; i++) {
       const distance = reach * i / 5;
@@ -1658,7 +1695,7 @@ export class MuWorldEngine {
       }
     }
 
-    const wingMode: 'stand' | 'walk' = hasWings && !inCity ? 'walk' : 'stand';
+    const wingMode = this.flightMode === 'landing' ? 'landing' : flying ? 'walk' : 'stand';
     this.flyff.update(dt, this.heroY, wingMode, this.heroX, this.heroZ);
 
     this.streamAccum += dt;
@@ -1722,7 +1759,7 @@ export class MuWorldEngine {
         if (!mob.alive) continue;
       }
 
-      const d = Math.hypot(this.heroX - mob.x, this.heroZ - mob.z);
+      const d = Math.hypot(this.heroX - mob.x, this.heroZ - mob.z, this.altitude);
       if (!mob.model && !mob.modelPending && performance.now() >= (mob.retryAt || 0)) {
         mob.modelPending = true;
         void this.getOrLoadEntityContainer(mob.glbFile).then(container => {
@@ -1944,6 +1981,7 @@ export class MuWorldEngine {
       }
     }
     this.callbacks.onWorldTelemetry?.({
+      flightMode:this.flightMode, altitude:Math.round(this.altitude),
       x: Math.round(this.heroX),
       z: Math.round(this.heroZ),
       inSafeCity: this.isInSafeCity(),

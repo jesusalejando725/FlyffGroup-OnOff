@@ -695,7 +695,7 @@ export class EquipmentAppearance {
       actor.wingRig.update(0, false);
       actor.playWingAnimation('stand');
 
-      this.attachWingEffects(actor, wingSocket, evoTier);
+      this.attachWingEffects(actor, wingSocket, evoTier, wingItem?.enhanceLevel ?? 0);
     } else {
       wingContainer?.dispose();
     }
@@ -751,7 +751,8 @@ export class EquipmentAppearance {
     }
   }
 
-  private attachWingEffects(actor: FlyffActorLike, wingSocket: TransformNode, evoTier: 1 | 2 | 3 | 4): void {
+  private attachWingEffects(actor: FlyffActorLike, wingSocket: TransformNode, evoTier: 1 | 2 | 3 | 4, level: number): void {
+    const glow = level >= 9 ? 1.25 + .25 * Math.min(4, level - 9) : 1;
     const adminOpts = getAdminConfigSync()['item-options'];
     const tierColors: Record<1 | 2 | 3 | 4, Color3> = {
       1: Color3.FromHexString('#7dd3fc'),
@@ -768,7 +769,7 @@ export class EquipmentAppearance {
         light.parent = wingSocket;
         light.diffuse = col;
         light.specular = col;
-        light.intensity = 0.12 + evoTier * 0.07;
+        light.intensity = (0.12 + evoTier * 0.07) * glow;
         light.range = 4.5 + evoTier * 3.0;
         actor.wingLight = light;
       } catch {
@@ -795,6 +796,7 @@ export class EquipmentAppearance {
         ps.emitRate = 7 + evoTier * 7;
         ps.blendMode = ParticleSystem.BLENDMODE_ADD;
         ps.gravity = new Vector3(0, 0.35, 0);
+        ps.emitRate *= glow;
         ps.start();
         actor.wingParticles = ps;
       } catch {

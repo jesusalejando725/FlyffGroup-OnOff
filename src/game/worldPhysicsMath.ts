@@ -54,6 +54,7 @@ export const POTION_TIERS: PotionTierDef[] = [
 ];
 
 export interface PotionConfig {
+  preferredPotion?: string;
   tierId: PotionTierDef['id'];
   autoHealThresholdPct: number;
 }

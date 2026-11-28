@@ -45,3 +45,26 @@ test('set bonuses require four distinct, equipped, intact pieces from the same s
   assert.deepEqual(equippedGearBonuses([...pieces.slice(0, 3), pieces[0]]), {});
   assert.deepEqual(equippedGearBonuses(pieces.map((item, i) => ({ ...item, durability: i === 0 ? 0 : 100 }))), {});
 });
+
+test('jewels have one shared roll per kill and respect disabled loot', () => {
+  const m = {id:'a',name:'A',level:1};
+  assert.deepEqual(rollFlyffDrops(m, samples(.99,.99,.19999,.7)), ['life']);
+  assert.deepEqual(rollFlyffDrops(m, samples(.99,.99,.2)), []);
+  assert.deepEqual(rollFlyffDrops({...m,drops:[]}, () => 0), []);
+});
+
+test('forge charges all ingredients and handles both sides of the success boundary', async () => {
+  const {forge} = await import('../src/data/jewelForge.ts');
+  const wallet = {bless:5, soul:5, life:4, harmony:1};
+  for (let n=9;n<13;n++) {
+    const item = {...items.get('flyff_wooden')!, enhanceLevel:n} as MuItem;
+    assert.deepEqual(forge(item,wallet,'soul',()=>.29999)?.cost,{bless:n-7,soul:n-7,life:n-8,harmony:0});
+    assert.equal(forge(item,wallet,'soul',()=>.29999)?.level,n+1);
+    assert.equal(forge(item,wallet,'soul',()=>.3)?.level,n-1);
+    assert.equal(forge(item,{...wallet,life:n-9},'soul'),null);
+  }
+  const item = items.get('flyff_wooden')! as MuItem;
+  const life = forge(item,wallet,'life',samples(0,.99,0,0,0))!;
+  assert.equal(new Set(life.options).size,3);
+  assert.equal(forge({...item,lifeOptions:life.options},wallet,'life',()=>.9)?.options.length,2);
+});
