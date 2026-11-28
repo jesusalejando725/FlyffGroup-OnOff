@@ -1,3 +1,6 @@
+import { restoreEquipment } from '../data/madrigalEquipment';
+import { canEquip } from '../data/equipmentRules';
+import type { WalletKey } from '../types/game';
 import { forge } from '../data/jewelForge';
 import { equippedGearBonuses } from '../data/flyffEconomy';
 import { findHeroAppearance } from '../data/heroAppearances';
@@ -71,6 +74,22 @@ class MuLorenciaDatabase extends Dexie {
       chatMessages: 'id, createdAt',
       asyncDuels: 'id, createdAt',
       kvMeta: 'key',
+    });
+    this.version(2).stores({}).upgrade(async tx=>{
+      for (const c of await tx.table<MuCharacter>('characters').toArray()) {
+        const rows=await tx.table<MuItem>('items').where('charId').equals(c.id).toArray();
+        const keep: MuItem[]=[];
+        for (const row of rows) {
+          const item=restoreEquipment(row,c.classType,c.sex);
+          if (item.isEquipped && !canEquip(c,item)) item.isEquipped=false;
+          const stack=item.slot==='consumable' && keep.find(i=>sameStack(i,item));
+          if (stack) {stack.quantity=(stack.quantity ?? 1)+(item.quantity ?? 1); await tx.table('items').delete(item.id);}
+          else keep.push(item);
+        }
+        await tx.table('items').bulkPut(keep);
+        await tx.table('characters').put({...applyGearHealth(c,keep),life:c.life+(c.chaos||0)+(c.harmony||0)+(c.creation||0)+(c.talisman||0),
+          chaos:0,harmony:0,creation:0,talisman:0,inventory:keep.filter(i=>!i.isEquipped),equipment:keep.filter(i=>i.isEquipped),updatedAt:Date.now(),isSynced:false});
+      }
     });
   }
 }
@@ -190,11 +209,11 @@ export function normalizeCharacterRecord(c: MuCharacter): MuCharacter {
     xpToNext: Math.max(100, Number(c.xpToNext) || getXpRequiredForLevel(safeLevel)),
     hp: Math.max(1, Math.min(maxHp, Number(c.hp) || maxHp)),
     maxHp,
-    mp: Math.max(0, Math.min(maxMp, Number(c.mp) || maxMp)),
+    mp: Math.max(0, Math.min(maxMp, Number(c.mp ?? maxMp))),
     maxMp,
-    sd: Math.max(0, Math.min(maxSd, Number(c.sd) || maxSd)),
+    sd: Math.max(0, Math.min(maxSd, Number(c.sd ?? maxSd))),
     maxSd,
-    ag: Math.max(0, Math.min(maxAg, Number(c.ag) || maxAg)),
+    ag: Math.max(0, Math.min(maxAg, Number(c.ag ?? maxAg))),
     maxAg,
     str: Math.max(10, Number(c.str) || 20),
     agi: Math.max(10, Number(c.agi) || 20),
@@ -211,11 +230,8 @@ export function normalizeCharacterRecord(c: MuCharacter): MuCharacter {
     zen: Math.max(0, Number(c.zen) || 0),
     bless: Math.max(0, Number(c.bless) || 0),
     soul: Math.max(0, Number(c.soul) || 0),
-    chaos: Math.max(0, Number(c.chaos) || 0),
-    life: Math.max(0, Number(c.life) || 0),
-    harmony: Math.max(0, Number(c.harmony) || 0),
-    creation: Math.max(0, Number(c.creation) || 0),
-    talisman: Math.max(0, Number(c.talisman) || 0),
+    life: [c.life,c.chaos,c.harmony,c.creation,c.talisman].reduce<number>((n,v)=>n+Math.max(0,Number(v)||0),0),
+    chaos:0,harmony:0,creation:0,talisman:0,
     kills: Math.max(0, Number(c.kills) || 0),
     currentMapId: getMapById(c.currentMapId).id,
     updatedAt: Number(c.updatedAt) || Date.now(),
@@ -388,7 +404,7 @@ export async function createCharacterForAccount(
   const meta = MU_CLASSES.find((m) => m.id === classType) || MU_CLASSES[0];
   const charId = `char-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
   const flaris = getMapById('flaris');
-  const starterItems = getStarterItemsForMuClass(charId, name.trim(), classType);
+  const starterItems = getStarterItemsForMuClass(charId, name.trim(), classType, sex);
 
   const created = normalizeCharacterRecord({
     id: charId,
@@ -424,7 +440,7 @@ export async function createCharacterForAccount(
     zen: 6500,
     bless: 2,
     soul: 2,
-    chaos: 1,
+    chaos: 0,
     life: 1,
     harmony: 0,
     creation: 0,
@@ -480,7 +496,7 @@ export async function getItemsForCharacter(charId: string): Promise<MuItem[]> {
 
 export async function addItemToCharacter(charId: string, item: MuItem): Promise<MuItem[]> {
   await initDexie();
-  await db.items.put({ ...item, charId });
+  await db.transaction('rw', db.items, () => storeStack({ ...item, charId }));
   await touchCharacterWithItems(charId);
   return getItemsForCharacter(charId);
 }
@@ -501,9 +517,7 @@ export async function equipItem(charId: string, itemId: string): Promise<MuItem[
     if (equipping) {
       if (target.slot === 'consumable') return;
       const character = await db.characters.get(charId);
-      if (!character || (target.requiredLevel ?? 1) > character.level ||
-          (target.sexFilter && target.sexFilter !== character.sex) ||
-          (target.classFilter && !target.classFilter.includes(character.classType))) return;
+      if (!character || !canEquip(character,target)) return;
       const all = await db.items.where('charId').equals(charId).toArray();
       for (const other of all) {
         if (other.id !== target.id && other.slot === target.slot && other.isEquipped) {
@@ -627,10 +641,63 @@ function buildCatalogItem(character: MuCharacter, shopItem: ShopItemDef): MuItem
 
 }
 
+function sameStack(a: MuItem, b: MuItem) {
+  return a.slot === 'consumable' && b.slot === a.slot && a.name === b.name && !a.isEquipped &&
+    JSON.stringify(a.recovery) === JSON.stringify(b.recovery);
+}
+async function storeStack(item: MuItem) {
+  if (item.slot === 'consumable') {
+    const matches = await db.items.where('charId').equals(item.charId).filter(i=>sameStack(i,item)).toArray();
+    if (matches.length) {
+      const [first,...rest] = matches;
+      await db.items.update(first.id,{quantity: matches.reduce((n,i)=>n+(i.quantity ?? 1),item.quantity ?? 1)});
+      await db.items.bulkDelete(rest.map(i=>i.id));
+      return;
+    }
+  }
+  await db.items.put(item);
+}
+
+export async function readVault(charId: string) {
+  const c = await db.characters.get(charId);
+  const a = c && await db.accounts.get(c.accountId);
+  return {items:a?.vault ?? [], wallet:a?.vaultWallet ?? {}};
+}
+
+export async function transferVault(charId: string, selection: {item:string}|{currency:WalletKey}, deposit: boolean) {
+  return db.transaction('rw', db.accounts,db.characters,db.items,async () => {
+    const c = await db.characters.get(charId);
+    const a = c && await db.accounts.get(c.accountId);
+    if (!a || !c) return;
+    const vault = [...(a.vault ?? [])], wallet = {...a.vaultWallet};
+    if ('currency' in selection) {
+      const key = selection.currency;
+      const amount = deposit ? c[key] : wallet[key] ?? 0;
+      if (amount <= 0) return;
+      wallet[key] = (wallet[key] ?? 0) + (deposit ? amount : -amount);
+      await db.characters.update(charId, row=>{row[key]=c[key]+(deposit ? -amount : amount)});
+    } else if (deposit) {
+      const item = await db.items.get(selection.item);
+      if (!item || item.charId !== charId || item.isEquipped) return;
+      const stack = vault.find(i=>sameStack(i,item));
+      if (stack) stack.quantity=(stack.quantity ?? 1)+(item.quantity ?? 1);
+      else vault.push(item);
+      await db.items.delete(item.id);
+    } else {
+      const index=vault.findIndex(i=>i.id===selection.item);
+      if (index<0 || await db.items.get(selection.item)) return;
+      const [item]=vault.splice(index,1);
+      await storeStack({...item,charId,isEquipped:false});
+    }
+    await db.accounts.update(a.id,{vault,vaultWallet:wallet,updatedAt:Math.max(Date.now(),a.updatedAt+1),isSynced:false});
+    return touchCharacterWithItems(charId);
+  });
+}
+
 export async function addCatalogItem(character: MuCharacter, shopItem: ShopItemDef): Promise<void> {
   await initDexie();
   await db.transaction('rw', db.items, db.characters, async () => {
-    await db.items.put(buildCatalogItem(character, shopItem));
+    await storeStack(buildCatalogItem(character, shopItem));
     await touchCharacterWithItems(character.id);
   });
 }
@@ -663,7 +730,7 @@ export async function buyShopItem(
     const current = await db.characters.get(character.id);
     if (!current || shopItem.dropExclusive || !Number.isSafeInteger(shopItem.zenCost) ||
         shopItem.zenCost < 0 || current.zen < shopItem.zenCost) return null;
-    await db.items.put(buildCatalogItem(current, shopItem));
+    await storeStack(buildCatalogItem(current, shopItem));
     await db.characters.update(current.id, { zen: current.zen - shopItem.zenCost });
     return touchCharacterWithItems(current.id);
   });
@@ -689,61 +756,35 @@ export async function buyJewelFromNpc(
   cost: number,
 ): Promise<{ ok: boolean; character: MuCharacter; message: string }> {
   await initDexie();
-  if (character.zen < cost) {
-    return {
-      ok: false,
-      character,
-      message: `Necesitas ${cost.toLocaleString()} Zen para comprar Jewel of ${jewel.toUpperCase()}.`,
-    };
-  }
-  const updated = await updateCharacter({
-    ...character,
-    zen: character.zen - cost,
-    [jewel]: character[jewel] + 1,
+  return db.transaction('rw', db.characters, async () => {
+    const current = await db.characters.get(character.id);
+    if (!current || !['bless', 'soul', 'life'].includes(jewel) ||
+        !Number.isSafeInteger(cost) || cost <= 0 || current.zen < cost) {
+      return { ok: false, character: current ?? character, message: 'Compra no disponible o Zen insuficiente.' };
+    }
+    const updated = { ...current, zen: current.zen - cost, [jewel]: current[jewel] + 1,
+      updatedAt: Math.max(Date.now(), current.updatedAt + 1), isSynced: false };
+    await db.characters.put(updated);
+    return { ok: true, character: updated, message: `Adquiriste +1 Jewel of ${jewel.toUpperCase()} por ${cost.toLocaleString()} Zen.` };
   });
-  return {
-    ok: true,
-    character: updated,
-    message: `Adquiriste +1 Jewel of ${jewel.toUpperCase()} por ${cost.toLocaleString()} Zen.`,
-  };
 }
 
 export async function sellInventoryItem(
   character: MuCharacter,
-  itemId: string,
-): Promise<{ ok: boolean; character: MuCharacter; items: MuItem[]; message: string }> {
+  selection: string | string[],
+) {
   await initDexie();
-  const item = await db.items.get(itemId);
-  if (!item || item.charId !== character.id) {
-    return {
-      ok: false,
-      character,
-      items: await getItemsForCharacter(character.id),
-      message: 'Ítem no encontrado.',
-    };
-  }
-  if (item.isEquipped) {
-    return {
-      ok: false,
-      character,
-      items: await getItemsForCharacter(character.id),
-      message: 'Retira el ítem antes de venderlo.',
-    };
-  }
-
-  const sellValue = inventorySellValue(item);
-  await db.items.delete(item.id);
-  const updated = await updateCharacter({
-    ...character,
-    zen: character.zen + sellValue,
+  const ids = [...new Set(Array.isArray(selection) ? selection : [selection])];
+  return db.transaction('rw', db.items,db.characters,async () => {
+    const c = await db.characters.get(character.id);
+    const rows = (await db.items.bulkGet(ids)).filter((i): i is MuItem => !!i && i.charId === character.id && !i.isEquipped);
+    if (!c || !rows.length) return {ok:false,character:c ?? character,items:await getItemsForCharacter(character.id),message:'No hay objetos para vender.'};
+    const value = rows.reduce((sum,i)=>sum+inventorySellValue(i),0);
+    await db.items.bulkDelete(rows.map(i=>i.id));
+    await db.characters.update(c.id,{zen:c.zen+value});
+    const updated=(await touchCharacterWithItems(c.id))!;
+    return {ok:true,character:updated,items:[...(updated.equipment ?? []),...(updated.inventory ?? [])],message:`Venta: ${rows.length} · +${value.toLocaleString()} Zen`};
   });
-  const nextItems = await getItemsForCharacter(character.id);
-  return {
-    ok: true,
-    character: updated,
-    items: nextItems,
-    message: `Vendiste ${item.name} +${item.enhanceLevel} por +${sellValue.toLocaleString()} Zen.`,
-  };
 }
 
 export async function executeChaosMixWing(
@@ -755,14 +796,14 @@ export async function executeChaosMixWing(
   if (
     character.bless < recipe.blessCost ||
     character.soul < recipe.soulCost ||
-    character.chaos < recipe.chaosCost ||
+    character.life < recipe.chaosCost ||
     character.zen < recipe.zenCost
   ) {
     return {
       ok: false,
       character,
       items: await getItemsForCharacter(character.id),
-      message: `Faltan materiales para Chaos Mix Evo ${tier}: ${recipe.blessCost} Bless, ${recipe.soulCost} Soul, ${recipe.chaosCost} Chaos y ${recipe.zenCost.toLocaleString()} Zen.`,
+      message: `Faltan materiales para Forja Evo ${tier}: ${recipe.blessCost} Bless, ${recipe.soulCost} Soul, ${recipe.chaosCost} Life y ${recipe.zenCost.toLocaleString()} Zen.`,
     };
   }
 
@@ -794,7 +835,7 @@ export async function executeChaosMixWing(
     ...character,
     bless: character.bless - recipe.blessCost,
     soul: character.soul - recipe.soulCost,
-    chaos: character.chaos - recipe.chaosCost,
+    life: character.life - recipe.chaosCost,
     zen: character.zen - recipe.zenCost,
   });
   const nextItems = await getItemsForCharacter(character.id);
@@ -802,7 +843,7 @@ export async function executeChaosMixWing(
     ok: true,
     character: updated,
     items: nextItems,
-    message: `¡Chaos Mix exitoso! Forjaste ${wingName} (+${enhance}).`,
+    message: `¡Forja exitosa! Forjaste ${wingName} (+${enhance}).`,
   };
 }
 
@@ -812,32 +853,36 @@ export async function allocateStatPoint(
   amount = 1,
 ): Promise<{ ok: boolean; character: MuCharacter; message?: string }> {
   await initDexie();
-  const pts = Math.max(1, Math.min(character.unspentPoints, amount));
-  if (character.unspentPoints <= 0) {
-    return { ok: false, character, message: 'No tienes puntos disponibles para repartir.' };
-  }
-  const currentVal = character[stat];
-  if (currentVal >= MAX_STAT_POINTS) {
-    return { ok: false, character, message: `${stat.toUpperCase()} ya está al máximo (${MAX_STAT_POINTS}).` };
-  }
-  const actualAdd = Math.min(pts, MAX_STAT_POINTS - currentVal);
-  const nextVit = stat === 'vit' ? character.vit + actualAdd : character.vit;
-  const nextEne = stat === 'ene' ? character.ene + actualAdd : character.ene;
-  const nextMaxHp = character.maxHp + (stat === 'vit' ? actualAdd * 4 : 0);
-  const nextMaxMp = character.maxMp + (stat === 'ene' ? actualAdd * 3 : 0);
+  return db.transaction('rw', db.characters, async () => {
+    const current = await db.characters.get(character.id);
+    if (!current) return { ok: false, character, message: 'Personaje no disponible.' };
+    const pts = Math.max(1, Math.min(current.unspentPoints, Number.isFinite(amount) ? Math.floor(amount) : 1));
+    if (current.unspentPoints <= 0) {
+      return { ok: false, character:current, message: 'No tienes puntos disponibles para repartir.' };
+    }
+    const currentVal = current[stat];
+    if (currentVal >= MAX_STAT_POINTS) {
+      return { ok: false, character:current, message: `${stat.toUpperCase()} ya está al máximo (${MAX_STAT_POINTS}).` };
+    }
+    const actualAdd = Math.min(pts, MAX_STAT_POINTS - currentVal);
+    const nextVit = stat === 'vit' ? current.vit + actualAdd : current.vit;
+    const nextEne = stat === 'ene' ? current.ene + actualAdd : current.ene;
+    const nextMaxHp = current.maxHp + (stat === 'vit' ? actualAdd * 4 : 0);
+    const nextMaxMp = current.maxMp + (stat === 'ene' ? actualAdd * 3 : 0);
 
-  const saved = await updateCharacter({
-    ...character,
-    [stat]: currentVal + actualAdd,
-    vit: nextVit,
-    ene: nextEne,
-    maxHp: nextMaxHp,
-    hp: Math.min(nextMaxHp, character.hp + (stat === 'vit' ? actualAdd * 4 : 0)),
-    maxMp: nextMaxMp,
-    mp: Math.min(nextMaxMp, character.mp + (stat === 'ene' ? actualAdd * 3 : 0)),
-    unspentPoints: character.unspentPoints - actualAdd,
+    const saved = await updateCharacter({
+      ...current,
+      [stat]: currentVal + actualAdd,
+      vit: nextVit,
+      ene: nextEne,
+      maxHp: nextMaxHp,
+      hp: Math.min(nextMaxHp, current.hp + (stat === 'vit' ? actualAdd * 4 : 0)),
+      maxMp: nextMaxMp,
+      mp: Math.min(nextMaxMp, current.mp + (stat === 'ene' ? actualAdd * 3 : 0)),
+      unspentPoints: current.unspentPoints - actualAdd,
+    });
+    return { ok: true, character: saved };
   });
-  return { ok: true, character: saved };
 }
 
 export async function performHeroReset(
@@ -1104,7 +1149,13 @@ export async function importDatabaseFile(file: File): Promise<void> {
     async () => {
       if (Array.isArray(t.accounts)) await db.accounts.bulkPut(t.accounts);
       if (Array.isArray(t.characters)) await db.characters.bulkPut(t.characters.map(normalizeCharacterRecord));
-      if (Array.isArray(t.items)) await db.items.bulkPut(t.items);
+      if (Array.isArray(t.items)) {
+        const owners=new Map((await db.characters.toArray()).map(c=>[c.id,c]));
+        await db.items.bulkPut(t.items.map(item=>{
+          const owner=owners.get(item.charId);
+          return owner ? restoreEquipment(item,owner.classType,owner.sex) : item;
+        }));
+      }
       if (Array.isArray(t.sharedLedger)) await db.sharedLedger.bulkPut(t.sharedLedger);
       if (Array.isArray(t.eventSessions)) await db.eventSessions.bulkPut(t.eventSessions);
       if (Array.isArray(t.chatMessages)) await db.chatMessages.bulkPut(t.chatMessages);

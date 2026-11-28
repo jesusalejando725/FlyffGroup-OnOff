@@ -91,12 +91,12 @@ const COMMON_MONSTERS: Record<string, MonsterSpawnDef[]> = {
       colorHex: '#f59e0b',
       isBoss: true,
     },
-    { id: 'mob_cra_balrog', name: 'Balrog de Ceniza', type: 'balrog', level: 70, maxHp: 1750, attack: 135, defense: 56, xpReward: 780, zenMin: 1200, zenMax: 2400, scale: 1.35, colorHex: '#fb923c' },
+    { id: 'mob_cra_balrog', name: 'Kern de Ceniza', type: 'balrog', level: 70, maxHp: 1750, attack: 135, defense: 56, xpReward: 780, zenMin: 1200, zenMax: 2400, scale: 1.35, colorHex: '#fb923c' },
     { id: 'mob_cra_drake', name: 'Draco Ígneo', type: 'drake', level: 82, maxHp: 2350, attack: 170, defense: 72, xpReward: 1080, zenMin: 1650, zenMax: 3200, scale: 1.45, colorHex: '#ef4444' },
     { id: 'mob_cra_fenix', name: 'Centinela Volcánico', type: 'lich', level: 90, maxHp: 3000, attack: 210, defense: 88, xpReward: 1420, zenMin: 2100, zenMax: 4200, scale: 1.5, colorHex: '#f43f5e' },
     {
       id: 'boss_cra_kundun',
-      name: 'Kundun del Cráter',
+      name: 'Meteonyker del Cráter',
       type: 'boss',
       level: 99,
       maxHp: 7800,
@@ -121,7 +121,7 @@ function makeNpcs(mapId: MapId, cx: number, cz: number): NpcDef[] {
     { id: `npc_${mapId}_potion`, name: 'Amy la Alquimista', title: 'Pociones & Buffs', role: 'potion', mapId, x: cx - 14, z: cz - 10, colorHex: '#4ade80' },
     { id: `npc_${mapId}_smith`, name: 'Herrero Hanzo', title: 'Armas & Armaduras', role: 'blacksmith', mapId, x: cx + 14, z: cz - 10, colorHex: '#fb923c' },
     { id: `npc_${mapId}_magic`, name: 'Pasi la Maga', title: 'Báculos, Alas & Joyas', role: 'magic', mapId, x: cx - 12, z: cz + 14, colorHex: '#60a5fa' },
-    { id: `npc_${mapId}_goblin`, name: 'Chaos Goblin', title: 'Máquina de Chaos Mix', role: 'chaos_goblin', mapId, x: cx + 12, z: cz + 14, colorHex: '#f43f5e' },
+    { id: `npc_${mapId}_goblin`, name: 'Artesano de Flaris', title: 'Forja de alas', role: 'chaos_goblin', mapId, x: cx + 12, z: cz + 14, colorHex: '#f43f5e' },
   ];
 }
 
@@ -177,7 +177,7 @@ export const MU_MAPS: MapDef[] = [
   {
     id: 'crater_ceniza',
     name: 'Cráter de Ceniza',
-    subtitle: 'Volcán activo al noreste · Jefes Balrog, Kundun y lava viva',
+    subtitle: 'Volcán activo al noreste · Kern, Meteonyker y lava viva',
     minLevel: 77,
     maxLevel: 99,
     warpZen: 12000,
@@ -603,7 +603,7 @@ export interface ChaosWingRecipe {
 export const MU_CHAOS_WINGS_RECIPES: ChaosWingRecipe[] = [
   {
     tier: 1,
-    title: 'Forja de Alas Evo Lv.1 (Base Flaris / OpenMU)',
+    title: 'Forja de Alas Evo Lv.1 (Base Flaris)',
     blessCost: 1,
     soulCost: 1,
     chaosCost: 1,
@@ -615,13 +615,7 @@ export const MU_CHAOS_WINGS_RECIPES: ChaosWingRecipe[] = [
     magicPower: 18,
     excellentOpt: 'Vuelo +1m / Absorbe +14% Daño',
     scaleLabel: 'Tamaño Base 1.0x',
-    wingNames: {
-      DK: 'Alas de Ángel MU (OpenMU Evo 1)',
-      DW: 'Alas de Ángel MU (OpenMU Evo 1)',
-      ELF: 'Alas de Hada MU (OpenMU Evo 1)',
-      DL: 'Alas Pluma de Flaris (Evo 1)',
-      MG: 'Alas Pluma de Flaris (Evo 1)',
-    },
+    wingNames: {DK: 'Wing of Spint', DW: 'Wing of Spint', ELF: 'Wing of Spint', DL: 'Wing of Spint', MG: 'Wing of Spint'},
   },
   {
     tier: 2,
@@ -637,13 +631,7 @@ export const MU_CHAOS_WINGS_RECIPES: ChaosWingRecipe[] = [
     magicPower: 32,
     excellentOpt: 'Absorbe +24% Daño / Crítico +6%',
     scaleLabel: 'Tamaño 2.0x (Doble Evo 1)',
-    wingNames: {
-      DK: 'Wings of Dragon (MU Evo 2)',
-      DW: 'Wings of Soul (MU Evo 2)',
-      ELF: 'Wings of Spirit (MU Evo 2)',
-      DL: 'Cape of Lord (MU Evo 2)',
-      MG: 'Alas Celestiales (Evo 2)',
-    },
+    wingNames: {DK: 'Wing of Storm', DW: 'Wing of Storm', ELF: 'Wing of Storm', DL: 'Wing of Storm', MG: 'Wing of Storm'},
   },
   {
     tier: 3,
@@ -659,13 +647,7 @@ export const MU_CHAOS_WINGS_RECIPES: ChaosWingRecipe[] = [
     magicPower: 54,
     excellentOpt: 'Ignora Defensa +5% / Absorbe +36%',
     scaleLabel: 'Tamaño 6.0x (3x Evo 2)',
-    wingNames: {
-      DK: 'Alas de Dragón MU (OpenMU Evo 3)',
-      DW: 'Alas del Profeta de Madrigal (Evo 3)',
-      ELF: 'Wing of Illusion +13',
-      DL: 'Alas del Profeta de Madrigal (Evo 3)',
-      MG: 'Alas de Dragón MU (OpenMU Evo 3)',
-    },
+    wingNames: {DK: 'Wing of Vortex', DW: 'Wing of Vortex', ELF: 'Wing of Vortex', DL: 'Wing of Vortex', MG: 'Wing of Vortex'},
   },
   {
     tier: 4,
@@ -681,13 +663,7 @@ export const MU_CHAOS_WINGS_RECIPES: ChaosWingRecipe[] = [
     magicPower: 86,
     excellentOpt: 'Ignora Defensa +10% / Absorbe +48% / Aura Real',
     scaleLabel: 'Tamaño 7.5x (> Evo 3)',
-    wingNames: {
-      DK: 'Wing of Storm +13',
-      DW: 'Alas Eternas MU (OpenMU Evo 4)',
-      ELF: 'Wing of Space Time +13',
-      DL: 'Manto del Emperador MU (OpenMU Evo 4)',
-      MG: 'Alas Malditas Curse MU (OpenMU Evo 4)',
-    },
+    wingNames: {DK: 'Wing of Doom', DW: 'Wing of Doom', ELF: 'Wing of Doom', DL: 'Wing of Doom', MG: 'Wing of Doom'},
   },
 ];
 

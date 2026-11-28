@@ -31,7 +31,6 @@ import convertir as c  # noqa: E402
 
 DEST = ROOT / 'public' / 'mugroup'
 OLD_FLYFF = ROOT / 'public' / 'flyff'
-OLD_OPENMU = ROOT / 'public' / 'openmu'
 OLD_MODELS = ROOT / 'public' / 'models'
 
 ENTRIES = d.ENTRIES
@@ -328,13 +327,6 @@ def copy_base_folders():
         for jf in ['equipo.json', 'efectos-audio.json', 'personajes.json']:
             if (OLD_FLYFF / jf).exists() and not (DEST / jf).exists():
                 shutil.copy2(OLD_FLYFF / jf, DEST / jf)
-
-    # Copy OpenMU wings, weapons, sounds & textures into mugroup/openmu_legacy cleanly
-    if OLD_OPENMU.exists():
-        shutil.copytree(OLD_OPENMU / 'audio', DEST / 'audio' / 'mu_sfx', dirs_exist_ok=True)
-        shutil.copytree(OLD_OPENMU / 'models', DEST / 'equipo' / 'mu_models', dirs_exist_ok=True)
-        if (OLD_OPENMU / 'effects').exists():
-            shutil.copytree(OLD_OPENMU / 'effects', DEST / 'efectos' / 'mu_effects', dirs_exist_ok=True)
 
     # Copy non-building nature GLBs from public/models/ (trees & crystals only, zero houses/structures)
     if OLD_MODELS.exists():

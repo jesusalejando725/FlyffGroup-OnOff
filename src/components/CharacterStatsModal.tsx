@@ -1,3 +1,4 @@
+import { madrigalPiece } from '../data/madrigalEquipment';
 import React, { useState } from 'react';
 import {
   Award,
@@ -87,10 +88,10 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
     hint: string;
   }> = [
     { key: 'str', label: 'Fuerza (STR)', value: character.str, hint: 'Aumenta daño físico (máx 65,000)' },
-    { key: 'agi', label: 'Agilidad (AGI)', value: character.agi, hint: 'Aumenta defensa, crítico y cadencia (máx 65,000)' },
+    { key: 'agi', label: 'Agilidad (AGI)', value: character.agi, hint: 'Aumenta velocidad de carrera, defensa y crítico (máx 65,000)' },
     { key: 'vit', label: 'Vitalidad (VIT)', value: character.vit, hint: 'Aumenta HP (+4 por punto) y aguante frontal (máx 65,000)' },
     { key: 'ene', label: 'Energía (ENE)', value: character.ene, hint: 'Aumenta poder mágico y MP (+3 por punto) (máx 65,000)' },
-    { key: 'cmd', label: 'Comando (CMD)', value: character.cmd, hint: 'Potencia ataque táctico, crítico y mascotas (máx 65,000)' },
+    { key: 'cmd', label: 'Comando (CMD)', value: character.cmd, hint: 'Permite equipar piezas avanzadas y aumenta el crítico (máx 65,000)' },
   ];
 
   const classSkills = MU_SKILLS[character.classType] || MU_SKILLS.DK;
@@ -395,7 +396,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                     <div className="text-sm font-bold text-amber-300">
                       {activeProfile.displayName} — {activeProfile.title}
                     </div>
-                    <div className="text-[11px] text-slate-400">{activeProfile.specialty}</div>
+                    <div className="text-[11px] text-slate-400">Fuerza aumenta el ataque físico; Energía, la magia y el maná. Agilidad mejora la carrera y la defensa. Vitalidad aumenta la vida; Comando desbloquea equipo.</div>
                   </div>
                   <div className="flex items-center gap-2 font-mono-tabular text-[11px]">
                     <span className="px-2 py-1 rounded bg-slate-900 text-emerald-300">
@@ -425,7 +426,7 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                     <div className="text-rose-300 font-bold">Ataque Principal y Armas</div>
                     <div className="text-slate-200 font-sans">{activeProfile.basicAttackName}</div>
                     <div className="text-[10px] text-sky-300 font-sans">
-                      Armas: {activeProfile.weapons.join(' → ')}
+                      Armas: {madrigalPiece('weapon',activeProfile.classType,activeProfile.sex).name}
                     </div>
                   </div>
                 </div>
@@ -434,19 +435,19 @@ export const CharacterStatsModal: React.FC<CharacterStatsModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
                   <div className="p-2 rounded bg-[#0b1019] border border-slate-800 space-y-0.5">
                     <div className="text-emerald-300 font-bold mb-1">Ropa y Piezas de Armadura</div>
-                    <div className="text-slate-300">Yelmo: <span className="text-slate-100">{activeProfile.armorPieces.helm}</span></div>
-                    <div className="text-slate-300">Pechera: <span className="text-slate-100">{activeProfile.armorPieces.armor}</span></div>
-                    <div className="text-slate-300">Pantalón: <span className="text-slate-100">{activeProfile.armorPieces.pants}</span></div>
-                    <div className="text-slate-300">Guantes: <span className="text-slate-100">{activeProfile.armorPieces.gloves}</span></div>
-                    <div className="text-slate-300">Botas: <span className="text-slate-100">{activeProfile.armorPieces.boots}</span></div>
-                    <div className="text-slate-300">Escudo: <span className="text-slate-100">{activeProfile.armorPieces.shield}</span></div>
+                    <div className="text-slate-300">Yelmo: <span className="text-slate-100">{madrigalPiece('helm',activeProfile.classType,activeProfile.sex).name}</span></div>
+                    <div className="text-slate-300">Pechera: <span className="text-slate-100">{madrigalPiece('armor',activeProfile.classType,activeProfile.sex).name}</span></div>
+                    <div className="text-slate-300">Pantalón: <span className="text-slate-100">{madrigalPiece('pants',activeProfile.classType,activeProfile.sex).name}</span></div>
+                    <div className="text-slate-300">Guantes: <span className="text-slate-100">{madrigalPiece('gloves',activeProfile.classType,activeProfile.sex).name}</span></div>
+                    <div className="text-slate-300">Botas: <span className="text-slate-100">{madrigalPiece('boots',activeProfile.classType,activeProfile.sex).name}</span></div>
+                    <div className="text-slate-300">Escudo: <span className="text-slate-100">{madrigalPiece('shield',activeProfile.classType,activeProfile.sex).name}</span></div>
                   </div>
                   <div className="p-2 rounded bg-[#0b1019] border border-slate-800 space-y-0.5">
                     <div className="text-purple-300 font-bold mb-1">Joyería y Mascotas</div>
-                    <div className="text-slate-300">Colgante: <span className="text-slate-100">{activeProfile.jewelry.pendant}</span></div>
-                    <div className="text-slate-300">Anillo Izq.: <span className="text-slate-100">{activeProfile.jewelry.ring1}</span></div>
-                    <div className="text-slate-300">Anillo Der.: <span className="text-slate-100">{activeProfile.jewelry.ring2}</span></div>
-                    <div className="text-slate-300">Mascota: <span className="text-slate-100">{activeProfile.jewelry.pet}</span></div>
+                    <div className="text-slate-300">Colgante: <span className="text-slate-100">{'Collar de Madrigal'}</span></div>
+                    <div className="text-slate-300">Anillo Izq.: <span className="text-slate-100">{'Mighteer+1'}</span></div>
+                    <div className="text-slate-300">Anillo Der.: <span className="text-slate-100">{'Penzeru+1'}</span></div>
+                    <div className="text-slate-300">Mascota: <span className="text-slate-100">{'Guardián de Madrigal'}</span></div>
                   </div>
                 </div>
 

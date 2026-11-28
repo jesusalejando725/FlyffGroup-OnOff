@@ -55,7 +55,7 @@ import {
   setCharacterSpecialization,
   wearEquipment,
   repairEquipment,
-  sellInventoryItem,
+  sellInventoryItem, transferVault,
   updateCharacter,
   upgradeItemWithJewel,
   upgradeSkillRank,
@@ -178,7 +178,7 @@ export default function App() {
   const [helperEnabled, setHelperEnabled] = useState(false);
   const [comboArmed, setComboArmed] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [measuredFps, setMeasuredFps] = useState(60);
+  const [measuredFps, setMeasuredFps] = useState(0);
   const [worldTelemetry, setWorldTelemetry] = useState<WorldTelemetryInfo>({
     x: -200,
     z: -255,
@@ -665,14 +665,10 @@ export default function App() {
             id: `ev-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
             charId: savedChar.id,
             name: reward.itemName,
-            slot: reward.itemName.includes('Báculo') || reward.itemName.includes('Espada') ? 'weapon' : 'armor',
-            category:
-              reward.itemName.includes('Alas')
-                ? 'wings'
-                : reward.itemName.includes('Báculo') || reward.itemName.includes('Espada')
-                  ? 'weapon'
-                  : 'armor',
-            setName: 'Evento Cooperativo',
+            slot: reward.eventType === 'free_trade' ? 'wings' : reward.eventType === 'chaos_castle' ? 'shield' : 'weapon',
+            category: reward.eventType === 'free_trade' ? 'wings' : reward.eventType === 'chaos_castle' ? 'armor' : 'weapon',
+            requiredLevel: 45,
+            setName: 'Evento de Madrigal',
             rarity: 'excellent',
             enhanceLevel: 7,
             minDmg: 54,
@@ -1103,6 +1099,7 @@ export default function App() {
     [pushBanner],
   );
 
+  const helperCycle = useRef(0);
   const handlePressAttack = useCallback((useCombo = comboArmed, helper = false) => {
     const c = charRef.current;
     if (!c || screenStageRef.current !== 'playing') return;
@@ -1116,6 +1113,11 @@ export default function App() {
 
     if (useCombo) {
       if (!engineRef.current?.canStartCombo()) return;
+      if (helper && helperCycle.current++ % 2 === 0) {
+        const skill = classSkills[Math.floor(helperCycle.current / 2) % classSkills.length];
+        handleCastSkill((skillCooldownsRef.current[skill.id] ?? 0) > 0 ? classSkills[0] : skill);
+        return;
+      }
       const selectedIds = comboConfig.comboSkillIds.slice(0, 5);
       const comboSkills: SkillDef[] = [];
       for (const id of selectedIds) {
@@ -1158,11 +1160,10 @@ export default function App() {
   useEffect(() => {
     const basic = MU_SKILLS[character?.classType ?? 'DK'][0];
     engineRef.current?.setAutoHuntEnabled(
-      helperEnabled && screenStage === 'playing' && !adminPanelOpen && activeDrawer === 'none' && !editMode,
+      helperEnabled && screenStage === 'playing',
       Math.min(...MU_SKILLS[character?.classType ?? 'DK'].filter(skill => !skill.isBuff).map(skill => skill.range), basic.range) + 1.4,
-      lootFilters,
     );
-  }, [helperEnabled, screenStage, adminPanelOpen, activeDrawer, editMode, character?.classType, lootFilters]);
+  }, [helperEnabled, screenStage, character?.classType]);
 
   // Global keyboard shortcuts while playing/paused
   useEffect(() => {
@@ -1462,10 +1463,10 @@ export default function App() {
   useEffect(() => {
     if (screenStage !== 'playing') return;
     const timer = window.setInterval(() => {
-      if (!helperEnabled && lootFiltersRef.current.autoLootEnabled) {
+      if (helperEnabled || lootFiltersRef.current.autoLootEnabled) {
         engineRef.current?.collectAutoLoot(lootFiltersRef.current);
       }
-      if (document.hidden || activeDrawer !== 'none' || adminPanelOpen || editMode) return;
+      if (document.hidden) return;
       if (helperEnabled || comboArmed) {
         const c = charRef.current;
         if (c && (c.hp < c.maxHp || c.mp < c.maxMp)) {
@@ -1483,7 +1484,7 @@ export default function App() {
       }
     }, 350);
     return () => window.clearInterval(timer);
-  }, [screenStage, comboArmed, helperEnabled, handleHealPotion, activeDrawer, adminPanelOpen, editMode]);
+  }, [screenStage, comboArmed, helperEnabled, handleHealPotion]);
 
   const handleEquip = async (itemId: string) => {
     if (!character) return;
@@ -1655,15 +1656,17 @@ export default function App() {
   const handleBuyJewel = async (jewel: 'bless' | 'soul' | 'chaos' | 'life' | 'harmony', cost: number) => {
     if (!character) return;
     const res = await buyJewelFromNpc(character, jewel, cost);
-    setCharacter(res.character);
+    if (charRef.current?.id !== character.id) return;
+    if (res.ok) setCharacter(prev => prev && {...prev, zen: res.character.zen, [jewel]: res.character[jewel]});
     setNpcStatusMessage(res.message);
     soundSynth.playJewelDrop();
   };
 
-  const handleSellItem = async (itemId: string) => {
+  const handleSellItem = async (itemId: string | string[]) => {
     if (!character) return;
     const res = await sellInventoryItem(character, itemId);
-    setCharacter(res.character);
+    if (charRef.current?.id !== character.id) return;
+    setCharacter(prev=>prev && {...prev,zen:res.character.zen,equipment:res.character.equipment,inventory:res.character.inventory});
     setItems(res.items);
     setNpcStatusMessage(res.message);
     soundSynth.playTradeSync();
@@ -1764,7 +1767,7 @@ export default function App() {
           onOpenApkCenter={() => setActiveDrawer('apk')}
           onRotatePreview={dx => engineRef.current?.rotatePreview(dx)}
           onRestore={async () => { await loadAllFromDexie(); }}
-          onPreviewClass={(cls, sex, appearanceId) => engineRef.current?.syncHeroAppearance(cls, getStarterItemsForMuClass('preview','Vista previa',cls), sex, appearanceId).catch(console.error)}
+          onPreviewClass={(cls, sex, appearanceId) => engineRef.current?.syncHeroAppearance(cls, getStarterItemsForMuClass('preview','Vista previa',cls,sex), sex, appearanceId).catch(console.error)}
         />
       )}
 
@@ -1908,6 +1911,13 @@ export default function App() {
       {character && (
         <>
           <MuInventoryModal
+            key={character.id}
+            onVault={async (selection, deposit) => {
+              const updated=await transferVault(character.id,selection,deposit);
+              if (!updated || charRef.current?.id !== character.id) return;
+              setItems([...(updated.equipment ?? []),...(updated.inventory ?? [])]);
+              setCharacter(prev=>prev && {...prev,...('currency' in selection ? {[selection.currency]:updated[selection.currency]} : {}),inventory:updated.inventory});
+            }}
             open={activeDrawer === 'inventory'}
             character={character}
             items={items}

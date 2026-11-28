@@ -127,7 +127,7 @@ export const FLYFF_ECONOMY_CATALOG = [...commonLow, ...commonHigh, ...shop, spik
   ...jewelry, ...low, ...high, card, base('heal_pack', 'Pociones duales HP/MP', 1, 'consumable', 'consumable',
     { recovery:{ hp:.28, mp:.25 }, quantity:100, vendorRoles:['potion','guard','blacksmith','magic','chaos_goblin'], fixedPrice:true, zenCost:1400 })];
 
-const legacyJewels = new Set(['bless', 'soul', 'chaos', 'life', 'creation', 'talisman']);
+const legacyJewels = new Set(['bless', 'soul', 'life']);
 
 export function rollFlyffDrops(monster: Pick<MonsterSpawnDef, 'id' | 'name' | 'level' | 'isBoss' | 'drops'>,
   random = Math.random): string[] {

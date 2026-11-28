@@ -12,5 +12,6 @@ export function monsterCombatStats(level: number, isBoss = false) {
 // A large level gap protects later regions; resets help bridge that gap.
 export function damageAgainstMonster(raw: number, defense: number, heroLevel: number, resets: number, monsterLevel: number) {
   const gap = Math.max(0, monsterLevel - heroLevel - 8 - Math.max(0, resets) * 8);
-  return Math.max(1, Math.round(raw * (120 / (120 + Math.max(0, defense))) / (1 + (gap / 16) ** 2)));
+  const progressionCap = gap > 25 ? Math.max(1, Math.round((heroLevel + 2 + resets*8) * 3 / (1+gap/24))) : Infinity;
+  return Math.min(progressionCap,Math.max(1, Math.round(raw * (120 / (120 + Math.max(0, defense))) / (1 + (gap / 16) ** 2))));
 }

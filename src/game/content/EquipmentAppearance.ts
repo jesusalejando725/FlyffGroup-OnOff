@@ -598,7 +598,6 @@ export class EquipmentAppearance {
       actor.wingSocket = wingSocket;
       actor.wingRig = new WingRig(actor.root, wingSocket, upperSpine, torso);
 
-      const isMuWing = /wing_mu_/.test(wingFile);
       const baseName = wingFile.split('/').pop() || wingFile;
       // Calibrated local alignment & measured deformed span per wing family so Evo 1 = ~1.50m wingspan
       let alignRot = new Vector3(0, 0, 0);
@@ -621,30 +620,6 @@ export class EquipmentAppearance {
         modelOffset = new Vector3(0, -1.55, -0.39);
         rawAnimatedSpan = 4.27;
         verticalFit = 0.43;
-      } else if (baseName === 'wing_mu_fairy.glb') {
-        alignRot = new Vector3(-Math.PI / 2, 0, 0);
-        modelOffset = new Vector3(0, 0.18, -0.10);
-        rawAnimatedSpan = 2.07;
-      } else if (baseName === 'wing_mu_angel.glb') {
-        alignRot = new Vector3(0, 0, 0);
-        modelOffset = new Vector3(0, -0.20, -0.18);
-        rawAnimatedSpan = 3.30;
-      } else if (baseName === 'wing_mu_elf.glb') {
-        alignRot = new Vector3(-0.35, 0, 0);
-        modelOffset = new Vector3(0, -0.12, 0.02);
-        rawAnimatedSpan = 4.62;
-      } else if (isMuWing) {
-        // OpenMU dragon / soul / dark / storm / eternal / emperor / curse wings extend along -X in glTF
-        alignRot = new Vector3(0, Math.PI / 2, 0);
-        modelOffset = new Vector3(0, 0.08, -0.06);
-        if (baseName === 'wing_mu_dragon.glb') rawAnimatedSpan = 3.61;
-        else if (baseName === 'wing_mu_soul.glb') { rawAnimatedSpan = 2.55; modelOffset.y = -0.12; }
-        else if (baseName === 'wing_mu_dark.glb') { rawAnimatedSpan = 2.24; modelOffset.y = -0.06; verticalFit = 0.29; }
-        else if (baseName === 'wing_mu_storm.glb') { rawAnimatedSpan = 1.50; modelOffset.set(0, 0.01, -0.10); verticalFit = 0.19; }
-        else if (baseName === 'wing_mu_eternal.glb') { rawAnimatedSpan = 4.00; modelOffset.y = -0.02; }
-        else if (baseName === 'wing_mu_emperor.glb') { rawAnimatedSpan = 2.41; modelOffset.y = 0.01; }
-        else if (baseName === 'wing_mu_curse.glb') { rawAnimatedSpan = 3.07; modelOffset.y = 0; verticalFit = 0.23; }
-        else rawAnimatedSpan = 2.60;
       }
 
       const normalizedBase = 1.15 / rawAnimatedSpan;
@@ -671,12 +646,7 @@ export class EquipmentAppearance {
         if (!m.skeleton && m instanceof Mesh) actor.wingRig.addUnskinned(m);
         m.name = `equip_wings_${tag}`;
         m.isPickable = false;
-        if (isMuWing && m.material && 'transparencyMode' in m.material) {
-          const mat = m.material as StandardMaterial;
-          mat.transparencyMode = 2;
-          mat.alphaCutOff = 0.4;
-          mat.backFaceCulling = false;
-        } else if (m.material) {
+        if (m.material) {
           m.material.backFaceCulling = false;
         }
         applyEnhanceGlow(m, wingItem?.enhanceLevel ?? evoTier * 3);

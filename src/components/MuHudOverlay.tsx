@@ -115,9 +115,6 @@ const LOOT_FILTER_OPTIONS: Array<{ key: LootFilterKey; label: string; colorClass
   { key: 'life', label: 'Life', colorClass: 'text-purple-300' },
   { key: 'soul', label: 'Soul', colorClass: 'text-sky-300' },
   { key: 'bless', label: 'Bless', colorClass: 'text-rose-300' },
-  { key: 'chaos', label: 'Chaos', colorClass: 'text-amber-200' },
-  { key: 'creation', label: 'Creation', colorClass: 'text-emerald-300' },
-  { key: 'talisman', label: 'Talismán', colorClass: 'text-yellow-300' },
 ];
 
 export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
@@ -289,7 +286,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
   const wrapButton = (id: HudButtonId, children: React.ReactNode) => {
     const layout = buttonLayouts[id] || DEFAULT_BUTTON_LAYOUTS[id];
     const isSelected = editMode && selectedEditId === id;
-    const isPassiveDisplay = !editMode && (id === 'room' || id === 'banners' || id === 'minimap' || id === 'targetMonster' || id === 'damageBox' || id === 'status' || id === 'vitals');
+    const isPassiveDisplay = !editMode && (id === 'room' || id === 'banners' || id === 'minimap' || id === 'targetMonster' || id === 'damageBox' || id === 'vitals');
     const zClass = id === 'editToolbar' ? 'z-40' : id === 'damageBox' ? 'z-15' : 'z-20';
     return (
       <div
@@ -391,42 +388,6 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
               ))}
           </div>,
         )}
-
-      {/* TOP-LEFT: Compact Character, Safe Zone / Hunting Zone, Coords & FPS */}
-      {wrapButton('status', <div className="pointer-events-none rounded-lg bg-[#0d121c]/92 border border-amber-700/50 px-2 lg:px-3 py-1 lg:py-1.5 shadow-lg space-y-0.5 max-w-[38vw] lg:max-w-[43vw]">
-        <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-xs flex-wrap">
-          <span className="font-display font-bold text-amber-300 truncate max-w-[110px] lg:max-w-none">{character.name}</span>
-          <span className="font-mono-tabular text-slate-300">
-            {character.classType} Nv.{character.level}
-          </span>
-          <span className="font-mono-tabular text-sky-300">
-            · {worldTelemetry.mapName || mapCfg.name} <span className="hidden lg:inline">({(worldTelemetry.areaKm2 || mapCfg.areaKm2).toFixed(2)} km²)</span>
-          </span>
-          <span className="font-mono-tabular text-emerald-300">{measuredFps} FPS</span>
-          {autoAimAssist && (
-            <span className="hidden xl:inline font-mono-tabular text-amber-300">· Auto-Aim 60%</span>
-          )}
-          {free3dCamera && (
-            <span className="hidden xl:inline font-mono-tabular text-purple-300">· 3D Libre</span>
-          )}
-        </div>
-        <div className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-[11px] font-mono-tabular">
-          {worldTelemetry.inSafeCity ? (
-            <span className="inline-flex items-center gap-1 text-emerald-300 font-semibold truncate">
-              <Shield className="w-3 h-3 shrink-0" />
-              <span>Capital Segura<span className="hidden lg:inline"> (Sin ataques ni monstruos)</span></span>
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 text-rose-300 font-semibold truncate">
-              <Swords className="w-3 h-3 shrink-0" />
-              <span>Zona Exterior<span className="hidden lg:inline"> ({worldTelemetry.nearbyMonsters} cerca / {worldTelemetry.totalMonsters.toLocaleString()} mapa)</span></span>
-            </span>
-          )}
-          <span className="text-slate-400 shrink-0">
-            ({worldTelemetry.x}, {worldTelemetry.z})
-          </span>
-        </div>
-      </div>)}
 
       {/* TOP-LEFT SECONDARY: Quick Oracle, APK / Cloud Sync Buttons + Active Effects */}
       {wrapButton('actions',
@@ -631,7 +592,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
               onChange={event => setSelectedEditId(event.currentTarget.value as HudButtonId)}
               className="max-w-[160px] rounded bg-slate-900 text-slate-100 text-xs p-2"
             >
-              {Object.values(DEFAULT_BUTTON_LAYOUTS).map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+              {Object.values(DEFAULT_BUTTON_LAYOUTS).filter(i=>i.id!=='status').map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
             </select>
             {selectedEditId && (['xPct','yPct'] as const).map(axis => <label key={axis} className="flex items-center gap-1 text-xs">
               {axis === 'xPct' ? 'X' : 'Y'}
@@ -1174,6 +1135,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
           ['EXP',xpPct,Math.floor(xpPct),100,'#a28bc6']] as const).map(([label,pct,current,max,color]) =>
             <div className="flyff-gauge" key={label}><b>{label}</b><span><i style={{width:pct+'%',backgroundColor:color}}/><em>{current}/{max}</em></span></div>)}
 
+        <footer>{worldTelemetry.mapName || mapCfg.name} · {worldTelemetry.x}, {worldTelemetry.z} · {measuredFps} FPS</footer>
       </div>)}
 
       {/* SMALL MU ONLINE SKILL & 5-POWER COMBO CONFIGURATOR POPOVER */}

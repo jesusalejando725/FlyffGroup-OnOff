@@ -11,6 +11,8 @@ const assets = market.items as Record<string, ItemAssets>;
 const sets = market.sets as Record<string, Partial<Record<Sex, string>>>;
 
 export function itemAssets(name: string): ItemAssets | undefined {
+  if (name === 'Pociones duales HP/MP') return {icon:'ui/hp_potion.png'};
+  if (name === 'Balas de cañón') return {icon:'ui/items/cannonball.svg'};
   return assets[name];
 }
 

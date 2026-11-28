@@ -127,15 +127,16 @@ class MuSoundSynth {
     }
     if (this.playingSfx.size >= 10) return true;
     try {
-      const audio = this.preloadedSkills.get(url) ?? new Audio(url);
-      this.preloadedSkills.delete(url);
+      const ready = this.preloadedSkills.get(url);
+      const audio = ready && !this.playingSfx.has(ready) ? ready : new Audio(url);
+      audio.currentTime = 0;
       audio.volume = Math.max(0, Math.min(1, this.volume * gain));
       this.playingSfx.add(audio);
       const cleanup = () => {
         this.playingSfx.delete(audio);
+        audio.onended = audio.onerror = null;
       };
-      audio.addEventListener('ended', cleanup, { once: true });
-      audio.addEventListener('error', cleanup, { once: true });
+      audio.onended = audio.onerror = cleanup;
       void audio.play().catch(cleanup);
       return true;
     } catch {
@@ -345,7 +346,7 @@ class MuSoundSynth {
     if (monsterVoices.has(voice)) { this.playUrl('./mugroup/audio/voces/'+voice+'.ogg',.65); return; }
     const heavy = ['bang', 'grrr', 'rockmuscle', 'clockwork', 'jackhammer'].includes(cleanName);
     const flying = ['aibatt', 'flybat', 'meteonyker'].includes(cleanName);
-    const clip = event === 'die1' ? (heavy ? 'openmu/audio/mBullDie' : flying ? 'openmu/audio/mDrakanDie' : 'openmu/audio/mHoundDie')
+    const clip = event === 'die1' ? (heavy ? 'mugroup/audio/stomp' : 'mugroup/audio/wind')
       : event === 'dmg1' ? 'mugroup/audio/hit_sword' : heavy ? 'mugroup/audio/stomp' : flying ? 'mugroup/audio/wind' : 'mugroup/audio/swing';
     this.playUrl(`./${clip}.wav`, 0.65);
   }

@@ -55,30 +55,12 @@ def paint(chunks,path,slot='',tint=None):
     rgb=np.uint8(np.clip(col*shade[:,None],0,255));im=Image.new('RGBA',(192,192));pen=ImageDraw.Draw(im)
     for i in np.argsort(depth.mean(axis=1)):pen.polygon([tuple(p) for p in xy[i]],fill=tuple(rgb[i])+(255,))
     im.resize((96,96),Image.Resampling.LANCZOS).save(path,quality=88)
-def wing_texture_portrait(path, dest):
-    # These two legacy wings are painted on cards; one colour per triangle
-    # loses the veins and leaves a black silhouette. Use the embedded artwork.
-    data = path.read_bytes()
-    size = struct.unpack_from('<I', data, 12)[0]
-    doc = json.loads(data[20:20+size])
-    view = doc['bufferViews'][doc['images'][0]['bufferView']]
-    offset = 28 + size + view.get('byteOffset', 0)
-    im = Image.open(BytesIO(data[offset:offset+view['byteLength']])).convert('RGBA')
-    im.putdata([(r,g,b,0 if max(r,g,b)<8 else a) for r,g,b,a in im.getdata()])
-    im.thumbnail((88,88), Image.Resampling.LANCZOS)
-    portrait = Image.new('RGBA',(96,96))
-    portrait.alpha_composite(im, ((96-im.width)//2,(96-im.height)//2))
-    portrait.save(dest, lossless=True)
-
 if __name__=='__main__':
     dest=OUT/'items';dest.mkdir(exist_ok=True,parents=True)
-    for f in sorted([*(PUBLIC/'mugroup/equipo').glob('*.glb'),*(PUBLIC/'openmu/models').glob('wing*.glb')]):
-        if f.stem in ('wing_mu_fairy','wing_mu_dark'):
-            wing_texture_portrait(f,dest/(f.stem+'.webp'))
-            continue
+    for f in sorted((PUBLIC/'mugroup/equipo').glob('*.glb')):
         chunks=scene(f)
         if f.stem.endswith(('_male','_female')):
             for slot in ['helm','armor','pants','gloves','boots']:paint(chunks,dest/(f.stem+'-'+slot+'.webp'),slot)
         else:paint(chunks,dest/(f.stem+'.webp'))
-    for key,model,tint in [('red','mugroup/monstruos/meteonyker',[1.5,.54,.42]),('gold','mugroup/monstruos/meteonyker',[1.6,1.25,.4]),('kundum','models/mon_balrog',None),('selupan','mugroup/monstruos/clockwork',None),('medusa','models/mon_hydra',None)]:
+    for key,model,tint in [('red','mugroup/monstruos/meteonyker',[1.5,.54,.42]),('gold','mugroup/monstruos/meteonyker',[1.6,1.25,.4]),('kundum','mugroup/monstruos/glaphan',None),('selupan','mugroup/monstruos/clockwork',None),('medusa','mugroup/monstruos/kern',None)]:
         paint(scene(PUBLIC/(model+'.glb')),OUT/('event-'+key+'.webp'),tint=tint)

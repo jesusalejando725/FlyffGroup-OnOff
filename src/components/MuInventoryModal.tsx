@@ -1,8 +1,13 @@
+import { liveQuery } from 'dexie';
+import { readVault } from '../db/dexieStore';
+import { canEquip, equipmentRequirements } from '../data/equipmentRules';
+import type { WalletKey } from '../types/game';
+const walletKeys: WalletKey[] = ['zen','bless','soul','life'];
 import { forgeSlots, lifeOptions, recipe } from '../data/jewelForge';
 import { previewModelFile, itemAssets } from '../data/itemVisualAssets';
 import { ShopModel } from './ShopModel';
 import { ItemPortrait } from './ItemPortrait';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Gem, Hammer, Sparkles, X } from 'lucide-react';
 import { getItemVisualSpec } from '../data/muWorldData';
 import type { ItemSlot, MuCharacter, MuItem } from '../types/game';
@@ -12,6 +17,7 @@ interface MuInventoryModalProps {
   character: MuCharacter;
   items: MuItem[];
   onClose: () => void;
+  onVault: (selection: {item:string}|{currency:WalletKey}, deposit:boolean)=>Promise<void>;
   onOpenStats: () => void;
   onRepair: () => void;
   onEquip: (itemId: string) => void;
@@ -40,16 +46,24 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
   character,
   items,
   onClose,
-  onOpenStats,
+  onOpenStats, onVault,
   onEquip,
   onUse,
   onRepair,
   onUpgrade,
   forgeMessage,
 }) => {
+  const [page,setPage] = useState(0);
   const [previewId, setPreviewId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  const [tab,setTab] = useState<'Recolección'|'Baúl'|'Personaje'>('Recolección');
+  const [vault,setVault] = useState<Awaited<ReturnType<typeof readVault>>>({items:[],wallet:{}});
+  useEffect(()=>{
+    if (!open) return;
+    const sub = liveQuery(()=>readVault(character.id)).subscribe(setVault);
+    return ()=>sub.unsubscribe();
+  },[open,character.id]);
   if (!open) return null;
 
   const equippedBySlot = new Map<ItemSlot, MuItem>();
@@ -62,8 +76,13 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
     }
   }
 
-  const selectedItem = items.find((i) => i.id === selectedId) || items[0] || null;
-  const totalSlots = Math.max(24, Math.ceil(backpackItems.length / 8) * 8);
+  const visible = tab === 'Personaje' ? [...equippedBySlot.values()] : tab === 'Baúl' ? vault.items : backpackItems;
+  const lastPage = Math.max(0,Math.ceil(visible.length/48)-1);
+  const activePage = Math.min(page,lastPage);
+  const pageItems = visible.slice(activePage*48,(activePage+1)*48);
+  const selectedItem = pageItems.find(i=>i.id === selectedId) ?? pageItems[0];
+  const req = selectedItem && equipmentRequirements(selectedItem);
+  const totalSlots = Math.max(24, Math.ceil(pageItems.length / 8) * 8);
 
   const getRarityStyle = (it: MuItem) => {
     if (it.rarity === 'ancient') return 'border-sky-400/90 bg-sky-950/60 text-sky-200';
@@ -101,9 +120,11 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto mu-scroll p-3 sm:p-4 grid grid-cols-1 md:grid-cols-12 gap-4">
-          {/* Left: 12-slot MU Paper-Doll */}
-          <div className="md:col-span-5 inventory-tray border border-amber-900/60 rounded-lg p-3 flex flex-col justify-between">
+        <nav aria-label="Inventarios" className="pack-tabs">
+          {(['Recolección','Baúl','Personaje'] as const).map(t=><button key={t} aria-pressed={t===tab} onClick={()=>{setTab(t);setPage(0);setSelectedId(null);setPreviewId(null)}}>{t}</button>)}
+        </nav>
+        <div className="flex-1 overflow-y-auto mu-scroll p-3 grid grid-cols-1 md:grid-cols-12 gap-3">
+          {tab === 'Personaje' && <div className="md:col-span-5 inventory-tray native-doll rounded-lg p-3">
             <div>
               <div className="text-[11px] font-semibold text-amber-300/90 mb-2 text-center">
                 Equipo + Joyería + Mascota ({character.classType})
@@ -139,53 +160,23 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
               </div>
             </div>
 
-            {/* Bottom MU Currencies & Jewels Strip */}
-            <div className="mt-3 pt-2.5 border-t border-slate-800 grid grid-cols-3 gap-1.5 text-center font-mono-tabular">
-              <div className="p-1.5 rounded bg-[#121724] border border-slate-800 col-span-3 flex items-center justify-between px-3">
-                <span className="text-[11px] text-slate-400">Zen</span>
-                <span className="text-xs font-bold text-amber-300">{character.zen.toLocaleString()}</span>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-rose-300">Bless</div>
-                <div className="text-xs font-bold text-rose-200">{character.bless}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-sky-300">Soul</div>
-                <div className="text-xs font-bold text-sky-200">{character.soul}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-amber-200">Chaos</div>
-                <div className="text-xs font-bold text-amber-100">{character.chaos}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-purple-300">Life</div>
-                <div className="text-xs font-bold text-purple-200">{character.life}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-emerald-300">Creation</div>
-                <div className="text-xs font-bold text-emerald-200">{character.creation ?? 0}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800">
-                <div className="text-[9px] text-yellow-300">Talismán</div>
-                <div className="text-xs font-bold text-yellow-200">{character.talisman ?? 0}</div>
-              </div>
-              <div className="p-1 rounded bg-[#121724] border border-slate-800 col-span-3">
-                <div className="text-[9px] text-emerald-300">Harmony (+14/+15)</div>
-                <div className="text-xs font-bold text-emerald-200">{character.harmony}</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right: 6x4 MU Grid + Selected Item Tooltip */}
-          <div className="md:col-span-7 flex flex-col gap-3">
-            <div className="inventory-tray border border-amber-900/60 rounded-lg p-3">
-              <div className="flex items-center justify-between text-[11px] text-slate-400 mb-2">
-                <span>Mochila · {backpackItems.length} objetos</span>
-                <span>Toca un cuadro para equipar o forjar</span>
-              </div>
+          </div>}
+          <div className={tab==='Personaje' ? "md:col-span-7" : "md:col-span-12"}>
+            {tab !== 'Personaje' && <div className="inventory-tray native-bag rounded-lg p-3">
+              <h3 className="text-sm mb-2">{tab === 'Baúl' ? 'Baúl compartido de la cuenta' : 'Mochila de recolección'} · {visible.length} lotes</h3>
+              <div className="flex flex-wrap gap-2 mb-2">{walletKeys.map(key=>{
+                const qty = tab==='Baúl' ? vault.wallet[key] ?? 0 : character[key];
+                return <button key={key} disabled={!qty} title={tab==='Baúl' ? 'Retirar pila' : 'Depositar pila'} onClick={()=>onVault({currency:key},tab!=='Baúl')} className="realm-button px-2 py-1 text-xs">
+                  <img className="inline-block w-6 h-6" src={'./mugroup/ui/items/'+(key==='zen'?'zen':'jewel-'+key)+'.webp'} alt=""/> {key} +{qty}
+                </button>})}</div>
+              {lastPage>0 && <div className="flex gap-3 text-xs pb-2">
+                <button disabled={!activePage} onClick={()=>setPage(activePage-1)}>← Anterior</button>
+                {activePage+1} / {lastPage+1}
+                <button disabled={activePage===lastPage} onClick={()=>setPage(activePage+1)}>Siguiente →</button>
+              </div>}
               <div className="grid grid-cols-6 sm:grid-cols-8 gap-1.5">
                 {Array.from({ length: totalSlots }).map((_, idx) => {
-                  const it = backpackItems[idx];
+                  const it = pageItems[idx];
                   const active = it && selectedItem?.id === it.id;
                   return (
                     <button
@@ -201,7 +192,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                         <>
                           {renderSlotIcon(it)}
                           <span className="text-[9px] font-semibold leading-tight truncate w-full mt-0.5">
-                            {it.name}
+                            {it.name}{it.slot === 'consumable' && ` +${it.quantity ?? 1}`}
                           </span>
                         </>
                       )}
@@ -209,7 +200,7 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   );
                 })}
               </div>
-            </div>
+            </div>}
 
             {selectedItem && (
               <div className="p-3.5 rounded-lg bg-[#080d18] border border-amber-500/50 space-y-2">
@@ -229,10 +220,10 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                     style={{ color: getItemVisualSpec(selectedItem).labelColor }}
                     className="text-sm font-bold"
                   >
-                    {selectedItem.name} +{selectedItem.enhanceLevel}
+                    {selectedItem.name} +{selectedItem.slot==='consumable' ? selectedItem.quantity ?? 1 : selectedItem.enhanceLevel}
                   </div>
                   <span className="text-[11px] font-mono-tabular text-slate-400">
-                    {selectedItem.isEquipped ? 'Equipado' : 'En Mochila'} · {selectedItem.rarity.toUpperCase()}
+                    {selectedItem.isEquipped ? 'Equipado' : tab === 'Baúl' ? 'En baúl' : 'En mochila'} · {selectedItem.rarity.toUpperCase()}
                   </span>
                 </div>
 
@@ -243,7 +234,8 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   <span>Set: {selectedItem.setName} · Estado: {selectedItem.durability ?? 100}%</span>
                 </div>
 
-                {selectedItem.requiredLevel && <div className="text-xs">Nivel requerido: {selectedItem.requiredLevel}</div>}
+                {req && selectedItem.slot !== 'consumable' && <div className="text-xs text-amber-200">Requiere: Nv. {req.level} · FUE {req.str} · AGI {req.agi} · VIT {req.vit} · ENE {req.ene} · CMD {req.cmd}
+                  {selectedItem.classFilter && ' · '+selectedItem.classFilter.join('/')} {selectedItem.sexFilter && (selectedItem.sexFilter==='male'?' · Masculino':' · Femenino')}</div>}
                 <div className="text-xs text-emerald-300">
                   {selectedItem.luck ? 'Suerte (crítico)' : 'Sin Suerte'}
                   {(selectedItem.lifeOptions ?? []).map(key => ' · ' + lifeOptions[key][0]).join('')}{selectedItem.excellentOpt ? ` · ${selectedItem.excellentOpt}` : ''}
@@ -254,13 +246,14 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                   {selectedItem.sharedFromSession ? ` · Compartido en sala ${selectedItem.sharedFromSession}` : ''}
                 </div>
 
-                <button onClick={onRepair} className="min-h-[40px] rounded bg-emerald-900 px-3 text-sm">Reparar equipo · 1 Zen por punto</button>
+                {tab !== 'Personaje' && <button className="realm-button p-2 text-sm" onClick={()=>onVault({item:selectedItem.id},tab==='Recolección')}>{tab==='Baúl' ? 'Retirar a recolección' : 'Guardar en el baúl'}</button>}
+                {tab !== 'Baúl' && <><button onClick={onRepair} className="min-h-[40px] rounded bg-emerald-900 px-3 text-sm">Reparar equipo · 1 Zen por punto</button>
                 <div className="flex items-center gap-1.5 pt-1 flex-wrap">
                   {selectedItem.recovery && <button onClick={() => onUse(selectedItem.id)}
                     className="min-h-[40px] rounded bg-emerald-800 px-3 text-sm">Usar poción</button>}
                   {selectedItem.slot !== 'consumable' && (
                     <button
-                      disabled={!selectedItem.isEquipped && (selectedItem.requiredLevel ?? 1) > character.level}
+                      disabled={!selectedItem.isEquipped && !canEquip(character,selectedItem)}
                       onClick={() => onEquip(selectedItem.id)}
                       className="min-h-[40px] px-3.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs cursor-pointer"
                     >
@@ -291,15 +284,8 @@ export const MuInventoryModal: React.FC<MuInventoryModalProps> = ({
                     <Gem className="w-3.5 h-3.5" />
                     +Life
                   </button>
-                  <button
-                    onClick={() => onUpgrade(selectedItem.id, 'harmony')}
-                    disabled={selectedItem.slot === 'consumable' || character.harmony <= 0 || selectedItem.enhanceLevel < 13 || selectedItem.enhanceLevel >= 15}
-                    className="min-h-[40px] px-3 rounded-lg bg-emerald-700 hover:bg-emerald-600 disabled:opacity-40 text-white font-semibold text-xs inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    +Harmony
-                  </button>
-                </div>
+
+                </div></>}
               </div>
             )}
           </div>

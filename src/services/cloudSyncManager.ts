@@ -1,3 +1,4 @@
+import {restoreEquipment} from '../data/madrigalEquipment';
 import Dexie from 'dexie';
 import { discoverSharedServer, isPublishedClient, sharedServerOrigin } from './serverConnection';
 import { loginNameTaken, lookupAccountLink, lookupRecoveryLink, lookupRecoveryQuestions, publishAccountLink } from './accountLink';
@@ -264,7 +265,7 @@ class CloudSyncManager {
         if (!old || old.updatedAt < ch.updatedAt) {
           await db.characters.put(normalizeCharacterRecord({ ...ch, isSynced: true }));
           await db.items.where('charId').equals(ch.id).delete();
-          const gear = [...(ch.equipment || []), ...(ch.inventory || [])];
+          const gear = [...(ch.equipment || []), ...(ch.inventory || [])].map(i=>restoreEquipment(i,ch.classType,ch.sex));
           const owners = await db.items.bulkGet(gear.map(item => item.id));
           if (owners.some(item => item && item.charId !== ch.id)) throw new Error('Conflicto de inventario.');
           await db.items.bulkPut(gear.map(item => ({ ...item, charId: ch.id })));

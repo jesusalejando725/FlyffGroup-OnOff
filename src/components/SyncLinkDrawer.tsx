@@ -51,9 +51,9 @@ interface SyncLinkDrawerProps {
 }
 
 const EVENT_LABELS: Record<EventType, string> = {
-  blood_castle: 'Blood Castle (Arcángel)',
-  chaos_castle: 'Chaos Castle (Supervivencia)',
-  kundun_boss: 'Invasión de Kundun',
+  blood_castle: 'Asedio de Flaris',
+  chaos_castle: 'Supervivencia en Robledal',
+  kundun_boss: 'Invasión de Glaphan',
   free_trade: 'Comercio Libre en Plaza',
 };
 

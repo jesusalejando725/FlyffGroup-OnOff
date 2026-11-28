@@ -1,5 +1,5 @@
 import source from '../../public/mugroup/market-assets.json' with { type: 'json' };
-import type { HeroClass, ItemSlot, ShopItemDef } from '../types/game';
+import type { HeroClass, ItemSlot, ShopItemDef } from '../types/game.ts';
 
 const rows = source.stock as Array<{
   id: string; name: string; npcs: string[]; level: number; cost: number; kind: string;

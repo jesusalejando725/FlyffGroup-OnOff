@@ -80,7 +80,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DK_male',
     classType: 'DK',
     sex: 'male',
-    displayName: 'Blade Knight (Masculino)',
+    displayName: 'Mercenario (Masculino)',
     title: 'Caballero de Vanguardia',
     specialty: 'ATK = STR×1.45 + AGI×0.35 · Combo pesado y aguante frontal.',
     competitivePowerScore: 102,
@@ -101,7 +101,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DK_female',
     classType: 'DK',
     sex: 'female',
-    displayName: 'Blade Knight (Femenino)',
+    displayName: 'Mercenario (Femenino)',
     title: 'Caballera Carmesí',
     specialty: 'ATK = STR×1.40 + AGI×0.42 · Mayor cadencia crítica en combo.',
     competitivePowerScore: 101,
@@ -122,7 +122,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DW_male',
     classType: 'DW',
     sex: 'male',
-    displayName: 'Soul Master (Masculino)',
+    displayName: 'Mago elemental (Masculino)',
     title: 'Archimago Elemental',
     specialty: 'MAG = ENE×1.55 + AGI×0.25 · Meteoro y Soul Barrier a distancia.',
     competitivePowerScore: 100,
@@ -143,7 +143,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DW_female',
     classType: 'DW',
     sex: 'female',
-    displayName: 'Soul Master (Femenino)',
+    displayName: 'Mago elemental (Femenino)',
     title: 'Hechicera Astral',
     specialty: 'MAG = ENE×1.58 + AGI×0.28 · Ventisca y regeneración veloz.',
     competitivePowerScore: 101,
@@ -164,7 +164,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'ELF_male',
     classType: 'ELF',
     sex: 'male',
-    displayName: 'Muse Elf (Masculino)',
+    displayName: 'Acróbata (Masculino)',
     title: 'Cazador Silvano',
     specialty: 'ATK = AGI×1.38 + STR×0.38 · Alta evasión y flecha perforante.',
     competitivePowerScore: 99,
@@ -185,8 +185,8 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'ELF_female',
     classType: 'ELF',
     sex: 'female',
-    displayName: 'Muse Elf (Femenino)',
-    title: 'Arquera de Noria',
+    displayName: 'Acróbata (Femenino)',
+    title: 'Arquera de Madrigal',
     specialty: 'ATK = AGI×1.40 + ENE×0.36 · Lluvia de flechas y aura curativa.',
     competitivePowerScore: 100,
     atkSpeedRating: 1.2,
@@ -206,7 +206,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DL_male',
     classType: 'DL',
     sex: 'male',
-    displayName: 'Dark Lord (Masculino)',
+    displayName: 'Asistente (Masculino)',
     title: 'Emperador Oscuro',
     specialty: 'ATK = STR×1.05 + CMD×0.85 + ENE×0.45 · Crítico imperial.',
     competitivePowerScore: 104,
@@ -227,7 +227,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'DL_female',
     classType: 'DL',
     sex: 'female',
-    displayName: 'Dark Lord (Femenino)',
+    displayName: 'Asistente (Femenino)',
     title: 'Soberana de Ceniza',
     specialty: 'ATK = STR×1.00 + CMD×0.90 + ENE×0.48 · Fénix de fuego oscuro.',
     competitivePowerScore: 103,
@@ -248,7 +248,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'MG_male',
     classType: 'MG',
     sex: 'male',
-    displayName: 'Magic Gladiator (Masculino)',
+    displayName: 'Espadachín arcano (Masculino)',
     title: 'Gladiador Rúnico',
     specialty: 'ATK = STR×1.10 + ENE×1.05 + AGI×0.30 · Híbrido dual letal.',
     competitivePowerScore: 103,
@@ -269,7 +269,7 @@ export const TEN_CHARACTER_TABLES: CharacterTableProfile[] = [
     variantKey: 'MG_female',
     classType: 'MG',
     sex: 'female',
-    displayName: 'Magic Gladiator (Femenino)',
+    displayName: 'Espadachín arcano (Femenino)',
     title: 'Gladiadora Arcana',
     specialty: 'ATK = STR×1.05 + ENE×1.12 + AGI×0.32 · Relámpago y tajo rúnico.',
     competitivePowerScore: 102,
@@ -362,14 +362,14 @@ export function computeHeroDamageStats(
   }
 
   const statPhysical = Math.round(
-    (character.str + (gear.str ?? 0)) * profile.atkWeight.str +
+    (character.str + (gear.str ?? 0)) * (1 + profile.atkWeight.str) +
       character.agi * profile.atkWeight.agi +
       character.cmd * profile.atkWeight.cmd +
       character.level * 2.2 +
       character.resets * 18,
   );
   const statMagic = Math.round(
-    character.ene * profile.atkWeight.ene +
+    character.ene * (1 + profile.atkWeight.ene) +
       character.cmd * 0.25 +
       character.level * 2.0 +
       character.resets * 16,
@@ -388,7 +388,7 @@ export function computeHeroDamageStats(
 
   const primaryAtk =
     character.classType === 'DW'
-      ? magicPower
+      ? Math.round(magicPower + physicalPower * .28)
       : character.classType === 'MG'
         ? Math.round((physicalPower + magicPower) * 0.62)
         : Math.round(physicalPower + magicPower * 0.25);

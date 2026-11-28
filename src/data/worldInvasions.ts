@@ -6,11 +6,11 @@ export interface Invasion {
   zen: number; levels: number; points: number; pieces: number; model: string; color: string;
 }
 export const INVASIONS: Invasion[] = [
-  {id:'red', name:'Red Dragon', map:'flaris', count:10, hp:21, attack:6, zen:100000, levels:10, points:2000, pieces:2, model:'monstruos/meteonyker.glb', color:'#eb624c'},
-  {id:'gold', name:'Golden Dragon', map:'robledal', count:10, hp:42, attack:12, zen:100000, levels:10, points:1000, pieces:4, model:'monstruos/meteonyker.glb', color:'#ffc849'},
-  {id:'kundum', name:'Kundum', map:'puerto_bruma', count:6, hp:126, attack:36, zen:130000, levels:15, points:1500, pieces:6, model:'../models/mon_balrog.glb', color:'#8fa2f4'},
-  {id:'selupan', name:'Selupan', map:'crater_ceniza', count:1, hp:1260, attack:180, zen:250000, levels:25, points:2500, pieces:10, model:'monstruos/clockwork.glb', color:'#72e5ff'},
-  {id:'medusa', name:'Medusa', map:'crater_ceniza', count:5, hp:630, attack:72, zen:150000, levels:23, points:1500, pieces:7, model:'../models/mon_hydra.glb', color:'#9bf686'},
+  {id:'red', name:'Meteonyker Carmesí', map:'flaris', count:10, hp:21, attack:6, zen:100000, levels:10, points:2000, pieces:2, model:'monstruos/meteonyker.glb', color:'#eb624c'},
+  {id:'gold', name:'Meteonyker Dorado', map:'robledal', count:10, hp:42, attack:12, zen:100000, levels:10, points:1000, pieces:4, model:'monstruos/meteonyker.glb', color:'#ffc849'},
+  {id:'kundum', name:'Glaphan de Bruma', map:'puerto_bruma', count:6, hp:126, attack:36, zen:130000, levels:15, points:1500, pieces:6, model:'monstruos/glaphan.glb', color:'#8fa2f4'},
+  {id:'selupan', name:'Clockworks', map:'crater_ceniza', count:1, hp:1260, attack:180, zen:250000, levels:25, points:2500, pieces:10, model:'monstruos/clockwork.glb', color:'#72e5ff'},
+  {id:'medusa', name:'Kern de Ceniza', map:'crater_ceniza', count:5, hp:630, attack:72, zen:150000, levels:23, points:1500, pieces:7, model:'monstruos/kern.glb', color:'#9bf686'},
 ];
 const PERIOD = 6 * 3600000;
 export const INVASION_DURATION = 80 * 60000;

@@ -1,3 +1,5 @@
+import { NATIVE_NPC_CATALOG } from './nativeNpcStock.ts';
+import {FLYFF_ECONOMY_CATALOG} from './flyffEconomy.ts';
 import type { MonsterSpawnDef } from '../types/game.ts';
 import { BESTIARY } from './bestiary.ts';
 import { MU_MAPS, MU_SHOP_CATALOG } from './muWorldData.ts';
@@ -49,7 +51,7 @@ export const monsterChoices = [
 export const npcChoices = npcs.npcs;
 const monsterIds = new Set(monsterChoices.map(x => x.id));
 const npcIds = new Set(npcChoices.map(x => x.id));
-const itemIds = new Set([...MU_SHOP_CATALOG, ...ARTISAN_CATALOG].map(x => x.id));
+const itemIds = new Set([...MU_SHOP_CATALOG, ...ARTISAN_CATALOG,...FLYFF_ECONOMY_CATALOG,...NATIVE_NPC_CATALOG].map(x => x.id));
 const invasionById = new Map(INVASIONS.map(x => [x.id, x]));
 
 function object(value: unknown): Record<string, unknown> {
