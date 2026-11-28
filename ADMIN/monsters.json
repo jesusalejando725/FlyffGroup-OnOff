@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "minDistinctClasses": 40,
   "aggroRadiusMeters": 10,
-  "respawnSeconds": 7,
+  "respawnSeconds": 4,
   "glbOverrides": {
     "pompom": "monstruos/mushpang.glb",
     "bellcap": "monstruos/mushpang.glb",

@@ -1,12 +1,12 @@
 import { equippedGearBonuses, rollFlyffDrops } from '../data/flyffEconomy';
 import madrigalSites from '../data/madrigalSpawns.json';
-import { capitalPortals, nearestRegion } from './worldRegions';
+import { capitalPortals, CRATER_NPC_SAFE_RADIUS, inProtectedArea, nearestRegion } from './worldRegions';
 import creatureModels from '../data/creatureModels.json' with {type:'json'};
 import { flightHeight } from './content/WingRig';
 import { invasionSites, invasionWindow, type Invasion } from '../data/worldInvasions';
 import { applyMonsterRule, canonicalMap, modelMonsters, positionsAt } from '../data/liveWorld';
 import { getLiveWorld, refreshLiveWorld, worldInvasions } from '../services/liveWorldService';
-import { CAMP_SIZE, MONSTER_WANDER_RADIUS, populateRegionalCamps, reachableHuntingLand, regionalTemplate, SpawnGrid, type CampMember } from './encounters';
+import { CAMP_SIZE, CAMP_RESPAWN_SECONDS, MONSTER_WANDER_RADIUS, populateRegionalCamps, reachableHuntingLand, regionalTemplate, SpawnGrid, type CampMember } from './encounters';
 import {
   AnimationGroup,
   ArcRotateCamera,
@@ -30,9 +30,10 @@ import {
 } from '@babylonjs/core';
 import '@babylonjs/loaders';
 import { ITEM_BY_ID } from '../data/itemCatalog';
-import { RECIPES } from './content/recipes';
 import { WorldContentManager } from './WorldContent';
-import { getEffectiveSkillMultiplier } from './combatAndProgression';
+import { computeHeroDamageStats, getEffectiveSkillMultiplier } from './combatAndProgression';
+import { damageAgainstMonster, MONSTER_POWER_ENERGY, monsterCombatStats } from './monsterCombat';
+import { MU_SKILLS, skillPresentation } from '../data/muSkillsAndClasses';
 import { soundSynth } from './soundSynth';
 import { DEFAULT_CAMERA_DISTANCE, type LootFilterSettings } from './worldPhysicsMath';
 import { BESTIARY, SPECIES_BY_ID, type MonsterElement, type AttackStyle } from '../data/bestiary';
@@ -61,12 +62,15 @@ import type { WorldTelemetryInfo } from '../components/MuHudOverlay';
 export interface TargetMonsterInfo {
   id: string;
   currentHp: number;
+  currentEnergy: number;
   autoAimPct: number;
   dist: number;
   stats: {
     name: string;
     scaledLevel: number;
     maxHp: number;
+    maxEnergy: number;
+    strength: number;
     defense: number;
     powers: MonsterPower[];
     damageTable: {
@@ -114,6 +118,8 @@ interface ActiveMonster {
   scaledLevel: number;
   maxHp: number;
   hp: number;
+  maxEnergy: number;
+  energy: number;
   attack: number;
   defense: number;
   x: number;
@@ -233,6 +239,7 @@ export class MuWorldEngine {
   private canvas: HTMLCanvasElement | null = null;
   private callbacks: EngineCallbacks;
   private headless: boolean;
+  private warmedSkillClasses = new Set<HeroClass>();
   private hemiLight: HemisphericLight;
   private dirLight: DirectionalLight;
   private heroRoot: TransformNode;
@@ -485,6 +492,12 @@ export class MuWorldEngine {
   ): Promise<void> {
     const actor = await this.flyff.setActor(classType, sex, equippedItems, appearanceId);
     if (actor && !this.disposed) {
+      if (!this.warmedSkillClasses.has(classType)) {
+        this.warmedSkillClasses.add(classType);
+        const skills = MU_SKILLS[classType].map(skill => skillPresentation(classType, skill));
+        void Promise.all(skills.map(({ effect }) => this.flyff.fx.preloadEffect(effect)));
+        void soundSynth.preloadSkill(skills[0].sound);
+      }
       actor.root.parent = this.heroRoot;
       actor.root.position.set(0, 0, 0);
       actor.root.rotation.y = this.heroRotY;
@@ -622,9 +635,12 @@ export class MuWorldEngine {
     return Number.isFinite(value) ? Math.max(1, Math.min(500, value)) : 500;
   }
 
+  private craterNpcZones: { x: number; z: number; radius: number }[] = [];
+
   private isSafePoint(x: number, z: number, margin = 0): boolean {
     const rules = getAdminConfigSync()['world-rules'];
-    return MU_MAPS.some(map => Math.hypot(x - map.spawn.x, z - map.spawn.z) <= this.cityRadius(map, rules) + margin);
+    return MU_MAPS.some(map => (x - map.spawn.x) ** 2 + (z - map.spawn.z) ** 2 <= (this.cityRadius(map, rules) + margin) ** 2) ||
+      inProtectedArea(x, z, margin, this.craterNpcZones);
   }
 
   public isInSafeCity(): boolean {
@@ -691,9 +707,8 @@ export class MuWorldEngine {
     if (this.mode !== 'playing') return;
     const cls = this.heroStats?.classType || 'DK';
     if (!skill.isBuff && this.isInSafeCity()) return;
-    const clsRecipes = RECIPES[cls] || RECIPES.DK;
     const skillIndex = Math.max(0, Number(skill.keyHint) - 1);
-    const [fxId, soundId] = clsRecipes[skillIndex] || clsRecipes[0];
+    const { element, style, effect, sound } = skillPresentation(cls, skill);
 
 
     const clipName = this.resolveHeroSkillClip(skill);
@@ -716,22 +731,14 @@ export class MuWorldEngine {
       ? new Vector3(targetMob.x, this.flyff.world.getGroundHeight(targetMob.x, targetMob.z) + 0.65, targetMob.z)
       : skill.isBuff ? origin : origin.add(forward.scale(2.4));
 
-    void this.flyff.fx.play(skill.flyffEffect || fxId, fxPos, 1.05, {
+    void this.flyff.fx.play(effect, fxPos, 1.05, {
       colorHex: skill.colorHex,
       casterPos: origin,
       targetPos: fxPos,
     });
-    soundSynth.playSkill(skill.flyffSound || soundId);
-    // These local silhouettes keep each class readable even if a texture
-    // is still streaming. The authored effect and sound continue to play.
-    const styles: Record<HeroClass, [MonsterElement, AttackStyle]> = {
-      DK: ['light', 'cleave'], DW: ['frost', 'bolt'], ELF: ['venom', 'bolt'],
-      DL: ['void', 'pulse'], MG: ['ember', skillIndex >= 2 ? 'bolt' : 'cleave'],
-    };
-    const [element, style] = styles[cls];
-    const signature = creatureFx(this.scene, this.creatureEffectsRoot, origin, fxPos, element, skill.isBuff ? 'greeting' : style);
+    soundSynth.playSkill(sound);
+    const signature = creatureFx(this.scene, this.creatureEffectsRoot, origin, fxPos, element, style);
     window.setTimeout(() => { if (!signature.isDisposed()) signature.dispose(); }, 430);
-
 
     if (skill.isBuff) {
       this.emitDamageNumber(50, 38, `+${skill.shortName}`, skill.colorHex, false);
@@ -766,7 +773,7 @@ export class MuWorldEngine {
       const isCrit = Math.random() * 100 < 14 + this.activeBonuses.critBonusPct + (gear.critPct ?? 0);
       const rawDmg = baseStatPower * mult * atkBonus * (isCrit ? 1.55 + (gear.critDamagePct ?? 0) / 100 : 0.92 + Math.random() * 0.16);
       const effectiveDefense = mob.defense * (1 - (gear.ignoreDefensePct ?? 0) / 100);
-      const finalDmg = Math.max(4, Math.round(rawDmg - effectiveDefense * 0.35));
+      const finalDmg = this.damageToMonster(mob, rawDmg, effectiveDefense);
 
       mob.hp = Math.max(0, mob.hp - finalDmg);
       this.playMonsterAnim(mob, 'hit', false);
@@ -857,6 +864,27 @@ export class MuWorldEngine {
     void this.callbacks.onPickupLoot?.(loot.info);
   }
 
+  private damageToMonster(mob: ActiveMonster, damage: number, defense = mob.defense): number {
+    return damageAgainstMonster(damage, defense, this.heroStats?.level ?? mob.scaledLevel, this.heroStats?.resets ?? 0, mob.scaledLevel);
+  }
+
+  private reviveMonster(mob: ActiveMonster, now: number): void {
+    if (mob.alive || now < mob.respawnAt) return;
+    mob.alive = true;
+    mob.hp = mob.maxHp;
+    mob.energy = mob.maxEnergy;
+    mob.x = mob.homeX;
+    mob.z = mob.homeZ;
+    mob.hitCooldown = 1.2;
+    mob.powerCooldown = 2;
+    mob.actionTime = 0;
+    mob.activeAnim = '';
+    if (mob.root) {
+      mob.root.position.set(mob.x, this.flyff.world.getGroundHeight(mob.x, mob.z), mob.z);
+      this.playMonsterAnim(mob, 'stand', true);
+    }
+  }
+
   private handleMonsterDefeated(mob: ActiveMonster): void {
     if (!mob.alive) return;
     mob.alive = false;
@@ -873,9 +901,9 @@ export class MuWorldEngine {
       for (let i=0; i<e.pieces; i++) this.spawnLootDrop(mob.x+1.5*Math.cos(i*2.4),mob.z+1.5*Math.sin(i*2.4),0,true,pool);
       return;
     }
-    const adminRespawn = Number(getAdminConfigSync().monsters?.respawnSeconds || 7);
+    const adminRespawn = Number(getAdminConfigSync().monsters?.respawnSeconds || CAMP_RESPAWN_SECONDS);
     mob.strike = undefined;
-    mob.respawnAt = this.flyff.worldClock + (mob.def.respawnSeconds ?? (mob.def.isBoss ? Math.max(18, adminRespawn * 2) : adminRespawn));
+    mob.respawnAt = performance.now() + (mob.def.respawnSeconds ?? adminRespawn) * 1000;
 
     const zen =
       mob.def.zenMin + Math.floor(Math.random() * Math.max(1, mob.def.zenMax - mob.def.zenMin));
@@ -949,6 +977,7 @@ export class MuWorldEngine {
     });
   }
 
+  private entityBounds = new WeakMap<AssetContainer, { minY: number; height: number }>();
   private pendingModels = new Map<string, Promise<AssetContainer | null>>();
   private getOrLoadEntityContainer(relPath: string): Promise<AssetContainer | null> {
     const pending = this.pendingModels.get(relPath);
@@ -993,25 +1022,32 @@ export class MuWorldEngine {
       { doNotInstantiate: ownMaterials },
     );
     const root = new TransformNode(`${prefix}_root`, this.scene);
+    const bounds = this.entityBounds.get(container);
     let minY = Infinity;
     let maxY = -Infinity;
     for (const rn of inst.rootNodes) {
       rn.parent = root;
-      rn.computeWorldMatrix(true);
-      if ('getChildMeshes' in rn) {
-        const meshes = rn.getChildMeshes(false);
-        for (const m of meshes) {
-          m.isPickable = false;
-          m.computeWorldMatrix(true);
-          const bb = m.getBoundingInfo().boundingBox;
-          minY = Math.min(minY, bb.minimumWorld.y);
-          maxY = Math.max(maxY, bb.maximumWorld.y);
-        }
+      if (!bounds) rn.computeWorldMatrix(true);
+      if ('getChildMeshes' in rn) for (const m of rn.getChildMeshes(false)) {
+        m.isPickable = false;
+        if (bounds) continue;
+        m.computeWorldMatrix(true);
+        const box = m.getBoundingInfo().boundingBox;
+        minY = Math.min(minY, box.minimumWorld.y);
+        maxY = Math.max(maxY, box.maximumWorld.y);
       }
     }
-    const rawHeight = Number.isFinite(maxY - minY) && maxY - minY > 0.1 ? maxY - minY : 1.75;
-    const scale = Math.max(0.04, Math.min(4.0, targetHeight / rawHeight));
-    const offsetY = Number.isFinite(minY) ? -minY * scale : 0;
+    const height = maxY - minY;
+    const dimensions = bounds ?? {
+      minY: Number.isFinite(minY) ? minY : 0,
+      height: Number.isFinite(height) && height > .1 ? height : 1.75,
+    };
+    if (!bounds) this.entityBounds.set(container, dimensions);
+    root.onDisposeObservable.addOnce(() => {
+      for (const skeleton of inst.skeletons) skeleton.dispose();
+    });
+    const scale = Math.max(0.04, Math.min(4.0, targetHeight / dimensions.height));
+    const offsetY = -dimensions.minY * scale;
 
     for (const rn of inst.rootNodes) {
       if ('scaling' in rn && rn.scaling instanceof Vector3) {
@@ -1087,6 +1123,7 @@ export class MuWorldEngine {
     this.campMarkers = [];
     this.eventMobs = []; this.eventKey = '';
     this.npcs = [];
+    this.craterNpcZones = [];
     if (this.lastNearbyNpcId !== null) this.callbacks.onNearbyNpcChange?.(null);
     this.lastNearbyNpcId = null;
     this.loots = [];
@@ -1117,7 +1154,7 @@ export class MuWorldEngine {
         };
       });
 
-    const npcList: Array<NpcDef & { model?: string }> = [...adminMapNpcs,...MU_MAPS.flatMap(map => adminNpcsRaw.some((n: any) => canonicalMap(n.mapId) === map.id)
+    const npcList: Array<NpcDef & { model?: string }> = [...adminMapNpcs,...MU_MAPS.flatMap(map => adminMapNpcs.some(n => n.mapId === map.id)
       ? [] : map.npcs)];
 
     const npcGlbs = [...new Set(npcList.map((n) => resolveNpcGlb(n.model, n.role)))];
@@ -1125,6 +1162,9 @@ export class MuWorldEngine {
     // Never mark the region populated against an empty height/water table.
     await Promise.all([this.flyff.world.ensureManifest(), ...npcGlbs.map(g=>this.getOrLoadEntityContainer(g))]);
     if (token !== this.entityBuildToken || this.disposed) return;
+
+    this.craterNpcZones = npcList.filter(npc => npc.mapId === 'crater_ceniza')
+      .map(({ x, z }) => ({ x, z, radius: CRATER_NPC_SAFE_RADIUS }));
 
     for (const npcDef of npcList) {
       const glbPath = resolveNpcGlb(npcDef.model, npcDef.role);
@@ -1170,7 +1210,7 @@ export class MuWorldEngine {
         role:'guard',x,z,colorHex:'#48a6ed',warpTarget:target.id}});
     }
 
-    this.monsterRoamLimit = 40;
+    this.monsterRoamLimit = 0;
     this.monsterScan = 0;
     const size = MU_MAPS[0].worldSize;
     const land = (x: number, z: number) => this.flyff.world.isHuntingLand(x, z);
@@ -1181,7 +1221,6 @@ export class MuWorldEngine {
       return {
         id: map.id,
         count: Math.max(1, Math.min(5000, Math.ceil(adminCfg['world-rules'].maps[key].targetMonsterCount / CAMP_SIZE))),
-        clusteredAt: map.id === puerto.id ? puerto.spawn : undefined,
         contains: (x, z) => nearestRegion(MU_MAPS, x, z).id === map.id,
         allows: (x, z) => (map.id === puerto.id ? reachable(x, z) : land(x, z)) && !this.isSafePoint(x, z, 12),
       };
@@ -1335,7 +1374,7 @@ export class MuWorldEngine {
         zenMin: number(group.zen, template.def.zenMin, 0, 1e8),
         zenMax: number(group.zen, template.def.zenMax, 0, 1e8),
         roamRadius: number(group.roamRadius, MONSTER_WANDER_RADIUS, 0, 200),
-        respawnSeconds: number(group.respawnSeconds, 7, 1, 3600),
+        respawnSeconds: number(group.respawnSeconds, Number(adminCfg.monsters?.respawnSeconds ?? CAMP_RESPAWN_SECONDS), 1, 3600),
         drops: Array.isArray(group.drops) ? group.drops.filter((key: string) =>
           ['zen', 'bless', 'soul', 'life', 'chaos', 'creation', 'talisman'].includes(key) || ITEM_BY_ID.has(key)) : undefined,
       };
@@ -1350,24 +1389,33 @@ export class MuWorldEngine {
     }
 
     for (const [i, { entry, mx, mz, angle, camp }] of placements.entries()) {
-      const rule = applyMonsterRule(entry.def, live.monsters[entry.def.id]);
-      const level = Math.max(map.minLevel, Math.min(map.maxLevel, rule.level));
-      const scale = level / Math.max(1, rule.level);
-      const def = { ...rule, level, maxHp: Math.max(1, Math.round(rule.maxHp * scale)),
-        attack: Math.round(rule.attack * scale), defense: Math.round(rule.defense * scale),
-        xpReward: Math.round(rule.xpReward * scale), zenMin: Math.round(rule.zenMin * scale),
-        zenMax: Math.round(rule.zenMax * scale) };
+      const level = Math.max(map.minLevel, Math.min(map.maxLevel, entry.def.level));
+      const stats = monsterCombatStats(level, entry.def.isBoss);
+      const liveRule = live.monsters[entry.def.id];
+      const scale = level / Math.max(1, entry.def.level);
+      const tuned = applyMonsterRule(camp === undefined ? { ...entry.def, level } : {
+        ...entry.def, level, maxHp: stats.maxHp, attack: stats.strength, defense: stats.defense,
+        xpReward: Math.round(entry.def.xpReward * scale),
+        zenMin: Math.round(entry.def.zenMin * scale), zenMax: Math.round(entry.def.zenMax * scale),
+        respawnSeconds: CAMP_RESPAWN_SECONDS,
+      }, liveRule);
+      const def = camp !== undefined || scale === 1 ? tuned : {
+        ...tuned, maxHp: Math.max(1, Math.round(tuned.maxHp * scale)), attack: Math.round(tuned.attack * scale),
+        defense: Math.round(tuned.defense * scale), xpReward: Math.round(tuned.xpReward * scale),
+        zenMin: Math.round(tuned.zenMin * scale), zenMax: Math.round(tuned.zenMax * scale),
+      };
+      const maxEnergy = stats.maxEnergy + (liveRule?.energy ?? 0);
       const mob: ActiveMonster = {
         id: `mob-${map.id}-${i}`,
         def, glbFile: entry.glb, camp,
         attackFx: entry.attackFx || (def.isBoss ? 'sfx_sklmerfury01' : 'sfx_hitsword01'),
-        scaledLevel: def.level, maxHp: def.maxHp, hp: def.maxHp, attack: def.attack, defense: def.defense,
+        scaledLevel: def.level, maxHp: def.maxHp, hp: def.maxHp, attack: def.attack, defense: def.defense, maxEnergy, energy: maxEnergy,
         x: mx, z: mz, homeX: mx, homeZ: mz, rotY: angle,
         animations: [], activeAnim: '', hitCooldown: 1.2 + (i % 10) * 0.11,
         respawnAt: 0, powerCooldown: 2, actionTime: 0,
         originalSpecies: entry.speciesId, alive: true,
       };
-      this.monsterRoamLimit = Math.max(this.monsterRoamLimit, def.roamRadius ?? 40);
+      this.monsterRoamLimit = Math.max(this.monsterRoamLimit, def.roamRadius ?? (def.isBoss ? 15 : Number(adminCfg.monsters?.aggroRadiusMeters ?? 10)) + MONSTER_WANDER_RADIUS);
       if (camp !== undefined && i % CAMP_SIZE === 0) this.campMarkers.push({x:mx,z:mz});
       this.monsters.push(mob);
       this.monsterGrid.add(mx, mz, mob);
@@ -1379,7 +1427,11 @@ export class MuWorldEngine {
   }
 
   private *localCandidates(radius: number): Iterable<ActiveMonster> {
-    yield* this.monsterGrid.near(this.heroX, this.heroZ, radius + this.monsterRoamLimit);
+    const now = performance.now();
+    for (const mob of this.monsterGrid.near(this.heroX, this.heroZ, radius + this.monsterRoamLimit)) {
+      this.reviveMonster(mob, now);
+      yield mob;
+    }
     for (const m of this.eventMobs) if (Math.hypot(m.x-this.heroX,m.z-this.heroZ) <= radius + (m.def.roamRadius ?? 40)) yield m;
   }
 
@@ -1396,6 +1448,7 @@ export class MuWorldEngine {
       const sites = rule?.x !== undefined && rule.z !== undefined ? positionsAt({x: rule.x, z: rule.z}, e.count)
         : invasionSites(e,w.start,this.currentMap.worldSize || 3072,(x,z)=>!this.flyff.world.isHuntingLand(x,z) || this.isSafePoint(x,z,45) || nearestRegion(MU_MAPS,x,z).id !== e.map);
       const hp = (level99?.hp ?? 11400)*e.hp, attack = (level99?.damage ?? 425)*e.attack;
+      const maxEnergy = monsterCombatStats(99, true).maxEnergy;
       sites.forEach(({x,z},i)=>{
         if (!this.flyff.world.isHuntingLand(x,z) || this.isSafePoint(x,z,45)) return;
         const id = ['invasion',this.heroStats!.id,e.id,i].join(':');
@@ -1404,7 +1457,7 @@ export class MuWorldEngine {
         if (old?.respawnAt === w.start) { this.eventMobs.push(old); retained.delete(id); return; }
         this.eventMobs.push({id, invasion:e, def:{id,name:e.name,type:'boss',level:99,maxHp:hp,attack,defense:99,
           xpReward:0,zenMin:e.zen,zenMax:e.zen,scale:2,colorHex:e.color,isBoss:true,roamRadius:rule?.roamRadius ?? 40},
-          glbFile:e.model,attackFx:'sfx_sklmerfury01',scaledLevel:99,maxHp:hp,hp,attack,defense:99,
+          glbFile:e.model,attackFx:'sfx_sklmerfury01',scaledLevel:99,maxHp:hp,hp,attack,defense:99,maxEnergy,energy:maxEnergy,
           x,z,homeX:x,homeZ:z,rotY:0,animations:[],activeAnim:'',hitCooldown:1,powerCooldown:3,actionTime:0,respawnAt:w.start,alive:true});
       });
     }
@@ -1657,6 +1710,7 @@ export class MuWorldEngine {
       this.streamMonsters(radius + 16);
       this.monsterScan = 0.2;
     }
+    const now = performance.now();
     for (const mob of this.loadedMonsters) {
       const root = mob.root!;
       mob.actionTime = Math.max(0, mob.actionTime - dt);
@@ -1664,13 +1718,8 @@ export class MuWorldEngine {
       if (!mob.alive) {
         if (mob.model && !mob.animations.length) mob.model.rotation.z = (1 - mob.actionTime / 0.25) * Math.PI / 2;
         if (mob.actionTime <= 0) root.setEnabled(false);
-        if (this.flyff.worldClock < mob.respawnAt) continue;
-        mob.alive = true;
-        mob.hp = mob.maxHp;
-        mob.x = mob.homeX;
-        mob.z = mob.homeZ;
-        mob.activeAnim = '';
-        this.playMonsterAnim(mob, 'stand', true);
+        this.reviveMonster(mob, now);
+        if (!mob.alive) continue;
       }
 
       const d = Math.hypot(this.heroX - mob.x, this.heroZ - mob.z);
@@ -1699,6 +1748,7 @@ export class MuWorldEngine {
       }
       if (root.isEnabled() !== (d <= radius)) root.setEnabled(d <= radius);
       if (!mob.model || d > radius) { mob.strike = undefined; continue; }
+      mob.energy = Math.min(mob.maxEnergy, mob.energy + dt * (mob.def.isBoss ? 4 : 3));
       const aggroRadius = mob.invasion ? 22 : mob.def.isBoss ? 15 : normalAggro;
       const engaged = !safeCity && d <= aggroRadius;
       const leash = mob.def.roamRadius ?? (aggroRadius + MONSTER_WANDER_RADIUS);
@@ -1768,8 +1818,9 @@ export class MuWorldEngine {
         const blocked = gear.blockPct && Math.random() * 100 < gear.blockPct;
         const damage = Math.round(mob.attack * (strike.power?.damageMult ?? 1) * (blocked ? .5 : 1));
         this.callbacks.onPlayerDamaged?.(damage, !blocked && Math.random() < 0.12);
-        if (gear.reflectPct) {
-          mob.hp = Math.max(0, mob.hp - Math.round(damage * gear.reflectPct / 100));
+        const reflected = Math.round(damage * (gear.reflectPct ?? 0) / 100);
+        if (reflected > 0) {
+          mob.hp = Math.max(0, mob.hp - this.damageToMonster(mob, reflected, 0));
           if (!mob.hp) this.handleMonsterDefeated(mob);
         }
         soundSynth.playHit(this.heroStats?.sex);
@@ -1779,17 +1830,18 @@ export class MuWorldEngine {
       if (!engaged || this.isSafePoint(mob.x, mob.z) || mob.actionTime > 0) continue;
       const profile = monsterAttackProfile(mob.glbFile);
       const species = mob.originalSpecies ? SPECIES_BY_ID.get(mob.originalSpecies) : undefined;
-      const special = mob.powerCooldown <= 0;
+      const special = mob.powerCooldown <= 0 && mob.energy >= MONSTER_POWER_ENERGY;
       const style = special ? (species?.power.style ?? profile.style) : 'cleave';
       const range = style === 'bolt' ? 9 : style === 'pulse' ? 5.5 : 2.9;
       if (d > range) continue;
       mob.hitCooldown -= dt;
       if (mob.hitCooldown <= 0) {
         mob.hitCooldown = 1.65;
-        const power = special ? species?.power ?? mob.def.powers?.[0] ?? {
-          id: `${mob.def.id}_power`, name: profile.name, colorHex: mob.def.colorHex, damageMult: 1.35,
-        } : undefined;
-        if (special) mob.powerCooldown = species?.power.cooldownSec ?? 5;
+        const power = special ? this.monsterPowers(mob, profile.name)[0] : undefined;
+        if (special) {
+          mob.energy -= MONSTER_POWER_ENERGY;
+          mob.powerCooldown = species?.power.cooldownSec ?? 5;
+        }
         root.rotation.y = Math.atan2(this.heroX - mob.x, this.heroZ - mob.z);
         this.playMonsterAnim(mob, 'atk1', false);
         mob.strike = { remaining: 0.32, power, range: range + 0.6, element: species?.power.element ?? profile.element, style };
@@ -1827,6 +1879,12 @@ export class MuWorldEngine {
     }
   }
 
+  private monsterPowers(mob: ActiveMonster, fallbackName = monsterAttackProfile(mob.glbFile).name): MonsterPower[] {
+    return mob.def.powers?.length ? mob.def.powers : [
+      { id: `${mob.def.id}_power`, name: fallbackName, colorHex: mob.def.colorHex, damageMult: 1.35 },
+    ];
+  }
+
   private checkTargetMonster(): void {
     if (this.isInSafeCity()) {
       if (this.lastTargetId !== null) {
@@ -1845,24 +1903,33 @@ export class MuWorldEngine {
     }
     this.lastTargetId = target.id;
     const dist = Number(Math.hypot(target.x - this.heroX, target.z - this.heroZ).toFixed(1));
+    const gearItems = this.flyff.getLastEquippedItems();
+    const attack = this.heroStats ? computeHeroDamageStats(this.heroStats, gearItems).avgAttack : 40;
+    const gear = equippedGearBonuses(gearItems);
+    const defense = target.defense * (1 - (gear.ignoreDefensePct ?? 0) / 100);
+    const buffedAttack = attack * (1 + this.activeBonuses.atkBonusPct / 100);
+    const powers = this.monsterPowers(target);
     this.callbacks.onTargetMonsterChange?.({
       id: target.id,
       currentHp: target.hp,
+      currentEnergy: Math.floor(target.energy),
       autoAimPct: this.autoAimAssist ? 94 : 60,
       dist,
       stats: {
         name: target.def.name,
         scaledLevel: target.scaledLevel,
         maxHp: target.maxHp,
+        maxEnergy: target.maxEnergy,
+        strength: target.attack,
         defense: target.defense,
-        powers: target.def.powers || [],
+        powers,
         damageTable: {
-          playerEstNormal: Math.max(12, Math.round(45 - target.defense * 0.3)),
-          playerEstCrit: Math.max(18, Math.round(72 - target.defense * 0.3)),
+          playerEstNormal: this.damageToMonster(target, buffedAttack, defense),
+          playerEstCrit: this.damageToMonster(target, buffedAttack * (1.55 + (gear.critDamagePct ?? 0) / 100), defense),
           basicAttack: target.attack,
-          criticalHit: Math.round(target.attack * 1.45),
+          criticalHit: Math.round(target.attack * 1.35),
           critChancePct: 12,
-          specialPower: Math.round(target.attack * (target.def.powers?.[0]?.damageMult ?? 1.5)),
+          specialPower: Math.round(target.attack * powers[0].damageMult),
         },
       },
     });
@@ -1939,6 +2006,7 @@ export class MuWorldEngine {
     this.campMarkers = [];
     this.eventMobs = []; this.eventKey = '';
     this.npcs = [];
+    this.craterNpcZones = [];
     this.loots = [];
     this.remotePeers.clear();
     this.flyff.dispose();

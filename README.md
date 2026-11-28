@@ -166,7 +166,13 @@ Las reglas base de ADMIN viajan en cada compilación. El panel publica cambios d
 
 <!-- coderabbit-ai-generated-section:v1:b96cd116aa201579a1970ba2adbcacc95861619f35821b7b32d83a25edef0eef -->
 
-Madrigal es un terreno común de 9,44 km² con cuatro regiones y cuatro portales interactivos en cada capital. Se puede caminar de una región a otra sin cargar un mapa nuevo. Se conservan los campamentos originales y se añaden grupos de diez en suelo válido, separados de los campamentos existentes y fuera de las capitales. Los grupos adicionales usan monstruos de la región con niveles que aumentan al alejarse de su capital. El minimapa marca los campamentos. La tienda muestra el retrato disponible, precio y estadísticas de la pieza.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:9eacd2726aca17499e0e5cb022b62c682e1c8e807b1c6a7a01eedfce2ff58be8 -->
+
+Madrigal es un terreno común de 9,44 km² con cuatro regiones y cuatro portales interactivos en cada capital. Se puede caminar de una región a otra sin cargar un mapa nuevo. El minimapa marca los campamentos; la tienda muestra el retrato, el precio y las estadísticas de cada pieza disponible.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 <!-- /coderabbit-ai-generated:v1 -->
 
@@ -202,14 +208,22 @@ Referencias para el desarrollo: [FlyffWeb](https://github.com/marciobremer/Flyff
 
 ## Progresión de Madrigal y economía
 
-| Región | Nivel de monstruos | Monstruos en campamentos |
-| --- | ---: | ---: |
-| Flaris | 1–27 | 6.620 |
-| Villa del Robledal | 28–48 | 2.460 |
-| Puerto de Bruma | 49–76 | 2.800 |
-| Cráter de Ceniza | 77–99 | 1.770 |
+<!-- coderabbit-ai-generated:v1 -->
 
-El terreno original se comparte entre las cuatro regiones. Cada campamento contiene diez monstruos. La cuota es de hasta 7.000 por región, limitada por el suelo válido, las capitales y la separación de 40 m entre centros. En Puerto de Bruma, la zona segura es de 250 m. El terreno conectado al punto de llegada se puebla con zonas de caza de diez campamentos. Los centros de campamentos de distintas zonas quedan separados al menos 100 m. Los monstruos patrullan hasta 6 m desde su punto de aparición y detectan al héroe a 10 m; los jefes, a 15 m. Las invasiones y los grupos publicados por administración se añaden aparte.
+<!-- coderabbit-ai-generated-section:v1:45a5fdbf1b74f052a9c29daffe419cd25fa4685d986814ec8ce6fc993a0ab845 -->
+
+| Región | Nivel de monstruos | Radio seguro de llegada |
+| --- | ---: | ---: |
+| Flaris | 1–27 | 90 m |
+| Villa del Robledal | 28–48 | 500 m |
+| Puerto de Bruma | 49–76 | 250 m |
+| Cráter de Ceniza | 77–99 | 100 m |
+
+Los cuatro territorios comparten el mismo mapa. Los campamentos de cinco monstruos tienen sus centros separados al menos 100 m y ocupan suelo apto para cazar. En Cráter de Ceniza cada NPC tiene además una zona segura de 20 m. Los monstruos de campamento reaparecen en su punto original a los 4 segundos por defecto. Las invasiones y las reglas publicadas por administración conservan su configuración propia.
+
+Los HP, la fuerza, la energía y la defensa aumentan con el nivel. La energía se consume en los ataques especiales. Los monstruos de nivel muy superior reciben menos daño hasta que el héroe gana niveles o resets. La tarjeta de objetivo muestra sus valores activos.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 <!-- /coderabbit-ai-generated:v1 -->
 
@@ -225,7 +239,15 @@ La mochila abre la vista 3D del mismo modelo que muestra el comerciante y el que
 
 Las ofertas originales compatibles se añadieron a seis comerciantes. Las categorías de la tienda separan armas, escudos, conjuntos, alas, joyería, mascotas y consumibles según la oferta del NPC. Las piezas de conjunto se venden por separado. Las tres representaciones del ítem se resuelven en [market-assets.json](public/mugroup/market-assets.json). Algunas alas de la economía personalizada usan apariencias existentes: el juego señala cuál. Los nombres personalizados sin correspondencia en la fuente pueden conservar un icono genérico.
 
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:4ecde9bcbd153ee2e315f11fa5ce5479e1dec3dc25c964a63b5c6d093c46202c -->
+
 Elfo usa las animaciones y sonidos originales de arco, hielo y curación; Blade Knight usa animaciones de espada para Estocada y Barrido. Se conservaron los identificadores de habilidades guardados. Los importadores en `tools/world/` toman sus archivos de la revisión de Flyff fijada en el repositorio.
+
+Los clientes [Flawkee](https://github.com/Flawkee/FlyffUniverse-WebClient/blob/887758f648f2a2d9a3a7cf298798c68fb98bca28/FlyffWCForm.cs#L43) e [ils94](https://github.com/ils94/FlyffUAndroid/blob/3967df867f3fa0095f0e26d28aeb30f959c756fb/app/src/main/java/com/droidev/flyffuwebviewclient/MainActivity.java#L45) cargan el juego oficial en un navegador integrado. Sus repositorios no contienen las pantallas, inventarios ni archivos de poderes o criaturas del juego oficial. Este juego usa los iconos y medios ya integrados en [mugroup](public/mugroup/) y los modelos locales configurados en [worldInvasions.ts](src/data/worldInvasions.ts).
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 <!-- /coderabbit-ai-generated:v1 -->
 

@@ -103,13 +103,32 @@ class MuSoundSynth {
     return this.soundMapPromise;
   }
 
+  private preloadedSkills = new Map<string, HTMLAudioElement>();
+
+  public async preloadSkill(key: string): Promise<void> {
+    if (this.muted || typeof Audio === 'undefined') return;
+    const file = (await this.ensureSoundMap())[key];
+    if (!file) return;
+    const url = this.soundUrl(file);
+    if (this.preloadedSkills.has(url)) return;
+    const audio = new Audio();
+    audio.preload = 'auto';
+    audio.src = url;
+    this.preloadedSkills.set(url, audio);
+  }
+
+  private soundUrl(rel: string): string {
+    return rel.startsWith('../') ? `./${rel.slice(3)}` : `./mugroup/${rel}`;
+  }
+
   private playUrl(url: string, gain = 1.0): boolean {
     if (!this.foreground || this.muted || this.volume <= 0 || typeof window === 'undefined' || typeof Audio === 'undefined') {
       return false;
     }
     if (this.playingSfx.size >= 10) return true;
     try {
-      const audio = new Audio(url);
+      const audio = this.preloadedSkills.get(url) ?? new Audio(url);
+      this.preloadedSkills.delete(url);
       audio.volume = Math.max(0, Math.min(1, this.volume * gain));
       this.playingSfx.add(audio);
       const cleanup = () => {
@@ -129,8 +148,7 @@ class MuSoundSynth {
     const map = await this.ensureSoundMap();
     const rel = map[key];
     if (!rel) return false;
-    const url = rel.startsWith('../') ? `./${rel.replace(/^\.\.\//, '')}` : `./mugroup/${rel}`;
-    return this.playUrl(url, gain);
+    return this.playUrl(this.soundUrl(rel), gain);
   }
 
   public unlockAudio() {

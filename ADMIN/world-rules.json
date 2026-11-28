@@ -50,7 +50,7 @@
     },
     "ceniza": {
       "name": "Cráter de Ceniza",
-      "cityRadius": 500,
+      "cityRadius": 100,
       "sizeMeters": 3072,
       "minLevel": 77,
       "maxLevel": 99,

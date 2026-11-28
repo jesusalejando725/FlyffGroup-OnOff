@@ -1,3 +1,4 @@
+import type { AttackStyle, MonsterElement } from './bestiary';
 import { RECIPES } from '../game/content/recipes.ts';
 import skillRules from '../../ADMIN/classes-skills.json' with { type: 'json' };
 import type {
@@ -587,6 +588,32 @@ export const MU_SKILLS: Record<HeroClass, SkillDef[]> = Object.fromEntries(
     }),
   ]),
 ) as Record<HeroClass, SkillDef[]>;
+
+const SKILL_ELEMENTS: Record<HeroClass, readonly [MonsterElement, AttackStyle][]> = {
+  DK: [['stone', 'cleave'], ['storm', 'pulse'], ['stone', 'cleave'], ['stone', 'cleave'], ['light', 'pulse'], ['stone', 'cleave']],
+  DW: [['void', 'bolt'], ['void', 'pulse'], ['ember', 'pulse'], ['frost', 'pulse'], ['light', 'pulse'], ['ember', 'bolt']],
+  ELF: [['light', 'bolt'], ['light', 'bolt'], ['light', 'bolt'], ['frost', 'bolt'], ['light', 'pulse'], ['light', 'pulse']],
+  DL: [['stone', 'cleave'], ['ember', 'bolt'], ['stone', 'pulse'], ['void', 'bolt'], ['light', 'pulse'], ['ember', 'bolt']],
+  MG: [['storm', 'cleave'], ['storm', 'bolt'], ['ember', 'bolt'], ['storm', 'pulse'], ['tide', 'pulse'], ['ember', 'cleave']],
+};
+
+const ELEMENT_LABELS: Record<MonsterElement, string> = {
+  stone: 'Tierra', ember: 'Fuego', frost: 'Hielo', storm: 'Rayo', venom: 'Veneno', void: 'Oscuridad', tide: 'Agua', light: 'Luz',
+};
+
+export function skillPresentation(classType: HeroClass, skill: SkillDef) {
+  const slot = Math.max(0, Number(skill.keyHint) - 1) || 0;
+  const [element, style] = SKILL_ELEMENTS[classType][slot] ?? SKILL_ELEMENTS[classType][0];
+  const [effect, sound] = RECIPES[classType][slot] ?? RECIPES[classType][0];
+  return {
+    element,
+    label: ELEMENT_LABELS[element],
+    style: skill.isBuff ? 'greeting' as const : style,
+    effect: skill.flyffEffect || effect,
+    sound: skill.flyffSound || sound,
+    icon: `./mugroup/ui/skill-${classType}-${slot}.webp`,
+  };
+}
 
 export const DEFAULT_BUTTON_LAYOUTS: Record<HudButtonId, ButtonLayoutItem> = {
   room: {id:'room',label:'Sala y jefe',xPct:50,yPct:4,scale:1},

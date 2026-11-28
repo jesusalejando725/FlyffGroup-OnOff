@@ -24,7 +24,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
-import { DEFAULT_BUTTON_LAYOUTS, MU_SKILLS } from '../data/muSkillsAndClasses';
+import { DEFAULT_BUTTON_LAYOUTS, MU_SKILLS, skillPresentation } from '../data/muSkillsAndClasses';
 import { getMapById } from '../data/muWorldData';
 import type {
   ActiveEffect,
@@ -568,11 +568,12 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
               </div>
               <div className="flex items-center justify-between text-[10px] font-mono-tabular text-slate-300">
                 <span>HP {targetMonster.currentHp}/{targetMonster.stats.maxHp}</span>
-                <span>DEF {targetMonster.stats.defense}</span>
+                <span>DEF {targetMonster.stats.defense} · FUE {targetMonster.stats.strength}</span>
+                <span>ENE {targetMonster.currentEnergy}/{targetMonster.stats.maxEnergy}</span>
               </div>
               <div className="grid grid-cols-2 gap-1 text-[10px] font-mono-tabular pt-1 border-t border-slate-800">
                 <div className="text-emerald-300">
-                  Tu Daño: {targetMonster.stats.damageTable.playerEstNormal} ({targetMonster.stats.damageTable.playerEstCrit}c)
+                  Tu golpe base: {targetMonster.stats.damageTable.playerEstNormal} ({targetMonster.stats.damageTable.playerEstCrit}c)
                 </div>
                 <div className="text-rose-300 text-right">
                   Golpe: {targetMonster.stats.damageTable.basicAttack} · Crit: {targetMonster.stats.damageTable.criticalHit} ({targetMonster.stats.damageTable.critChancePct}%)
@@ -1040,7 +1041,8 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
 
           {powersOpen && (
             <div className="grid grid-cols-5 gap-1 rounded-lg bg-[#0b1019]/92 border border-amber-700/60 p-1 shadow-xl">
-              {classSkills.slice(0, 10).map((sk, iconIndex) => {
+              {classSkills.slice(0, 10).map((sk) => {
+                const media = skillPresentation(character.classType, sk);
                 const isDefault = sk.id === defaultSkill.id;
                 const comboIdx = comboConfig.comboSkillIds.indexOf(sk.id);
                 const rank = getSkillRank(character, sk.id);
@@ -1065,7 +1067,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
                         fireImmediateAction(`skill_${sk.id}`, () => onCastSkill(sk));
                       }
                     }}
-                    title={`${sk.name} Nv.${rank} (MP ${sk.mpCost})`}
+                    title={`${sk.name} Nv.${rank} · ${media.label} · MP ${sk.mpCost} · AG ${sk.agCost}`}
                     style={{
                       borderColor:
                         assignComboMode && comboIdx >= 0
@@ -1076,7 +1078,7 @@ export const MuHudOverlay: React.FC<MuHudOverlayProps> = ({
                     }}
                     className="relative w-9 h-9 rounded bg-[#151c2c] hover:bg-[#1f2940] border flex flex-col items-center justify-center text-center cursor-pointer active:scale-95 overflow-hidden touch-none select-none"
                   >
-                    <img src={`./mugroup/ui/skill-${character.classType}-${iconIndex}.webp`} alt="" className="w-4 h-4 rounded-sm pointer-events-none" />
+                    <img src={media.icon} alt="" className="w-4 h-4 rounded-sm pointer-events-none" />
                     <span className="text-[7.5px] font-bold text-slate-100 leading-none truncate max-w-[32px] pointer-events-none">
                       {sk.shortName}
                     </span>
